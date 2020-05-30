@@ -31,8 +31,8 @@
 <meta property="article:published_time" content="2020-05-30T16:19:12.000Z">
 <meta property="article:modified_time" content="2020-05-30T16:23:35.959Z">
 <meta property="article:author" content="音视跳动">
-<meta property="article:tag" content="音视频">
 <meta property="article:tag" content="ffmpeg">
+<meta property="article:tag" content="音视频">
 <meta property="article:tag" content="直播">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5956443-d9bc0c8f72f24d62.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -383,8 +383,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag"><i class="fa fa-tag"></i> 音视频</a>
               <a href="/tags/ffmpeg/" rel="tag"><i class="fa fa-tag"></i> ffmpeg</a>
+              <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag"><i class="fa fa-tag"></i> 音视频</a>
               <a href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag"><i class="fa fa-tag"></i> 直播</a>
           </div>
 
@@ -574,14 +574,9 @@
                 console.error('Failed to save visitor count', error);
               });
           } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
           }
         })
         .catch(error => {
@@ -608,7 +603,7 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz","app_key":"5dKv9XFD2w3gjJnb0xnWIIWz","server_url":null,"security":false};
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz","app_key":"5dKv9XFD2w3gjJnb0xnWIIWz","server_url":null,"security":true};
     function fetchData(api_server) {
       var Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
