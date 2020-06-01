@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>我在github上的第一篇文章</title>
-    <url>/2020-05-29-%E6%88%91%E5%9C%A8github%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="为什么要建自己的-Blog"><a href="#为什么要建自己的-Blog" class="headerlink" title="为什么要建自己的 Blog?"></a>为什么要建自己的 Blog?</h2><p>haha</p>
-<h2 id="Hexo-真的好用吗？"><a href="#Hexo-真的好用吗？" class="headerlink" title="Hexo 真的好用吗？"></a>Hexo 真的好用吗？</h2><h2 id="这会是一个新的阵地吗？"><a href="#这会是一个新的阵地吗？" class="headerlink" title="这会是一个新的阵地吗？"></a>这会是一个新的阵地吗？</h2>]]></content>
-      <categories>
-        <category>hexo博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020-06-01-hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-<video controls="controls" src="https://www.youtube.com/watch?v=NDzSk7_RTKA&feature=youtu.be">
-您的浏览器不支持 video 标签。
-</video>
-
-]]></content>
-  </entry>
-  <entry>
     <title>ffmpeg精讲常见问题</title>
     <url>/2020-05-31-ffmpeg%E7%B2%BE%E8%AE%B2%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="问：编译-ffmpeg-方法"><a href="#问：编译-ffmpeg-方法" class="headerlink" title="问：编译 ffmpeg 方法"></a>问：编译 ffmpeg 方法</h2><p>答：在各个平台编译方法基本都是一样的。</p>
@@ -147,38 +109,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo博客系统的实现原理与搭建</title>
-    <url>/2020-05-30-hexo%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>作为技术人员，定期写Blog是一个非常好的习惯。你可以通过它将自己的一些学习心得记录下来，也可以对平常的工作做一些经验总结等等。对于我来说，Blog就更为重要了。因为我目前正在创业做一些音视频技术的培训与教学工作，所以特别需要通过Blog将一些<strong>音视频</strong>知识、课程中的问题解答推广、宣传出去。</p>
-<a id="more"></a>
-
-<p>以前，我的博客主阵地一直在<strong>简书</strong>，通过简书的Markdown写博客非常方便，而且所见即所得。但最近不知什么原因，简书却将我的Blog给封掉了。我多次申述，但目前简书方面仍然没有任何反馈。考虑到自己在其它平台也可能遇到类似的情况，因此决定还是自己搭建一套博客系统才能真正解决这个问题。</p>
-<p>如何才能快速搭建一套比较专业的博客系统呢？通过调研，我发现hexo完全可以满足我的要求，下面我就来详细讲述一下我是如何通过<strong>hexo</strong>搭建博客系统的吧。</p>
-<h2 id="BLOG系统"><a href="#BLOG系统" class="headerlink" title="BLOG系统"></a>BLOG系统</h2><p>实际上我们仔细想想，所谓的Blog就是将许许多多的通过Markdown语法写成的文档转化成一个个的HTML页面，然后放到Web服务器上发布出来。另一方面，还要有一个系统可以将这些页面管理起来，有目录、有标签，可以分类、搜索等等。</p>
-<p>如果是我们自己实现的话，我们需要实现一个Markdown到HTML的翻译器，然后再实现一个管理系统将这些HTML页面管理起来。而这些工作实际上已经有非常好的开源项目实现了，这就是hexo。hexo 不但实现了这些功能，还有很多其它的功能（如文章浏览次数，创建时间，文章字数等），这些功能对于我们来说都是非常有用的。</p>
-<p>接下来我们就来看看 hexo 是如何实现这些功能的吧。</p>
-<h2 id="hexo实现原理"><a href="#hexo实现原理" class="headerlink" title="hexo实现原理"></a>hexo实现原理</h2><p>我们通常所说的<strong>hexo</strong>是由三部分组成的，即<strong>hexo-cli</strong>、<strong>hexo-core</strong>以及<strong>hexo plugs</strong>。在这三部分中最核心的是 hexo-core 模块，该模块用于将 Markdown 语法编写的文章最终翻译成HTML页面。</p>
-<p>hexo-core在进行翻译时会经历两步:</p>
-<ul>
-<li><p>第一步是将Markdown翻译成下在格式的对JSON对象：</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">article: &#123;</span><br><span class="line">    title:</span><br><span class="line">    date:</span><br><span class="line">    tags:</span><br><span class="line">    categories:</span><br><span class="line">    content:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二步才是将上面生成的JSON对象最终生成 HTML 页面。</p>
-</li>
-</ul>
-<p>下面我们来看一下 hexo-core 是如何先将Markdown翻译成JSON的，又是如何将JSON 翻译成HTML的。</p>
-<p>在hexo中，</p>
-<h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><h2 id="next主题的设置"><a href="#next主题的设置" class="headerlink" title="next主题的设置"></a>next主题的设置</h2><h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2>]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Blog</tag>
-        <tag>next</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>音视频系统入门常见问题</title>
     <url>/2020-05-31-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><img data-src="https://upload-images.jianshu.io/upload_images/5956443-d9bc0c8f72f24d62.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
@@ -271,6 +201,76 @@
         <tag>ffmpeg</tag>
         <tag>音视频</tag>
         <tag>直播</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020-06-01-hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+<video controls="controls" src="https://www.youtube.com/watch?v=NDzSk7_RTKA&feature=youtu.be">
+您的浏览器不支持 video 标签。
+</video>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>hexo博客系统的实现原理与搭建</title>
+    <url>/2020-05-30-hexo%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>作为技术人员，定期写Blog是一个非常好的习惯。你可以通过它将自己的一些学习心得记录下来，也可以对平常的工作做一些经验总结等等。对于我来说，Blog就更为重要了。因为我目前正在创业做一些音视频技术的培训与教学工作，所以特别需要通过Blog将一些<strong>音视频</strong>知识、课程中的问题解答推广、宣传出去。</p>
+<a id="more"></a>
+
+<p>以前，我的博客主阵地一直在<strong>简书</strong>，通过简书的Markdown写博客非常方便，而且所见即所得。但最近不知什么原因，简书却将我的Blog给封掉了。我多次申述，但目前简书方面仍然没有任何反馈。考虑到自己在其它平台也可能遇到类似的情况，因此决定还是自己搭建一套博客系统才能真正解决这个问题。</p>
+<p>如何才能快速搭建一套比较专业的博客系统呢？通过调研，我发现hexo完全可以满足我的要求，下面我就来详细讲述一下我是如何通过<strong>hexo</strong>搭建博客系统的吧。</p>
+<h2 id="BLOG系统"><a href="#BLOG系统" class="headerlink" title="BLOG系统"></a>BLOG系统</h2><p>实际上我们仔细想想，所谓的Blog就是将许许多多的通过Markdown语法写成的文档转化成一个个的HTML页面，然后放到Web服务器上发布出来。另一方面，还要有一个系统可以将这些页面管理起来，有目录、有标签，可以分类、搜索等等。</p>
+<p>如果是我们自己实现的话，我们需要实现一个Markdown到HTML的翻译器，然后再实现一个管理系统将这些HTML页面管理起来。而这些工作实际上已经有非常好的开源项目实现了，这就是hexo。hexo 不但实现了这些功能，还有很多其它的功能（如文章浏览次数，创建时间，文章字数等），这些功能对于我们来说都是非常有用的。</p>
+<p>接下来我们就来看看 hexo 是如何实现这些功能的吧。</p>
+<h2 id="hexo实现原理"><a href="#hexo实现原理" class="headerlink" title="hexo实现原理"></a>hexo实现原理</h2><p>我们通常所说的<strong>hexo</strong>是由三部分组成的，即<strong>hexo-cli</strong>、<strong>hexo-core</strong>以及<strong>hexo plugs</strong>。在这三部分中最核心的是 hexo-core 模块，该模块用于将 Markdown 语法编写的文章最终翻译成HTML页面。</p>
+<p>hexo-core在进行翻译时会经历两步:</p>
+<ul>
+<li><p>第一步是将Markdown翻译成下在格式的对JSON对象：</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">article: &#123;</span><br><span class="line">    title:</span><br><span class="line">    date:</span><br><span class="line">    tags:</span><br><span class="line">    categories:</span><br><span class="line">    content:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步才是将上面生成的JSON对象最终生成 HTML 页面。</p>
+</li>
+</ul>
+<p>下面我们来看一下 hexo-core 是如何先将Markdown翻译成JSON的，又是如何将JSON 翻译成HTML的。</p>
+<p>在hexo中，</p>
+<h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><h2 id="next主题的设置"><a href="#next主题的设置" class="headerlink" title="next主题的设置"></a>next主题的设置</h2><h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2>]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>Blog</tag>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我在github上的第一篇文章</title>
+    <url>/2020-05-29-%E6%88%91%E5%9C%A8github%E4%B8%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="为什么要建自己的-Blog"><a href="#为什么要建自己的-Blog" class="headerlink" title="为什么要建自己的 Blog?"></a>为什么要建自己的 Blog?</h2><p>haha</p>
+<h2 id="Hexo-真的好用吗？"><a href="#Hexo-真的好用吗？" class="headerlink" title="Hexo 真的好用吗？"></a>Hexo 真的好用吗？</h2><h2 id="这会是一个新的阵地吗？"><a href="#这会是一个新的阵地吗？" class="headerlink" title="这会是一个新的阵地吗？"></a>这会是一个新的阵地吗？</h2>]]></content>
+      <categories>
+        <category>hexo博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
       </tags>
   </entry>
 </search>
