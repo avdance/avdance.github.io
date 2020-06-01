@@ -24,11 +24,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo博客系统的实现原理与搭建">
 <meta property="og:url" content="http://blog.avdancedu.com/2020-05-30-hexo%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%90%AD%E5%BB%BA/index.html">
-<meta property="og:site_name" content="音视跳动">
+<meta property="og:site_name" content="音视跳动科技">
 <meta property="og:description" content="作为技术人员，定期写Blog是一个非常好的习惯。你可以通过它将自己的一些学习心得记录下来，也可以对平常的工作做一些经验总结等等。对于我来说，Blog就更为重要了。因为我目前正在创业做一些音视频技术的培训与教学工作，所以特别需要通过Blog将一些音视频知识、课程中的问题解答推广、宣传出去。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-30T05:27:29.000Z">
-<meta property="article:modified_time" content="2020-06-01T02:06:02.447Z">
+<meta property="article:modified_time" content="2020-06-01T05:05:13.869Z">
 <meta property="article:author" content="音视跳动">
 <meta property="article:tag" content="Blog">
 <meta property="article:tag" content="hexo">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>hexo博客系统的实现原理与搭建 | 音视跳动</title>
+  <title>hexo博客系统的实现原理与搭建 | 音视跳动科技</title>
   
 
 
@@ -108,7 +108,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">音视跳动</h1>
+      <h1 class="site-title">音视跳动科技</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
       <p class="site-subtitle" itemprop="description">传播最前沿的科技知识！</p>
@@ -213,11 +213,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avdancevod.oss-cn-beijing.aliyuncs.com/image/next/avdancelogo.png">
       <meta itemprop="name" content="音视跳动">
-      <meta itemprop="description" content="学习音视频的圣地！">
+      <meta itemprop="description" content="传输最前沿的科技知认，学习音视频的圣地！ffmpeg, webrtc, H264, AAC">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="音视跳动">
+      <meta itemprop="name" content="音视跳动科技">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -240,7 +240,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-01 10:06:02" itemprop="dateModified" datetime="2020-06-01T10:06:02+08:00">2020-06-01</time>
+                <time title="修改时间：2020-06-01 13:05:13" itemprop="dateModified" datetime="2020-06-01T13:05:13+08:00">2020-06-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,14 +279,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -317,7 +317,43 @@
 </ul>
 <p>下面我们来看一下 hexo-core 是如何先将Markdown翻译成JSON的，又是如何将JSON 翻译成HTML的。</p>
 <p>在hexo中，</p>
-<h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><h2 id="next主题的设置"><a href="#next主题的设置" class="headerlink" title="next主题的设置"></a>next主题的设置</h2><h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2><h3 id="如何设置摘要"><a href="#如何设置摘要" class="headerlink" title="如何设置摘要"></a>如何设置摘要</h3><h3 id="如何设置图片床"><a href="#如何设置图片床" class="headerlink" title="如何设置图片床"></a>如何设置图片床</h3><h3 id="如何统计阅读次数"><a href="#如何统计阅读次数" class="headerlink" title="如何统计阅读次数"></a>如何统计阅读次数</h3><h3 id="如何显示文章字数"><a href="#如何显示文章字数" class="headerlink" title="如何显示文章字数"></a>如何显示文章字数</h3><h3 id="如何添加评论区"><a href="#如何添加评论区" class="headerlink" title="如何添加评论区"></a>如何添加评论区</h3><h3 id="如何让文章置顶"><a href="#如何让文章置顶" class="headerlink" title="如何让文章置顶"></a>如何让文章置顶</h3><h3 id="如何设置标签"><a href="#如何设置标签" class="headerlink" title="如何设置标签"></a>如何设置标签</h3><h3 id="如何设置标签云"><a href="#如何设置标签云" class="headerlink" title="如何设置标签云"></a>如何设置标签云</h3><h3 id="如何设置本地搜索"><a href="#如何设置本地搜索" class="headerlink" title="如何设置本地搜索"></a>如何设置本地搜索</h3><h3 id="如何设置关于"><a href="#如何设置关于" class="headerlink" title="如何设置关于"></a>如何设置关于</h3><h3 id="设置404"><a href="#设置404" class="headerlink" title="设置404"></a>设置404</h3><h3 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h3>
+<h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><p><strong>hexo</strong>有几个基本信令，分别是<code>hex clean</code>、<code>hexo g</code>、<code>hexo s</code>等等。下面我们分别看一下这几个命信的具体作用是什么：</p>
+<ul>
+<li>hexo clean: 删除 hexo 生成的所有文档，最主要的是public</li>
+<li>hexo g: 根据 source 目录中的文件生成可布署的html</li>
+<li>hexo s: 起动本地http 服务，将生成的 html 在本地发布出来</li>
+<li>hexo d: 将生成的html代码推送到 github 上</li>
+</ul>
+<p>上面命令中的前三个命令让要是用在本地，根据source目录中的源Markdown文件生成 html。而<code>hexo d</code>是布署命令，将最终生成的html布署到服务端。</p>
+<h2 id="next主题的安装与配置"><a href="#next主题的安装与配置" class="headerlink" title="next主题的安装与配置"></a>next主题的安装与配置</h2><p>hexo中有很多的主题，其中用的最多的就是<strong>next</strong>主题。下面我们就来介绍一下如何安装并设置next主题。</p>
+<h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2><p>通过上面的操作我们就将自己的blog搭建出来了。但此时这个blog只是一个最一个最基本、最简单的blog。如果你想让你的blog更专业的话，我们还需要装不少的插件，下面我们就来看看有哪些插件是我们必须要装的。它们分别是：</p>
+<ul>
+<li>如何设置摘要</li>
+<li>如何设置图片床</li>
+<li>如何统计阅读次数</li>
+<li>如何显示文章字数</li>
+<li>如何添加评论区</li>
+<li>如何让文章置顶</li>
+<li>如何设置标签</li>
+<li>如何设置标签云</li>
+<li>如何设置本地搜索</li>
+<li>如何设置关于</li>
+<li>设置404</li>
+</ul>
+<p>接下来我们再来详细描述一下上面各功能该如何设置。</p>
+<h3 id="如何设置摘要"><a href="#如何设置摘要" class="headerlink" title="如何设置摘要"></a>如何设置摘要</h3><p>在hexo中实现摘要有两种方法，一种主试是在正文中加入下面这行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>它的作用是将<code>more</code>之前的文字都作为摘要。一般情况下摘要都是在 200 字以内，所以你自己控制放置<code>more</code>的位置就好了。这种方式也是我平常使用的方式，非常方便。</p>
+<p>第二种方法是在文章头的 description 字段中写一段摘要，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: xxxx</span><br><span class="line">date: xxxx-xx-xx</span><br><span class="line">...</span><br><span class="line">description: xxxxxxx...</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>这处方式的好处理可以将文中某一段设置为摘要，然后自己单独写一段摘要，这样可以让搜索引擎更容易搜索到。它也是SEO优化的一种方式。</p>
+<p>以上两种方法都可以，可以根据你自己的需求选择合适的方法即可。</p>
+<h3 id="如何设置图片床"><a href="#如何设置图片床" class="headerlink" title="如何设置图片床"></a>如何设置图片床</h3><p>我们的blog最终发布时，一般都是通过github发布出来，但github给我们每个人的资源是有限的，如果你在github上放一些特别大的文件，那么你的网站的访问速度一定很慢，这会延度影响用户的体验。</p>
+<p>另外，不论你放在哪儿，都不应该在你的发布主站上放置特别大的文件，尤其是大图片。但我们的文章一般都要放置一些图片，一是可以让读者看着更直观，二是可以更吸睛。如何解决上述的矛盾呢？</p>
+<h3 id="如何统计阅读次数"><a href="#如何统计阅读次数" class="headerlink" title="如何统计阅读次数"></a>如何统计阅读次数</h3><h3 id="如何显示文章字数"><a href="#如何显示文章字数" class="headerlink" title="如何显示文章字数"></a>如何显示文章字数</h3><h3 id="如何添加评论区"><a href="#如何添加评论区" class="headerlink" title="如何添加评论区"></a>如何添加评论区</h3><h3 id="如何让文章置顶"><a href="#如何让文章置顶" class="headerlink" title="如何让文章置顶"></a>如何让文章置顶</h3><h3 id="如何设置标签"><a href="#如何设置标签" class="headerlink" title="如何设置标签"></a>如何设置标签</h3><p>#<br>“如何设置标签## 如何设置标签云</p>
+<h3 id="如何设置本地搜索"><a href="#如何设置本地搜索" class="headerlink" title="如何设置本地搜索"></a>如何设置本地搜索</h3><h3 id="如何设置关于"><a href="#如何设置关于" class="headerlink" title="如何设置关于"></a>如何设置关于</h3><h3 id="设置404"><a href="#设置404" class="headerlink" title="设置404"></a>设置404</h3><h3 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h3>
     </div>
 
     
@@ -437,7 +473,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BLOG系统"><span class="nav-number">1.</span> <span class="nav-text">BLOG系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo实现原理"><span class="nav-number">2.</span> <span class="nav-text">hexo实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何布署hexo"><span class="nav-number">3.</span> <span class="nav-text">如何布署hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题的设置"><span class="nav-number">4.</span> <span class="nav-text">next主题的设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级知识"><span class="nav-number">5.</span> <span class="nav-text">高级知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置摘要"><span class="nav-number">5.1.</span> <span class="nav-text">如何设置摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置图片床"><span class="nav-number">5.2.</span> <span class="nav-text">如何设置图片床</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何统计阅读次数"><span class="nav-number">5.3.</span> <span class="nav-text">如何统计阅读次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何显示文章字数"><span class="nav-number">5.4.</span> <span class="nav-text">如何显示文章字数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何添加评论区"><span class="nav-number">5.5.</span> <span class="nav-text">如何添加评论区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让文章置顶"><span class="nav-number">5.6.</span> <span class="nav-text">如何让文章置顶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置标签"><span class="nav-number">5.7.</span> <span class="nav-text">如何设置标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置标签云"><span class="nav-number">5.8.</span> <span class="nav-text">如何设置标签云</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置本地搜索"><span class="nav-number">5.9.</span> <span class="nav-text">如何设置本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置关于"><span class="nav-number">5.10.</span> <span class="nav-text">如何设置关于</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置404"><span class="nav-number">5.11.</span> <span class="nav-text">设置404</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO"><span class="nav-number">5.12.</span> <span class="nav-text">SEO</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BLOG系统"><span class="nav-number">1.</span> <span class="nav-text">BLOG系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo实现原理"><span class="nav-number">2.</span> <span class="nav-text">hexo实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何布署hexo"><span class="nav-number">3.</span> <span class="nav-text">如何布署hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题的安装与配置"><span class="nav-number">4.</span> <span class="nav-text">next主题的安装与配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级知识"><span class="nav-number">5.</span> <span class="nav-text">高级知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置摘要"><span class="nav-number">5.1.</span> <span class="nav-text">如何设置摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置图片床"><span class="nav-number">5.2.</span> <span class="nav-text">如何设置图片床</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何统计阅读次数"><span class="nav-number">5.3.</span> <span class="nav-text">如何统计阅读次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何显示文章字数"><span class="nav-number">5.4.</span> <span class="nav-text">如何显示文章字数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何添加评论区"><span class="nav-number">5.5.</span> <span class="nav-text">如何添加评论区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让文章置顶"><span class="nav-number">5.6.</span> <span class="nav-text">如何让文章置顶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置标签"><span class="nav-number">5.7.</span> <span class="nav-text">如何设置标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置本地搜索"><span class="nav-number">5.8.</span> <span class="nav-text">如何设置本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何设置关于"><span class="nav-number">5.9.</span> <span class="nav-text">如何设置关于</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置404"><span class="nav-number">5.10.</span> <span class="nav-text">设置404</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO"><span class="nav-number">5.11.</span> <span class="nav-text">SEO</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -446,7 +482,7 @@
     <img class="site-author-image" itemprop="image" alt="音视跳动"
       src="https://avdancevod.oss-cn-beijing.aliyuncs.com/image/next/avdancelogo.png">
   <p class="site-author-name" itemprop="name">音视跳动</p>
-  <div class="site-description" itemprop="description">学习音视频的圣地！</div>
+  <div class="site-description" itemprop="description">传输最前沿的科技知认，学习音视频的圣地！ffmpeg, webrtc, H264, AAC</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -528,12 +564,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">10k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8 分钟</span>
+    <span title="站点阅读时长">9 分钟</span>
 </div>
 
         

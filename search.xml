@@ -225,7 +225,43 @@
 </ul>
 <p>下面我们来看一下 hexo-core 是如何先将Markdown翻译成JSON的，又是如何将JSON 翻译成HTML的。</p>
 <p>在hexo中，</p>
-<h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><h2 id="next主题的设置"><a href="#next主题的设置" class="headerlink" title="next主题的设置"></a>next主题的设置</h2><h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2><h3 id="如何设置摘要"><a href="#如何设置摘要" class="headerlink" title="如何设置摘要"></a>如何设置摘要</h3><h3 id="如何设置图片床"><a href="#如何设置图片床" class="headerlink" title="如何设置图片床"></a>如何设置图片床</h3><h3 id="如何统计阅读次数"><a href="#如何统计阅读次数" class="headerlink" title="如何统计阅读次数"></a>如何统计阅读次数</h3><h3 id="如何显示文章字数"><a href="#如何显示文章字数" class="headerlink" title="如何显示文章字数"></a>如何显示文章字数</h3><h3 id="如何添加评论区"><a href="#如何添加评论区" class="headerlink" title="如何添加评论区"></a>如何添加评论区</h3><h3 id="如何让文章置顶"><a href="#如何让文章置顶" class="headerlink" title="如何让文章置顶"></a>如何让文章置顶</h3><h3 id="如何设置标签"><a href="#如何设置标签" class="headerlink" title="如何设置标签"></a>如何设置标签</h3><h3 id="如何设置标签云"><a href="#如何设置标签云" class="headerlink" title="如何设置标签云"></a>如何设置标签云</h3><h3 id="如何设置本地搜索"><a href="#如何设置本地搜索" class="headerlink" title="如何设置本地搜索"></a>如何设置本地搜索</h3><h3 id="如何设置关于"><a href="#如何设置关于" class="headerlink" title="如何设置关于"></a>如何设置关于</h3><h3 id="设置404"><a href="#设置404" class="headerlink" title="设置404"></a>设置404</h3><h3 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h3>]]></content>
+<h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><p><strong>hexo</strong>有几个基本信令，分别是<code>hex clean</code>、<code>hexo g</code>、<code>hexo s</code>等等。下面我们分别看一下这几个命信的具体作用是什么：</p>
+<ul>
+<li>hexo clean: 删除 hexo 生成的所有文档，最主要的是public</li>
+<li>hexo g: 根据 source 目录中的文件生成可布署的html</li>
+<li>hexo s: 起动本地http 服务，将生成的 html 在本地发布出来</li>
+<li>hexo d: 将生成的html代码推送到 github 上</li>
+</ul>
+<p>上面命令中的前三个命令让要是用在本地，根据source目录中的源Markdown文件生成 html。而<code>hexo d</code>是布署命令，将最终生成的html布署到服务端。</p>
+<h2 id="next主题的安装与配置"><a href="#next主题的安装与配置" class="headerlink" title="next主题的安装与配置"></a>next主题的安装与配置</h2><p>hexo中有很多的主题，其中用的最多的就是<strong>next</strong>主题。下面我们就来介绍一下如何安装并设置next主题。</p>
+<h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2><p>通过上面的操作我们就将自己的blog搭建出来了。但此时这个blog只是一个最一个最基本、最简单的blog。如果你想让你的blog更专业的话，我们还需要装不少的插件，下面我们就来看看有哪些插件是我们必须要装的。它们分别是：</p>
+<ul>
+<li>如何设置摘要</li>
+<li>如何设置图片床</li>
+<li>如何统计阅读次数</li>
+<li>如何显示文章字数</li>
+<li>如何添加评论区</li>
+<li>如何让文章置顶</li>
+<li>如何设置标签</li>
+<li>如何设置标签云</li>
+<li>如何设置本地搜索</li>
+<li>如何设置关于</li>
+<li>设置404</li>
+</ul>
+<p>接下来我们再来详细描述一下上面各功能该如何设置。</p>
+<h3 id="如何设置摘要"><a href="#如何设置摘要" class="headerlink" title="如何设置摘要"></a>如何设置摘要</h3><p>在hexo中实现摘要有两种方法，一种主试是在正文中加入下面这行代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>它的作用是将<code>more</code>之前的文字都作为摘要。一般情况下摘要都是在 200 字以内，所以你自己控制放置<code>more</code>的位置就好了。这种方式也是我平常使用的方式，非常方便。</p>
+<p>第二种方法是在文章头的 description 字段中写一段摘要，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: xxxx</span><br><span class="line">date: xxxx-xx-xx</span><br><span class="line">...</span><br><span class="line">description: xxxxxxx...</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>这处方式的好处理可以将文中某一段设置为摘要，然后自己单独写一段摘要，这样可以让搜索引擎更容易搜索到。它也是SEO优化的一种方式。</p>
+<p>以上两种方法都可以，可以根据你自己的需求选择合适的方法即可。</p>
+<h3 id="如何设置图片床"><a href="#如何设置图片床" class="headerlink" title="如何设置图片床"></a>如何设置图片床</h3><p>我们的blog最终发布时，一般都是通过github发布出来，但github给我们每个人的资源是有限的，如果你在github上放一些特别大的文件，那么你的网站的访问速度一定很慢，这会延度影响用户的体验。</p>
+<p>另外，不论你放在哪儿，都不应该在你的发布主站上放置特别大的文件，尤其是大图片。但我们的文章一般都要放置一些图片，一是可以让读者看着更直观，二是可以更吸睛。如何解决上述的矛盾呢？</p>
+<h3 id="如何统计阅读次数"><a href="#如何统计阅读次数" class="headerlink" title="如何统计阅读次数"></a>如何统计阅读次数</h3><h3 id="如何显示文章字数"><a href="#如何显示文章字数" class="headerlink" title="如何显示文章字数"></a>如何显示文章字数</h3><h3 id="如何添加评论区"><a href="#如何添加评论区" class="headerlink" title="如何添加评论区"></a>如何添加评论区</h3><h3 id="如何让文章置顶"><a href="#如何让文章置顶" class="headerlink" title="如何让文章置顶"></a>如何让文章置顶</h3><h3 id="如何设置标签"><a href="#如何设置标签" class="headerlink" title="如何设置标签"></a>如何设置标签</h3><p>#<br>“如何设置标签## 如何设置标签云</p>
+<h3 id="如何设置本地搜索"><a href="#如何设置本地搜索" class="headerlink" title="如何设置本地搜索"></a>如何设置本地搜索</h3><h3 id="如何设置关于"><a href="#如何设置关于" class="headerlink" title="如何设置关于"></a>如何设置关于</h3><h3 id="设置404"><a href="#设置404" class="headerlink" title="设置404"></a>设置404</h3><h3 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h3>]]></content>
       <categories>
         <category>hexo</category>
       </categories>
