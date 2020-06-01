@@ -1,94 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>ffmpeg精讲常见问题</title>
-      <link href="/2020-05-31-ffmpeg%E7%B2%BE%E8%AE%B2%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
-      <url>/2020-05-31-ffmpeg%E7%B2%BE%E8%AE%B2%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<h2 id="问：编译-ffmpeg-方法"><a href="#问：编译-ffmpeg-方法" class="headerlink" title="问：编译 ffmpeg 方法"></a>问：编译 ffmpeg 方法</h2><p>答：在各个平台编译方法基本都是一样的。</p><ul><li>首先下载 ffmpeg 源码，地址为: <a href="http://www.ffmpeg.org/download.html" target="_blank" rel="noopener">www.ffmpeg.org/download.html</a></li><li>进入到下载后的<a href="https://coding.imooc.com/class/279.html?mc_marking=59c321c0417e144904c49c366f94dd57&mc_channel=shouji" target="_blank" rel="noopener">ffmpeg目</a>录下，执行下面的指令：<a id="more"></a><ul><li>Mac 平台：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;ffmpeg</span><br><span class="line">                  --enable-gpl</span><br><span class="line">                  --enable-nonfree</span><br><span class="line">                  --enable-libfdk-aac</span><br><span class="line">                  --enable-libx264</span><br><span class="line">                  --enable-libx265</span><br><span class="line">                  --enable-filter&#x3D;delogo</span><br><span class="line">                  --enable-debug</span><br><span class="line">                  --disable-optimizations</span><br><span class="line">                  --enable-libspeex</span><br><span class="line">                  --enable-videotoolbox</span><br><span class="line">                  --enable-shared</span><br><span class="line">                  --enable-pthreads</span><br><span class="line">                  --enable-version3</span><br><span class="line">                  --enable-hardcoded-tables</span><br><span class="line">                  --cc&#x3D;clang</span><br><span class="line">                  --host-cflags&#x3D;</span><br><span class="line">                  --host-ldflags&#x3D;</span><br></pre></td></tr></table></figure></li><li>Linux平台<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;ffmpeg</span><br><span class="line">                  --enable-gpl</span><br><span class="line">                  --enable-nonfree</span><br><span class="line">                  --enable-libfdk-aac</span><br><span class="line">                  --enable-libx264</span><br><span class="line">                  --enable-libx265</span><br><span class="line">                  --enable-filter&#x3D;delogo</span><br><span class="line">                  --enable-debug</span><br><span class="line">                  --disable-optimizations</span><br><span class="line">                  --enable-libspeex</span><br><span class="line">                  --enable-shared</span><br><span class="line">                  --enable-pthreads</span><br></pre></td></tr></table></figure></li><li>Windows平台<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;ffmpeg</span><br><span class="line">                  --enable-gpl</span><br><span class="line">                  --enable-nonfree</span><br><span class="line">                  --enable-libfdk-aac</span><br><span class="line">                  --enable-libx264</span><br><span class="line">                  --enable-libx265</span><br><span class="line">                  --enable-filter&#x3D;delogo</span><br><span class="line">                  --enable-debug</span><br><span class="line">                  --disable-optimizations</span><br><span class="line">                  --enable-libspeex</span><br><span class="line">                  --enable-static</span><br></pre></td></tr></table></figure></li></ul></li></ul><h2 id="问：make-amp-amp-make-install失败"><a href="#问：make-amp-amp-make-install失败" class="headerlink" title="问：make &amp;&amp; make install失败"></a>问：make &amp;&amp; make install失败</h2><p>答：make &amp;&amp; make install 之所以会失败，则由于该用户没有操作目录的权限引起的。所以只需要在make install 之前加 sudo即可。</p><p>另一种方法是将用户切换成 root用户，因 root用户的权力最大，所以这样做也是没问题的。但建议还是用 非 root用户操作，这样更安全。</p><h2 id="问：库已经安装好了，但仍报找不到它的错误？"><a href="#问：库已经安装好了，但仍报找不到它的错误？" class="headerlink" title="问：库已经安装好了，但仍报找不到它的错误？"></a>问：库已经安装好了，但仍报找不到它的错误？</h2><p>答：首先确认是否已经将 <code>pkg-config</code>工具安装好了。可以执行下面的命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg-config</span><br></pre></td></tr></table></figure><p>如果提示没有安装，则先将该工具安装好，安装命令如下：</p><ul><li>ubuntu  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt intall pkg-config</span><br></pre></td></tr></table></figure></li><li>mac  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install pkg-config</span><br></pre></td></tr></table></figure></li><li>cygwin  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cyg install pkg-config</span><br></pre></td></tr></table></figure></li><li>centos  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install pkg-config</span><br></pre></td></tr></table></figure>安装完该工具后仍然报错？那再按照具体的错误看下面的解决方案吧。</li></ul><h2 id="问：libx264库找不到（-ERROR-libx264-not-found-）"><a href="#问：libx264库找不到（-ERROR-libx264-not-found-）" class="headerlink" title="问：libx264库找不到（[ERROR: libx264 not found]）"></a>问：libx264库找不到（[ERROR: libx264 not found]）</h2><p>该问题可能由下面三个方面的问题引起。</p><ul><li>libx264库没有安装。对于这种情况有两种解决办法:<ul><li>其一，是通过平台的安装工作进行安装，如 apt/brew/yum install x264。（注：在Linux下应该安装 libx264-dev）。</li><li>其二，是通过源码安装，步骤如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. wget https:&#x2F;&#x2F;code.videolan.org&#x2F;videolan&#x2F;x264&#x2F;-&#x2F;archive&#x2F;master&#x2F;x264-master.tar.bz2</span><br><span class="line">2. bunzip2 x264-master.tar.bz2</span><br><span class="line">3. tar -vxf x264-master.tar.tar</span><br><span class="line">4. .&#x2F;configure --enable-static --enable-shared --disable-asm --disable-avs</span><br><span class="line">5. make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure></li></ul></li><li>通过 pkg-config 命令无法找到。对于这类问题，我们可以使用下面的命 <code>pkg-config --cflags --lib libx264</code>看是否可以找到 libx264，如果找不到，就说明确实是这个问题。解决的办法是设置环境变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PKG_CONFIG_PATH&#x3D;$PKG_CONFIG_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib&#x2F;pkgconfig</span><br></pre></td></tr></table></figure>其中 <code>xxx</code> 由你的实际路径代替。</li></ul><blockquote><p>注，有可能你的系统中并没有装 pkg-config工具，可以使用 brew/apt/yum install pkg-config进行安装。</p></blockquote><ul><li>无法链接上libx264, 这是由于通过环境变量 LD_LIBRARY_PATH 无法定位到 libx264库。解决的办法也很简单，与上面类似，可以通过设置环境变量来解决该问题。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LIB_LIBRARY_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib</span><br></pre></td></tr></table></figure>其中，<code>xxx</code>由你的实际路径代替。</li></ul><p>当然，你也可以将环境变量设置在脚本里，这样就不用每次都写export命令了。只需要将上面的两条语句加入到 <del>/.bashrc / 或</del>/.bash_profil 文件里，然后在控制台执行 <code>source ~/.bashrc</code> 或 <code>source ~/.bash_profile</code>即可。</p><h2 id="问：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）"><a href="#问：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）" class="headerlink" title="问：fdk-aac库找不到（[ERROR: libfdk_aac not found]）"></a>问：fdk-aac库找不到（[ERROR: libfdk_aac not found]）</h2><p>答：该问题与上面的 libx264 问题类似，所以只需要将上面的 libx264替换为libfdk-aac即可。这里不在赘述。</p><h2 id="问：speex库找不到（-ERROR-speex-not-found-）"><a href="#问：speex库找不到（-ERROR-speex-not-found-）" class="headerlink" title="问：speex库找不到（[ERROR: speex not found]）"></a>问：speex库找不到（[ERROR: speex not found]）</h2><p>答：该问题与上面的 libx264 问题类似，所以只需要将上面的 libx264替换为speex即可。这里不在赘述。</p><h2 id="问：编译不出ffplay"><a href="#问：编译不出ffplay" class="headerlink" title="问：编译不出ffplay"></a>问：编译不出ffplay</h2><p>答：引起该问题有以下几方面的原因：</p><ul><li>所使用的操作系统没有安装图形库。如有的同学在阿里的云服务器上想安装ffplay是肯定不行的。</li><li>没有安装 SDL2 库。解决办法是通过 brew/apt/yum install sdl2 即可 或 通过 SDL2 源码安装。<strong>安装完成后，要重新进行到 ffmpeg目录下，执行 ./configure…这指命令。</strong></li><li>有的同学编译ffmpeg时，在ffmpeg目录执行./configure … 之后，没有修改config.h文件，这样也编译不出ffplay来。解决办法是进入到 ffmpeg 目录下，打开 config.h文件找 FFPLAY 关键字，将其后面的 0 修改为 1，保存并退出该文件。在当前目录下执行 make &amp;&amp; sudo  make install。<strong>注意，修改 config.h文件后，不要再执行./configure …了，否则config.h中的值又都恢复为原来的值了。</strong></li><li>SDL2与最新的Mac系统 mojave不兼容。解决办法：<ul><li>方法一<ul><li>从 <a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.tar.gz" target="_blank" rel="noopener">SDL</a>下载 2.0.9版本或以后的SDL2代码。</li><li>执行 ./configure</li><li>执行 make &amp;&amp; sudo make install</li><li>执行 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</li><li>[重新]编译ffmpeg</li></ul></li><li>方法二<ul><li>从<a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.dmg" target="_blank" rel="noopener">SDL</a>下载dmg包。</li><li>执行 open SDL2-2.0.9.dmg</li><li>[重新]编译ffmpeg</li></ul></li></ul></li></ul><h2 id="SDL在windows的-cygwin下无法打印日志"><a href="#SDL在windows的-cygwin下无法打印日志" class="headerlink" title="SDL在windows的 cygwin下无法打印日志"></a>SDL在windows的 cygwin下无法打印日志</h2><p>在编译 SDL 时，将configure 中的 <code>-mwindows</code> 参数去掉。</p><h2 id="问：如何在Windows下编译ffmpeg问题"><a href="#问：如何在Windows下编译ffmpeg问题" class="headerlink" title="问：如何在Windows下编译ffmpeg问题"></a>问：如何在Windows下编译ffmpeg问题</h2><p>答：参见 <a href="http://www.imooc.com/article/247113" target="_blank" rel="noopener">Windows下编译ffmpeg问题</a></p><h2 id="问：在Windows下编译安装ffmpeg是不是特别麻烦？"><a href="#问：在Windows下编译安装ffmpeg是不是特别麻烦？" class="headerlink" title="问：在Windows下编译安装ffmpeg是不是特别麻烦？"></a>问：在Windows下编译安装ffmpeg是不是特别麻烦？</h2><p>答：确实是这样。所以建议在Window开发者最好装一个 Ubuntu的虚拟机，这样就方便很多了。如果条件允许的话，最好能用Mac开发。可以说Mac Pro是关专为开发者制造的，一旦你用上它会让你爱不释手。</p><h2 id="问：编译时，各种库找不到问题"><a href="#问：编译时，各种库找不到问题" class="headerlink" title="问：编译时，各种库找不到问题"></a>问：编译时，各种库找不到问题</h2><p>答：该问题与上面的 libx264类似，我们可以通过 <code>brew/apt/yum install xxx</code> 命令进行安装，一般情况下这种方式都可以满足我们的需求。如果始终不行的话，就需要源码安装了。源码安装的方法可以参见 <a href="http://www.imooc.com/article/247113" target="_blank" rel="noopener">Windows下编译ffmpeg问题</a> 里的说明。</p><h2 id="问：ffmpeg如何使用-libx265"><a href="#问：ffmpeg如何使用-libx265" class="headerlink" title="问：ffmpeg如何使用 libx265"></a>问：ffmpeg如何使用 libx265</h2><p>答：准确的讲ffmpeg应该是一个音视频框架，所有的音视频编解码器都是以插件的方式与ffmpeg联系起来的。换句话说，ffmpeg在上层提供了统一的 API，无法你使用的编解决是 x264, open264, x265, vp8/vp9/av1 上层用户都不管心，它仍然使用同样的 API， 只是在find_decoder 或 find_encoder时，指定具体的编解码器就可以了。也就是说在find_xxx时，你要设置了 x264 它最终就会调用 x264进行编解码，设置了 x265它就使用 x265进行编解码。如些而已。</p><h2 id="问：这门课有群吗？"><a href="#问：这门课有群吗？" class="headerlink" title="问：这门课有群吗？"></a>问：这门课有群吗？</h2><p>答：有的，群号：883069602，不过<a href="https://coding.imooc.com/class/279.html?mc_marking=59c321c0417e144904c49c366f94dd57&mc_channel=shouji" target="_blank" rel="noopener">需要购买课程</a>后输入验证码才可以进群。大家可以在群里讨论问题，也可以在课程的评论区里搜索答案。目前评论区里已经积累了大量问题的解决方案。</p><h2 id="问：为什么我使用课程中的程序无法成功抽取AAC音频？"><a href="#问：为什么我使用课程中的程序无法成功抽取AAC音频？" class="headerlink" title="问：为什么我使用课程中的程序无法成功抽取AAC音频？"></a>问：为什么我使用课程中的程序无法成功抽取AAC音频？</h2><p>答：<a href="https://www.imooc.com/article/254733" target="_blank" rel="noopener">详细回答在这里</a></p><h2 id="问：Android播放器例子为什么调API失败"><a href="#问：Android播放器例子为什么调API失败" class="headerlink" title="问：Android播放器例子为什么调API失败"></a>问：Android播放器例子为什么调API失败</h2><p>答：你目前使用的 NDK 版本与我编译时使用的 NDK 版本不一致造成的，换成 NDK10e试试。</p><h2 id="问：NDK10e-从哪里下载"><a href="#问：NDK10e-从哪里下载" class="headerlink" title="问：NDK10e 从哪里下载"></a>问：NDK10e 从哪里下载</h2><p>答：可以到<a href="https://developer.android.com/ndk/downloads/older_releases" target="_blank" rel="noopener">这里</a>下载。</p><ul><li><a href="https://dl.google.com/android/repository/android-ndk-r10e-darwin-x86_64.zip" target="_blank" rel="noopener">mac NDK10e</a></li><li><a href="https://dl.google.com/android/repository/android-ndk-r10e-windows-x86.zip" target="_blank" rel="noopener">windows 32 位 NDK10e</a></li><li><a href="https://dl.google.com/android/repository/android-ndk-r10e-windows-x86_64.zip" target="_blank" rel="noopener">windows 64位 NDK10e</a></li><li><a href="https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip" target="_blank" rel="noopener">linux NDK10e</a></li></ul><h2 id="问：NDKr21-从哪里下载"><a href="#问：NDKr21-从哪里下载" class="headerlink" title="问：NDKr21 从哪里下载"></a>问：NDKr21 从哪里下载</h2><p>答：可以到这里下载。</p><ul><li><a href="https://dl.google.com/android/repository/android-ndk-r21-darwin-x86_64.zip" target="_blank" rel="noopener">mac NDKr21</a></li><li><a href="https://dl.google.com/android/repository/android-ndk-r21-windows-x86_64.zip" target="_blank" rel="noopener">windows NDKr21</a></li><li><a href="https://dl.google.com/android/repository/android-ndk-r21-linux-x86_64.zip" target="_blank" rel="noopener">linux NDKr21</a></li></ul><h2 id="问：ffmpeg安装好后，编译视频中的ffmpeg-log不成功"><a href="#问：ffmpeg安装好后，编译视频中的ffmpeg-log不成功" class="headerlink" title="问：ffmpeg安装好后，编译视频中的ffmpeg_log不成功"></a>问：ffmpeg安装好后，编译视频中的ffmpeg_log不成功</h2><p>答：执行下面的命令进行编译</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -g -o ffmpeg_log ffmpeg_log.c &#96;pkg-config --libs --cflags libavutil&#96;</span><br></pre></td></tr></table></figure><p><strong>注意：pkg-confg 前面的符号不是<code>&#39;</code>哟！它是键盘左上角 ESC键下面的键。</strong></p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>该文章会不定期更新，我们将一些大家使用<a href="https://coding.imooc.com/class/279.html?mc_marking=59c321c0417e144904c49c366f94dd57&mc_channel=shouji" target="_blank" rel="noopener">ffmpeg</a>常见的问题更新到这里来。</p><h2 id="视频课地址"><a href="#视频课地址" class="headerlink" title="视频课地址"></a>视频课地址</h2><p><a href="http://www.imooc.com/u/4873493/courses?sort=publish" target="_blank" rel="noopener">课程主页地址</a></p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title>ffmpeg精讲常见问题</title>
+    <url>/2020-05-31-ffmpeg%E7%B2%BE%E8%AE%B2%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="问：编译-ffmpeg-方法"><a href="#问：编译-ffmpeg-方法" class="headerlink" title="问：编译 ffmpeg 方法"></a>问：编译 ffmpeg 方法</h2><p>答：在各个平台编译方法基本都是一样的。</p>
+<ul>
+<li>首先下载 ffmpeg 源码，地址为: <a href="http://www.ffmpeg.org/download.html" target="_blank" rel="noopener">www.ffmpeg.org/download.html</a></li>
+<li>进入到下载后的<a href="https://coding.imooc.com/class/279.html?mc_marking=59c321c0417e144904c49c366f94dd57&mc_channel=shouji" target="_blank" rel="noopener">ffmpeg目</a>录下，执行下面的指令：<a id="more"></a>
+<ul>
+<li>Mac 平台：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;ffmpeg</span><br><span class="line">                  --enable-gpl</span><br><span class="line">                  --enable-nonfree</span><br><span class="line">                  --enable-libfdk-aac</span><br><span class="line">                  --enable-libx264</span><br><span class="line">                  --enable-libx265</span><br><span class="line">                  --enable-filter&#x3D;delogo</span><br><span class="line">                  --enable-debug</span><br><span class="line">                  --disable-optimizations</span><br><span class="line">                  --enable-libspeex</span><br><span class="line">                  --enable-videotoolbox</span><br><span class="line">                  --enable-shared</span><br><span class="line">                  --enable-pthreads</span><br><span class="line">                  --enable-version3</span><br><span class="line">                  --enable-hardcoded-tables</span><br><span class="line">                  --cc&#x3D;clang</span><br><span class="line">                  --host-cflags&#x3D;</span><br><span class="line">                  --host-ldflags&#x3D;</span><br></pre></td></tr></table></figure></li>
+<li>Linux平台<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;ffmpeg</span><br><span class="line">                  --enable-gpl</span><br><span class="line">                  --enable-nonfree</span><br><span class="line">                  --enable-libfdk-aac</span><br><span class="line">                  --enable-libx264</span><br><span class="line">                  --enable-libx265</span><br><span class="line">                  --enable-filter&#x3D;delogo</span><br><span class="line">                  --enable-debug</span><br><span class="line">                  --disable-optimizations</span><br><span class="line">                  --enable-libspeex</span><br><span class="line">                  --enable-shared</span><br><span class="line">                  --enable-pthreads</span><br></pre></td></tr></table></figure></li>
+<li>Windows平台<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;ffmpeg</span><br><span class="line">                  --enable-gpl</span><br><span class="line">                  --enable-nonfree</span><br><span class="line">                  --enable-libfdk-aac</span><br><span class="line">                  --enable-libx264</span><br><span class="line">                  --enable-libx265</span><br><span class="line">                  --enable-filter&#x3D;delogo</span><br><span class="line">                  --enable-debug</span><br><span class="line">                  --disable-optimizations</span><br><span class="line">                  --enable-libspeex</span><br><span class="line">                  --enable-static</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="问：make-amp-amp-make-install失败"><a href="#问：make-amp-amp-make-install失败" class="headerlink" title="问：make &amp;&amp; make install失败"></a>问：make &amp;&amp; make install失败</h2><p>答：make &amp;&amp; make install 之所以会失败，则由于该用户没有操作目录的权限引起的。所以只需要在make install 之前加 sudo即可。</p>
+<p>另一种方法是将用户切换成 root用户，因 root用户的权力最大，所以这样做也是没问题的。但建议还是用 非 root用户操作，这样更安全。</p>
+<h2 id="问：库已经安装好了，但仍报找不到它的错误？"><a href="#问：库已经安装好了，但仍报找不到它的错误？" class="headerlink" title="问：库已经安装好了，但仍报找不到它的错误？"></a>问：库已经安装好了，但仍报找不到它的错误？</h2><p>答：首先确认是否已经将 <code>pkg-config</code>工具安装好了。可以执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pkg-config</span><br></pre></td></tr></table></figure>
+<p>如果提示没有安装，则先将该工具安装好，安装命令如下：</p>
+<ul>
+<li>ubuntu  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt intall pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>mac  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>cygwin  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt-cyg install pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>centos  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install pkg-config</span><br></pre></td></tr></table></figure>
+安装完该工具后仍然报错？那再按照具体的错误看下面的解决方案吧。</li>
+</ul>
+<h2 id="问：libx264库找不到（-ERROR-libx264-not-found-）"><a href="#问：libx264库找不到（-ERROR-libx264-not-found-）" class="headerlink" title="问：libx264库找不到（[ERROR: libx264 not found]）"></a>问：libx264库找不到（[ERROR: libx264 not found]）</h2><p>该问题可能由下面三个方面的问题引起。</p>
+<ul>
+<li>libx264库没有安装。对于这种情况有两种解决办法:<ul>
+<li>其一，是通过平台的安装工作进行安装，如 apt/brew/yum install x264。（注：在Linux下应该安装 libx264-dev）。</li>
+<li>其二，是通过源码安装，步骤如下：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. wget https:&#x2F;&#x2F;code.videolan.org&#x2F;videolan&#x2F;x264&#x2F;-&#x2F;archive&#x2F;master&#x2F;x264-master.tar.bz2</span><br><span class="line">2. bunzip2 x264-master.tar.bz2</span><br><span class="line">3. tar -vxf x264-master.tar.tar</span><br><span class="line">4. .&#x2F;configure --enable-static --enable-shared --disable-asm --disable-avs</span><br><span class="line">5. make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>通过 pkg-config 命令无法找到。对于这类问题，我们可以使用下面的命 <code>pkg-config --cflags --lib libx264</code>看是否可以找到 libx264，如果找不到，就说明确实是这个问题。解决的办法是设置环境变量。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PKG_CONFIG_PATH&#x3D;$PKG_CONFIG_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib&#x2F;pkgconfig</span><br></pre></td></tr></table></figure>
+其中 <code>xxx</code> 由你的实际路径代替。</li>
+</ul>
+<blockquote>
+<p>注，有可能你的系统中并没有装 pkg-config工具，可以使用 brew/apt/yum install pkg-config进行安装。</p>
+</blockquote>
+<ul>
+<li>无法链接上libx264, 这是由于通过环境变量 LD_LIBRARY_PATH 无法定位到 libx264库。解决的办法也很简单，与上面类似，可以通过设置环境变量来解决该问题。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LIB_LIBRARY_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib</span><br></pre></td></tr></table></figure>
+其中，<code>xxx</code>由你的实际路径代替。</li>
+</ul>
+<p>当然，你也可以将环境变量设置在脚本里，这样就不用每次都写export命令了。只需要将上面的两条语句加入到 <del>/.bashrc / 或</del>/.bash_profil 文件里，然后在控制台执行 <code>source ~/.bashrc</code> 或 <code>source ~/.bash_profile</code>即可。</p>
+<h2 id="问：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）"><a href="#问：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）" class="headerlink" title="问：fdk-aac库找不到（[ERROR: libfdk_aac not found]）"></a>问：fdk-aac库找不到（[ERROR: libfdk_aac not found]）</h2><p>答：该问题与上面的 libx264 问题类似，所以只需要将上面的 libx264替换为libfdk-aac即可。这里不在赘述。</p>
+<h2 id="问：speex库找不到（-ERROR-speex-not-found-）"><a href="#问：speex库找不到（-ERROR-speex-not-found-）" class="headerlink" title="问：speex库找不到（[ERROR: speex not found]）"></a>问：speex库找不到（[ERROR: speex not found]）</h2><p>答：该问题与上面的 libx264 问题类似，所以只需要将上面的 libx264替换为speex即可。这里不在赘述。</p>
+<h2 id="问：编译不出ffplay"><a href="#问：编译不出ffplay" class="headerlink" title="问：编译不出ffplay"></a>问：编译不出ffplay</h2><p>答：引起该问题有以下几方面的原因：</p>
+<ul>
+<li>所使用的操作系统没有安装图形库。如有的同学在阿里的云服务器上想安装ffplay是肯定不行的。</li>
+<li>没有安装 SDL2 库。解决办法是通过 brew/apt/yum install sdl2 即可 或 通过 SDL2 源码安装。<strong>安装完成后，要重新进行到 ffmpeg目录下，执行 ./configure…这指命令。</strong></li>
+<li>有的同学编译ffmpeg时，在ffmpeg目录执行./configure … 之后，没有修改config.h文件，这样也编译不出ffplay来。解决办法是进入到 ffmpeg 目录下，打开 config.h文件找 FFPLAY 关键字，将其后面的 0 修改为 1，保存并退出该文件。在当前目录下执行 make &amp;&amp; sudo  make install。<strong>注意，修改 config.h文件后，不要再执行./configure …了，否则config.h中的值又都恢复为原来的值了。</strong></li>
+<li>SDL2与最新的Mac系统 mojave不兼容。解决办法：<ul>
+<li>方法一<ul>
+<li>从 <a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.tar.gz" target="_blank" rel="noopener">SDL</a>下载 2.0.9版本或以后的SDL2代码。</li>
+<li>执行 ./configure</li>
+<li>执行 make &amp;&amp; sudo make install</li>
+<li>执行 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</li>
+<li>[重新]编译ffmpeg</li>
+</ul>
+</li>
+<li>方法二<ul>
+<li>从<a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.dmg" target="_blank" rel="noopener">SDL</a>下载dmg包。</li>
+<li>执行 open SDL2-2.0.9.dmg</li>
+<li>[重新]编译ffmpeg</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="SDL在windows的-cygwin下无法打印日志"><a href="#SDL在windows的-cygwin下无法打印日志" class="headerlink" title="SDL在windows的 cygwin下无法打印日志"></a>SDL在windows的 cygwin下无法打印日志</h2><p>在编译 SDL 时，将configure 中的 <code>-mwindows</code> 参数去掉。</p>
+<h2 id="问：如何在Windows下编译ffmpeg问题"><a href="#问：如何在Windows下编译ffmpeg问题" class="headerlink" title="问：如何在Windows下编译ffmpeg问题"></a>问：如何在Windows下编译ffmpeg问题</h2><p>答：参见 <a href="http://www.imooc.com/article/247113" target="_blank" rel="noopener">Windows下编译ffmpeg问题</a></p>
+<h2 id="问：在Windows下编译安装ffmpeg是不是特别麻烦？"><a href="#问：在Windows下编译安装ffmpeg是不是特别麻烦？" class="headerlink" title="问：在Windows下编译安装ffmpeg是不是特别麻烦？"></a>问：在Windows下编译安装ffmpeg是不是特别麻烦？</h2><p>答：确实是这样。所以建议在Window开发者最好装一个 Ubuntu的虚拟机，这样就方便很多了。如果条件允许的话，最好能用Mac开发。可以说Mac Pro是关专为开发者制造的，一旦你用上它会让你爱不释手。</p>
+<h2 id="问：编译时，各种库找不到问题"><a href="#问：编译时，各种库找不到问题" class="headerlink" title="问：编译时，各种库找不到问题"></a>问：编译时，各种库找不到问题</h2><p>答：该问题与上面的 libx264类似，我们可以通过 <code>brew/apt/yum install xxx</code> 命令进行安装，一般情况下这种方式都可以满足我们的需求。如果始终不行的话，就需要源码安装了。源码安装的方法可以参见 <a href="http://www.imooc.com/article/247113" target="_blank" rel="noopener">Windows下编译ffmpeg问题</a> 里的说明。</p>
+<h2 id="问：ffmpeg如何使用-libx265"><a href="#问：ffmpeg如何使用-libx265" class="headerlink" title="问：ffmpeg如何使用 libx265"></a>问：ffmpeg如何使用 libx265</h2><p>答：准确的讲ffmpeg应该是一个音视频框架，所有的音视频编解码器都是以插件的方式与ffmpeg联系起来的。换句话说，ffmpeg在上层提供了统一的 API，无法你使用的编解决是 x264, open264, x265, vp8/vp9/av1 上层用户都不管心，它仍然使用同样的 API， 只是在find_decoder 或 find_encoder时，指定具体的编解码器就可以了。也就是说在find_xxx时，你要设置了 x264 它最终就会调用 x264进行编解码，设置了 x265它就使用 x265进行编解码。如些而已。</p>
+<h2 id="问：这门课有群吗？"><a href="#问：这门课有群吗？" class="headerlink" title="问：这门课有群吗？"></a>问：这门课有群吗？</h2><p>答：有的，群号：883069602，不过<a href="https://coding.imooc.com/class/279.html?mc_marking=59c321c0417e144904c49c366f94dd57&mc_channel=shouji" target="_blank" rel="noopener">需要购买课程</a>后输入验证码才可以进群。大家可以在群里讨论问题，也可以在课程的评论区里搜索答案。目前评论区里已经积累了大量问题的解决方案。</p>
+<h2 id="问：为什么我使用课程中的程序无法成功抽取AAC音频？"><a href="#问：为什么我使用课程中的程序无法成功抽取AAC音频？" class="headerlink" title="问：为什么我使用课程中的程序无法成功抽取AAC音频？"></a>问：为什么我使用课程中的程序无法成功抽取AAC音频？</h2><p>答：<a href="https://www.imooc.com/article/254733" target="_blank" rel="noopener">详细回答在这里</a></p>
+<h2 id="问：Android播放器例子为什么调API失败"><a href="#问：Android播放器例子为什么调API失败" class="headerlink" title="问：Android播放器例子为什么调API失败"></a>问：Android播放器例子为什么调API失败</h2><p>答：你目前使用的 NDK 版本与我编译时使用的 NDK 版本不一致造成的，换成 NDK10e试试。</p>
+<h2 id="问：NDK10e-从哪里下载"><a href="#问：NDK10e-从哪里下载" class="headerlink" title="问：NDK10e 从哪里下载"></a>问：NDK10e 从哪里下载</h2><p>答：可以到<a href="https://developer.android.com/ndk/downloads/older_releases" target="_blank" rel="noopener">这里</a>下载。</p>
+<ul>
+<li><a href="https://dl.google.com/android/repository/android-ndk-r10e-darwin-x86_64.zip" target="_blank" rel="noopener">mac NDK10e</a></li>
+<li><a href="https://dl.google.com/android/repository/android-ndk-r10e-windows-x86.zip" target="_blank" rel="noopener">windows 32 位 NDK10e</a></li>
+<li><a href="https://dl.google.com/android/repository/android-ndk-r10e-windows-x86_64.zip" target="_blank" rel="noopener">windows 64位 NDK10e</a></li>
+<li><a href="https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip" target="_blank" rel="noopener">linux NDK10e</a></li>
+</ul>
+<h2 id="问：NDKr21-从哪里下载"><a href="#问：NDKr21-从哪里下载" class="headerlink" title="问：NDKr21 从哪里下载"></a>问：NDKr21 从哪里下载</h2><p>答：可以到这里下载。</p>
+<ul>
+<li><a href="https://dl.google.com/android/repository/android-ndk-r21-darwin-x86_64.zip" target="_blank" rel="noopener">mac NDKr21</a></li>
+<li><a href="https://dl.google.com/android/repository/android-ndk-r21-windows-x86_64.zip" target="_blank" rel="noopener">windows NDKr21</a></li>
+<li><a href="https://dl.google.com/android/repository/android-ndk-r21-linux-x86_64.zip" target="_blank" rel="noopener">linux NDKr21</a></li>
+</ul>
+<h2 id="问：ffmpeg安装好后，编译视频中的ffmpeg-log不成功"><a href="#问：ffmpeg安装好后，编译视频中的ffmpeg-log不成功" class="headerlink" title="问：ffmpeg安装好后，编译视频中的ffmpeg_log不成功"></a>问：ffmpeg安装好后，编译视频中的ffmpeg_log不成功</h2><p>答：执行下面的命令进行编译</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gcc -g -o ffmpeg_log ffmpeg_log.c &#96;pkg-config --libs --cflags libavutil&#96;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：pkg-confg 前面的符号不是<code>&#39;</code>哟！它是键盘左上角 ESC键下面的键。</strong></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>该文章会不定期更新，我们将一些大家使用<a href="https://coding.imooc.com/class/279.html?mc_marking=59c321c0417e144904c49c366f94dd57&mc_channel=shouji" target="_blank" rel="noopener">ffmpeg</a>常见的问题更新到这里来。</p>
+<h2 id="视频课地址"><a href="#视频课地址" class="headerlink" title="视频课地址"></a>视频课地址</h2><p><a href="http://www.imooc.com/u/4873493/courses?sort=publish" target="_blank" rel="noopener">课程主页地址</a></p>
+]]></content>
       <categories>
-          
-          <category> 音视频 </category>
-          
+        <category>音视频</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> ffmpeg </tag>
-            
-            <tag> 音视频 </tag>
-            
-            <tag> 直播 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>音视频系统入门常见问题</title>
-      <link href="/2020-05-31-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
-      <url>/2020-05-31-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<p><img data-src="https://upload-images.jianshu.io/upload_images/5956443-d9bc0c8f72f24d62.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p><p>同学们在学习视频课小白系统入门这门课的过程中，经常遇到一些问题，这里总结一些最常见的问题，供大家参考：</p><h2 id="Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash"><a href="#Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash" class="headerlink" title="Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash."></a>Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash.</h2><p>A: 重新编译ffmpeg，在执行 ./configure 时增加 –extra-cflags=”fno-static-check” 选项，注意该选项一定要放在前面，否则编译有问题。</p><a id="more"></a><h2 id="Q：添加-–extra-cflags-”fno-static-check”-选项-仍然-crash"><a href="#Q：添加-–extra-cflags-”fno-static-check”-选项-仍然-crash" class="headerlink" title="Q：添加 –extra-cflags=”fno-static-check” 选项 仍然 crash"></a>Q：添加 –extra-cflags=”fno-static-check” 选项 仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲</p><h2 id="Q：Xcode-编译成功，但执行失败"><a href="#Q：Xcode-编译成功，但执行失败" class="headerlink" title="Q：Xcode 编译成功，但执行失败"></a>Q：Xcode 编译成功，但执行失败</h2><p>A：在执行课程的例子时，要将沙盒关闭掉，在info.list中增加访问mic phone 权限。</p><h2 id="Q：关闭沙盒后，程序仍然无法执行"><a href="#Q：关闭沙盒后，程序仍然无法执行" class="headerlink" title="Q：关闭沙盒后，程序仍然无法执行"></a>Q：关闭沙盒后，程序仍然无法执行</h2><p>A：要有开发者证书才可以。</p><h2 id="Q：引入ffmpeg库后，报code-signature…not-valid"><a href="#Q：引入ffmpeg库后，报code-signature…not-valid" class="headerlink" title="Q：引入ffmpeg库后，报code signature…not valid"></a>Q：引入ffmpeg库后，报code signature…not valid</h2><p>A：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 打开 Mac 中的 keychain Access.app, 选择“我的证书”</span><br><span class="line">2. 执行 codesign -f -s &quot;证书名&quot; xxx.dylib</span><br><span class="line">3. 为了避免逐个签名，可以进行批量操作 codesign -f -s &quot;证书名&quot; &#x2F;usr&#x2F;local&#x2F;ffmpeg&#x2F;lib&#x2F;*.dylib</span><br></pre></td></tr></table></figure><h2 id="Q-ffmpeg-执行时提示没有权限"><a href="#Q-ffmpeg-执行时提示没有权限" class="headerlink" title="Q: ffmpeg 执行时提示没有权限"></a>Q: ffmpeg 执行时提示没有权限</h2><p>A： 切目录切换到你自己的用户目录下再执行ffmpeg。</p><h2 id="虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？"><a href="#虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？" class="headerlink" title="虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？"></a>虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？</h2><p>A： ffmpeg中最低采样个数为32个，所以只有 64 字节数据时，是无进行重采样的。解决办法是将数据放到一个缓冲区中，积攒到一定大小后，再进行重采样。</p><h2 id="Q-在从设备采体数据时，返回错误-35"><a href="#Q-在从设备采体数据时，返回错误-35" class="headerlink" title="Q: 在从设备采体数据时，返回错误 -35"></a>Q: 在从设备采体数据时，返回错误 -35</h2><p>A: 说明你的设备现在暂时还没准备好，此时你应该等待它几秒，之后就可以正常读数据了。</p><h2 id="Q：在编码时，编码器返回-35-错误"><a href="#Q：在编码时，编码器返回-35-错误" class="headerlink" title="Q：在编码时，编码器返回 -35 错误"></a>Q：在编码时，编码器返回 -35 错误</h2><p>A：此时说明编码器没有准备好，需要等待几秒钟。</p><h2 id="Q-编译ffmpeg时没有ffplay"><a href="#Q-编译ffmpeg时没有ffplay" class="headerlink" title="Q: 编译ffmpeg时没有ffplay"></a>Q: 编译ffmpeg时没有ffplay</h2><p>A:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.首先安装 SDL2 库</span><br><span class="line">2. 在 ffmpeg源码中执行 .&#x2F;configure 时并增加 --enable-sdl2</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure><h2 id="Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库"><a href="#Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库" class="headerlink" title="Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库"></a>Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库</h2><p>A：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 安装好 fdk-aac库</span><br><span class="line">2. 重新在ffmpeg源码目录下执行.&#x2F;configure 并增加--enable-libfdk-aac 参数</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure><h2 id="Q-在Linux中何采集音频数据"><a href="#Q-在Linux中何采集音频数据" class="headerlink" title="Q: 在Linux中何采集音频数据"></a>Q: 在Linux中何采集音频数据</h2><p>A: ffmpeg -f alsa -i hw:0,0 xxx.wav</p><h2 id="Q-在-Linux-中找不到-alsa-设备"><a href="#Q-在-Linux-中找不到-alsa-设备" class="headerlink" title="Q: 在 Linux 中找不到 alsa 设备"></a>Q: 在 Linux 中找不到 alsa 设备</h2><p>A：可以通过 arecord -l 查看你linux系统下有哪些音频设备。如果没有alsa, 可以使用  oss.</p><h2 id="Q：编译ffmpeg-时-filter-编译不过"><a href="#Q：编译ffmpeg-时-filter-编译不过" class="headerlink" title="Q：编译ffmpeg 时 filter 编译不过"></a>Q：编译ffmpeg 时 filter 编译不过</h2><p>A：选择使用 libstdc++ 库试试</p><h2 id="Q-Windows下编译ffmpeg"><a href="#Q-Windows下编译ffmpeg" class="headerlink" title="Q: Windows下编译ffmpeg"></a>Q: Windows下编译ffmpeg</h2><p>A:  <a href="https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW" target="_blank" rel="noopener">https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW</a></p><h2 id="Q-AAC-编码为-AAC-HE-V2-时，声音不对"><a href="#Q-AAC-编码为-AAC-HE-V2-时，声音不对" class="headerlink" title="Q: AAC 编码为 AAC_HE_V2 时，声音不对"></a>Q: AAC 编码为 AAC_HE_V2 时，声音不对</h2><p>A：这是因为我用的 AAC 版本比较老，老版本的 AAC 与新版本的 AAC 可能有一些差异，这个我会后面查找一下原因。大家测试时可以将profile修改为 AAC HE 或 AAC LC，这样就可以正常编码出 AAC 数据了。</p><h2 id="Q：库已经安装好了，但仍报找不到它的错误？"><a href="#Q：库已经安装好了，但仍报找不到它的错误？" class="headerlink" title="Q：库已经安装好了，但仍报找不到它的错误？"></a><a href="">Q：库已经安装好了，但仍报找不到它的错误？</a></h2><p>A：首先确认是否已经将 <code>pkg-config</code>工具安装好了。可以执行下面的命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg-config</span><br></pre></td></tr></table></figure><p>如果提示没有安装，则先将该工具安装好，安装命令如下：</p><ul><li>ubuntu  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt intall pkg-config</span><br></pre></td></tr></table></figure></li><li>mac  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install pkg-config</span><br></pre></td></tr></table></figure></li><li>cygwin  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cyg install pkg-config</span><br></pre></td></tr></table></figure></li><li>centos  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install pkg-config</span><br></pre></td></tr></table></figure>安装完该工具后仍然报错？那再按照具体的错误看下面的解决方案吧。</li></ul><h2 id="Q：libx264库找不到（-ERROR-libx264-not-found-）"><a href="#Q：libx264库找不到（-ERROR-libx264-not-found-）" class="headerlink" title="Q：libx264库找不到（[ERROR: libx264 not found]）"></a>Q：libx264库找不到（[ERROR: libx264 not found]）</h2><p>A:<br>该问题可能由下面三个方面的问题引起。</p><ul><li>libx264库没有安装。对于这种情况有两种解决办法:<ul><li>其一，是通过平台的安装工作进行安装，如 apt/brew/yum install x264。（注：在Linux下应该安装 libx264-dev）。</li><li>其二，是通过源码安装，步骤如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. wget https:&#x2F;&#x2F;code.videolan.org&#x2F;videolan&#x2F;x264&#x2F;-&#x2F;archive&#x2F;master&#x2F;x264-master.tar.bz2</span><br><span class="line">2. bunzip2 last_x264.tar.bz2</span><br><span class="line">3. tar -vxf last_x264.tar</span><br><span class="line">4. .&#x2F;configure --enable-static --enable-shared --disable-asm --disable-avs</span><br><span class="line">5. make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure></li></ul></li><li>通过 pkg-config 命令无法找到。对于这类问题，我们可以使用下面的命 <code>pkg-config --cflags --lib libx264</code>看是否可以找到 libx264，如果找不到，就说明确实是这个问题。解决的办法是设置环境变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PKG_CONFIG_PATH&#x3D;$PKG_CONFIG_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib&#x2F;pkgconfig</span><br></pre></td></tr></table></figure>其中 <code>xxx</code> 由你的实际路径代替。</li></ul><blockquote><p>注，有可能你的系统中并没有装 pkg-config工具，可以使用 brew/apt/yum install pkg-config进行安装。</p></blockquote><ul><li>无法链接上libx264, 这是由于通过环境变量 LD_LIBRARY_PATH 无法定位到 libx264库。解决的办法也很简单，与上面类似，可以通过设置环境变量来解决该问题。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LIB_LIBRARY_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib</span><br></pre></td></tr></table></figure>其中，<code>xxx</code>由你的实际路径代替。</li></ul><p>当然，你也可以将环境变量设置在脚本里，这样就不用每次都写export命令了。只需要将上面的两条语句加入到 <del>/.bashrc / 或</del>/.bash_profil 文件里，然后在控制台执行 <code>source ~/.bashrc</code> 或 <code>source ~/.bash_profile</code>即可。</p><h2 id="Q：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）"><a href="#Q：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）" class="headerlink" title="Q：fdk-aac库找不到（[ERROR: libfdk_aac not found]）"></a>Q：fdk-aac库找不到（[ERROR: libfdk_aac not found]）</h2><p>A：该问题与上面的 libx264 问题类似，所以只需要将上面的 libx264替换为libfdk-aac即可。这里不在赘述。</p><h2 id="Q：通过-avcodec-find-encoder-by-name-无法找到编码器"><a href="#Q：通过-avcodec-find-encoder-by-name-无法找到编码器" class="headerlink" title="Q：通过 avcodec_find_encoder_by_name() 无法找到编码器"></a>Q：通过 avcodec_find_encoder_by_name() 无法找到编码器</h2><p>A：通过以下步骤进行解决</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0. 你使用的ffmpeg必须是经过源码编译的</span><br><span class="line">1. 你在编译 ffmpeg 时，执行.&#x2F;configure时是否将此编码器模块添加到 ffmpeg中了？以 fdk_aac 为例，在执行 .&#x2F;configure …时你应该加上 --enable-libfdk-aac 选项。</span><br><span class="line">2. 如果通过源码编译ffmpeg时有报错，请根据错误信息查看本文档的相应处理方法</span><br><span class="line">3. 确保 pkg-config 命令查询到的是你通过源码编译的ffmpeg库</span><br></pre></td></tr></table></figure><h2 id="Q：编译不出ffplay"><a href="#Q：编译不出ffplay" class="headerlink" title="Q：编译不出ffplay"></a>Q：编译不出ffplay</h2><p>A：引起该问题有以下几方面的原因：</p><ul><li>所使用的操作系统没有安装图形库。如有的同学在阿里的云服务器上想安装ffplay是肯定不行的。</li><li>没有安装 SDL2 库。解决办法是通过 brew/apt/yum install sdl2 即可 或 通过 SDL2 源码安装。<strong>安装完成后，要重新进行到 ffmpeg目录下，执行 ./configure…这指命令。</strong></li><li>有的同学编译ffmpeg时，在ffmpeg目录执行./configure …时没有添加 –enable-sdl2 选项也会导致无法编译出 ffplay</li><li>SDL2与最新的Mac系统 mojave不兼容。解决办法：<ul><li>方法一<ul><li>从 <a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.tar.gz" target="_blank" rel="noopener">SDL</a>下载 2.0.9版本或以后的SDL2代码。</li><li>执行 ./configure</li><li>执行 make &amp;&amp; sudo make install</li><li>执行 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</li><li>[重新]编译ffmpeg</li></ul></li><li>方法二<ul><li>从<a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.dmg" target="_blank" rel="noopener">SDL</a>下载dmg包。</li><li>执行 open SDL2-2.0.9.dmg</li><li>[重新]编译ffmpeg</li></ul></li></ul></li></ul><h2 id="Q：非Mac同学如何学习本课程"><a href="#Q：非Mac同学如何学习本课程" class="headerlink" title="Q：非Mac同学如何学习本课程"></a>Q：非Mac同学如何学习本课程</h2><p>A：本课程中的例子的界面是由 Swift 编写的，如果你没有 Mac 系统的话，你可以用 Qt 甚至不用界面开发，代码中与ffmpeg相着的代码都是跨平台的。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://coding.imooc.com/class/415.html?mc_marking=b587280c0c1c0e76c1092aa21406565a&mc_channel=syb6" target="_blank" rel="noopener">音视频小白系统入门课</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>ffmpeg</tag>
+        <tag>音视频</tag>
+        <tag>直播</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>音视频系统入门常见问题</title>
+    <url>/2020-05-31-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A8%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><img data-src="https://upload-images.jianshu.io/upload_images/5956443-d9bc0c8f72f24d62.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>同学们在学习视频课小白系统入门这门课的过程中，经常遇到一些问题，这里总结一些最常见的问题，供大家参考：</p>
+<h2 id="Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash"><a href="#Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash" class="headerlink" title="Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash."></a>Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash.</h2><p>A: 重新编译ffmpeg，在执行 ./configure 时增加 –extra-cflags=”fno-static-check” 选项，注意该选项一定要放在前面，否则编译有问题。</p>
+<a id="more"></a>
+
+<h2 id="Q：添加-–extra-cflags-”fno-static-check”-选项-仍然-crash"><a href="#Q：添加-–extra-cflags-”fno-static-check”-选项-仍然-crash" class="headerlink" title="Q：添加 –extra-cflags=”fno-static-check” 选项 仍然 crash"></a>Q：添加 –extra-cflags=”fno-static-check” 选项 仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲</p>
+<h2 id="Q：Xcode-编译成功，但执行失败"><a href="#Q：Xcode-编译成功，但执行失败" class="headerlink" title="Q：Xcode 编译成功，但执行失败"></a>Q：Xcode 编译成功，但执行失败</h2><p>A：在执行课程的例子时，要将沙盒关闭掉，在info.list中增加访问mic phone 权限。</p>
+<h2 id="Q：关闭沙盒后，程序仍然无法执行"><a href="#Q：关闭沙盒后，程序仍然无法执行" class="headerlink" title="Q：关闭沙盒后，程序仍然无法执行"></a>Q：关闭沙盒后，程序仍然无法执行</h2><p>A：要有开发者证书才可以。</p>
+<h2 id="Q：引入ffmpeg库后，报code-signature…not-valid"><a href="#Q：引入ffmpeg库后，报code-signature…not-valid" class="headerlink" title="Q：引入ffmpeg库后，报code signature…not valid"></a>Q：引入ffmpeg库后，报code signature…not valid</h2><p>A：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 打开 Mac 中的 keychain Access.app, 选择“我的证书”</span><br><span class="line">2. 执行 codesign -f -s &quot;证书名&quot; xxx.dylib</span><br><span class="line">3. 为了避免逐个签名，可以进行批量操作 codesign -f -s &quot;证书名&quot; &#x2F;usr&#x2F;local&#x2F;ffmpeg&#x2F;lib&#x2F;*.dylib</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q-ffmpeg-执行时提示没有权限"><a href="#Q-ffmpeg-执行时提示没有权限" class="headerlink" title="Q: ffmpeg 执行时提示没有权限"></a>Q: ffmpeg 执行时提示没有权限</h2><p>A： 切目录切换到你自己的用户目录下再执行ffmpeg。</p>
+<h2 id="虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？"><a href="#虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？" class="headerlink" title="虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？"></a>虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？</h2><p>A： ffmpeg中最低采样个数为32个，所以只有 64 字节数据时，是无进行重采样的。解决办法是将数据放到一个缓冲区中，积攒到一定大小后，再进行重采样。</p>
+<h2 id="Q-在从设备采体数据时，返回错误-35"><a href="#Q-在从设备采体数据时，返回错误-35" class="headerlink" title="Q: 在从设备采体数据时，返回错误 -35"></a>Q: 在从设备采体数据时，返回错误 -35</h2><p>A: 说明你的设备现在暂时还没准备好，此时你应该等待它几秒，之后就可以正常读数据了。</p>
+<h2 id="Q：在编码时，编码器返回-35-错误"><a href="#Q：在编码时，编码器返回-35-错误" class="headerlink" title="Q：在编码时，编码器返回 -35 错误"></a>Q：在编码时，编码器返回 -35 错误</h2><p>A：此时说明编码器没有准备好，需要等待几秒钟。</p>
+<h2 id="Q-编译ffmpeg时没有ffplay"><a href="#Q-编译ffmpeg时没有ffplay" class="headerlink" title="Q: 编译ffmpeg时没有ffplay"></a>Q: 编译ffmpeg时没有ffplay</h2><p>A:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.首先安装 SDL2 库</span><br><span class="line">2. 在 ffmpeg源码中执行 .&#x2F;configure 时并增加 --enable-sdl2</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库"><a href="#Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库" class="headerlink" title="Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库"></a>Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库</h2><p>A：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 安装好 fdk-aac库</span><br><span class="line">2. 重新在ffmpeg源码目录下执行.&#x2F;configure 并增加--enable-libfdk-aac 参数</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h2 id="Q-在Linux中何采集音频数据"><a href="#Q-在Linux中何采集音频数据" class="headerlink" title="Q: 在Linux中何采集音频数据"></a>Q: 在Linux中何采集音频数据</h2><p>A: ffmpeg -f alsa -i hw:0,0 xxx.wav</p>
+<h2 id="Q-在-Linux-中找不到-alsa-设备"><a href="#Q-在-Linux-中找不到-alsa-设备" class="headerlink" title="Q: 在 Linux 中找不到 alsa 设备"></a>Q: 在 Linux 中找不到 alsa 设备</h2><p>A：可以通过 arecord -l 查看你linux系统下有哪些音频设备。如果没有alsa, 可以使用  oss.</p>
+<h2 id="Q：编译ffmpeg-时-filter-编译不过"><a href="#Q：编译ffmpeg-时-filter-编译不过" class="headerlink" title="Q：编译ffmpeg 时 filter 编译不过"></a>Q：编译ffmpeg 时 filter 编译不过</h2><p>A：选择使用 libstdc++ 库试试</p>
+<h2 id="Q-Windows下编译ffmpeg"><a href="#Q-Windows下编译ffmpeg" class="headerlink" title="Q: Windows下编译ffmpeg"></a>Q: Windows下编译ffmpeg</h2><p>A:  <a href="https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW" target="_blank" rel="noopener">https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW</a></p>
+<h2 id="Q-AAC-编码为-AAC-HE-V2-时，声音不对"><a href="#Q-AAC-编码为-AAC-HE-V2-时，声音不对" class="headerlink" title="Q: AAC 编码为 AAC_HE_V2 时，声音不对"></a>Q: AAC 编码为 AAC_HE_V2 时，声音不对</h2><p>A：这是因为我用的 AAC 版本比较老，老版本的 AAC 与新版本的 AAC 可能有一些差异，这个我会后面查找一下原因。大家测试时可以将profile修改为 AAC HE 或 AAC LC，这样就可以正常编码出 AAC 数据了。</p>
+<h2 id="Q：库已经安装好了，但仍报找不到它的错误？"><a href="#Q：库已经安装好了，但仍报找不到它的错误？" class="headerlink" title="Q：库已经安装好了，但仍报找不到它的错误？"></a><a href="">Q：库已经安装好了，但仍报找不到它的错误？</a></h2><p>A：首先确认是否已经将 <code>pkg-config</code>工具安装好了。可以执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pkg-config</span><br></pre></td></tr></table></figure>
+<p>如果提示没有安装，则先将该工具安装好，安装命令如下：</p>
+<ul>
+<li>ubuntu  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt intall pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>mac  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>cygwin  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt-cyg install pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>centos  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install pkg-config</span><br></pre></td></tr></table></figure>
+安装完该工具后仍然报错？那再按照具体的错误看下面的解决方案吧。</li>
+</ul>
+<h2 id="Q：libx264库找不到（-ERROR-libx264-not-found-）"><a href="#Q：libx264库找不到（-ERROR-libx264-not-found-）" class="headerlink" title="Q：libx264库找不到（[ERROR: libx264 not found]）"></a>Q：libx264库找不到（[ERROR: libx264 not found]）</h2><p>A:<br>该问题可能由下面三个方面的问题引起。</p>
+<ul>
+<li>libx264库没有安装。对于这种情况有两种解决办法:<ul>
+<li>其一，是通过平台的安装工作进行安装，如 apt/brew/yum install x264。（注：在Linux下应该安装 libx264-dev）。</li>
+<li>其二，是通过源码安装，步骤如下：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. wget https:&#x2F;&#x2F;code.videolan.org&#x2F;videolan&#x2F;x264&#x2F;-&#x2F;archive&#x2F;master&#x2F;x264-master.tar.bz2</span><br><span class="line">2. bunzip2 last_x264.tar.bz2</span><br><span class="line">3. tar -vxf last_x264.tar</span><br><span class="line">4. .&#x2F;configure --enable-static --enable-shared --disable-asm --disable-avs</span><br><span class="line">5. make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>通过 pkg-config 命令无法找到。对于这类问题，我们可以使用下面的命 <code>pkg-config --cflags --lib libx264</code>看是否可以找到 libx264，如果找不到，就说明确实是这个问题。解决的办法是设置环境变量。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PKG_CONFIG_PATH&#x3D;$PKG_CONFIG_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib&#x2F;pkgconfig</span><br></pre></td></tr></table></figure>
+其中 <code>xxx</code> 由你的实际路径代替。</li>
+</ul>
+<blockquote>
+<p>注，有可能你的系统中并没有装 pkg-config工具，可以使用 brew/apt/yum install pkg-config进行安装。</p>
+</blockquote>
+<ul>
+<li>无法链接上libx264, 这是由于通过环境变量 LD_LIBRARY_PATH 无法定位到 libx264库。解决的办法也很简单，与上面类似，可以通过设置环境变量来解决该问题。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LIB_LIBRARY_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib</span><br></pre></td></tr></table></figure>
+其中，<code>xxx</code>由你的实际路径代替。</li>
+</ul>
+<p>当然，你也可以将环境变量设置在脚本里，这样就不用每次都写export命令了。只需要将上面的两条语句加入到 <del>/.bashrc / 或</del>/.bash_profil 文件里，然后在控制台执行 <code>source ~/.bashrc</code> 或 <code>source ~/.bash_profile</code>即可。</p>
+<h2 id="Q：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）"><a href="#Q：fdk-aac库找不到（-ERROR-libfdk-aac-not-found-）" class="headerlink" title="Q：fdk-aac库找不到（[ERROR: libfdk_aac not found]）"></a>Q：fdk-aac库找不到（[ERROR: libfdk_aac not found]）</h2><p>A：该问题与上面的 libx264 问题类似，所以只需要将上面的 libx264替换为libfdk-aac即可。这里不在赘述。</p>
+<h2 id="Q：通过-avcodec-find-encoder-by-name-无法找到编码器"><a href="#Q：通过-avcodec-find-encoder-by-name-无法找到编码器" class="headerlink" title="Q：通过 avcodec_find_encoder_by_name() 无法找到编码器"></a>Q：通过 avcodec_find_encoder_by_name() 无法找到编码器</h2><p>A：通过以下步骤进行解决</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0. 你使用的ffmpeg必须是经过源码编译的</span><br><span class="line">1. 你在编译 ffmpeg 时，执行.&#x2F;configure时是否将此编码器模块添加到 ffmpeg中了？以 fdk_aac 为例，在执行 .&#x2F;configure …时你应该加上 --enable-libfdk-aac 选项。</span><br><span class="line">2. 如果通过源码编译ffmpeg时有报错，请根据错误信息查看本文档的相应处理方法</span><br><span class="line">3. 确保 pkg-config 命令查询到的是你通过源码编译的ffmpeg库</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q：编译不出ffplay"><a href="#Q：编译不出ffplay" class="headerlink" title="Q：编译不出ffplay"></a>Q：编译不出ffplay</h2><p>A：引起该问题有以下几方面的原因：</p>
+<ul>
+<li>所使用的操作系统没有安装图形库。如有的同学在阿里的云服务器上想安装ffplay是肯定不行的。</li>
+<li>没有安装 SDL2 库。解决办法是通过 brew/apt/yum install sdl2 即可 或 通过 SDL2 源码安装。<strong>安装完成后，要重新进行到 ffmpeg目录下，执行 ./configure…这指命令。</strong></li>
+<li>有的同学编译ffmpeg时，在ffmpeg目录执行./configure …时没有添加 –enable-sdl2 选项也会导致无法编译出 ffplay</li>
+<li>SDL2与最新的Mac系统 mojave不兼容。解决办法：<ul>
+<li>方法一<ul>
+<li>从 <a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.tar.gz" target="_blank" rel="noopener">SDL</a>下载 2.0.9版本或以后的SDL2代码。</li>
+<li>执行 ./configure</li>
+<li>执行 make &amp;&amp; sudo make install</li>
+<li>执行 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</li>
+<li>[重新]编译ffmpeg</li>
+</ul>
+</li>
+<li>方法二<ul>
+<li>从<a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.dmg" target="_blank" rel="noopener">SDL</a>下载dmg包。</li>
+<li>执行 open SDL2-2.0.9.dmg</li>
+<li>[重新]编译ffmpeg</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Q：非Mac同学如何学习本课程"><a href="#Q：非Mac同学如何学习本课程" class="headerlink" title="Q：非Mac同学如何学习本课程"></a>Q：非Mac同学如何学习本课程</h2><p>A：本课程中的例子的界面是由 Swift 编写的，如果你没有 Mac 系统的话，你可以用 Qt 甚至不用界面开发，代码中与ffmpeg相着的代码都是跨平台的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://coding.imooc.com/class/415.html?mc_marking=b587280c0c1c0e76c1092aa21406565a&mc_channel=syb6" target="_blank" rel="noopener">音视频小白系统入门课</a></p>
+]]></content>
       <categories>
-          
-          <category> 音视频 </category>
-          
+        <category>音视频</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> ffmpeg </tag>
-            
-            <tag> 音视频 </tag>
-            
-            <tag> 直播 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>hexo博客系统的实现原理与搭建</title>
-      <link href="/2020-05-30-hexo%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%90%AD%E5%BB%BA/"/>
-      <url>/2020-05-30-hexo%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%90%AD%E5%BB%BA/</url>
-      
-        <content type="html"><![CDATA[<p>作为技术人员，定期写Blog是一个非常好的习惯。你可以通过它将自己的一些学习心得记录下来，也可以对平常的工作做一些经验总结等等。对于我来说，Blog就更为重要了。因为我目前正在创业做一些音视频技术的培训与教学工作，所以特别需要通过Blog将一些<strong>音视频</strong>知识、课程中的问题解答推广、宣传出去。</p><a id="more"></a><p>以前，我的博客主阵地一直在<strong>简书</strong>，通过简书的Markdown写博客非常方便，而且所见即所得。但最近不知什么原因，简书却将我的Blog给封掉了。我多次申述，但目前简书方面仍然没有任何反馈。考虑到自己在其它平台也可能遇到类似的情况，因此决定还是自己搭建一套博客系统才能真正解决这个问题。</p><p>如何才能快速搭建一套比较专业的博客系统呢？通过调研，我发现hexo完全可以满足我的要求，下面我就来详细讲述一下我是如何通过<strong>hexo</strong>搭建博客系统的吧。</p><h2 id="BLOG系统"><a href="#BLOG系统" class="headerlink" title="BLOG系统"></a>BLOG系统</h2><p>实际上我们仔细想想，所谓的Blog就是将许许多多的通过Markdown语法写成的文档转化成一个个的HTML页面，然后放到Web服务器上发布出来。另一方面，还要有一个系统可以将这些页面管理起来，有目录、有标签，可以分类、搜索等等。</p><p>如果是我们自己实现的话，我们需要实现一个Markdown到HTML的翻译器，然后再实现一个管理系统将这些HTML页面管理起来。而这些工作实际上已经有非常好的开源项目实现了，这就是hexo。hexo 不但实现了这些功能，还有很多其它的功能（如文章浏览次数，创建时间，文章字数等），这些功能对于我们来说都是非常有用的。</p><p>接下来我们就来看看 hexo 是如何实现这些功能的吧。</p><h2 id="hexo实现原理"><a href="#hexo实现原理" class="headerlink" title="hexo实现原理"></a>hexo实现原理</h2><p>我们通常所说的<strong>hexo</strong>是由三部分组成的，即<strong>hexo-cli</strong>、<strong>hexo-core</strong>以及<strong>hexo plugs</strong>。在这三部分中最核心的是 hexo-core 模块，该模块用于将 Markdown 语法编写的文章最终翻译成HTML页面。</p><p>hexo-core在进行翻译时会经历两步:</p><ul><li><p>第一步是将Markdown翻译成下在格式的对JSON对象：</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">article: &#123;</span><br><span class="line">    title:</span><br><span class="line">    date:</span><br><span class="line">    tags:</span><br><span class="line">    categories:</span><br><span class="line">    content:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>第二步才是将上面生成的JSON对象最终生成 HTML 页面。</p></li></ul><p>下面我们来看一下 hexo-core 是如何先将Markdown翻译成JSON的，又是如何将JSON 翻译成HTML的。</p><p>在hexo中，</p><h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><p><strong>hexo</strong>有几个基本信令，分别是<code>hex clean</code>、<code>hexo g</code>、<code>hexo s</code>等等。下面我们分别看一下这几个命信的具体作用是什么：</p><ul><li>hexo clean: 删除 hexo 生成的所有文档，最主要的是public</li><li>hexo g: 根据 source 目录中的文件生成可布署的html</li><li>hexo s: 起动本地http 服务，将生成的 html 在本地发布出来</li><li>hexo d: 将生成的html代码推送到 github 上</li></ul><p>上面命令中的前三个命令让要是用在本地，根据source目录中的源Markdown文件生成 html。而<code>hexo d</code>是布署命令，将最终生成的html布署到服务端。</p><h2 id="next主题的安装与配置"><a href="#next主题的安装与配置" class="headerlink" title="next主题的安装与配置"></a>next主题的安装与配置</h2><p>hexo中有很多的主题，其中用的最多的就是<strong>next</strong>主题。下面我们就来介绍一下如何安装并设置next主题。</p><h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2><p>通过上面的操作我们就将自己的blog搭建出来了。但此时这个blog只是一个最一个最基本、最简单的blog。如果你想让你的blog更专业的话，我们还需要装不少的插件，下面我们就来看看有哪些插件是我们必须要装的。它们分别是：</p><ul><li>如何设置摘要</li><li>如何设置图片床</li><li>如何统计阅读次数</li><li>如何显示文章字数</li><li>如何添加评论区</li><li>如何让文章置顶</li><li>如何设置标签</li><li>如何设置标签云</li><li>如何设置本地搜索</li><li>如何设置关于</li><li>设置404</li></ul><p>接下来我们再来详细描述一下上面各功能该如何设置。</p><h3 id="如何设置摘要"><a href="#如何设置摘要" class="headerlink" title="如何设置摘要"></a>如何设置摘要</h3><p>在hexo中实现摘要有两种方法，一种主试是在正文中加入下面这行代码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure><p>它的作用是将<code>more</code>之前的文字都作为摘要。一般情况下摘要都是在 200 字以内，所以你自己控制放置<code>more</code>的位置就好了。这种方式也是我平常使用的方式，非常方便。</p><p>第二种方法是在文章头的 description 字段中写一段摘要，如下所示：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: xxxx</span><br><span class="line">date: xxxx-xx-xx</span><br><span class="line">...</span><br><span class="line">description: xxxxxxx...</span><br><span class="line">---</span><br></pre></td></tr></table></figure><p>这处方式的好处理可以将文中某一段设置为摘要，然后自己单独写一段摘要，这样可以让搜索引擎更容易搜索到。它也是SEO优化的一种方式。</p><p>以上两种方法都可以，可以根据你自己的需求选择合适的方法即可。</p><h3 id="如何设置图片床"><a href="#如何设置图片床" class="headerlink" title="如何设置图片床"></a>如何设置图片床</h3><p>我们的blog最终发布时，一般都是通过github发布出来，但github给我们每个人的资源是有限的，如果你在github上放一些特别大的文件，那么你的网站的访问速度一定很慢，这会延度影响用户的体验。</p><p>另外，不论你将blog放在哪儿发布，你都不应该在发布主站上放置特别大的文件，尤其是大图片。但通常来说，我们写的文章一般又必须放一些图片，这样做一是可以让读者看着更直观，二是可以更吸睛。如何解决上述的矛盾呢？</p><p>解决的办法就是使用<strong>图床</strong>。所谓的图床其实就是云存储，像阿里、腾讯、七牛都提供这种服务，一般来说价格也都不贵。当然了，更好的方式是再通过CDN加速，这样一处非常好的优化网站网速度的方案。</p><p>我这里使用的就是阿里云的OSS，具体的方法我这里就不赘述了，有兴趣的小伙伙伴可以到阿里的官网上自行查阅使用说明。</p><h3 id="如何统计阅读次数"><a href="#如何统计阅读次数" class="headerlink" title="如何统计阅读次数"></a>如何统计阅读次数</h3><p>由于hexo自己没有提供数据库功能，因此hexo中的访问次数统计都是通过第三方云服务来提供支持的。当然你也可以自己做一个云数据库来为hexo提供这个支持。不过大多数情况下大家都是使用的leancloud来实现的。</p><p>我这里也是通过 leancloud 来提供的服务。如果你也想使用leancloud，那你首先需要到leancloud官网上注册一个账户。在leancloud上提供了两种用户类型，一种是developer，一种是商业用户。developer用户是免费的，但leancloud对它的使用有一种限制。不过这对于我们这种访问量很少的blog系统来说已经足够了。</p><p>leancloud的注册步骤我这里就不作介绍了，大家自已按官网的指导进行注册就好了。注册好用户后，我们要创建一个<strong>class</strong>，这里的class类似于我们关系型数据库中的一张表。这个class的名子还是固定的，必须是Counter，只有这样 hexo 才能将数据保存到leancloud上，也才能真正的实现阅读量的统计，</p><h3 id="如何显示文章字数"><a href="#如何显示文章字数" class="headerlink" title="如何显示文章字数"></a>如何显示文章字数</h3><h3 id="如何添加评论区"><a href="#如何添加评论区" class="headerlink" title="如何添加评论区"></a>如何添加评论区</h3><h3 id="如何让文章置顶"><a href="#如何让文章置顶" class="headerlink" title="如何让文章置顶"></a>如何让文章置顶</h3><h3 id="如何开启打赏功能"><a href="#如何开启打赏功能" class="headerlink" title="如何开启打赏功能"></a>如何开启打赏功能</h3><p>hexo 中 next 主题开启打赏功能非常简单，只要稍微配置一下就可以了。在里需要普及一些支付的基本知识，对于正常的支付来说，当用户点击打赏时，可以选择要打赏的金额，之后应该调用腾讯或阿里的支付接口，最终完成支付。但对于hexo来说，显然它做不了这么复杂的交互逻辑，那它是如何做的呢？</p><p>实际上，它只是将微信/支付完的收款二维码放到网页上面来实现打赏功能的。具体的步骤如下：</p><ul><li>生成收款二维码，打开微信/支付宝，将收款二维码保存成图片。</li><li>编辑next主题下面的_config.xmy文件，将该文件中的<code>reward_settings</code>打开即可。具体配置如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Reward (Donate)</span><br><span class="line">reward_settings:</span><br><span class="line">  enable: true</span><br><span class="line">  animation: true</span><br><span class="line">  comment: 只想买包辣条</span><br><span class="line"></span><br><span class="line">reward:</span><br><span class="line">  wechatpay: &#x2F;images&#x2F;wechatpay.png   #微信收款码</span><br><span class="line">  alipay: &#x2F;images&#x2F;alipay.png   #支付宝收款码</span><br><span class="line">  #bitcoin: &#x2F;images&#x2F;bitcoin.png</span><br></pre></td></tr></table></figure>通过上面的设置，我们就将hexo的打赏功能设置好了。</li></ul><h3 id="如何设置标签"><a href="#如何设置标签" class="headerlink" title="如何设置标签"></a>如何设置标签</h3><h3 id="如何设置标签-如何设置标签云"><a href="#如何设置标签-如何设置标签云" class="headerlink" title="如何设置标签## 如何设置标签云"></a>如何设置标签## 如何设置标签云</h3><h3 id="如何设置本地搜索"><a href="#如何设置本地搜索" class="headerlink" title="如何设置本地搜索"></a>如何设置本地搜索</h3><h3 id="如何设置关于"><a href="#如何设置关于" class="headerlink" title="如何设置关于"></a>如何设置关于</h3><h3 id="设置404"><a href="#设置404" class="headerlink" title="设置404"></a>设置404</h3><h3 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h3>]]></content>
-      
-      
+      <tags>
+        <tag>ffmpeg</tag>
+        <tag>音视频</tag>
+        <tag>直播</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo博客系统的实现原理与搭建</title>
+    <url>/2020-05-30-hexo%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>作为技术人员，定期写Blog是一个非常好的习惯。你可以通过它将自己的一些学习心得记录下来，也可以对平常的工作做一些经验总结等等。对于我来说，Blog就更为重要了。因为我目前正在创业做一些音视频技术的培训与教学工作，所以特别需要通过Blog将一些<strong>音视频</strong>知识、课程中的问题解答推广、宣传出去。</p>
+<a id="more"></a>
+
+<p>以前，我的博客主阵地一直在<strong>简书</strong>，通过简书的Markdown写博客非常方便，而且所见即所得。但最近不知什么原因，简书却将我的Blog给封掉了。我多次申述，但目前简书方面仍然没有任何反馈。考虑到自己在其它平台也可能遇到类似的情况，因此决定还是自己搭建一套博客系统才能真正解决这个问题。</p>
+<p>如何才能快速搭建一套比较专业的博客系统呢？通过调研，我发现hexo完全可以满足我的要求，下面我就来详细讲述一下我是如何通过<strong>hexo</strong>搭建博客系统的吧。</p>
+<h2 id="BLOG系统"><a href="#BLOG系统" class="headerlink" title="BLOG系统"></a>BLOG系统</h2><p>实际上我们仔细想想，所谓的Blog就是将许许多多的通过Markdown语法写成的文档转化成一个个的HTML页面，然后放到Web服务器上发布出来。另一方面，还要有一个系统可以将这些页面管理起来，有目录、有标签，可以分类、搜索等等。</p>
+<p>如果是我们自己实现的话，我们需要实现一个Markdown到HTML的翻译器，然后再实现一个管理系统将这些HTML页面管理起来。而这些工作实际上已经有非常好的开源项目实现了，这就是hexo。hexo 不但实现了这些功能，还有很多其它的功能（如文章浏览次数，创建时间，文章字数等），这些功能对于我们来说都是非常有用的。</p>
+<p>接下来我们就来看看 hexo 是如何实现这些功能的吧。</p>
+<h2 id="hexo实现原理"><a href="#hexo实现原理" class="headerlink" title="hexo实现原理"></a>hexo实现原理</h2><p>我们通常所说的<strong>hexo</strong>是由三部分组成的，即<strong>hexo-cli</strong>、<strong>hexo-core</strong>以及<strong>hexo plugs</strong>。在这三部分中最核心的是 hexo-core 模块，该模块用于将 Markdown 语法编写的文章最终翻译成HTML页面。</p>
+<p>hexo-core在进行翻译时会经历两步:</p>
+<ul>
+<li><p>第一步是将Markdown翻译成下在格式的对JSON对象：</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">article: &#123;</span><br><span class="line">    title:</span><br><span class="line">    date:</span><br><span class="line">    tags:</span><br><span class="line">    categories:</span><br><span class="line">    content:</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步才是将上面生成的JSON对象最终生成 HTML 页面。</p>
+</li>
+</ul>
+<p>下面我们来看一下 hexo-core 是如何先将Markdown翻译成JSON的，又是如何将JSON 翻译成HTML的。</p>
+<p>在hexo中，</p>
+<h2 id="如何布署hexo"><a href="#如何布署hexo" class="headerlink" title="如何布署hexo"></a>如何布署hexo</h2><p><strong>hexo</strong>有几个基本信令，分别是<code>hex clean</code>、<code>hexo g</code>、<code>hexo s</code>等等。下面我们分别看一下这几个命信的具体作用是什么：</p>
+<ul>
+<li>hexo clean: 删除 hexo 生成的所有文档，最主要的是public</li>
+<li>hexo g: 根据 source 目录中的文件生成可布署的html</li>
+<li>hexo s: 起动本地http 服务，将生成的 html 在本地发布出来</li>
+<li>hexo d: 将生成的html代码推送到 github 上</li>
+</ul>
+<p>上面命令中的前三个命令让要是用在本地，根据source目录中的源Markdown文件生成 html。而<code>hexo d</code>是布署命令，将最终生成的html布署到服务端。</p>
+<h2 id="next主题的安装与配置"><a href="#next主题的安装与配置" class="headerlink" title="next主题的安装与配置"></a>next主题的安装与配置</h2><p>hexo中有很多的主题，其中用的最多的就是<strong>next</strong>主题。下面我们就来介绍一下如何安装并设置next主题。</p>
+<h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2><p>通过上面的操作我们就将自己的blog搭建出来了。但此时这个blog只是一个最一个最基本、最简单的blog。如果你想让你的blog更专业的话，我们还需要装不少的插件，下面我们就来看看有哪些插件是我们必须要装的。它们分别是：</p>
+<ul>
+<li>如何设置摘要</li>
+<li>如何设置图片床</li>
+<li>如何统计阅读次数</li>
+<li>如何显示文章字数</li>
+<li>如何添加评论区</li>
+<li>如何让文章置顶</li>
+<li>如何设置标签</li>
+<li>如何设置标签云</li>
+<li>如何设置本地搜索</li>
+<li>如何设置关于</li>
+<li>设置404</li>
+</ul>
+<p>接下来我们再来详细描述一下上面各功能该如何设置。</p>
+<h3 id="如何设置摘要"><a href="#如何设置摘要" class="headerlink" title="如何设置摘要"></a>如何设置摘要</h3><p>在hexo中实现摘要有两种方法，一种主试是在正文中加入下面这行代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>它的作用是将<code>more</code>之前的文字都作为摘要。一般情况下摘要都是在 200 字以内，所以你自己控制放置<code>more</code>的位置就好了。这种方式也是我平常使用的方式，非常方便。</p>
+<p>第二种方法是在文章头的 description 字段中写一段摘要，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: xxxx</span><br><span class="line">date: xxxx-xx-xx</span><br><span class="line">...</span><br><span class="line">description: xxxxxxx...</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>这处方式的好处理可以将文中某一段设置为摘要，然后自己单独写一段摘要，这样可以让搜索引擎更容易搜索到。它也是SEO优化的一种方式。</p>
+<p>以上两种方法都可以，可以根据你自己的需求选择合适的方法即可。</p>
+<h3 id="如何设置图片床"><a href="#如何设置图片床" class="headerlink" title="如何设置图片床"></a>如何设置图片床</h3><p>我们的blog最终发布时，一般都是通过github发布出来，但github给我们每个人的资源是有限的，如果你在github上放一些特别大的文件，那么你的网站的访问速度一定很慢，这会延度影响用户的体验。</p>
+<p>另外，不论你将blog放在哪儿发布，你都不应该在发布主站上放置特别大的文件，尤其是大图片。但通常来说，我们写的文章一般又必须放一些图片，这样做一是可以让读者看着更直观，二是可以更吸睛。如何解决上述的矛盾呢？</p>
+<p>解决的办法就是使用<strong>图床</strong>。所谓的图床其实就是云存储，像阿里、腾讯、七牛都提供这种服务，一般来说价格也都不贵。当然了，更好的方式是再通过CDN加速，这样一处非常好的优化网站网速度的方案。</p>
+<p>我这里使用的就是阿里云的OSS，具体的方法我这里就不赘述了，有兴趣的小伙伙伴可以到阿里的官网上自行查阅使用说明。</p>
+<h3 id="如何统计阅读次数"><a href="#如何统计阅读次数" class="headerlink" title="如何统计阅读次数"></a>如何统计阅读次数</h3><p>由于hexo自己没有提供数据库功能，因此hexo中的访问次数统计都是通过第三方云服务来提供支持的。当然你也可以自己做一个云数据库来为hexo提供这个支持。不过大多数情况下大家都是使用的leancloud来实现的。</p>
+<p>我这里也是通过 leancloud 来提供的服务。如果你也想使用leancloud，那你首先需要到leancloud官网上注册一个账户。在leancloud上提供了两种用户类型，一种是developer，一种是商业用户。developer用户是免费的，但leancloud对它的使用有一种限制。不过这对于我们这种访问量很少的blog系统来说已经足够了。</p>
+<p>leancloud的注册步骤我这里就不作介绍了，大家自已按官网的指导进行注册就好了。注册好用户后，我们要创建一个<strong>class</strong>，这里的class类似于我们关系型数据库中的一张表。这个class的名子还是固定的，必须是Counter，只有这样 hexo 才能将数据保存到leancloud上，也才能真正的实现阅读量的统计，</p>
+<h3 id="如何显示文章字数"><a href="#如何显示文章字数" class="headerlink" title="如何显示文章字数"></a>如何显示文章字数</h3><h3 id="如何添加评论区"><a href="#如何添加评论区" class="headerlink" title="如何添加评论区"></a>如何添加评论区</h3><h3 id="如何让文章置顶"><a href="#如何让文章置顶" class="headerlink" title="如何让文章置顶"></a>如何让文章置顶</h3><h3 id="如何开启打赏功能"><a href="#如何开启打赏功能" class="headerlink" title="如何开启打赏功能"></a>如何开启打赏功能</h3><p>hexo 中 next 主题开启打赏功能非常简单，只要稍微配置一下就可以了。在里需要普及一些支付的基本知识，对于正常的支付来说，当用户点击打赏时，可以选择要打赏的金额，之后应该调用腾讯或阿里的支付接口，最终完成支付。但对于hexo来说，显然它做不了这么复杂的交互逻辑，那它是如何做的呢？</p>
+<p>实际上，它只是将微信/支付完的收款二维码放到网页上面来实现打赏功能的。具体的步骤如下：</p>
+<ul>
+<li>生成收款二维码，打开微信/支付宝，将收款二维码保存成图片。</li>
+<li>编辑next主题下面的_config.xmy文件，将该文件中的<code>reward_settings</code>打开即可。具体配置如下：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Reward (Donate)</span><br><span class="line">reward_settings:</span><br><span class="line">  enable: true</span><br><span class="line">  animation: true</span><br><span class="line">  comment: 只想买包辣条</span><br><span class="line"></span><br><span class="line">reward:</span><br><span class="line">  wechatpay: &#x2F;images&#x2F;wechatpay.png   #微信收款码</span><br><span class="line">  alipay: &#x2F;images&#x2F;alipay.png   #支付宝收款码</span><br><span class="line">  #bitcoin: &#x2F;images&#x2F;bitcoin.png</span><br></pre></td></tr></table></figure>
+通过上面的设置，我们就将hexo的打赏功能设置好了。</li>
+</ul>
+<h3 id="如何设置标签"><a href="#如何设置标签" class="headerlink" title="如何设置标签"></a>如何设置标签</h3><h3 id="如何设置标签-如何设置标签云"><a href="#如何设置标签-如何设置标签云" class="headerlink" title="如何设置标签## 如何设置标签云"></a>如何设置标签## 如何设置标签云</h3><h3 id="如何设置本地搜索"><a href="#如何设置本地搜索" class="headerlink" title="如何设置本地搜索"></a>如何设置本地搜索</h3><h3 id="如何设置关于"><a href="#如何设置关于" class="headerlink" title="如何设置关于"></a>如何设置关于</h3><h3 id="设置404"><a href="#设置404" class="headerlink" title="设置404"></a>设置404</h3><h3 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h3>]]></content>
       <categories>
-          
-          <category> hexo </category>
-          
+        <category>hexo</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Blog </tag>
-            
-            <tag> hexo </tag>
-            
-            <tag> next </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>Blog</tag>
+        <tag>hexo</tag>
+        <tag>next</tag>
+      </tags>
+  </entry>
 </search>
