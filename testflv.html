@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>test flv.js </title>
+    
+        <!-- 引入 flv.js 库 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.5.0/flv.min.js"></script>
+
+    </head>
+    <body>
+
+        <!-- 设置 video 标签 -->
+        <video id="flv_file" controls autoplay>
+          You Browser doesn't support video tag
+        </video>
+
+        <script>
+            //通过 JavaScript 脚本创建 FLV Player
+            if (flvjs.isSupported()) {
+                var videoElement = document.getElementById('flv_file');
+                var flvPlayer = flvjs.createPlayer({
+                    type: 'flv',
+                    url: 'https://avdancevod.oss-cn-beijing.aliyuncs.com/vodio/killer.flv'
+                });
+                flvPlayer.attachMediaElement(videoElement);
+                flvPlayer.load();
+                flvPlayer.play();
+            }
+        </script>
+    </body>
+</html>
