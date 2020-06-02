@@ -375,7 +375,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">14k</span>
+    <span title="站点总字数">15k</span>
 </div>
 
         
@@ -633,9 +633,9 @@
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/valine/1.3.10/Valine.min.js', () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick';
     guest = guest.split(',').filter(item => {
       return GUEST.includes(item);
     });
@@ -645,7 +645,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       notify     : false,
       appId      : 'Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz',
       appKey     : '5dKv9XFD2w3gjJnb0xnWIIWz',
-      placeholder: "Just go go",
+      placeholder: "您想说点啥呢？",
       avatar     : 'mm',
       meta       : guest,
       pageSize   : '10' || 10,
