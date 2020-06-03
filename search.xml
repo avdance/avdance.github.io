@@ -251,24 +251,25 @@
 <li>hexo d: 将生成的html代码推送到 github 上</li>
 </ul>
 <p>这几个命令的含义都非常清晰，我就不再做其它赘述了。</p>
-<h2 id="hexo发布页面"><a href="#hexo发布页面" class="headerlink" title="hexo发布页面"></a>hexo发布页面</h2><p>如上面所介绍的，我们可以使用<code>hexo d</code>命令将生成的目标文件发布出来，但在使用它之前你需要在站节点的_config.yml文件中配置发布的方法。我们举个例子：</p>
+<h2 id="hexo发布页面"><a href="#hexo发布页面" class="headerlink" title="hexo发布页面"></a>hexo发布页面</h2><p>如上面所介绍的，我们可以使用<code>hexo d</code>命令将生成的目标文件发布出来，但在使用它之前，你需要在站节点的_config.yml文件中配置发布的方法。我们举个例子：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">- type: git #leancloud_counter_security_sync #git</span><br><span class="line">  repo: git@github.com:avdance&#x2F;avdance.github.io.git</span><br></pre></td></tr></table></figure>
 
 <p>当我们执行<code>hexo d</code>命令时，它会调用 hexo 中的 <code>hexo-deployer-git</code> 插件。在该插件内部会启动一个进程调用<code>git</code>命令，从而将生成的html等代码上传到 github上。</p>
-<p>这里可能有些同学会有疑问，为什么上传到github上就算是发布了呢？这里因为github已经为我们提供了免费的个人博客空间。只要你在github上创建一下<code>用户名.github.io</code>的项目，然后将编译好的博客页面放上去就可以了。</p>
-<p>当然你也可以自己买台云主机，在上面用ngnix、nodejs等搭建一个Web服务，然后将博客页面放上去也是没问题的。</p>
-<h2 id="next主题的安装与配置"><a href="#next主题的安装与配置" class="headerlink" title="next主题的安装与配置"></a>next主题的安装与配置</h2><p>hexo中有很多的主题，但其中用的最多的、最著名的就是<strong>next</strong>主题了。下面我们就来介绍一下如何安装并设置next主题并通其做一些简单的配置。</p>
+<p>这里可能有些同学会有疑问，为什么上传到github上就算是发布了呢？这是因为github为我们提供了免费的个人博客空间。只要你在github上创建一个<code>用户名.github.io</code>的项目，github就会自动将这个项目中的文件发布出来。</p>
+<p>当然你也可以采用传输的方式，自己购买台云主机，然后在云主机上用ngnix、nodejs等搭建一个Web服务，最终将页面发布出来。</p>
+<h2 id="next主题的安装与配置"><a href="#next主题的安装与配置" class="headerlink" title="next主题的安装与配置"></a>next主题的安装与配置</h2><p>hexo中有很多的主题，但其中用的最多的、最著名的就是<strong>next</strong>主题了。下面我们就来介绍一下，如何安装next主题并对其做一些简单的配置。</p>
 <p>next的安装比简单了，你只需要将next源码从github上下载下来，然后放到hexo的themes目录下即可。如下面这行语句:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone --branch v7.8.0 https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next.git themes&#x2F;next</span><br></pre></td></tr></table></figure>
 
-<p>如果你在github中搜索关键字<code>hexo-theme-next</code>时，你会发现有两个github star数特别多，这两个地址分别是</p>
+<p>这里需要注意的是，我们在github中搜索关键字<code>hexo-theme-next</code>时，你会发现有两个github star数特别多，这两个地址分别是</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;iissnan</span><br></pre></td></tr></table></figure>
 <p>和</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;theme-next</span><br></pre></td></tr></table></figure>
-<p>上面的地址是next老版本的官方地址，下面这个是新版本的官方地址。因此，如果你要下载老版本的next就去上面的地址上下载，如果是下载新版本的则去下面的地址下载。</p>
-<p>next下载好后，我们就可以对它进行配置了。在themes/next目录下也有一个_config.yml文件，它是next主题的配置文件。如果你要配置next主题时，就要修改该文件。</p>
-<p>打开该文件，找到<code>Scheme</code>关键字，你会发现next支持多种Scheme，你可以选择你自己喜欢的Scheme，我这里选择的是<code>Gemini</code>。选择好Scheme后我们博客的基本结构就定下来了，接下来你可以根据自己的喜好配置它人的一些参数了。</p>
-<p>当所有的配置都修改为你自己喜欢的配置后，你就可以执行下面的语句将博客发布出来看看效果了。</p>
+<p>上面的地址是next老版本的官方地址，下面这个是新版本的官方地址。你清楚他们之间的关系就不会给你造成混乱了。</p>
+<p>next下载好后，下一步就是进行配置了。在themes/next目录下也有一个_config.yml文件，它是next主题的配置文件，千万不要将它与站点的_config.yml弄混了。</p>
+<p>如果你要配置next主题时，需要修改的是themes/next目录下的_config.yml文件。</p>
+<p>打开该文件，找到<code>Scheme</code>关键字，你会发现next支持多种Scheme。你可以根据喜好选择你自己喜欢的Scheme，我这里选择的是<code>Gemini</code>。选择好Scheme后，我们博客的基本结构就定下来了。接下来你可s可以对它进行配置了。具体的配置我会在下面再做详细论述。</p>
+<p>当所有的配置都修改好后，你可以执行下面的命令将博客发布出来了。</p>
 <blockquote>
 <ul>
 <li>hexo clean</li>
@@ -277,7 +278,7 @@
 </ul>
 </blockquote>
 <h2 id="高级知识"><a href="#高级知识" class="headerlink" title="高级知识"></a>高级知识</h2><p>通过上面的操作，我们就将自己的Blog搭建好了。但此时这个Blog还只是一个最基本、最简单的Blog。如果你想让你的Blog更专业的话，还要对它进行细细的打磨。</p>
-<p>接下来，我们就来看看我们还必须做哪些处理?</p>
+<p>接下来，我们就来看看还需要对我们的Blog做哪些处理?</p>
 <ul>
 <li>为文章设置摘要</li>
 <li>增加图片床</li>
@@ -292,7 +293,7 @@
 <li>设置404</li>
 <li>SEO优化</li>
 </ul>
-<p>下面我们就按着这个清单将你的Blog打造成专业的产品。</p>
+<p>下面我们就按着这个清单细细打磨我们的Blog吧。</p>
 <h3 id="为文章设置摘要"><a href="#为文章设置摘要" class="headerlink" title="为文章设置摘要"></a>为文章设置摘要</h3><p>在hexo中实现摘要有两种方法，一种主是在正文中加入如下代码</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
 
@@ -455,6 +456,8 @@
         <tag>标签</tag>
         <tag>hexo</tag>
         <tag>next</tag>
+        <tag>Blog</tag>
+        <tag>SEO</tag>
       </tags>
   </entry>
 </search>
