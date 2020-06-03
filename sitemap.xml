@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.avdancedu.com/404.html</loc>
+    
+    <lastmod>2020-06-03T02:33:36.313Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.avdancedu.com/posts/2ef51851/</loc>
     
-    <lastmod>2020-06-02T16:42:37.396Z</lastmod>
+    <lastmod>2020-06-02T23:39:55.019Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>https://blog.avdancedu.com/tags/index.html</loc>
     
     <lastmod>2020-06-02T09:49:27.313Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.avdancedu.com/404.html</loc>
-    
-    <lastmod>2020-06-01T03:24:21.874Z</lastmod>
     
   </url>
   
