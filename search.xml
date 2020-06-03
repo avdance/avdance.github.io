@@ -218,7 +218,7 @@
 <h2 id="hexo基本原理"><a href="#hexo基本原理" class="headerlink" title="hexo基本原理"></a>hexo基本原理</h2><p>要了解hexo的实现原理，我们首先要知清楚 hexo 的目录结构，这样可以更有助于了解hexo。</p>
 <p>hexo由以下几个重要文件/目录组成：</p>
 <ul>
-<li>_config.yml，该文件是hexo 的站级配置文件。所谓<strong>站</strong>级配置文件是指对hexo搭建的站点的配置文件。</li>
+<li>_config.yml，该文件是hexo 的<code>站</code>级配置文件。所谓<strong>站</strong>级配置文件是指，对整个站点的起效果的配置文件。</li>
 <li>source目录，该目录存放源文件。即用户编写的博文都放在该目录下。在该目录下又有几个子目录我们来分别看一下。<ul>
 <li>_post，用于存放博文，基本上每篇文章都是由Markdown语法编写的的。</li>
 <li>tags，存放tag 的文件。hexo中的tags是自动生成的，所以我们不用手动修改tags目录下的index.md文件，在发布时它会自动生成。</li>
