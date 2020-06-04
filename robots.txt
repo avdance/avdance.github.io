@@ -10,5 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://blog.avdancedu.com/sitemap.xml
-Sitemap: http://blog.avdancedu.com/baidusitemap.xml
+Sitemap: https://www.avdancedu.com/sitemap.xml
+Sitemap: http://www.avdancedu.com/baidusitemap.xml
