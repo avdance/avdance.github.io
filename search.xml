@@ -111,25 +111,29 @@
   <entry>
     <title>音视频系统入门常见问题</title>
     <url>/631d466a/</url>
-    <content><![CDATA[<p>同学们在学习《音视频课小白系统入门》这门课的过程中，经常遇到一些问题，如Mac系统下为什么无法编译ffmpeg? Xcode编译课程中的程序为什么不成功? 为什么我从设备中读的数据很小?等等不足而一。</p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/av_base/question.jpg" alt=""></p>
+<p>同学们在学习《音视频课小白系统入门》这门课的过程中，经常遇到一些问题，如Mac系统下为什么无法编译ffmpeg? Xcode编译课程中的程序为什么不成功? 为什么我从设备中读的数据很小?等等不足而一。</p>
 <p>实际上，大部分同学提出的问题都是重复的。因此，我将一些最常见的问题整理出了答案放在这里，同学们可以根据自己的情况去查找相应的解决办法，以免我个人原因不能及时回答问题时，给大家的学习造成麻烦和不便。</p>
 <a id="more"></a>
 
-<p><img data-src="https://cdn.avdancedu.com/image/article/yiwen.jpg" alt=""></p>
 <h2 id="Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash"><a href="#Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash" class="headerlink" title="Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash."></a>Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash.</h2><p>A: 重新编译ffmpeg，在执行 ./configure 时增加 –extra-cflags=”fno-static-check” 选项，注意该选项一定要放在前面，否则编译有问题。</p>
-<h2 id="Q：添加-–extra-cflags-”fno-static-check”-选项-仍然-crash"><a href="#Q：添加-–extra-cflags-”fno-static-check”-选项-仍然-crash" class="headerlink" title="Q：添加 –extra-cflags=”fno-static-check” 选项 仍然 crash"></a>Q：添加 –extra-cflags=”fno-static-check” 选项 仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲</p>
-<h2 id="Q：Xcode-编译成功，但执行失败"><a href="#Q：Xcode-编译成功，但执行失败" class="headerlink" title="Q：Xcode 编译成功，但执行失败"></a>Q：Xcode 编译成功，但执行失败</h2><p>A：在执行课程的例子时，要将沙盒关闭掉，在info.list中增加访问mic phone 权限。</p>
+<h2 id="Q：Mac下添加-–extra-cflags-”fno-static-check”-选项-仍然-crash"><a href="#Q：Mac下添加-–extra-cflags-”fno-static-check”-选项-仍然-crash" class="headerlink" title="Q：Mac下添加 –extra-cflags=”fno-static-check” 选项 仍然 crash"></a>Q：Mac下添加 –extra-cflags=”fno-static-check” 选项 仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲</p>
+<h2 id="Q-在Mac下，上面的方法仍然无法成功编译ffmpeg"><a href="#Q-在Mac下，上面的方法仍然无法成功编译ffmpeg" class="headerlink" title="Q: 在Mac下，上面的方法仍然无法成功编译ffmpeg"></a>Q: 在Mac下，上面的方法仍然无法成功编译ffmpeg</h2><p>A: 那就只能用命令的方式安装ffmpeg了，执行 <code>brew install ffmpeg</code></p>
+<h2 id="Q-Mac下通过命令的方式安装的ffmpeg没有fdk-aac库怎么办"><a href="#Q-Mac下通过命令的方式安装的ffmpeg没有fdk-aac库怎么办" class="headerlink" title="Q: Mac下通过命令的方式安装的ffmpeg没有fdk-aac库怎么办"></a>Q: Mac下通过命令的方式安装的ffmpeg没有fdk-aac库怎么办</h2><p>A: 执行这条语句<code>brew install ffmpeg --with-fdk-aac</code></p>
+<h2 id="Q-Mac下通过命令的方式安装非它第三方库如x264怎么办？"><a href="#Q-Mac下通过命令的方式安装非它第三方库如x264怎么办？" class="headerlink" title="Q: Mac下通过命令的方式安装非它第三方库如x264怎么办？"></a>Q: Mac下通过命令的方式安装非它第三方库如x264怎么办？</h2><p>A：与上面安装fdk-aac语句是类似的 <code>brew install ffmpeg --with-xxxx</code>，具体参数可以通过<code>brew info ffmpeg</code> 来查看。</p>
+<h2 id="Q：Xcode-编译成功，但执行失败，报没有权限"><a href="#Q：Xcode-编译成功，但执行失败，报没有权限" class="headerlink" title="Q：Xcode 编译成功，但执行失败，报没有权限"></a>Q：Xcode 编译成功，但执行失败，报没有权限</h2><p>如果是下面这种错误信息<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/nopriv.jpg" alt=""></p>
+<p>A：在执行课程的例子时，要将沙盒关闭掉，在info.list中增加访问mic phone 权限。info中增加访问权限如下:</p>
+<p><img data-src="https://cdn.avdancedu.com/image/article/av_base/info.jpg" alt=""></p>
+<h2 id="Q-info-plis加了权限仍然报没有权限"><a href="#Q-info-plis加了权限仍然报没有权限" class="headerlink" title="Q: info.plis加了权限仍然报没有权限"></a>Q: info.plis加了权限仍然报没有权限</h2><p>A: 按下图操作再试一下<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/priv2.jpg" alt=""></p>
 <h2 id="Q：关闭沙盒后，程序仍然无法执行"><a href="#Q：关闭沙盒后，程序仍然无法执行" class="headerlink" title="Q：关闭沙盒后，程序仍然无法执行"></a>Q：关闭沙盒后，程序仍然无法执行</h2><p>A：要有开发者证书才可以。</p>
-<h2 id="Q：引入ffmpeg库后，报code-signature…not-valid"><a href="#Q：引入ffmpeg库后，报code-signature…not-valid" class="headerlink" title="Q：引入ffmpeg库后，报code signature…not valid"></a>Q：引入ffmpeg库后，报code signature…not valid</h2><p>A：</p>
+<h2 id="Q：引入ffmpeg库后，报libavformat-xxx-dylib-示签名，即”code-signature…not-valid”"><a href="#Q：引入ffmpeg库后，报libavformat-xxx-dylib-示签名，即”code-signature…not-valid”" class="headerlink" title="Q：引入ffmpeg库后，报libavformat.xxx.dylib 示签名，即”code signature…not valid”"></a>Q：引入ffmpeg库后，报libavformat.xxx.dylib 示签名，即”code signature…not valid”</h2><p>就像下图所展示的一样：<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/unsigned.jpg" alt=""></p>
+<p>A:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 打开 Mac 中的 keychain Access.app, 选择“我的证书”</span><br><span class="line">2. 执行 codesign -f -s &quot;证书名&quot; xxx.dylib</span><br><span class="line">3. 为了避免逐个签名，可以进行批量操作 codesign -f -s &quot;证书名&quot; &#x2F;usr&#x2F;local&#x2F;ffmpeg&#x2F;lib&#x2F;*.dylib</span><br></pre></td></tr></table></figure>
 
 <h2 id="Q-ffmpeg-执行时提示没有权限"><a href="#Q-ffmpeg-执行时提示没有权限" class="headerlink" title="Q: ffmpeg 执行时提示没有权限"></a>Q: ffmpeg 执行时提示没有权限</h2><p>A： 切目录切换到你自己的用户目录下再执行ffmpeg。</p>
 <h2 id="虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？"><a href="#虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？" class="headerlink" title="虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？"></a>虚似机中每次获取的数据很小，只有64个字节，如果进行重采样？</h2><p>A： ffmpeg中最低采样个数为32个，所以只有 64 字节数据时，是无进行重采样的。解决办法是将数据放到一个缓冲区中，积攒到一定大小后，再进行重采样。</p>
 <h2 id="Q-在从设备采体数据时，返回错误-35"><a href="#Q-在从设备采体数据时，返回错误-35" class="headerlink" title="Q: 在从设备采体数据时，返回错误 -35"></a>Q: 在从设备采体数据时，返回错误 -35</h2><p>A: 说明你的设备现在暂时还没准备好，此时你应该等待它几秒，之后就可以正常读数据了。</p>
 <h2 id="Q：在编码时，编码器返回-35-错误"><a href="#Q：在编码时，编码器返回-35-错误" class="headerlink" title="Q：在编码时，编码器返回 -35 错误"></a>Q：在编码时，编码器返回 -35 错误</h2><p>A：此时说明编码器没有准备好，需要等待几秒钟。</p>
-<h2 id="Q-编译ffmpeg时没有ffplay"><a href="#Q-编译ffmpeg时没有ffplay" class="headerlink" title="Q: 编译ffmpeg时没有ffplay"></a>Q: 编译ffmpeg时没有ffplay</h2><p>A:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.首先安装 SDL2 库</span><br><span class="line">2. 在 ffmpeg源码中执行 .&#x2F;configure 时并增加 --enable-sdl2</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
 <h2 id="Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库"><a href="#Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库" class="headerlink" title="Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库"></a>Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库</h2><p>A：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 安装好 fdk-aac库</span><br><span class="line">2. 重新在ffmpeg源码目录下执行.&#x2F;configure 并增加--enable-libfdk-aac 参数</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 <h2 id="Q-在Linux中何采集音频数据"><a href="#Q-在Linux中何采集音频数据" class="headerlink" title="Q: 在Linux中何采集音频数据"></a>Q: 在Linux中何采集音频数据</h2><p>A: ffmpeg -f alsa -i hw:0,0 xxx.wav</p>
@@ -332,9 +336,10 @@
   <entry>
     <title>hexo博客系统的实现原理与搭建</title>
     <url>/2ef51851/</url>
-    <content><![CDATA[<p>作为技术人员，定期写Blog是一个非常好的习惯。你可以通过它将自己的一些学习心得记录下来，也可以对平常的工作做一些经验总结等等。对于我来说Blog就更为重要了，因为Blog是我推广<strong>音视频技术</strong>的一块<strong>“阵地”</strong>，我需要将我写的一些<strong>音视频技术</strong>知识、视频课程中的问题解答等内容放在它上面，以便同学们交流学习。</p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/hexo/hexo-logo.png" alt=""></p>
+<p>作为技术人员，定期写Blog是一个非常好的习惯。你可以通过它将自己的一些学习心得记录下来，也可以对平常的工作做一些经验总结等等。对于我来说Blog就更为重要了，因为Blog是我推广<strong>音视频技术</strong>的一块<strong>“阵地”</strong>，我需要将我写的一些<strong>音视频技术</strong>知识、视频课程中的问题解答等内容放在它上面，以便同学们交流学习。</p>
 <a id="more"></a>
-<p><img data-src="https://cdn.avdancedu.com/image/hexo/hexo-logo.png" alt=""></p>
+
 <p>以前，我的文章一直都在<strong>简书</strong>上发布，可最近不知为何，简书将我的账户封掉了。我经多次申诉却依然无果，既不告之那里违规，也不给我解封，真让人无语！考虑到在其它平台也可能遇到类似情况，因此决心搭建自己的博客，这样才能放心。</p>
 <p>如何才能快速搭建一套比较专业的博客系统呢？通过调研，我发现开源项目<strong>hexo</strong>完全可以满足我的要求。它既可以发布文章，还支持一些常见的功能，如阅览数、文章字数统计、本地搜索等等。下面我就来详细讲述一下我是如何通过<strong>hexo</strong>搭建自已的博客系统的。</p>
 <h2 id="Blog系统"><a href="#Blog系统" class="headerlink" title="Blog系统"></a>Blog系统</h2><p>在搭建Blog系统之前，我们有必要先了解一下Blog系统是干什么的，它都应该有哪些功能。</p>
