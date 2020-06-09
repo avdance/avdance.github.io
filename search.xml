@@ -119,12 +119,16 @@
 <h2 id="Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash"><a href="#Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash" class="headerlink" title="Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash."></a>Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash.</h2><p>A: 重新编译ffmpeg，在执行 ./configure 时增加 –extra-cflags=”fno-static-check” 选项，注意该选项一定要放在前面，否则编译有问题。</p>
 <h2 id="Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash"><a href="#Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash" class="headerlink" title="Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash"></a>Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲。</p>
 <h2 id="Q-无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？"><a href="#Q-无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？" class="headerlink" title="Q: 无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？"></a>Q: 无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？</h2><p>A: 那就只能用命令的方式安装ffmpeg了，执行 <code>brew install ffmpeg</code>即可。</p>
-<h2 id="Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办"><a href="#Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办" class="headerlink" title="Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?"></a>Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?</h2><p>A: 执行这条命令<code>brew install ffmpeg --with-fdk-aac</code> 安装的ffmpeg就是带fdk-aac库的了。</p>
-<h2 id="Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"><a href="#Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264" class="headerlink" title="Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"></a>Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264</h2><p>A: 与上面安装ffmpeg带fdk-aac库的命令是类似的，命令格式为: <code>brew install ffmpeg --with-xxxx</code>，添加某个库的具体参数可以通过<code>brew info ffmpeg</code> 来查找。</p>
+<h2 id="Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办"><a href="#Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办" class="headerlink" title="Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?"></a>Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?</h2><p>A: 以命令方式安装带 fdk-aac 的ffmpeg需要按下面的步骤执行:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0. brew unstall ffmpeg</span><br><span class="line">1. brew tap homebrew-ffmpeg&#x2F;ffmpeg</span><br><span class="line">2. brew install homebrew-ffmpeg&#x2F;ffmpeg&#x2F;ffmpeg --with-fdk-aac</span><br></pre></td></tr></table></figure>
+
+<p>注意，安装时如果报<code>ERROR: libsnappy not found</code> 错误，则你需要到<code>https://github.com/google/snappy</code>下载源码，并按照项目的说明编译并安装snappy库。</p>
+<p>安装好snappy库后，重新执行<code>brew install homebrew-ffmpeg/ffmpeg/ffmpeg --with-fdk-aac</code>命令。</p>
+<h2 id="Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"><a href="#Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264" class="headerlink" title="Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"></a>Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264</h2><p>A: 与上面安装ffmpeg带fdk-aac库的命令是类似的，命令格式为: <code>brew install ffmpeg --with-xxxx</code>，添加某个库的具体参数可以通过<code>homebrew-ffmpeg/ffmpeg/ffmpeg</code> 来查找。</p>
 <h2 id="Q-Xcode-编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？"><a href="#Q-Xcode-编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？" class="headerlink" title="Q: Xcode 编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？"></a>Q: Xcode 编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？</h2><p>A:<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/nopriv.jpg" alt=""></p>
 <p>如果是上面这种错误信息，解决办法是: 在编译课程中的例子时，先将将沙盒关闭掉，在info.list中增加访问mic phone 访问权限。具体操作如下图所示:</p>
 <p><img data-src="https://cdn.avdancedu.com/image/article/av_base/info.jpg" alt=""></p>
-<h2 id="Q-info-plis加了权限仍然报没有权限怎么解决？"><a href="#Q-info-plis加了权限仍然报没有权限怎么解决？" class="headerlink" title="Q: info.plis加了权限仍然报没有权限怎么解决？"></a>Q: info.plis加了权限仍然报没有权限怎么解决？</h2><p>A: 按下图操作试试<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/priv2.jpg" alt=""></p>
+<h2 id="Q-info-plist加了权限仍然报没有权限怎么解决？"><a href="#Q-info-plist加了权限仍然报没有权限怎么解决？" class="headerlink" title="Q: info.plist加了权限仍然报没有权限怎么解决？"></a>Q: info.plist加了权限仍然报没有权限怎么解决？</h2><p>A: 按下图操作试试<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/priv2.jpg" alt=""></p>
 <h2 id="Q-引入ffmpeg库后，报libavformat-xxx-dylib-未签名，错误信息类似”code-signature…not-valid”"><a href="#Q-引入ffmpeg库后，报libavformat-xxx-dylib-未签名，错误信息类似”code-signature…not-valid”" class="headerlink" title="Q: 引入ffmpeg库后，报libavformat.xxx.dylib 未签名，错误信息类似”code signature…not valid”"></a>Q: 引入ffmpeg库后，报libavformat.xxx.dylib 未签名，错误信息类似”code signature…not valid”</h2><p>A:<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/unsigned.jpg" alt=""><br>如果像上图所展示的一样，则按下面步骤操作：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 打开 Mac 中的 keychain Access.app, 选择“我的证书”</span><br><span class="line">2. 执行 codesign -f -s &quot;证书名&quot; xxx.dylib</span><br><span class="line">3. 为了避免逐个签名，可以进行批量操作 codesign -f -s &quot;证书名&quot; &#x2F;usr&#x2F;local&#x2F;ffmpeg&#x2F;lib&#x2F;*.dylib</span><br></pre></td></tr></table></figure>
 
@@ -206,22 +210,48 @@
       </tags>
   </entry>
   <entry>
-    <title>git常用命令</title>
+    <title>git常用命令及一些特殊用法</title>
     <url>/423abe9e/</url>
-    <content><![CDATA[<p>本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令能对您有所帮助。</p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/git/git-banner.jpg" alt=""><br>本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。</p>
 <a id="more"></a>
 
-<h2 id="git-的基本工作原理"><a href="#git-的基本工作原理" class="headerlink" title="git 的基本工作原理"></a>git 的基本工作原理</h2><p>这块待补充……</p>
+<h2 id="git-的基本工作原理"><a href="#git-的基本工作原理" class="headerlink" title="git 的基本工作原理"></a>git 的基本工作原理</h2><p>其实要想使用好git，你必须要知道一点git的工作原理，否则你在使用git时就只能死记硬背一些命令。如果你还处理死记硬背一些git命令的阶段，那么一旦你遇到一个非常复杂的或非手棘手的git case时，可以100%肯定你是无法解决的。</p>
+<p>因此，了解一点git的基本工作原理是我们每个开发人员都必须的基础知识，下面我就对git的的基本工作原理做一下简要介绍。</p>
+<h3 id="git的结构"><a href="#git的结构" class="headerlink" title="git的结构"></a>git的结构</h3><p>首先我们必须要清楚是，git是由三大部分组成的，即本地工作区，本地仓库以及远程仓库。</p>
+<ul>
+<li>本地工作区，就是你平常写代码或修改代码的地方。</li>
+<li>本地仓库，就是我们工作区中.git目录。它里边有一堆子目录，这些子目录都有各自的用途，我们暂且不管。</li>
+<li>远程仓库，这个比较好理解了，就是远端的git仓库，比如我们在github上创建的仓库。</li>
+</ul>
+<p>通过下面这张图我们可以更直观的了解这三大部分：<br><img data-src="https://cdn.avdancedu.com/image/article/git/git_base.jpg" alt="git结构图"></p>
+<p>从图中我们可以清楚的知道，平时我们使用git的三个主要命令(git add、git commit、git push)具体都做了些什么:</p>
+<ul>
+<li>git add: 将本地工作区中代码的修改保存到本地仓库的staged区，即暂存区。</li>
+<li>git commit: 将staged区中的内容保存到本地仓库。</li>
+<li>git push: 将本地仓库中的内容推送给远程仓库保存。</li>
+</ul>
+<p>通过上面这张图我们可以得出以下几点重要结论。</p>
+<p>第一，git在处理我们的提交时是按顺序、分阶段的。比如我们的一个提交，必须先到 staged 后才能进入本地仓库，这个处理顺序是不能乱的。</p>
+<p>第二，git管理中有一个 HEAD 指针，它始终指向正在处理的git commit。而它的前一次git commit 可以用<code>HEAD^</code>表式，它的上上次commit可以用<code>HEAD ^^</code>表式。</p>
+<p>第三，当我们想用地本仓库的内容更新本地工作区的内容时，如果 staged 中没有内容，则可以直接用本地仓库的内容更新本地工作区内容。但如果 staged 中有内容，则需要先更新staged ，然后再更新本地工作区。</p>
+<p>第四，git的核心是本地仓库，所有的操作都是围绕着它来的。它既是用户<code>commit</code>的终点，又是远程仓库的接收<code>commit</code>起点。我们在使用git时，可以向本地仓库提交多次修改，而只向远程仓库推送一次，git推送时会将之前的多个<code>commit</code>合并到一起。</p>
+<h3 id="git的分支管理"><a href="#git的分支管理" class="headerlink" title="git的分支管理"></a>git的分支管理</h3><p>在git中还有一个特别重要的概念就是branch，即分支。它是我们多人合作开发的基础。如下图所示：<br><img data-src="https://cdn.avdancedu.com/image/article/git/git_branch.jpg" alt="git 分支"></p>
+<p>通过上图我们可以清楚的知道，git是以<strong>指针</strong>的方式对分支进行管理的。下面我们来详述一下git是如何管理分支的。</p>
+<p>当我们执行<code>git init</code>时，git默认为我们创建一个分支，即<code>Master</code>分支。而HEAD指针也被初始化指向Master分支，因此每当你提交新的修改时，这些修改都会被压入到Master分支<strong>栈</strong>上。</p>
+<p>当然一般情况下我们都不会轻易对Master分支做操作，而是创建一个<code>Dev</code>分支作为我们的开发分支。在git中你可以执行<code>git branch branchname</code>命令来创建一个新分支，比如将branchname设置为<code>Dev</code>，这样我们就创建出了<code>Dev</code>分支。</p>
+<p>然后你可以执行<code>git checkout Dev</code> 命令，它的作用是让<code>HEAD</code>指向Dev分支。后面你所有的commit就都被<strong>push</strong>到Dev分支上了。</p>
+<p>如果你觉得执行两条命令比较麻烦，你也可以将上面的两步合并为一步，执行<code>git checkout -b branchname</code>这一条命令就可以了，这也是我们平常真正使用的命令。</p>
+<p>通过上面的描述，我想你应该对git的工作原理有了最基本的了解了，下面我们再来看这些命令时就很容易理解它们的作用以及为什么要这么做了。</p>
 <h2 id="已有代码该如何提效到仓库中"><a href="#已有代码该如何提效到仓库中" class="headerlink" title="已有代码该如何提效到仓库中"></a>已有代码该如何提效到仓库中</h2><p>第一步，在github 上创建一个仓库。<br>第二步，执行下面的代码</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:avdance&#x2F;test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 
 <h2 id="本地与远程有突冲，想放弃本地修改"><a href="#本地与远程有突冲，想放弃本地修改" class="headerlink" title="本地与远程有突冲，想放弃本地修改"></a>本地与远程有突冲，想放弃本地修改</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git reset --hard FETCH_HEAD</span><br></pre></td></tr></table></figure>
 
-<h2 id="重新从远端拉取某个文件"><a href="#重新从远端拉取某个文件" class="headerlink" title="重新从远端拉取某个文件"></a>重新从远端拉取某个文件</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout a.c</span><br></pre></td></tr></table></figure>
+<h2 id="重新从远端拉取某个文件"><a href="#重新从远端拉取某个文件" class="headerlink" title="重新从远端拉取某个文件"></a>重新从远端拉取某个文件</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout -- a.c</span><br></pre></td></tr></table></figure>
 
 <h2 id="撤消某次-add"><a href="#撤消某次-add" class="headerlink" title="撤消某次 add"></a>撤消某次 add</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git rm --cached &lt;added_file_to_undo&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="撤消某次-commit"><a href="#撤消某次-commit" class="headerlink" title="撤消某次 commit"></a>撤消某次 commit</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git reset --soft commitID  只是删除了commitId之后的commit记录,但是代码改动仍然存在</span><br><span class="line">git reset --hard commitID  彻底的回到CommitID13:39时候的版本,之后的改动不存在了</span><br></pre></td></tr></table></figure>
+<h2 id="撤消某次-commit"><a href="#撤消某次-commit" class="headerlink" title="撤消某次 commit"></a>撤消某次 commit</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git reset --soft commitID  只是删除了commitId之后的commit记录,但是代码改动仍然存在</span><br><span class="line">git reset --hard commitID  彻底的回到CommitID时候的版本,之后的改动不存在了</span><br></pre></td></tr></table></figure>
 
 <h2 id="将本地修改先暂存起来"><a href="#将本地修改先暂存起来" class="headerlink" title="将本地修改先暂存起来"></a>将本地修改先暂存起来</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git stash 将本地修改暂存起来</span><br><span class="line">git stash pop 弹出暂存的修改</span><br></pre></td></tr></table></figure>
 
@@ -235,7 +265,9 @@
 </blockquote>
 <p>摘取 commit 码的前 7位，执行下面的命令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout 4adb3f0</span><br><span class="line">git reset --hard 4adb3f0</span><br></pre></td></tr></table></figure>
-<h2 id="回滚到主分支"><a href="#回滚到主分支" class="headerlink" title="回滚到主分支"></a>回滚到主分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换-回滚到主分支"><a href="#切换-回滚到主分支" class="headerlink" title="切换/回滚到主分支"></a>切换/回滚到主分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
 <h2 id="服务端有更新，但你却-commit了你的代码"><a href="#服务端有更新，但你却-commit了你的代码" class="headerlink" title="服务端有更新，但你却 commit了你的代码"></a>服务端有更新，但你却 commit了你的代码</h2><ul>
 <li><p>先拉取服务端代码</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure></li>
@@ -249,20 +281,21 @@
 
 <p><strong>3. 重新切换到 dev 分支</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 <h2 id="查看每次提交的文件列表"><a href="#查看每次提交的文件列表" class="headerlink" title="查看每次提交的文件列表"></a>查看每次提交的文件列表</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log --stat | more</span><br></pre></td></tr></table></figure>
+
 <h2 id="查看某些提交代码的变化"><a href="#查看某些提交代码的变化" class="headerlink" title="查看某些提交代码的变化"></a>查看某些提交代码的变化</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git show &lt;commit id&gt; [&lt;filename&gt;]</span><br></pre></td></tr></table></figure>
 <h2 id="显示所有本地与远端分支"><a href="#显示所有本地与远端分支" class="headerlink" title="显示所有本地与远端分支"></a>显示所有本地与远端分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
-<p>#显示所有远程分支</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+<h2 id="显示所有远程分支"><a href="#显示所有远程分支" class="headerlink" title="显示所有远程分支"></a>显示所有远程分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
 <h2 id="显示远端地址"><a href="#显示远端地址" class="headerlink" title="显示远端地址"></a>显示远端地址</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
 <h2 id="创建一个新分支"><a href="#创建一个新分支" class="headerlink" title="创建一个新分支"></a>创建一个新分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout -b new_branch</span><br><span class="line">git --set-upstream origin new_branch</span><br><span class="line">git push origin new_branch</span><br></pre></td></tr></table></figure>
 <h2 id="远程仓库已经删除，而本地仓库还在，如果清除？"><a href="#远程仓库已经删除，而本地仓库还在，如果清除？" class="headerlink" title="远程仓库已经删除，而本地仓库还在，如果清除？"></a>远程仓库已经删除，而本地仓库还在，如果清除？</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git pull -p</span><br></pre></td></tr></table></figure>
 <h2 id="git-diff-不显示修改的内容"><a href="#git-diff-不显示修改的内容" class="headerlink" title="git diff 不显示修改的内容"></a>git diff 不显示修改的内容</h2><p>有些情况下，通过 <code>git status</code> 能查到某些文件有变化，但使用 <code>git diff</code> 却看不到修改的内容。可以使用下面的面试查看变化。</p>
-</li>
-<li><p>第一种方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git diff --cached 文件名</span><br></pre></td></tr></table></figure></li>
-<li><p>或者<br>先将修改的文件重命名，然后执行下面的语句</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git reset HEAD</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一种方法<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git diff --cached 文件名</span><br></pre></td></tr></table></figure></li>
+<li>或者<br>先将修改的文件重命名，然后执行下面的语句<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git reset HEAD</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -271,12 +304,20 @@
 <ul>
 <li>首先打开 git config 文件<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim ~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure></li>
 <li>增加配置项<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[difftool]</span><br><span class="line">    prompt &#x3D; false</span><br><span class="line">[diff]</span><br><span class="line">    vimdiff</span><br><span class="line">    tool &#x3D; vimdiff</span><br><span class="line">[difftool &quot;vimdiff&quot;]</span><br><span class="line">    path &#x3D; &#x2F;usr&#x2F;bin&#x2F;vimdiff</span><br></pre></td></tr></table></figure>
-<h2 id="打tag"><a href="#打tag" class="headerlink" title="打tag"></a>打tag</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;为git打tag, 第一次需要在前面加一个v</span><br><span class="line">git tag &quot;v1.0.0&quot;</span><br><span class="line">&#x2F;&#x2F;将tag推送到远程仓库</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
-<h2 id="git-merge-每次都生成一次commit"><a href="#git-merge-每次都生成一次commit" class="headerlink" title="git merge 每次都生成一次commit"></a>git merge 每次都生成一次commit</h2></li>
+
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git merge --no-ff</span><br></pre></td></tr></table></figure>
-<h2 id="拉某个-tag"><a href="#拉某个-tag" class="headerlink" title="拉某个 tag"></a>拉某个 tag</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout tag_name</span><br></pre></td></tr></table></figure>
+<h2 id="打tag"><a href="#打tag" class="headerlink" title="打tag"></a>打tag</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;为git打tag, 第一次需要在前面加一个v</span><br><span class="line">git tag &quot;v1.0.0&quot;</span><br><span class="line">&#x2F;&#x2F;将tag推送到远程仓库</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-merge-每次都生成一次commit"><a href="#git-merge-每次都生成一次commit" class="headerlink" title="git merge 每次都生成一次commit"></a>git merge 每次都生成一次commit</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git merge --no-ff</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：ff表示 fast forward</p>
+</blockquote>
+<h2 id="切到某个tag"><a href="#切到某个tag" class="headerlink" title="切到某个tag"></a>切到某个tag</h2><p>与切到某个分支是类似的，只不过将branch 名换为 tag 名而以。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout tag_name</span><br></pre></td></tr></table></figure>
+
 <h2 id="查看某个人的所有提交"><a href="#查看某个人的所有提交" class="headerlink" title="查看某个人的所有提交"></a>查看某个人的所有提交</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log --author&#x3D;“author”</span><br></pre></td></tr></table></figure>
+
 <h2 id="为git设置默认用户名和密码"><a href="#为git设置默认用户名和密码" class="headerlink" title="为git设置默认用户名和密码"></a>为git设置默认用户名和密码</h2><p>在使用Git 的时候，经常会遇到需要频繁输入密码的情况，每次git push 和 git pull 都要求输入用户名和密码，如果提交频繁的话就十分不方便。</p>
 <p>可以使用下面的方法，只需要第一次输入用户名和密码，以后都不用再输入了。</p>
 <h3 id="进入Git-配置文件"><a href="#进入Git-配置文件" class="headerlink" title="进入Git 配置文件"></a>进入Git 配置文件</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vim ~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure>
@@ -322,6 +363,7 @@
 <h2 id="循环克隆"><a href="#循环克隆" class="headerlink" title="循环克隆"></a>循环克隆</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone --recursive https:&#x2F;&#x2F;xxx.git</span><br></pre></td></tr></table></figure>
 <h2 id="给代码设置两个不同的源"><a href="#给代码设置两个不同的源" class="headerlink" title="给代码设置两个不同的源"></a>给代码设置两个不同的源</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote set-url origin https:&#x2F;&#x2F;xxx.git</span><br></pre></td></tr></table></figure>
 <h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>命令在不断更新中…</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">廖雪峰git教程</a></p>
 ]]></content>
       <categories>
         <category>git</category>
