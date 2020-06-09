@@ -210,6 +210,54 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo中如何画图</title>
+    <url>/f3ccc53/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/markdown_flow/markdown.jpg" alt="Markdown时序图"></p>
+<p>有很多同学觉得用Markdown画图是一个很鸡肋的事儿，一是Markdown画不了太复杂的图，如果图太复杂了估计能把自己绕晕；二是Markdown画不了特别漂亮的图，比如你想通过颜色来区分一些元素的作用Markdown就无能为力了。</p>
+<p>我以前也是持有这种态度，所以一直很反对使用Markdown画图。但最近我的思想有所改变，我认为Markdown画图还是有它的优势的。</p>
+<a id="more"></a>
+
+<p>Markdown绘图有两方面优势，一是通过Markdown画的图不占带宽，这个优势对我来说特别有吸引力。因为我的主机本来带宽就不足，要是在一篇文章中图片太多的话页面加载的速度就太慢了。</p>
+<p>二是Markdown的绘图功能还在不断发展中，没准那天就可以做到手工在页面里直接编辑的程度了，我相信这一天不会太迟到来。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>下面这两幅图就是用Markdown语法绘制的，第一个是流程图，第二个是时序图。看着是不是觉得也还蛮不错的呢？</p>
+<ul>
+<li><p>流程图</p>
+<center>
+<div id="flowchart-0" class="flow-chart"></div>
+</center>
+</li>
+<li><p>时序图</p>
+</li>
+</ul>
+<center>
+<div id="sequence-0"></div>
+</center>
+
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>当然，目前要想实现Markdown绘图还需要安装插件，对于每种不同类型图要安装不同的插件。绘制流程图要安装<code>hexo-filter-flowchart</code>; 绘制时序图要安装<code>hexo-filter-sequence</code>。</p>
+<p>安装的方法以及Markdown的语法我以后再来补充</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在Markdown上绘制图型还是有它的优势的，尤其对于自建博客的同学会更愿意偿试这种方式绘制图型。</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: Start|past:>http://www.google.com[blank]
+e=>end: End:>http://www.google.com
+op1=>operation: My Operation|past
+op2=>operation: Stuff|current
+sub1=>subroutine: My Subroutine|invalid
+cond=>condition: Yes
+or No?|approved:>http://www.google.com
+c2=>condition: Good idea|rejected
+io=>inputoutput: catch something...|request
+
+st->op1(right)->cond
+cond(yes, right)->c2
+cond(no)->sub1(left)->op1
+c2(yes)->io->e
+c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none">{"theme":"simple","scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.27/webfontloader.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script><textarea id="sequence-0-code" style="display: none">Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!</textarea><textarea id="sequence-0-options" style="display: none">{"theme":"simple","scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("sequence-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("sequence-0-options").value));  var diagram = Diagram.parse(code);  diagram.drawSVG("sequence-0", options);</script>]]></content>
+      <tags>
+        <tag>hexo 流程图 时序图</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git常用命令及一些特殊用法</title>
     <url>/423abe9e/</url>
     <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/git/git-banner.jpg" alt=""><br>本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。</p>
