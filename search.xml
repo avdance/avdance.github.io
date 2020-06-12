@@ -109,186 +109,6 @@
       </tags>
   </entry>
   <entry>
-    <title>音视频系统入门常见问题</title>
-    <url>/631d466a/</url>
-    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/av_base/question.jpg" alt=""></p>
-<p>同学们在学习《音视频课小白系统入门》这门课的过程中，经常遇到一些问题，如Mac系统下为什么无法编译ffmpeg? Xcode编译课程中的程序为什么不成功? 为什么我从设备中读的数据很小?等等不足而一。</p>
-<p>实际上，大部分同学提出的问题都是重复的。因此，我将一些最常见的问题整理出了答案放在这里，同学们可以根据自己的情况去查找相应的解决办法，以免我个人原因不能及时回答问题时，给大家的学习造成麻烦和不便。</p>
-<a id="more"></a>
-
-<h2 id="Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash"><a href="#Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash" class="headerlink" title="Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash."></a>Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash.</h2><p>A: 重新编译ffmpeg，在执行 ./configure 时增加 –extra-cflags=”fno-static-check” 选项，注意该选项一定要放在前面，否则编译有问题。</p>
-<h2 id="Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash"><a href="#Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash" class="headerlink" title="Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash"></a>Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲。</p>
-<h2 id="Q-无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？"><a href="#Q-无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？" class="headerlink" title="Q: 无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？"></a>Q: 无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？</h2><p>A: 那就只能用命令的方式安装ffmpeg了，执行 <code>brew install ffmpeg</code>即可。</p>
-<h2 id="Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办"><a href="#Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办" class="headerlink" title="Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?"></a>Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?</h2><p>A: 以命令方式安装带 fdk-aac 的ffmpeg需要按下面的步骤执行:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0. brew unstall ffmpeg</span><br><span class="line">1. brew tap homebrew-ffmpeg&#x2F;ffmpeg</span><br><span class="line">2. brew install homebrew-ffmpeg&#x2F;ffmpeg&#x2F;ffmpeg --with-fdk-aac</span><br></pre></td></tr></table></figure>
-
-<p>注意，安装时如果报<code>ERROR: libsnappy not found</code> 错误，则你需要到<code>https://github.com/google/snappy</code>下载源码，并按照项目的说明编译并安装snappy库。</p>
-<p>安装好snappy库后，重新执行<code>brew install homebrew-ffmpeg/ffmpeg/ffmpeg --with-fdk-aac</code>命令。</p>
-<h2 id="Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"><a href="#Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264" class="headerlink" title="Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"></a>Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264</h2><p>A: 与上面安装ffmpeg带fdk-aac库的命令是类似的，命令格式为: <code>brew install ffmpeg --with-xxxx</code>，添加某个库的具体参数可以通过<code>homebrew-ffmpeg/ffmpeg/ffmpeg</code> 来查找。</p>
-<h2 id="Q-Xcode-编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？"><a href="#Q-Xcode-编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？" class="headerlink" title="Q: Xcode 编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？"></a>Q: Xcode 编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？</h2><p>A:<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/nopriv.jpg" alt=""></p>
-<p>如果是上面这种错误信息，解决办法是: 在编译课程中的例子时，先将将沙盒关闭掉，在info.list中增加访问mic phone 访问权限。具体操作如下图所示:</p>
-<p><img data-src="https://cdn.avdancedu.com/image/article/av_base/info.jpg" alt=""></p>
-<h2 id="Q-info-plist加了权限仍然报没有权限怎么解决？"><a href="#Q-info-plist加了权限仍然报没有权限怎么解决？" class="headerlink" title="Q: info.plist加了权限仍然报没有权限怎么解决？"></a>Q: info.plist加了权限仍然报没有权限怎么解决？</h2><p>A: 按下图操作试试<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/priv2.jpg" alt=""></p>
-<h2 id="Q-引入ffmpeg库后，报libavformat-xxx-dylib-未签名，错误信息类似”code-signature…not-valid”"><a href="#Q-引入ffmpeg库后，报libavformat-xxx-dylib-未签名，错误信息类似”code-signature…not-valid”" class="headerlink" title="Q: 引入ffmpeg库后，报libavformat.xxx.dylib 未签名，错误信息类似”code signature…not valid”"></a>Q: 引入ffmpeg库后，报libavformat.xxx.dylib 未签名，错误信息类似”code signature…not valid”</h2><p>A:<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/unsigned.jpg" alt=""><br>如果像上图所展示的一样，则按下面步骤操作：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 打开 Mac 中的 keychain Access.app, 选择“我的证书”</span><br><span class="line">2. 执行 codesign -f -s &quot;证书名&quot; xxx.dylib</span><br><span class="line">3. 为了避免逐个签名，可以进行批量操作 codesign -f -s &quot;证书名&quot; &#x2F;usr&#x2F;local&#x2F;ffmpeg&#x2F;lib&#x2F;*.dylib</span><br></pre></td></tr></table></figure>
-
-<h2 id="Q-ffmpeg-执行时提示没有权限执行ffmpeg"><a href="#Q-ffmpeg-执行时提示没有权限执行ffmpeg" class="headerlink" title="Q: ffmpeg 执行时提示没有权限执行ffmpeg"></a>Q: ffmpeg 执行时提示没有权限执行ffmpeg</h2><p>A: 将目录切换到你自己的用户目录下再执行ffmpeg试试。</p>
-<h2 id="Q-在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？"><a href="#Q-在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？" class="headerlink" title="Q: 在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？"></a>Q: 在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？</h2><p>A: ffmpeg中最低采样个数为32个，所以只有 64 字节数据时，是无进行重采样的。解决办法是将数据放到一个缓冲区中，积攒到一定大小后，再进行重采样。</p>
-<h2 id="Q-在从设备采体音频数据时，返回错误-35"><a href="#Q-在从设备采体音频数据时，返回错误-35" class="headerlink" title="Q: 在从设备采体音频数据时，返回错误 -35"></a>Q: 在从设备采体音频数据时，返回错误 -35</h2><p>A: 说明你的设备现在暂时还没准备好，此时你应该等待它几秒，之后就可以正常读数据了。例如：<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(re&#x3D;av_read_frame(...))&#123;</span><br><span class="line">   if(ret&#x3D;&#x3D;-35) &#123;</span><br><span class="line">       sleep(1);</span><br><span class="line">       continue;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Q-在编码时，编码器返回-35-错误"><a href="#Q-在编码时，编码器返回-35-错误" class="headerlink" title="Q: 在编码时，编码器返回 -35 错误"></a>Q: 在编码时，编码器返回 -35 错误</h2><p>A: 此时说明编码器没有准备好，像上面的一样需要等待一会儿。</p>
-<h2 id="Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库"><a href="#Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库" class="headerlink" title="Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库"></a>Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库</h2><p>A: 如果是通过命令安装的ffmepg，则上面已经给了答案。下面的方案是通过源码编译出带fdk-aac的ffmeg。具体步骤如下： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 安装好 fdk-aac库</span><br><span class="line">2. 重新在ffmpeg源码目录下执行.&#x2F;configure 并增加--enable-libfdk-aac 参数</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<h2 id="Q-在Linux中何采集音频数据"><a href="#Q-在Linux中何采集音频数据" class="headerlink" title="Q: 在Linux中何采集音频数据"></a>Q: 在Linux中何采集音频数据</h2><p>A: ffmpeg -f alsa -i hw:0,0 xxx.wav</p>
-<h2 id="Q-在-Linux-中找不到-alsa-设备"><a href="#Q-在-Linux-中找不到-alsa-设备" class="headerlink" title="Q: 在 Linux 中找不到 alsa 设备"></a>Q: 在 Linux 中找不到 alsa 设备</h2><p>A：可以通过 arecord -l 查看你linux系统下有哪些音频设备。如果没有alsa, 可以使用  oss.</p>
-<h2 id="Q-编译ffmpeg-时-filter-编译不过"><a href="#Q-编译ffmpeg-时-filter-编译不过" class="headerlink" title="Q: 编译ffmpeg 时 filter 编译不过"></a>Q: 编译ffmpeg 时 filter 编译不过</h2><p>A：选择使用 libstdc++ 库试试</p>
-<h2 id="Q-Windows下编译ffmpeg"><a href="#Q-Windows下编译ffmpeg" class="headerlink" title="Q: Windows下编译ffmpeg"></a>Q: Windows下编译ffmpeg</h2><p>A:  <a href="https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW" target="_blank" rel="noopener">https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW</a></p>
-<h2 id="Q-AAC-编码为-AAC-HE-V2-时，声音与原始声音不一样"><a href="#Q-AAC-编码为-AAC-HE-V2-时，声音与原始声音不一样" class="headerlink" title="Q: AAC 编码为 AAC_HE_V2 时，声音与原始声音不一样"></a>Q: AAC 编码为 AAC_HE_V2 时，声音与原始声音不一样</h2><p>A：这是因为老师用的 AAC 版本比较老，老版本的 AAC 与新版本的 AAC 可能有一些差异，这个我会后面查找一下原因。大家测试时可以将profile修改为 AAC HE 或 AAC LC，这样就可以正常编码出 AAC 数据了。</p>
-<h2 id="Q-库已经安装好了，但仍报找不到它的错误？"><a href="#Q-库已经安装好了，但仍报找不到它的错误？" class="headerlink" title="Q: 库已经安装好了，但仍报找不到它的错误？"></a>Q: 库已经安装好了，但仍报找不到它的错误？</h2><p>A：首先确认是否已经将 <code>pkg-config</code>工具安装好了。可以执行下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pkg-config</span><br></pre></td></tr></table></figure>
-<p>如果提示没有安装，则先将该工具安装好，安装命令如下：</p>
-<ul>
-<li>ubuntu  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt intall pkg-config</span><br></pre></td></tr></table></figure></li>
-<li>mac  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install pkg-config</span><br></pre></td></tr></table></figure></li>
-<li>cygwin  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt-cyg install pkg-config</span><br></pre></td></tr></table></figure></li>
-<li>centos  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install pkg-config</span><br></pre></td></tr></table></figure>
-安装完该工具后仍然报错？那再按照具体的错误看下面的解决方案吧。</li>
-</ul>
-<h2 id="Q-libx264库找不到（-ERROR-libx264-not-found-）"><a href="#Q-libx264库找不到（-ERROR-libx264-not-found-）" class="headerlink" title="Q: libx264库找不到（[ERROR: libx264 not found]）"></a>Q: libx264库找不到（[ERROR: libx264 not found]）</h2><p>A:<br>该问题可能由下面三个方面的问题引起。</p>
-<ul>
-<li>libx264库没有安装。对于这种情况有两种解决办法:<ul>
-<li>其一，是通过平台的安装工作进行安装，如 apt/brew/yum install x264。（注：在Linux下应该安装 libx264-dev）。</li>
-<li>其二，是通过源码安装，步骤如下：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. wget https:&#x2F;&#x2F;code.videolan.org&#x2F;videolan&#x2F;x264&#x2F;-&#x2F;archive&#x2F;master&#x2F;x264-master.tar.bz2</span><br><span class="line">2. bunzip2 last_x264.tar.bz2</span><br><span class="line">3. tar -vxf last_x264.tar</span><br><span class="line">4. .&#x2F;configure --enable-static --enable-shared --disable-asm --disable-avs</span><br><span class="line">5. make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>通过 pkg-config 命令无法找到。对于这类问题，我们可以使用下面的命 <code>pkg-config --cflags --lib libx264</code>看是否可以找到 libx264，如果找不到，就说明确实是这个问题。解决的办法是设置环境变量。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PKG_CONFIG_PATH&#x3D;$PKG_CONFIG_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib&#x2F;pkgconfig</span><br></pre></td></tr></table></figure>
-其中 <code>xxx</code> 由你的实际路径代替。</li>
-</ul>
-<blockquote>
-<p>注，有可能你的系统中并没有装 pkg-config工具，可以使用 brew/apt/yum install pkg-config进行安装。</p>
-</blockquote>
-<ul>
-<li>无法链接上libx264, 这是由于通过环境变量 LD_LIBRARY_PATH 无法定位到 libx264库。解决的办法也很简单，与上面类似，可以通过设置环境变量来解决该问题。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LIB_LIBRARY_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib</span><br></pre></td></tr></table></figure>
-其中，<code>xxx</code>由你的实际路径代替。</li>
-</ul>
-<p>当然，你也可以将环境变量设置在脚本里，这样就不用每次都写export命令了。只需要将上面的两条语句加入到 ~/.bashrc / 或~/.bash_profile 文件里，然后在控制台执行 <code>source ~/.bashrc</code> 或 <code>source ~/.bash_profile</code>即可。</p>
-<h2 id="Q-通过-avcodec-find-encoder-by-name-无法找到编码器"><a href="#Q-通过-avcodec-find-encoder-by-name-无法找到编码器" class="headerlink" title="Q: 通过 avcodec_find_encoder_by_name() 无法找到编码器"></a>Q: 通过 avcodec_find_encoder_by_name() 无法找到编码器</h2><p>A：通过以下步骤进行解决</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0. 你使用的ffmpeg必须是经过源码编译的</span><br><span class="line">1. 你在编译 ffmpeg 时，执行.&#x2F;configure时是否将此编码器模块添加到 ffmpeg中了？以 fdk_aac 为例，在执行 .&#x2F;configure …时你应该加上 --enable-libfdk-aac 选项。</span><br><span class="line">2. 如果通过源码编译ffmpeg时有报错，请根据错误信息查看本文档的相应处理方法</span><br><span class="line">3. 确保 pkg-config 命令查询到的是你通过源码编译的ffmpeg库</span><br></pre></td></tr></table></figure>
-
-<h2 id="Q-编译不出ffplay"><a href="#Q-编译不出ffplay" class="headerlink" title="Q: 编译不出ffplay"></a>Q: 编译不出ffplay</h2><p>A：引起该问题有以下几方面的原因：</p>
-<ul>
-<li>所使用的操作系统没有安装图形库。如有的同学在阿里的云服务器上想安装ffplay是肯定不行的。</li>
-<li>没有安装 SDL2 库。解决办法是通过 brew/apt/yum install sdl2 即可 或 通过 SDL2 源码安装。<strong>安装完成后，要重新进行到 ffmpeg目录下，执行 ./configure…这指命令。</strong></li>
-<li>有的同学编译ffmpeg时，在ffmpeg目录执行./configure …时没有添加 –enable-sdl2 选项也会导致无法编译出 ffplay</li>
-<li>SDL2与最新的Mac系统 mojave不兼容。解决办法：<ul>
-<li>方法一<ul>
-<li>从 <a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.tar.gz" target="_blank" rel="noopener">SDL</a>下载 2.0.9版本或以后的SDL2代码。</li>
-<li>执行 ./configure</li>
-<li>执行 make &amp;&amp; sudo make install</li>
-<li>执行 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</li>
-<li>[重新]编译ffmpeg</li>
-</ul>
-</li>
-<li>方法二<ul>
-<li>从<a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.dmg" target="_blank" rel="noopener">SDL</a>下载dmg包。</li>
-<li>执行 open SDL2-2.0.9.dmg</li>
-<li>[重新]编译ffmpeg</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Q-非Mac同学如何学习本课程"><a href="#Q-非Mac同学如何学习本课程" class="headerlink" title="Q: 非Mac同学如何学习本课程"></a>Q: 非Mac同学如何学习本课程</h2><p>A：本课程中的例子的界面是由 Swift 编写的，如果你没有 Mac 系统的话，你可以用 Qt 甚至不用界面开发，代码中与ffmpeg相着的代码都是跨平台的。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://coding.imooc.com/class/415.html?mc_marking=b587280c0c1c0e76c1092aa21406565a&mc_channel=syb6" target="_blank" rel="noopener">音视频小白系统入门课</a></p>
-]]></content>
-      <categories>
-        <category>音视频</category>
-      </categories>
-      <tags>
-        <tag>ffmpeg</tag>
-        <tag>音视频</tag>
-        <tag>直播</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>js类的探究</title>
-    <url>/18fc7df1/</url>
-    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/js/javascript.png" alt="javascript"></p>
-<p>随着浏览器的发展，JS（JavaScript) 越来越受到人们的欢迎。它不再像以前只能做单一的渲染页面这样的事情了，在Chrome等现代浏览器上，你甚至可以用JS来做音视频的处理，是不是觉得很神奇？</p>
-<p>不过今天我要讨论的并不是如何使用JS来做一些<strong>神奇</strong>的事儿，而是来重新认识一下JS中<strong>类</strong>的使用。对于这部分知识的理解，将为我们后面阅读Janus(一款WebRTC流媒体服务器)代码有着至关重要的作用。</p>
-<a id="more"></a>
-
-<h2 id="JS中的function"><a href="#JS中的function" class="headerlink" title="JS中的function"></a>JS中的function</h2><p>在ES5以前，JS中并没有<strong>class</strong>关键字，那时候JS是如何表示一个类的呢？说来也奇怪，它使用<strong>function</strong>来表示。</p>
-<p>我在了解这部分知识的时候也是觉得不可思意！实际上我早在2003年的时候就学习并使用JS了，那时候JS还很简单。虽然后来很久没有再碰过它，但印象中<strong>function</strong>一直是用来定义一个函数的，现在怎么又用来定义<strong>类</strong>了呢？</p>
-<p>后来看了一些资料才逐渐理清，原来现在的JS中<code>function</code>既可以用来定义函数，也可以用来定义类。有点类似于语文中的<strong>一语双关</strong>。</p>
-<p>之所以<code>function</code>有双层含义，是因为JS最开始并不支持面向对象开发模式。但随着技术的发展，面向对象的开发模式越来越受到人们的欢迎，JS为了能跟上时代，所以也必须支持面向对象开发。</p>
-<p>不过JS在转向面向对象语方时面临一种选择，即从原生语言上支持<code>class</code>，那JS解析器就要做大的调整，这可不是一时半会儿可以完成的。而如果在原有的基础上修改则要容易的多。</p>
-<p>权衡利弊之后，JS<code>大神</code>们还是决定在现有的基础上修改是最省时少力的。于是就借用了<code>function</code>的函数，把它看作是一个<strong>构造函数</strong>，这样就可以快速的将JS改造成面向对象的开发语言了。</p>
-<p>以上就是JS中使用<code>function</code>定义类的大致由头！下面我们就来看看在ES5上该如何定义一个<strong>类</strong>。</p>
-<h2 id="类及成员"><a href="#类及成员" class="headerlink" title="类及成员"></a>类及成员</h2><p>在JS中如何定义一个类呢？实际上它与其它面向对象语言(如Java)是很类似的，只不过在Java中定义类用的是<code>class</code>关键字，而在JS中用<code>function</code>代替而以。代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function classname() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在 Java 中，类的成员可以分为公有和私有这个大家都很熟悉，JS中是否也有类似的概念呢？答案是肯定的。接下来我们就来看一下在JS类中如何定义公有成员和私有成功吧。</p>
-<p>在JS中定义公有成员和私有成员是隐式的，不像Java有显确的<code>public</code>和<code>private</code>关键字。在JS类中直接定义的函数或变量就是私有成员，在类成员或函数前面加<code>this</code>就表式它是公有成员。</p>
-<p>我们来看个例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function myclass ()&#123;</span><br><span class="line"></span><br><span class="line">    function test()&#123;</span><br><span class="line">        console.log(&quot;testA function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj &#x3D; new myclass();</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
-<p>如果我们在浏览器执行上面的代码，在控制台你一定可以看到这样一条错误信息<code>Uncaught TypeError: obj.testfunc is not a function</code>，这说明通过<code>obj</code>对像是无法访问到<code>test()</code>函数的。</p>
-<p>我们稍微调整一下这代段代，修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function myclass ()&#123;</span><br><span class="line"></span><br><span class="line">    this.test &#x3D; test() &#123; &#x2F;&#x2F;这里加了this 关键字</span><br><span class="line">        console.log(&quot;testA function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj &#x3D; new myclass();</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
-<p>我们只做了这一点点修改，这段代码你就可以在浏览器上运行成功了。</p>
-<p>由此，我们可以知道如果你想让外面可以访问对象中的成员（成员变量或成员方法），你就应该在这些成员前面加上<code>this</code>关键字。反过来讲，如果你不想让他们访问对象中的成员，则不要在这些成员前面加this。</p>
-<h2 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h2><p>在Java中除了有对象成员外，还可以有类成员，比如在使用单例模式时，我们都会定义一个静态的成员。在JS中如何做到这点呢？我们来看个具体例子吧。</p>
-<p>还是刚才那个代码，我们在其基础上稍做修改即可。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义类方法</span><br><span class="line">myclass.init &#x3D; function()&#123; </span><br><span class="line">    console.log(&quot;class method!&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function myclass ()&#123;</span><br><span class="line"></span><br><span class="line">    this.test &#x3D; test() &#123; &#x2F;&#x2F;这里加了this 关键字</span><br><span class="line">        console.log(&quot;testA function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;调用类方法</span><br><span class="line">myclass.init();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;创建对象</span><br><span class="line">var obj &#x3D; new myclass();</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
-
-<p>在这段代码中，加入了类方法的定义和类方法调用的代码。从中我们可以知道，在JS中类方法是在类之外定义的，而不像Java在是类内加<code>static</code>关键字。</p>
-<h2 id="类的原型prototype"><a href="#类的原型prototype" class="headerlink" title="类的原型prototype"></a>类的原型prototype</h2><p>每个类都有一个prototype属性，它代表的是<strong>类本身</strong>或者你可以把它理解为这个<strong>类在内存中的地址</strong>。当我们想为这个类添加方法或成员变量的时候，就可以通过prototype来实现，也就是说修改prototype指向的内存地址的内容来达到添加成员的目的。</p>
-<p>举个例子，假设我们定义了一个类如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function myjs()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>目前在这个类中没有写任何方法或成员变量，只是定义了一个空类。下面我想修改这个类，给这个类增加一些内容，该怎么做呢？实现的方法很简单，修改prototype即可，看下面的例子你就明白了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">myjs.prototype.a  &#x3D; 5;</span><br><span class="line">myjs.prototype.test &#x3D; function() &#123;</span><br><span class="line">    console.log(&quot;this is a function of myjs object!&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj &#x3D; new myjs();</span><br><span class="line">console.log(&quot;myjs.a &#x3D;&#x3D; &quot; + obj.a );</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
-
-<p>通过上面的代码，我们就给myjs类增加了两个成员，即一个变量<code>a</code>和一个方法<code>test</code>。当我们生成myjs对象时，生成的对象中就有我们之前添加的成员变量和成员方法了。</p>
-<h2 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h2><p>JS中没有专门用于类继承的语法，不过你可以通过上一节我介绍的prototype来实现<code>继承</code>。在我们正式讲解继承之前，我们先了解一下prototype在内存中是如何表示的。如下图所示：<br><img data-src="https://cdn.avdancedu.com/image/article/js/prototype.jpg" alt="prototype"></p>
-<p>通过上图我们可以看到，使用<code>function</code>定义的类并非真实的<code>类</code>，更准确的说它应该是一个<code>构造函数</code>。而该构造函数的<code>prototype</code>属性指向的才是类的真正地址。</p>
-<p>可能很多同学会问JS是如何通过构造函数找到它所在的类的呢？其实它使用的是C语言的一个小巧，其过程是JS调用浏览器，通过浏览器获取构造函数所在类的地址，对于浏览器来说这是小菜一碟。</p>
-<p>了解了<code>prototype</code>的物理意义后，接下来我们看看对象在内存中的情况，它与prototype之间的关系又是怎样的？如下图所示。<br><img data-src="https://cdn.avdancedu.com/image/article/js/js_obj.jpg" alt="对象在内存中"></p>
-<p>通过上图我们可以看到，JS在创建对象时会为每个对象分配内存空间。更为重要的一点是，多个相同类型的<code>对象</code>会指向同一个prototype。</p>
-<p>了解了上面的特性后，我们就可以利用<code>prototype</code>来实现类的继承了。如何来做呢？我们再来举个例子。</p>
-<p>首先，我们定义一个基类，如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function parent() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;给基类添加一个新的属性 a</span><br><span class="line">parent.prototype.a &#x3D; 1;</span><br></pre></td></tr></table></figure>
-
-<p>然后，我们创建一个子类，并让这个类的prototype指向父类，如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function child() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">child.prototype &#x3D; new parent();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;再给子类添加一个属性 b</span><br><span class="line">child.prototype.b &#x3D; 2;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;创建子类</span><br><span class="line">var obj_child &#x3D; new child();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;访问子类的属性</span><br><span class="line">console.log(&quot;a &#x3D; &quot; + obj_child.a);</span><br><span class="line">console.log(&quot;b &#x3D; &quot; + obj_child.b);</span><br></pre></td></tr></table></figure>
-
-<p>执行上面的例子，我们通过浏览器的<code>debugger</code>就可以看到如下结果：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a &#x3D; 1</span><br><span class="line">b &#x3D; 2</span><br></pre></td></tr></table></figure>
-
-<p>说明child子类确实是继承了parent类。对于这样一个继承关系，它在内存中的物理意义是什么呢？如下图所示：</p>
-<p><img data-src="https://cdn.avdancedu.com/image/article/js/js_extend.jpg" alt="js继承"></p>
-<p>在JS中，正常情况下每生成一个对象，该对象的 <code>__proto__</code> 都指向该对象的<strong>原始类的地址</strong>。如上图所示parent对象的<code>__proto__</code>指向parent.prototype，child对象的<code>__proto__</code>指向child.prototype。</p>
-<p>为什么会这样呢？要理解其中的奥秘，我们必须要知道JS中 <code>new xxx</code> 做了哪些事儿。实际上，<code>new xxx</code> 做了四件事儿，我们以上图中的<code>new parent()</code>为例，它做的四件事儿如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; &#123;&#125;;</span><br><span class="line">obj.__proto__ &#x3D; parent.prototype; &#x2F;&#x2F;即parent</span><br><span class="line">parent.call(obj);                 &#x2F;&#x2F;调用parent的构造函数</span><br><span class="line">return obj;</span><br></pre></td></tr></table></figure>
-
-<p>在这步中，第二步是最关键的，它表明了新对象的<code>__proto__</code>指向了哪里。这样我们就可以理解 <strong>“对象的 <code>__proto__</code> 都指向该对象的原始类的地址”</strong> 这句话了。</p>
-<p>当我们理解了 <code>new xxx</code> 的真实含义之后，<code>child.prototype = new parent()</code> 这句代码的含义立马就清楚了，它的含义是改变 <code>child.prototype</code> 的指向， 让他重新指向<code>parent</code>对象。</p>
-<p>由于生成parent对象时，它的<code>__proto__</code>指向了parent的<strong>原始类</strong>，因此child.prototype就与parent的prototype建立了连接。</p>
-<p>在接下来创建<code>obj_child</code>对象时，由于child.prototype已经指向了parent对象，因此<code>obj_child.__proto__</code>也就指向了parent对象。此时通过 old_child 就可以访问到parent对象的内容了。从而也就达到了继承的目的。</p>
-<h2 id="ES6-中的类"><a href="#ES6-中的类" class="headerlink" title="ES6 中的类"></a>ES6 中的类</h2><p>大家对于在JS中使用<code>function</code>方式定义类实在感到很厌烦，就不能与其它语言一样可以使用<code>class</code>来定义类吗？在ES6时代，JS终于可以做到这一点了。</p>
-<p>现在我们来看看在JS中该如何定义类吧，例子如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html" target="_blank" rel="noopener">阮一峰</a></p>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js class typescript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo中如何画图</title>
     <url>/f3ccc53/</url>
     <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/markdown_flow/markdown.jpg" alt="Markdown时序图"></p>
@@ -756,6 +576,279 @@ Bob-->Alice: I am good thanks!</textarea><textarea id="sequence-0-options" style
         <tag>hexo</tag>
         <tag>next</tag>
         <tag>SEO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>音视频系统入门常见问题</title>
+    <url>/631d466a/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/av_base/question.jpg" alt=""></p>
+<p>同学们在学习《音视频课小白系统入门》这门课的过程中，经常遇到一些问题，如Mac系统下为什么无法编译ffmpeg? Xcode编译课程中的程序为什么不成功? 为什么我从设备中读的数据很小?等等不足而一。</p>
+<p>实际上，大部分同学提出的问题都是重复的。因此，我将一些最常见的问题整理出了答案放在这里，同学们可以根据自己的情况去查找相应的解决办法，以免我个人原因不能及时回答问题时，给大家的学习造成麻烦和不便。</p>
+<a id="more"></a>
+
+<h2 id="Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash"><a href="#Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash" class="headerlink" title="Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash."></a>Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash.</h2><p>A: 重新编译ffmpeg，在执行 ./configure 时增加 –extra-cflags=”fno-static-check” 选项，注意该选项一定要放在前面，否则编译有问题。</p>
+<h2 id="Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash"><a href="#Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash" class="headerlink" title="Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash"></a>Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲。</p>
+<h2 id="Q-无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？"><a href="#Q-无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？" class="headerlink" title="Q: 无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？"></a>Q: 无论通过何种方式编译出的ffmpeg都会引发crash，如何解决？</h2><p>A: 那就只能用命令的方式安装ffmpeg了，执行 <code>brew install ffmpeg</code>即可。</p>
+<h2 id="Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办"><a href="#Q-在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办" class="headerlink" title="Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?"></a>Q: 在Mac下，通过命令方式安装的ffmpeg没有带fdk-aac库怎么办?</h2><p>A: 以命令方式安装带 fdk-aac 的ffmpeg需要按下面的步骤执行:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0. brew unstall ffmpeg</span><br><span class="line">1. brew tap homebrew-ffmpeg&#x2F;ffmpeg</span><br><span class="line">2. brew install homebrew-ffmpeg&#x2F;ffmpeg&#x2F;ffmpeg --with-fdk-aac</span><br></pre></td></tr></table></figure>
+
+<p>注意，安装时如果报<code>ERROR: libsnappy not found</code> 错误，则你需要到<code>https://github.com/google/snappy</code>下载源码，并按照项目的说明编译并安装snappy库。</p>
+<p>安装好snappy库后，重新执行<code>brew install homebrew-ffmpeg/ffmpeg/ffmpeg --with-fdk-aac</code>命令。</p>
+<h2 id="Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"><a href="#Q-在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264" class="headerlink" title="Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264"></a>Q: 在Mac下通过命令方式安装ffmpeg库时，如何能带上其它第三方库呢？如x264</h2><p>A: 与上面安装ffmpeg带fdk-aac库的命令是类似的，命令格式为: <code>brew install ffmpeg --with-xxxx</code>，添加某个库的具体参数可以通过<code>homebrew-ffmpeg/ffmpeg/ffmpeg</code> 来查找。</p>
+<h2 id="Q-Xcode-编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？"><a href="#Q-Xcode-编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？" class="headerlink" title="Q: Xcode 编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？"></a>Q: Xcode 编译课程中的程序成功，但执行失败，报的错误是没有权限该如何解决？</h2><p>A:<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/nopriv.jpg" alt=""></p>
+<p>如果是上面这种错误信息，解决办法是: 在编译课程中的例子时，先将将沙盒关闭掉，在info.list中增加访问mic phone 访问权限。具体操作如下图所示:</p>
+<p><img data-src="https://cdn.avdancedu.com/image/article/av_base/info.jpg" alt=""></p>
+<h2 id="Q-info-plist加了权限仍然报没有权限怎么解决？"><a href="#Q-info-plist加了权限仍然报没有权限怎么解决？" class="headerlink" title="Q: info.plist加了权限仍然报没有权限怎么解决？"></a>Q: info.plist加了权限仍然报没有权限怎么解决？</h2><p>A: 按下图操作试试<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/priv2.jpg" alt=""></p>
+<h2 id="Q-引入ffmpeg库后，报libavformat-xxx-dylib-未签名，错误信息类似”code-signature…not-valid”"><a href="#Q-引入ffmpeg库后，报libavformat-xxx-dylib-未签名，错误信息类似”code-signature…not-valid”" class="headerlink" title="Q: 引入ffmpeg库后，报libavformat.xxx.dylib 未签名，错误信息类似”code signature…not valid”"></a>Q: 引入ffmpeg库后，报libavformat.xxx.dylib 未签名，错误信息类似”code signature…not valid”</h2><p>A:<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/unsigned.jpg" alt=""><br>如果像上图所展示的一样，则按下面步骤操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 打开 Mac 中的 keychain Access.app, 选择“我的证书”</span><br><span class="line">2. 执行 codesign -f -s &quot;证书名&quot; xxx.dylib</span><br><span class="line">3. 为了避免逐个签名，可以进行批量操作 codesign -f -s &quot;证书名&quot; &#x2F;usr&#x2F;local&#x2F;ffmpeg&#x2F;lib&#x2F;*.dylib</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q-ffmpeg-执行时提示没有权限执行ffmpeg"><a href="#Q-ffmpeg-执行时提示没有权限执行ffmpeg" class="headerlink" title="Q: ffmpeg 执行时提示没有权限执行ffmpeg"></a>Q: ffmpeg 执行时提示没有权限执行ffmpeg</h2><p>A: 将目录切换到你自己的用户目录下再执行ffmpeg试试。</p>
+<h2 id="Q-在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？"><a href="#Q-在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？" class="headerlink" title="Q: 在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？"></a>Q: 在Linux虚似机中每次获取的音频数据很小，只有64个字节，如果进行重采样？</h2><p>A: ffmpeg中最低采样个数为32个，所以只有 64 字节数据时，是无进行重采样的。解决办法是将数据放到一个缓冲区中，积攒到一定大小后，再进行重采样。</p>
+<h2 id="Q-在从设备采体音频数据时，返回错误-35"><a href="#Q-在从设备采体音频数据时，返回错误-35" class="headerlink" title="Q: 在从设备采体音频数据时，返回错误 -35"></a>Q: 在从设备采体音频数据时，返回错误 -35</h2><p>A: 说明你的设备现在暂时还没准备好，此时你应该等待它几秒，之后就可以正常读数据了。例如：<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while(re&#x3D;av_read_frame(...))&#123;</span><br><span class="line">   if(ret&#x3D;&#x3D;-35) &#123;</span><br><span class="line">       sleep(1);</span><br><span class="line">       continue;</span><br><span class="line">   &#125;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Q-在编码时，编码器返回-35-错误"><a href="#Q-在编码时，编码器返回-35-错误" class="headerlink" title="Q: 在编码时，编码器返回 -35 错误"></a>Q: 在编码时，编码器返回 -35 错误</h2><p>A: 此时说明编码器没有准备好，像上面的一样需要等待一会儿。</p>
+<h2 id="Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库"><a href="#Q-采集到的音频数据编码-AAC-时，报无法找到libfdk-aac库" class="headerlink" title="Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库"></a>Q: 采集到的音频数据编码 AAC 时，报无法找到libfdk-aac库</h2><p>A: 如果是通过命令安装的ffmepg，则上面已经给了答案。下面的方案是通过源码编译出带fdk-aac的ffmeg。具体步骤如下： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 安装好 fdk-aac库</span><br><span class="line">2. 重新在ffmpeg源码目录下执行.&#x2F;configure 并增加--enable-libfdk-aac 参数</span><br><span class="line">3. make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h2 id="Q-在Linux中何采集音频数据"><a href="#Q-在Linux中何采集音频数据" class="headerlink" title="Q: 在Linux中何采集音频数据"></a>Q: 在Linux中何采集音频数据</h2><p>A: ffmpeg -f alsa -i hw:0,0 xxx.wav</p>
+<h2 id="Q-在-Linux-中找不到-alsa-设备"><a href="#Q-在-Linux-中找不到-alsa-设备" class="headerlink" title="Q: 在 Linux 中找不到 alsa 设备"></a>Q: 在 Linux 中找不到 alsa 设备</h2><p>A：可以通过 arecord -l 查看你linux系统下有哪些音频设备。如果没有alsa, 可以使用  oss.</p>
+<h2 id="Q-编译ffmpeg-时-filter-编译不过"><a href="#Q-编译ffmpeg-时-filter-编译不过" class="headerlink" title="Q: 编译ffmpeg 时 filter 编译不过"></a>Q: 编译ffmpeg 时 filter 编译不过</h2><p>A：选择使用 libstdc++ 库试试</p>
+<h2 id="Q-Windows下编译ffmpeg"><a href="#Q-Windows下编译ffmpeg" class="headerlink" title="Q: Windows下编译ffmpeg"></a>Q: Windows下编译ffmpeg</h2><p>A:  <a href="https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW" target="_blank" rel="noopener">https://trac.ffmpeg.org/wiki/CompilationGuide/MinGW</a></p>
+<h2 id="Q-AAC-编码为-AAC-HE-V2-时，声音与原始声音不一样"><a href="#Q-AAC-编码为-AAC-HE-V2-时，声音与原始声音不一样" class="headerlink" title="Q: AAC 编码为 AAC_HE_V2 时，声音与原始声音不一样"></a>Q: AAC 编码为 AAC_HE_V2 时，声音与原始声音不一样</h2><p>A：这是因为老师用的 AAC 版本比较老，老版本的 AAC 与新版本的 AAC 可能有一些差异，这个我会后面查找一下原因。大家测试时可以将profile修改为 AAC HE 或 AAC LC，这样就可以正常编码出 AAC 数据了。</p>
+<h2 id="Q-库已经安装好了，但仍报找不到它的错误？"><a href="#Q-库已经安装好了，但仍报找不到它的错误？" class="headerlink" title="Q: 库已经安装好了，但仍报找不到它的错误？"></a>Q: 库已经安装好了，但仍报找不到它的错误？</h2><p>A：首先确认是否已经将 <code>pkg-config</code>工具安装好了。可以执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pkg-config</span><br></pre></td></tr></table></figure>
+<p>如果提示没有安装，则先将该工具安装好，安装命令如下：</p>
+<ul>
+<li>ubuntu  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt intall pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>mac  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>cygwin  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt-cyg install pkg-config</span><br></pre></td></tr></table></figure></li>
+<li>centos  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install pkg-config</span><br></pre></td></tr></table></figure>
+安装完该工具后仍然报错？那再按照具体的错误看下面的解决方案吧。</li>
+</ul>
+<h2 id="Q-libx264库找不到（-ERROR-libx264-not-found-）"><a href="#Q-libx264库找不到（-ERROR-libx264-not-found-）" class="headerlink" title="Q: libx264库找不到（[ERROR: libx264 not found]）"></a>Q: libx264库找不到（[ERROR: libx264 not found]）</h2><p>A:<br>该问题可能由下面三个方面的问题引起。</p>
+<ul>
+<li>libx264库没有安装。对于这种情况有两种解决办法:<ul>
+<li>其一，是通过平台的安装工作进行安装，如 apt/brew/yum install x264。（注：在Linux下应该安装 libx264-dev）。</li>
+<li>其二，是通过源码安装，步骤如下：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. wget https:&#x2F;&#x2F;code.videolan.org&#x2F;videolan&#x2F;x264&#x2F;-&#x2F;archive&#x2F;master&#x2F;x264-master.tar.bz2</span><br><span class="line">2. bunzip2 last_x264.tar.bz2</span><br><span class="line">3. tar -vxf last_x264.tar</span><br><span class="line">4. .&#x2F;configure --enable-static --enable-shared --disable-asm --disable-avs</span><br><span class="line">5. make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>通过 pkg-config 命令无法找到。对于这类问题，我们可以使用下面的命 <code>pkg-config --cflags --lib libx264</code>看是否可以找到 libx264，如果找不到，就说明确实是这个问题。解决的办法是设置环境变量。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export PKG_CONFIG_PATH&#x3D;$PKG_CONFIG_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib&#x2F;pkgconfig</span><br></pre></td></tr></table></figure>
+其中 <code>xxx</code> 由你的实际路径代替。</li>
+</ul>
+<blockquote>
+<p>注，有可能你的系统中并没有装 pkg-config工具，可以使用 brew/apt/yum install pkg-config进行安装。</p>
+</blockquote>
+<ul>
+<li>无法链接上libx264, 这是由于通过环境变量 LD_LIBRARY_PATH 无法定位到 libx264库。解决的办法也很简单，与上面类似，可以通过设置环境变量来解决该问题。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export LD_LIBRARY_PATH&#x3D;$LIB_LIBRARY_PATH:&#x2F;xxx&#x2F;xxx&#x2F;lib</span><br></pre></td></tr></table></figure>
+其中，<code>xxx</code>由你的实际路径代替。</li>
+</ul>
+<p>当然，你也可以将环境变量设置在脚本里，这样就不用每次都写export命令了。只需要将上面的两条语句加入到 ~/.bashrc / 或~/.bash_profile 文件里，然后在控制台执行 <code>source ~/.bashrc</code> 或 <code>source ~/.bash_profile</code>即可。</p>
+<h2 id="Q-通过-avcodec-find-encoder-by-name-无法找到编码器"><a href="#Q-通过-avcodec-find-encoder-by-name-无法找到编码器" class="headerlink" title="Q: 通过 avcodec_find_encoder_by_name() 无法找到编码器"></a>Q: 通过 avcodec_find_encoder_by_name() 无法找到编码器</h2><p>A：通过以下步骤进行解决</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0. 你使用的ffmpeg必须是经过源码编译的</span><br><span class="line">1. 你在编译 ffmpeg 时，执行.&#x2F;configure时是否将此编码器模块添加到 ffmpeg中了？以 fdk_aac 为例，在执行 .&#x2F;configure …时你应该加上 --enable-libfdk-aac 选项。</span><br><span class="line">2. 如果通过源码编译ffmpeg时有报错，请根据错误信息查看本文档的相应处理方法</span><br><span class="line">3. 确保 pkg-config 命令查询到的是你通过源码编译的ffmpeg库</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q-编译不出ffplay"><a href="#Q-编译不出ffplay" class="headerlink" title="Q: 编译不出ffplay"></a>Q: 编译不出ffplay</h2><p>A：引起该问题有以下几方面的原因：</p>
+<ul>
+<li>所使用的操作系统没有安装图形库。如有的同学在阿里的云服务器上想安装ffplay是肯定不行的。</li>
+<li>没有安装 SDL2 库。解决办法是通过 brew/apt/yum install sdl2 即可 或 通过 SDL2 源码安装。<strong>安装完成后，要重新进行到 ffmpeg目录下，执行 ./configure…这指命令。</strong></li>
+<li>有的同学编译ffmpeg时，在ffmpeg目录执行./configure …时没有添加 –enable-sdl2 选项也会导致无法编译出 ffplay</li>
+<li>SDL2与最新的Mac系统 mojave不兼容。解决办法：<ul>
+<li>方法一<ul>
+<li>从 <a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.tar.gz" target="_blank" rel="noopener">SDL</a>下载 2.0.9版本或以后的SDL2代码。</li>
+<li>执行 ./configure</li>
+<li>执行 make &amp;&amp; sudo make install</li>
+<li>执行 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</li>
+<li>[重新]编译ffmpeg</li>
+</ul>
+</li>
+<li>方法二<ul>
+<li>从<a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.dmg" target="_blank" rel="noopener">SDL</a>下载dmg包。</li>
+<li>执行 open SDL2-2.0.9.dmg</li>
+<li>[重新]编译ffmpeg</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Q-非Mac同学如何学习本课程"><a href="#Q-非Mac同学如何学习本课程" class="headerlink" title="Q: 非Mac同学如何学习本课程"></a>Q: 非Mac同学如何学习本课程</h2><p>A：本课程中的例子的界面是由 Swift 编写的，如果你没有 Mac 系统的话，你可以用 Qt 甚至不用界面开发，代码中与ffmpeg相着的代码都是跨平台的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://coding.imooc.com/class/415.html?mc_marking=b587280c0c1c0e76c1092aa21406565a&mc_channel=syb6" target="_blank" rel="noopener">音视频小白系统入门课</a></p>
+]]></content>
+      <categories>
+        <category>音视频</category>
+      </categories>
+      <tags>
+        <tag>ffmpeg</tag>
+        <tag>音视频</tag>
+        <tag>直播</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js类的探究</title>
+    <url>/18fc7df1/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/js/javascript.png" alt="javascript"></p>
+<p>随着浏览器的发展，JS（JavaScript) 越来越受到人们的欢迎。它不再像以前只能做单一的渲染页面这样的事情了，在Chrome等现代浏览器上，你甚至可以用JS来做音视频的处理，是不是觉得很神奇？</p>
+<p>不过今天我要讨论的并不是如何使用JS来做一些<strong>神奇</strong>的事儿，而是来重新认识一下JS中<strong>类</strong>的使用。对于这部分知识的理解，将为我们后面阅读Janus(一款WebRTC流媒体服务器)代码有着至关重要的作用。</p>
+<a id="more"></a>
+
+<h2 id="JS中的function"><a href="#JS中的function" class="headerlink" title="JS中的function"></a>JS中的function</h2><p>在ES5以前，JS中并没有<strong>class</strong>关键字，那时候JS是如何表示一个类的呢？说来也奇怪，它使用<strong>function</strong>来表示。</p>
+<p>我在了解这部分知识的时候也是觉得不可思意！实际上我早在2003年的时候就学习并使用JS了，那时候JS还很简单。虽然后来很久没有再碰过它，但印象中<strong>function</strong>一直是用来定义一个函数的，现在怎么又用来定义<strong>类</strong>了呢？</p>
+<p>后来看了一些资料才逐渐理清，原来现在的JS中<code>function</code>既可以用来定义函数，也可以用来定义类。有点类似于语文中的<strong>一语双关</strong>。</p>
+<p>之所以<code>function</code>有双层含义，是因为JS最开始并不支持面向对象开发模式。但随着技术的发展，面向对象的开发模式越来越受到人们的欢迎，JS为了能跟上时代，所以也必须支持面向对象开发。</p>
+<p>不过JS在转向面向对象语方时面临一种选择，即从原生语言上支持<code>class</code>，那JS解析器就要做大的调整，这可不是一时半会儿可以完成的。而如果在原有的基础上修改则要容易的多。</p>
+<p>权衡利弊之后，JS<code>大神</code>们还是决定在现有的基础上修改是最省时少力的。于是就借用了<code>function</code>的函数，把它看作是一个<strong>构造函数</strong>，这样就可以快速的将JS改造成面向对象的开发语言了。</p>
+<p>以上就是JS中使用<code>function</code>定义类的大致由头！下面我们就来看看在ES5上该如何定义一个<strong>类</strong>。</p>
+<h2 id="类及成员"><a href="#类及成员" class="headerlink" title="类及成员"></a>类及成员</h2><p>在JS中如何定义一个类呢？实际上它与其它面向对象语言(如Java)是很类似的，只不过在Java中定义类用的是<code>class</code>关键字，而在JS中用<code>function</code>代替而以。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function classname() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Java 中，类的成员按安全性可以分为<strong>公有</strong>和<strong>私有</strong>，JS中是否也有类似的概念呢？答案是肯定的，接下来我们就来看一下在JS类中如何定义公有成员和私有成员吧。</p>
+<p>JS中公有成员和私有成员的定义都是隐式的，不像Java有显确的<code>public</code>和<code>private</code>关键字来指明它们的权限。在JS类中直接定义的函数或变量都是私有成员，在类成员或函数前面加<code>this</code>关键字的，则表式是公有成员。</p>
+<p>我们来看个例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function myclass ()&#123;</span><br><span class="line"></span><br><span class="line">    function test()&#123;</span><br><span class="line">        console.log(&quot;testA function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj &#x3D; new myclass();</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
+<p>如果我们在浏览器执行上面的代码，在控制台你一定可以看到这样一条错误信息<code>Uncaught TypeError: obj.testfunc is not a function</code>，这说明通过<code>obj</code>对像是无法访问到<code>test()</code>函数的。</p>
+<p>我们稍微调整一下这代段代，修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function myclass ()&#123;</span><br><span class="line"></span><br><span class="line">    this.test &#x3D; test() &#123; &#x2F;&#x2F;这里加了this 关键字</span><br><span class="line">        console.log(&quot;testA function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj &#x3D; new myclass();</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
+<p>我们在<code>test</code>函数前加上<code>this.</code>，只做这一点点修改，这段代码就可以在浏览器上成功运行了。</p>
+<p>由此我们可以知道，如果你想让外面访问对象中的成员（成员变量或成员方法），你就应该在这些成员前面加上<code>this</code>关键字。反过来讲，如果你不想让外面访问到对象中的成员，则不要在这些成员前面加<code>this</code>。</p>
+<h2 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h2><p>在Java中除了有对象成员外，还可以有类成员，比如在使用单例模式时，我们都会定义一个静态的成员。在JS中如何做到这点呢？我们来看个具体例子吧。还是刚才那个代码，我们在其基础上稍做修改即可。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;定义类方法</span><br><span class="line">myclass.init &#x3D; function()&#123; </span><br><span class="line">    console.log(&quot;class method!&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function myclass ()&#123;</span><br><span class="line"></span><br><span class="line">    this.test &#x3D; test() &#123; &#x2F;&#x2F;这里加了this 关键字</span><br><span class="line">        console.log(&quot;testA function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;调用类方法</span><br><span class="line">myclass.init();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;创建对象</span><br><span class="line">var obj &#x3D; new myclass();</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
+
+<p>在这段代码中，加入了类方法的定义及调用类方法的代码。从上述代码中我们可以知道，在JS中类方法是在类之外定义的，而不像Java在是类内加<code>static</code>关键字。</p>
+<h2 id="类的原型prototype"><a href="#类的原型prototype" class="headerlink" title="类的原型prototype"></a>类的原型prototype</h2><p>在JS中，每个类都有一个类属生prototype，用来指向类原型。或者你可以把它理解为指向<strong>类原型的地址</strong>。当我们想为这个类添加方法或成员变量的时候，就可以通过prototype来实现，只需修改prototype指向的内存地址的内容就可以达到添加成员的目的。</p>
+<p>举个例子，假设我们定义了一个类如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function myjs()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目前在这个类中没有写任何方法或成员变量，只是定义了一个空类。下面我想修改这个类，给这个类增加一些内容，该怎么做呢？实现的方法很简单，修改prototype即可，看下面的例子你就明白了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function myjs()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myjs.prototype.a  &#x3D; 5;</span><br><span class="line">myjs.prototype.test &#x3D; function() &#123;</span><br><span class="line">    console.log(&quot;this is a function of myjs object!&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj &#x3D; new myjs();</span><br><span class="line">console.log(&quot;myjs.a &#x3D;&#x3D; &quot; + obj.a );</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的代码，我们就给<code>myjs</code>类增加了两个成员，即一个变量<code>a</code>和一个方法<code>test</code>。当我们生成myjs对象时，生成的对象中就有我们之前添加的成员变量和成员方法了。</p>
+<h2 id="类的继承"><a href="#类的继承" class="headerlink" title="类的继承"></a>类的继承</h2><p>JS中没有专门用于类继承的语法，不过你可以通过上一节介绍的prototype来实现<code>类继承</code>。在我们正式讲解继承之前，我们先了解一下prototype在内存中是如何表示的。如下图所示：<br><img data-src="https://cdn.avdancedu.com/image/article/js/prototype.jpg" alt="prototype"></p>
+<p>通过上图我们可以看到，使用<code>function</code>定义的类并非真实的<code>类</code>，更准确的说它应该是一个<code>构造函数</code>。而类属性<code>prototype</code>指向的才是类的真正地址。</p>
+<p>可能很多同学会问JS是如何通过构造函数找到它所在的类的呢？其实这是C语言的一个小巧，其过程是JS调用浏览器，通过浏览器使用C语言中的<code>技巧</code>获取构造函数所在类的地址，这对于浏览器来当然是小菜一碟。</p>
+<p>了解了<code>prototype</code>的物理意义后，接下来我们看看类生成的对象在内存中的情况，它与prototype之间的关系又是怎样的？如下图所示。<br><img data-src="https://cdn.avdancedu.com/image/article/js/js_obj.jpg" alt="对象在内存中"></p>
+<p>通过上图我们可以看到，JS在创建对象时会为每个对象分配内存空间。更为重要的一点是，多个相同类型的<code>对象</code>会指向同一个prototype。</p>
+<p>了解了上面的特性后，我们就可以利用<code>prototype</code>来实现类的继承了。如何来做呢？我们再来举个例子。</p>
+<p>首先，我们定义一个基类，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function parent() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;给基类添加一个新的属性 a</span><br><span class="line">parent.prototype.a &#x3D; 1;</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们创建一个子类，并让子类的prototype指向父类，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function child() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">child.prototype &#x3D; new parent();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;再给子类添加一个属性 b</span><br><span class="line">child.prototype.b &#x3D; 2;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;创建子类</span><br><span class="line">var obj_child &#x3D; new child();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;访问子类的属性</span><br><span class="line">console.log(&quot;a &#x3D; &quot; + obj_child.a);</span><br><span class="line">console.log(&quot;b &#x3D; &quot; + obj_child.b);</span><br></pre></td></tr></table></figure>
+
+<p>执行上面的例子，我们通过浏览器的<code>debugger</code>就可以看到如下结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a &#x3D; 1</span><br><span class="line">b &#x3D; 2</span><br></pre></td></tr></table></figure>
+
+<p>说明child子类确实是继承了parent类。我们再深扒一下，对于上面这段代码表示的继承关系在内存中的物理意义是什么呢？如下图所示：</p>
+<p><img data-src="https://cdn.avdancedu.com/image/article/js/js_extend.jpg" alt="js继承"></p>
+<p>在JS中，正常情况下每生成一个对象，该对象的 <code>__proto__</code> 都指向该对象的<strong>原始类的地址</strong>。如上图所示parent对象的<code>__proto__</code>指向parent.prototype，child对象的<code>__proto__</code>指向child.prototype。</p>
+<p>为什么会这样呢？要理解其中的奥秘，我们必须要知道JS中 <code>new xxx</code> 做了哪些事儿。实际上，<code>new xxx</code> 做了四件事儿，我们以上图中的<code>new parent()</code>为例，它做的四件事儿如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; &#123;&#125;;</span><br><span class="line">obj.__proto__ &#x3D; parent.prototype; &#x2F;&#x2F;即parent</span><br><span class="line">parent.call(obj);                 &#x2F;&#x2F;调用parent的构造函数</span><br><span class="line">return obj;</span><br></pre></td></tr></table></figure>
+
+<p>在这步中，第二步是最关键的，它表明了新对象的<code>__proto__</code>指向了哪里。这样我们就可以理解 <strong>“对象的 <code>__proto__</code> 都指向该对象的原始类的地址”</strong> 这句话了。</p>
+<p>当我们理解了 <code>new xxx</code> 的真实含义之后，<code>child.prototype = new parent()</code> 这句代码的含义立马就清楚了，它的含义是改变 <code>child.prototype</code> 的指向， 让他重新指向<code>parent</code>对象。</p>
+<p>由于生成parent对象时，它的<code>__proto__</code>指向了parent的<strong>原始类</strong>，因此child.prototype就与parent的prototype建立了连接。</p>
+<p>在接下来创建<code>obj_child</code>对象时，由于child.prototype已经指向了parent对象，因此<code>obj_child.__proto__</code>也就指向了parent对象。此时通过 old_child 就可以访问到parent对象的内容了，从而也就达到了继承的目的。</p>
+<h2 id="ES6-中的类"><a href="#ES6-中的类" class="headerlink" title="ES6 中的类"></a>ES6 中的类</h2><p>大家对于在JS中使用<code>function</code>方式定义类实在感到很厌烦，就不能与其它语言一样可以使用<code>class</code>来定义类吗？在ES6时代，JS终于可以做到这一点了。</p>
+<p>现在我们来看看在JS中该如何定义类吧，例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html" target="_blank" rel="noopener">阮一峰</a></p>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+      <tags>
+        <tag>js class typescript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mediasoup 课程常见问题</title>
+    <url>/5a9f427c/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/mediasoup_ask/mediasoup_banner.jpg" alt="mediasoup"><br>《WebRTC流媒体服器》课程推出已经有一段时间了，受到很多同学们的好评，是慕课网为数不多的10分好课。这门课是专门讲解与WebRTC互通的流媒体服务器的高端课，课程从如何开发服务器程序讲起，逐步向你介绍如何构建出一个可商用的、高并发的、性能优越的流媒体服务器。</p>
+<p>该服务器可以与Chrome等浏览器对接，实现多人音视频会议系统或实时互动在线教育系统。毫不夸张的说，只要你能撑握课程中的 85% 的内容，去应聘流媒体服务器的研发岗时，你就不用再担心技术问题了。</p>
+<a id="more"></a>
+
+<p>在课程的评论区有很多评论，有兴趣的同学也可以参考一下</p>
+<p><img data-src="https://cdn.avdancedu.com/image/article/mediasoup_ask/ping.jpg" alt="课程评论"></p>
+<p>同学们在学习课程内容的时候也经常问一些问题，这里我总结了一些大家常见的问题以及问题答案希望对你能有所帮助。</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="Q-有mediasoup、janus、licode等流媒体服务器的比较吗？"><a href="#Q-有mediasoup、janus、licode等流媒体服务器的比较吗？" class="headerlink" title="Q: 有mediasoup、janus、licode等流媒体服务器的比较吗？"></a>Q: 有mediasoup、janus、licode等流媒体服务器的比较吗？</h3><p>A: <a href="https://www.avdancedu.com/947c722a/" target="_blank" rel="noopener">可以看我这篇文章</a></p>
+<h3 id="Q-有各流媒体服务器之间的性能比较吗？"><a href="#Q-有各流媒体服务器之间的性能比较吗？" class="headerlink" title="Q: 有各流媒体服务器之间的性能比较吗？"></a>Q: 有各流媒体服务器之间的性能比较吗？</h3><p>A: <a href="https://webrtchacks.com/sfu-load-testing/" target="_blank" rel="noopener">可以看这篇文章</a></p>
+<h3 id="Q-单台mediasoup流媒体服务器能承载多少人？"><a href="#Q-单台mediasoup流媒体服务器能承载多少人？" class="headerlink" title="Q: 单台mediasoup流媒体服务器能承载多少人？"></a>Q: 单台mediasoup流媒体服务器能承载多少人？</h3><p>A: 官方答案为 500 人。</p>
+<h3 id="Q-布署流媒体服务器是需要怎样的配置"><a href="#Q-布署流媒体服务器是需要怎样的配置" class="headerlink" title="Q: 布署流媒体服务器是需要怎样的配置?"></a>Q: 布署流媒体服务器是需要怎样的配置?</h3><p>A: <a href="https://github.com/havfo/multiparty-meeting/wiki/Scaling-and-recommended-Hardware" target="_blank" rel="noopener">这里有一份说明</a></p>
+<h3 id="Q-mediasoup安装时报错是什么原因？"><a href="#Q-mediasoup安装时报错是什么原因？" class="headerlink" title="Q: mediasoup安装时报错是什么原因？"></a>Q: mediasoup安装时报错是什么原因？</h3><p>A: 建议使用Ubuntu18.04 安装mediasoup。</p>
+<h3 id="Q-在Ubuntu18-04上安装也报错"><a href="#Q-在Ubuntu18-04上安装也报错" class="headerlink" title="Q: 在Ubuntu18.04上安装也报错"></a>Q: 在Ubuntu18.04上安装也报错</h3><p>A: node 版本在 10 以上，npm 版本在 6.4 版本以上。</p>
+<h3 id="Q-mediasoup安装好后看不对远端视频"><a href="#Q-mediasoup安装好后看不对远端视频" class="headerlink" title="Q: mediasoup安装好后看不对远端视频"></a>Q: mediasoup安装好后看不对远端视频</h3><p>A: 配置文件是否配置对了？检查一下IP地址不要写成127.0.0.1</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">WebRTC高并发流媒体服务器mediasoup</a></p>
+]]></content>
+      <categories>
+        <category>WebRTC</category>
+      </categories>
+      <tags>
+        <tag>WebRTC mediasoup 流媒体服务器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多人实时互动之各WebRTC流媒体服务器比较</title>
+    <url>/947c722a/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/sfu/conference.jpg" alt="SUF"><br>随着网络基础设施的提高，音视频实时通信越来越成为人们日常生活和工作中必不可少的需求。2011年 WebRTC的出现，则更加速了这种需求变为现实的可能性。</p>
+<p>熟悉 WebRTC 的同学应该都知道，WebRTC规范只定义了实时通信中客户端的行为，而没有规范服务端（包括哪些信令、数据如何流转）的行为。所以，你可以使用WebRTC库方便的实现 1:1 实时通信，但对于多人实时互动，光依靠 WebRTC库显然就无法完成要求了。</p>
+<p>那我们该如何实现多人实时互动通信呢？</p>
+<a id="more"></a>
+
+<h2 id="WebRTC-流媒体服务器"><a href="#WebRTC-流媒体服务器" class="headerlink" title="WebRTC 流媒体服务器"></a>WebRTC 流媒体服务器</h2><p>要想实现多人的实时互动，如音视频会议、在线教育这类产品，我们必须使用 WebRTC + WebRTC流媒体服务器这种方案。</p>
+<p>目前有很多比较有名的开源流媒体服务器，如 Janus、Medooze、Mediasoup、Licode(OWT)、Jitsi等等。这些流媒体服务器各有优缺点，下面我就对这几种流媒体服务器作下简要的介绍与比较。</p>
+<p>通过本文，你将知道各 WebRTC 流媒体服务器的优缺点，并依俱它们的优缺点选择出更适合你的那款WebRTC流媒体服务器。</p>
+<h3 id="Mediasoup"><a href="#Mediasoup" class="headerlink" title="Mediasoup"></a>Mediasoup</h3><p><img data-src="https://upload-images.jianshu.io/upload_images/5956443-9b6b83a933943c4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Mediasoup 整体结构"></p>
+<p>上图是Mediasoup整体架构图，通过该图我们可以知道 Mediasoup 流媒体服务器是由 Nodejs 和 Mediasoup(C++) 两部分组成。</p>
+<ul>
+<li>Nodejs，负责 Mediasoup 的信令接收与业务管理。如创建/消毁房间，创建/关闭生产者，创建/关闭消费者等。</li>
+<li>Mediasoup(C++)，这是一个单独的程序，但该程序无法直接启动。因为它在内部会判断是否是 Nodejs 将它启动起来了。只有在Nodejs 的 Mediasoup 管理模块加载之后，再将 Mediasoup(C++)启动起来，这样它才能正常工作。</li>
+</ul>
+<p>在众多的 WebRTC 流媒体服务器中，Mediasoup 可以说是性能最优秀的WebRTC流媒体服务器。它使用 C++ 作为开发语言，底层使用 libuv 处理 I/O 事件。</p>
+<p>有很多人对 Nodejs 比较诟病，认为 Nodejs 提拱不了高性能的流媒体服务器。实际上，如果按照传输的 Nodejs 应用开发出的流媒体服务器肯定是不能胜任这项工作的。但对于 Mediasoup 来讲，它只不过使用 Nodejs 做 信令处理 及 业务的管理 工作，所以它的负担并不重。对性能要求高的是媒体数据流的转发工作，而这部分工作是由 Mediasoup(C++)部分实现的。Nodejs 与 Mediasoup之间通过管道进行通信。</p>
+<p>严格意义上来说，Mediasoup是单进程的。但你不要以为这就影响了它的性能。实际上，它是使用单进程的方式将服务器上CPU某个 <code>核</code> 充分利用好，然后在业务层控制进程的个数。比如说你的服务器是个 8 核的CPU，那么在业务层你就该启动 8 个Mediasoup进程。通过这种方式来达到对 CPU 的充分利用。</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/5956443-87db0faac9090ef2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mediasoup结构图"></p>
+<p>Mediasoup中的每个进程称为一个 Worker, 你也可以把它理解为一个<code>节点</code>，在每个 Worker 中可以有多个 Router。对于 Router，你站在不同的解度可以有不同的理解。如果你占在应用层的角度，你可以把它理解为一个房间；如果你站在数据流转的角度，可以把它理解为一个路由器，数据通过 <code>路由器</code> 转发给目标用户。</p>
+<p>想了解更多Mediasoup的细节，可以观看我的视频课 <a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级高并发WebRTC流媒体服务器设计与开发》</a>，在这个视频中我对 Mediasoup 源码做了深入剖析。</p>
+<h3 id="Janus"><a href="#Janus" class="headerlink" title="Janus"></a>Janus</h3><p><img data-src="https://upload-images.jianshu.io/upload_images/5956443-b41cf420aaf37138.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Janus架构"></p>
+<p>上面这张图是 Janus 的整体架构图。在这张图中我们可以看到， 从大的方面说 Janus 由 Janus CORE、Janus Plugin 以及信令接口三部分组成。</p>
+<ul>
+<li>信令接口，Janus 支持的信令协议比较多，如 HTTP、WebSocket、RabbitMQ 等。这些信令协议使得 Janus 具有非常好的接入性。因为很多公司喜欢各种不同的协议，如有的喜欢 websocket，有的喜欢http，proto等。因此 Janus 在信令接入方面具有很大的优势。</li>
+<li>Janus Plugin，Janus 的业务管理是按照 Plugin 的方式管理的，因此你可以在Janus中根据自己的需要实现自己的业务插件。实际上，对于一般性的需求 Janus 已经相关的插件。如：<ul>
+<li>VideoRoom，用于多人音视频互动，像音视频会议，在线教育都可以通过该插件来实现。</li>
+<li>VideoCall，用于 1:1 的音视频通信。</li>
+<li>SIP，用于与传统电话设备对接。</li>
+<li>Streaming，用于广播，也就是我们通常所说的一人共享，多人观看的直播模式。</li>
+<li>TextRoom，它是一个聊天室，通过它可以进行文本聊天。</li>
+<li>RecordPlay，用于录制和回放。</li>
+</ul>
+</li>
+<li>Janus Core 是Janus的核心，其作用是处理流的转发，各种协议的接入。以浏览器为例，要想让浏览器接入到 WebRTC 流媒体服务器上，那流媒体服务器必须要支持 STUN、DTLS、SRTP、ICE 等协议。而 Janus Core 就是专门做这事儿的。</li>
+</ul>
+<p>Janus 是由 C语言开发的，因此它的性能非常优秀。要说不足的话，janus 底层没有使用 epoll 这类异步I/O事件处理机制，这应该说是它的一大缺陷；另外，Janus还使用 glib 库，由于 glib 库对于国内的很多开发同学来说用的比较少，所以会有一定的学习成本。</p>
+<p>整体上看，Janus采用了插件的架构设计方案。这种方案非常适合于有多种业务模型或业务经常发生变化的公司或项目。另外 Janus 支持多种消息传输协议，这对于开发人员来说具有极大的吸引力。</p>
+<h2 id="Medooze"><a href="#Medooze" class="headerlink" title="Medooze"></a>Medooze</h2><p><img data-src="https://upload-images.jianshu.io/upload_images/5956443-a13ae708ccc4a4b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Medooze 架构.png"></p>
+<p>Medooze 的整体架构与 Mediasoup 类似，不过它的信令处理、业务管理以及媒体数据的转发功能都是放在 Nodejs下进行统一管理的。实际上，这样的管理方式也不会对性能造成什么影响，因为重的媒体流的转发工作仍然是使用的 C++ 在 Nodejs 底层实现的。</p>
+<p>Medooze 的业务功能要比 Mediasoup 强大，像服务端录制、推流这些 Mediasoup 没有的功能它都支持。但它性能没有 Mediasoup 做的极致，在Medooze的底层使用的poll来处理I/O事件，poll与epoll性能相差距大。除此之外，Medooze的业务逻辑也没有Mediasoup简洁；另外与 Janus 相比，它的业务管理不如 Janus 灵活，Janus 的插件管理方式显然要优于 Medooze 和 mediasoup。</p>
+<p>但总的来说，Medooze还是一款非常不错的 WebRTC 流媒体服务器。虽然有一些小的暇疵，但还是非常不错的一款流媒体服务器。</p>
+<p>想了解更多 Medooze 细节的同学可以看我的专栏 <a href="https://time.geekbang.org/column/article/136000" target="_blank" rel="noopener">《从0打造音视频直播系统》</a>。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>通过上面的描述，我想你应该对目前主流的 WebRTC 流媒体服务器有了一个大体的了解。所以在选型上你可以按照自己团队的能力进行评估到底该用那个流媒体服务器。</p>
+<p>如果你团队能力比较强，可以做底层开发，那么建议你使用 Mediasoup。因为 Mediasoup 不关心应用层，它关注的是底层数据如何高效的流转，代码简洁、高效，性能极佳。</p>
+<p>如果你们要做的业务种类比较多，变化比较快，那建议你选择使用 Janus 作为流媒体服务器。将你的业务做成一个插件放到 Janus上很快就能实现你们的业务需求。</p>
+<p>如果你们的业务变化不大，除了追求性能外，还需要录制、推流之类的功能，那么你可以选择使用Medooze，它可以很好的满足你们的需求。</p>
+<p>当然，除了上面我介绍到的几款比较流行的 WebRTC 流媒体服务器外，还有一些其它的流媒体服务器，如 Licode、OWT、Jitsi等也可以选择。</p>
+<p>Licode 之所以名气比较大，是因为它推出的时间比较早。而 OWT 是 Licode 的一个变种，它在 Licode上实现了 SFU 功能。看一下 Licode 代码你就会发现，Licode 实现了一套完整的音视频会议系统，对于这样一套系统它的实现非常复杂。如果你的团队没有音视频方面的开发人才的话，可以考虑Licode，将它搭建出来之后就可以直接使用了。但如果你有业务变化想修改它就太麻烦了。</p>
+<p>Jitsi 上层是使用 Java 语言开发的，但底层也是使用的 C/C++ 语言。它通过 JNI 来实现Java与 C/C++之间的通信。在 2018 年有机构做过一次性能评测，当时 Jitsi 表现比较差强人意，不知现在是否已经有了改进。</p>
+<p>以上就是对几款 WebRTC流媒体服务器的比较，希望本文可以帮助你解决WebRTC流媒体服务器的选择问题。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级高并发WebRTC流媒体服务器设计与开发》</a></li>
+<li><a href="https://time.geekbang.org/column/article/136000" target="_blank" rel="noopener">《从0打造音视频直播系统》</a></li>
+<li><a href="https://www.jianshu.com/p/159ab573c38d" target="_blank" rel="noopener">音视频会议系统 Janus 的布署与安装</a></li>
+<li><a href="https://www.jianshu.com/p/98674c32aef8" target="_blank" rel="noopener">Janus的线程模型</a></li>
+<li><a href="https://www.jianshu.com/p/7867916c52e3" target="_blank" rel="noopener">理解Janus中的Plugin</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>WebRTC 音视频 流媒体服务器</category>
+      </categories>
+      <tags>
+        <tag>WebRTC mediasoup janus medooze licode owt 音视频 流媒体服务器</tag>
       </tags>
   </entry>
 </search>
