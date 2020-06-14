@@ -236,6 +236,62 @@
       </tags>
   </entry>
   <entry>
+    <title>TypeScript入门</title>
+    <url>/48922786/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/typescript/typescript.jpg" alt="TypeScript"><br>我们要学习一门新知识，首先要了解一些新知识的历史。<code>TypeScript</code> 是微软开发的，它的出现是为了解决 <code>JavaScript</code> 没有类型检查的弊端。因此，<code>TypeScript</code>并不是一门新语言，它的作用就是帮<code>JavaScript</code>检查数据类型是否正确，所以称它为<code>JavaScript</code>的一个<code>超集</code>是更贴切的。</p>
+<p>有很多同学对 <code>TypeScript</code> 产生疑惑，他们会问 <code>TypeScript</code> 可以在浏览器上运行吗？</p>
+<a id="more"></a>
+<p>虽然<code>TypeScript</code>是<code>JavaScript</code>的一个<code>超集</code>，但由于它要进行类型检查，所以就与 JavaScript 的语法有一些不同了，因此 TypeScript 编写的程序是无法直接运行在浏览器上的。</p>
+<h2 id="TypeScript-工作原理"><a href="#TypeScript-工作原理" class="headerlink" title="TypeScript 工作原理"></a>TypeScript 工作原理</h2><p>在讲解 <code>TypeScript</code> 工作原理之前，有一句话是你必须清楚且要印在脑子里的: <strong>在浏览器上，只能运行 JavaScript 脚本</strong>。</p>
+<p>既然浏览器里只能运行<code>JavaScript</code>，那<code>TypeScript</code>具体又做了什么事儿呢？下面我就向你解释一下<code>TypeScript</code>都做了哪些事儿。</p>
+<p>学习过编译原理的同学都清楚，<strong>类型检查</strong>就是<strong>语法分析</strong>，它属于编译器的范筹。TypeScript官网说: <strong>“TypeScrpt是JavaScript的超集，可以进行JavaScript类型检查。”</strong> 表明<code>TypeScript</code>为<code>JavaScript</code>增加了<strong>类型语法</strong>，并且它还有一个<strong>编译器</strong>，可以将用<code>TypeScript</code>语法编写的程序（.ts文件)，<strong>翻译成</strong> <code>JavaScript</code> 脚本语言。</p>
+<p>因此，<code>TypeScript</code>的使用步骤一定是这样的: 首先用 <code>TypeScript</code> 语法编写程序；然后<strong>编译</strong>，输出<code>JavaScript</code>脚本；最终在浏览器中引用生成的 JavaScript 脚本这样一个过程。</p>
+<p>实际情况也确实如此，在TypeScript的官网上你可以找到，TypeScript 有一个编译工具称为 <code>tsc</code>，即 <code>t</code>(ype) <code>s</code>(cript) <code>c</code>(ompiler)的缩写 。</p>
+<h2 id="JavaScript的最大问题"><a href="#JavaScript的最大问题" class="headerlink" title="JavaScript的最大问题"></a>JavaScript的最大问题</h2><p>使用过其它面向对象语言的同学们再使用JavaScript开发时，都会觉得特别<code>难受</code>，因为JavaScript无法进行类型检查。对于Javascript语法来说，你传给它什么类型的数据都可以，这样虽然看似很<code>很好</code>，但一旦你将数据传错了，你得到的结果就是错误的。当错误出现时，没有任何的提示，光凭我们肉眼去查找错误实在是太费力了，这就是JavaScript的最大问题。</p>
+<p>我们来看一个最简单的JavaScript例子你应该就清楚了：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function func(msg)&#123;</span><br><span class="line">    console.log(&quot;the message is :&quot; + msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这段代码是一段最简单的JS代码，它需要一个字符串参数。但由于JavaScript并没有对参数的类型做限制，所以你在调用这个函数时，可以给他传任意的值。如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func(123);</span><br><span class="line">func(&#39;this is my book!&#39;);</span><br><span class="line">func(func);</span><br></pre></td></tr></table></figure>
+<p>我的本意是只有第二种调用<code>func</code>的方式才是正确的，但在JavaScript中上面这几种调用<code>func</code>函数的方法都是正确的。在我们实际工作中，我们写了很长的代码后，传入了一个错误的值时JavaScript就无法为我们检测出那里出错了，这是最可怕的。</p>
+<p>这也是为什么<code>TypeScript</code>逐渐受到大家喜欢的原因。</p>
+<h2 id="一个最简单的-TypeScript-程序"><a href="#一个最简单的-TypeScript-程序" class="headerlink" title="一个最简单的 TypeScript 程序"></a>一个最简单的 TypeScript 程序</h2><p>下面我们就来写一个最简单的 TypeScript程序，了解一下整个使用过程。咱们还是以 Helloworld 为例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function hello(person: string) &#123;</span><br><span class="line">  return &#39;Hello , &#39; + person;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let user&#x3D;&#39;xxx&#39;</span><br><span class="line">console.log(hello(user));</span><br></pre></td></tr></table></figure>
+<p>上面就是一个简单的 TypeScript脚本，有了这个脚本后我们需要先对其进行编译，编译执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tsc hello.ts</span><br></pre></td></tr></table></figure>
+<p>编译出 JavaScript 脚本后，通过 HTML5 引用一下就好了，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;user typescript&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;&#x2F;head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;.&#x2F;hellots.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
+<p>至此，一个 TypeScript的简单使用过程就完成了，还是蛮简单的对吧！</p>
+<h2 id="TS-调用JS"><a href="#TS-调用JS" class="headerlink" title="TS 调用JS"></a>TS 调用JS</h2><p>我们在使用TS开发时最常见的一个问题是如何通过 TS 调用 JS。产生该问题的根本原因是一些著名的 JS 库(如VUE）的TS版本还没有开发出来，但我们的项目中又必须使用他们，因此就产生了我前面所说的TS 库要调用 JS 库的情况。</p>
+<p>我们前面也讲了 TS 本来就是 JS 的一个<code>超集</code>，因此它是有办法调用JS库的。从原理上我们可以证明这一点，因为TS程序最终要经过编译生成JS脚本程序后才能被浏览器执行，因此只要在浏览器上引入它需要的 JS 库，经编译后的 TS 程序就可以与其它的JS库相互调用。</p>
+<p>按照上面的描述好像TS 调JS是很简单的事儿，那问题在哪儿呢？其实问题在于如果我们自己写的 TS 程序调用了其它第三方 JS 库，那么正常情况下 <code>tsc</code> 编译我们的 <code>ts</code> 程序时就会报错。所以实际的问题应该是，我们编写的TS程序在调用第三方JS库时，如何可以顺利编译通过呢？</p>
+<p>我们在网上可以找到以下几种方案，第一种是将引用到的 JS 库直接翻译成 TS 库。很多同学看到这句话会<code>嗤之以鼻</code>，这明显就是行不通的方案。不过这种方案虽然难度很大，但总归还是一种方案不是；第二种是让<code>tsc</code>编译器不进行类型检查，那也就失去了 <code>TS</code> 的意义，所以这种方法也不是好办法；第三种是为 JS 库增加声名函数，这种方式既可以让<code>tsc</code>在编译时顺利通过，又同时可以检查我们写的代码是否有问题。</p>
+<p>所以综上所述，第三种方案是最优的方案。</p>
+<p>接下来我就来重点讲解一下如何通过第三种方案实现<code>TS</code>调用第三方<code>JS库</code>。首先我们先来创建一个JS库<code>test.js</code>，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function showmsg(msg)&#123;</span><br><span class="line">    console.log(&quot;the msg is :&quot; + msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码非常简单，只实现了一个函数。该函数有一个参数<code>msg</code>，当该函数被调用时，输出传入的参数值。</p>
+<p>接下来我们来看一下在<code>TS</code>中如何调用JS中的方法。为了使 TS 可以调用JS的方法，我们需要写一个与<code>JS</code>文件名对应的<code>.d.ts</code>文件。对于我们上面的<code>test.js</code>则需要有一个<code>test.d.ts</code>与之对应。</p>
+<p>编写<code>.d.ts</code>文件也很简单，对于test.js来说，它的<code>.d.ts</code>文件内容如下:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">declare function showmsg( msg: string) : void;</span><br></pre></td></tr></table></figure>
+
+<p>只需要这样一句就可以了。实际上，它就是为test.js文件中的showmsg函数定个声名。然后我们在使用它的TS文件中引用这个<code>.d.ts</code>文件就好了。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x2F; &lt;reference path &#x3D; &quot;.&#x2F;test.d.ts&quot; &#x2F;&gt;</span><br><span class="line">function doSomeThing()&#123;</span><br><span class="line">    showmsg(&#39;ts&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">doSomeThing();</span><br></pre></td></tr></table></figure>
+
+<p>在TS文件中引用<code>.d.ts</code>文件的方法是，在文件的开头写上 <code>/// &lt;reference path=&quot;./test.d.ts&quot; /&gt;</code> 即可。这样当我们使用<code>tsc</code>去编译<code>.ts</code>文件时就不会报错了。</p>
+<p>当<code>tsc</code>编译好TS文件后，我们可以在HTML中引入生成的JS文件以及它所使用的JS库了。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt; test ts call js&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;&#x2F;head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;script src&#x3D;&quot;.&#x2F;test.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">        &lt;script src&#x3D;&quot;.&#x2F;my.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此时，在浏览器的<code>debugger</code>里就可以看到<code>the msg is :ts</code>这句话了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文我向你介绍了<code>TypeScript</code>的基本工作原理，从中我们可能知道TypeScript解决了JavaScript最大的问题，即类型检测。但TypeScript并不是一门新语言，它也不会代替JavaScript，它只是JavaScript的一个超集而以。</p>
+]]></content>
+      <categories>
+        <category>TypeScript, JavaScript</category>
+      </categories>
+      <tags>
+        <tag>TypeScript, TS, JS, JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>多人实时互动之各WebRTC流媒体服务器比较</title>
     <url>/947c722a/</url>
     <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/sfu/conference.jpg" alt="SUF"><br>随着网络基础设施的提高，音视频实时通信越来越成为人们日常生活和工作中必不可少的需求。2011年 WebRTC的出现，则更加速了这种需求变为现实的可能性。</p>
@@ -297,7 +353,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>WebRTC 音视频 流媒体服务器</category>
+        <category>WebRTC</category>
       </categories>
       <tags>
         <tag>WebRTC mediasoup janus medooze licode owt 音视频 流媒体服务器</tag>
