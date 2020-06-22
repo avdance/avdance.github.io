@@ -481,23 +481,21 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;videoroom&quot;：&quot;event&quot;，</span><br><span class="line">        &quot;started&quot;：&quot;ok&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>configure</code>请求可以对<code>订阅</code>做更多深入操作。该请求允许<code>订阅者</code>动态更改与媒体订阅有关的某些属性，<code>configure</code>请求的格式如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;request&quot;：&quot;configure&quot;，</span><br><span class="line">        &quot;audio&quot;：&lt;true | false，是否应该转发音频；可选&gt;</span><br><span class="line">        &quot;video&quot;：&lt;true | false，是否应该转发视频；可选&gt;</span><br><span class="line">        &quot;data&quot;：&lt;true | false，是否转发数据；可选&gt;</span><br><span class="line">        &quot;substream&quot;：&lt;启用simulcast情况下，要接收的子流（0-2）；可选&gt;</span><br><span class="line">        &quot;temporal&quot;：&lt;启用simulcast，要接收的时间层（0-2）；可选&gt;</span><br><span class="line">        &quot;fallback&quot;：&lt;多少时间（在我们这里，默认为250000）没有接收到数据包将使我们下降到下面的子流&gt;，</span><br><span class="line">        &quot;spatial_layer&quot;：&lt;启用VP9-SVC时要接收的空间层（0-2）；可选&gt;</span><br><span class="line">        &quot;temporal_layer&quot;：&lt;启用VP9-SVC时要接收的时间层（0-2）；可选&gt;</span><br><span class="line">        &quot;audio_level_average&quot;：&quot;&lt;如果提供，将覆盖此用户的房间audio_level_average；可选&gt;&quot;，</span><br><span class="line">        &quot;audio_active_packets&quot;：&quot;&lt;如果提供，将覆盖此用户的房间audio_active_packets；可选&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">正如你所看到的audio，video和data属性可以用作媒体级的暂停&#x2F;恢复功能，而pause与start只是简单地暂停&#x2F;恢复所有数据流。</span><br><span class="line"></span><br><span class="line">下面来说说&#96;switch&#96;，switch 请求格式如下：</span><br></pre></td></tr></table></figure>
-<p>{<br>        “request”：”switch”，<br>        “feed”：&lt;要切换到的新发布者的唯一ID；强制性&gt;，<br>        “audio”：&lt;true | false，取决于是否应该中继音频；可选&gt;<br>        “video”：&lt;true | false，取决于是否应该中继视频；可选&gt;<br>        “data”：&lt;true | false，取决于是否应该中继数据通道消息；可选&gt;<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">如果成功，您将退订之前的发布者，然后订阅新的发布者。确认切换成功的事件如下所示：</span><br></pre></td></tr></table></figure>
-<p>{<br>        “videoroom”：”event”，<br>        “switched”：”ok”，<br>        “room”：&lt;房间ID&gt;，<br>        “id”：&lt;新发布者的唯一ID&gt;<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">最后，要停止订阅并删除相关的PeerConnection，可以使用该leave请求。由于上下文是隐式的，因此不需要其他参数：</span><br></pre></td></tr></table></figure>
-<p>{<br>        “request”：”leave”<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">如果成功，该插件将尝试拆除PeerConnection，并发送回一个left事件：</span><br></pre></td></tr></table></figure>
-<p>{<br>        “videoroom”：”event”，<br>        “left”：”ok”，<br>}</p>
-<pre><code>
-## 小结
-`VideoRoom`插件是Janus的一个特别重要的插件，对于该插件的理解对于我们理解整个Janus有至关重要的意义。本文说细分析了`VideoRoom`插件中所有的信令，大体上我们可以将它们人成两在类，一类是房间管理信令，另一类是用户信令。
 
-这些信令设计的非常巧妙，对我们研发自己的SFU会议系统是一个很好的借鉴。
+<p>正如你所看到的audio，video和data属性可以用作媒体级的暂停/恢复功能，而pause与start只是简单地暂停/恢复所有数据流。</p>
+<p>下面来说说<code>switch</code>，switch 请求格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;request&quot;：&quot;switch&quot;，</span><br><span class="line">        &quot;feed&quot;：&lt;要切换到的新发布者的唯一ID；强制性&gt;，</span><br><span class="line">        &quot;audio&quot;：&lt;true | false，取决于是否应该中继音频；可选&gt;</span><br><span class="line">        &quot;video&quot;：&lt;true | false，取决于是否应该中继视频；可选&gt;</span><br><span class="line">        &quot;data&quot;：&lt;true | false，取决于是否应该中继数据通道消息；可选&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果成功，您将退订之前的发布者，然后订阅新的发布者。确认切换成功的事件如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;videoroom&quot;：&quot;event&quot;，</span><br><span class="line">        &quot;switched&quot;：&quot;ok&quot;，</span><br><span class="line">        &quot;room&quot;：&lt;房间ID&gt;，</span><br><span class="line">        &quot;id&quot;：&lt;新发布者的唯一ID&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，要停止订阅并删除相关的PeerConnection，可以使用该leave请求。由于上下文是隐式的，因此不需要其他参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;request&quot;：&quot;leave&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果成功，该插件将尝试拆除PeerConnection，并发送回一个left事件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;videoroom&quot;：&quot;event&quot;，</span><br><span class="line">        &quot;left&quot;：&quot;ok&quot;，</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-## 参考
-[多人实时互动之各WebRTC流媒体服务器比较](http://www.avdancedu.com/947c722a/)
-[janus前端核心库源码分析](http://www.avdancedu.com/d7281c13/)</code></pre>]]></content>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><code>VideoRoom</code>插件是Janus的一个特别重要的插件，对于该插件的理解对于我们理解整个Janus有至关重要的意义。本文说细分析了<code>VideoRoom</code>插件中所有的信令，大体上我们可以将它们人成两在类，一类是房间管理信令，另一类是用户信令。</p>
+<p>这些信令设计的非常巧妙，对我们研发自己的SFU会议系统是一个很好的借鉴。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.avdancedu.com/947c722a/" target="_blank" rel="noopener">多人实时互动之各WebRTC流媒体服务器比较</a><br><a href="http://www.avdancedu.com/d7281c13/" target="_blank" rel="noopener">janus前端核心库源码分析</a></p>
+]]></content>
       <categories>
         <category>WebRTC</category>
       </categories>
