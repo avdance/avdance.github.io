@@ -315,10 +315,13 @@
   <entry>
     <title>janus的videoroom插件</title>
     <url>/bb906872/</url>
-    <content><![CDATA[<h2 id="VideoRoom插件"><a href="#VideoRoom插件" class="headerlink" title="VideoRoom插件"></a>VideoRoom插件</h2><p><code>VideoRoom</code>是Janus的一个插件，实现了一个SFU（Selective Forwarding Unit）型的音视频会议。如果你从数据转发的角度看，也可以把它认为是一个音视频<code>路由器</code>。</p>
-<p><code>VideoRoom</code>实现的音视频会议是基于<code>发布/订阅</code>模式。每个<code>参与方</code>都可以发布自己的实时音视频流，因此它可以实现几种不同的场景，比如泛娱乐化直播或多人的实时互动产品(如音视频会议、在线教育小班课等）。</p>
+    <content><![CDATA[<p><img data-src="http://cdn.avdancedu.com/image/article/videoroom/videoroom.jpg" alt="videoroom"></p>
+<p>在Janus的众多插件中，大家最感兴趣的恐怕就是<code>VideoRoom</code>插件了。因为它实现的是一个音视频会议的场景，这正是大多数同学所需要的。而且在Janus众多的插件中<code>VideoRoom</code>应该也是最复杂的一个，如果你们撑握了它，再去看其它插件的实现就容易多了。</p>
+<p>在<code>VideoRoom</code>中，包括了很多API，这些API是我们打开<code>VideoRoom</code>的一把钥匙，所以本文的重点就是讲解这些API。我相信当你把这些API都撑握之后，再去看<code>VideoRoom</code>插件的代码时就会更加游刃有余了。</p>
 <a id="more"></a>
 
+<h2 id="VideoRoom插件"><a href="#VideoRoom插件" class="headerlink" title="VideoRoom插件"></a>VideoRoom插件</h2><p><code>VideoRoom</code>是Janus的一个插件，实现了一个SFU（Selective Forwarding Unit）型的音视频会议。如果你从数据转发的角度看，也可以把它认为是一个音视频<code>路由器</code>。</p>
+<p><code>VideoRoom</code>实现的音视频会议是基于<code>发布/订阅</code>模式。每个<code>参与方</code>都可以发布自己的实时音视频流，因此它可以实现几种不同的场景，比如泛娱乐化直播或多人的实时互动产品(如音视频会议、在线教育小班课等）。</p>
 <p>考虑到此插件允许一个<code>参与方</code>可以打开多个WebRTC <code>PeerConnection</code>（如每个<code>参与方</code>可以有1个用于推流的<code>PeerConnection</code>和N个拉流的<code>PeerConnection</code>），所以每个<code>参与方</code>需要为订阅不同的流<code>attach</code>到<code>VideoRoom</code>插件几次(每<code>attach</code>一次就会生成一个<code>Handle</code>，每个<code>Handle</code>就是一个上下文)。</p>
 <p>因此，对于每个<code>参与方</code>至少要有一个<code>Handle</code>用于管理与插件的关系（如加入一个房间，离开一个房间，静音/取消静音，发布，接收事件）。</p>
 <p>每当<code>参与方</code>需要订阅另一个参与方发布的音视频流时，它需要创建一个新的<code>Handle</code>。新创建的<code>Handle</code>在逻辑上属于<strong>“从”</strong><code>Handle</code>，它不能像<strong>“主”</strong><code>Handle</code>一样可以做取消房间静音这样的操作。因此，<strong>从</strong><code>Handle</code>唯一目的是提供一个上下文，在该上下文中创建一个<code>recvonly</code>类型的<code>PeerConnection</code>来订阅发布者的音视频流。</p>
