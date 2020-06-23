@@ -313,6 +313,17 @@
       </tags>
   </entry>
   <entry>
+    <title>音视频学习路线图</title>
+    <url>/12dc77f9/</url>
+    <content><![CDATA[<h2 id="音视频学习路径图"><a href="#音视频学习路径图" class="headerlink" title="音视频学习路径图"></a><a href="https://coding.imooc.com/learningpath/route?pathId=39" target="_blank" rel="noopener">音视频学习路径图</a></h2><h2 id="音视频系统入门"><a href="#音视频系统入门" class="headerlink" title="音视频系统入门"></a><a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">音视频系统入门</a></h2><h2 id="ffmmpeg精讲"><a href="#ffmmpeg精讲" class="headerlink" title="ffmmpeg精讲"></a><a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">ffmmpeg精讲</a></h2><h2 id="WebRTC入门与实战"><a href="#WebRTC入门与实战" class="headerlink" title="WebRTC入门与实战"></a><a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">WebRTC入门与实战</a></h2><h2 id="WebRTC流媒体服务器"><a href="#WebRTC流媒体服务器" class="headerlink" title="WebRTC流媒体服务器"></a><a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">WebRTC流媒体服务器</a></h2><h2 id="从0开始打造音视频直播系统"><a href="#从0开始打造音视频直播系统" class="headerlink" title="从0开始打造音视频直播系统"></a><a href="https://time.geekbang.org/column/article/107916" target="_blank" rel="noopener">从0开始打造音视频直播系统</a></h2>]]></content>
+      <categories>
+        <category>音视频</category>
+      </categories>
+      <tags>
+        <tag>音视频</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>janus的videoroom插件</title>
     <url>/bb906872/</url>
     <content><![CDATA[<p><img data-src="http://cdn.avdancedu.com/image/article/videoroom/videoroom.jpg" alt="videoroom"></p>
