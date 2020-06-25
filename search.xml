@@ -337,6 +337,81 @@
       </tags>
   </entry>
   <entry>
+    <title>janus.js的使用</title>
+    <url>/5ae5ee2f/</url>
+    <content><![CDATA[<p>之前我们已经分析了<code>janus.js</code>文件，具体我们该如何使用它呢？janus中的<code>videoroomtest.js</code>是一个不错的例子，今天就来分析一下在<code>videoroomtest.js</code>中是如何使用<code>janus.js</code>的。</p>
+<h2 id="janus的初始化"><a href="#janus的初始化" class="headerlink" title="janus的初始化"></a>janus的初始化</h2><p>在我们使用<code>janus.js</code>之前，第一步是调用<code>Janus</code>的类方法<code>init</code>，该方法的原型如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Janus.init &#x3D; function(options)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们来看看<code>videoroomtest.js</code>中是如何调用<code>Janus.init</code>方法的。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Janus.init(</span><br><span class="line">            &#123;</span><br><span class="line">                debug: &quot;all&quot;,</span><br><span class="line">                callback: function()&#123;...&#125;</span><br><span class="line">            &#125;</span><br><span class="line">          );</span><br></pre></td></tr></table></figure>
+
+<p>通过简化代码，我们可以看出在<code>videoroomtest.js</code>中传给<code>Janus.init</code>方法的参数是一个<code>JSON</code>格式的对象，该对象中包括两个属性：<code>debug</code> 和 <code>callback</code>。</p>
+<p><code>janus</code>中的<code>init</code>方法做了什么工作呢？咱们把<code>Janus.init</code>方法中的主逻辑抽取出来就很容易理解它做了哪些事儿了。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">if(Janus.initDone) &#123;</span><br><span class="line">    options.callback();</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    ...</span><br><span class="line">    Janus.initDone &#x3D; true;</span><br><span class="line">    options.callback();</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的代码我们可以知道，正常情况下用户第一次使用janus时都会走<code>else</code>分支，在<code>else</code>分支中，它首先将初始化状态变为<code>true</code>表示已经初始化成功了；然后调用传入参数的<code>callback()</code>方法。</p>
+<p>输入参数的<code>callback</code>方法在<code>videoroomtest.js</code>中设置的是一个匿名函数，该方法又做了哪些事儿呢？我们仍然按照前面的分析方法将该函数的主干逻辑抽取出来，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">callback: function() &#123;</span><br><span class="line">    $(&#39;#start&#39;).one(&#39;click&#39;, function() &#123; ... &#125; )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正如你上面看到的，<code>callback</code>函数只实现了一行代码，即给<code>start</code> 键钮绑定了一个匿名方法。当户点击<code>start</code>时，执行该匿名方法。</p>
+<p>接下来，我们看看用户点击了<code>start</code>按钮后，绑定的匿名方法中做了哪些事儿呢？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">if(!Janus.isWebrtcSupported()) &#123; ... &#125;</span><br><span class="line">janus &#x3D; new Janus(</span><br><span class="line">                    &#123;</span><br><span class="line">                        server: server,</span><br><span class="line">                        success: function() &#123; ... &#125;,</span><br><span class="line">                        error: function(error) &#123; ... &#125;,</span><br><span class="line">                        destroyed: function() &#123; ... &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                 );</span><br></pre></td></tr></table></figure>
+
+<p>经抽丝拨茧后，可以看到该匿名函数首先判断<code>浏览器</code>是否支持<code>WebRTC</code>，如果支持的话，那创建<code>Janus</code>对象，并在创建对象时给它传入了一个<code>JSON</code>对象。该<code>JSON</code>对象包括以下内个字段：</p>
+<ul>
+<li>server，Janus服务器地址</li>
+<li>success，连接成功后执行的回调函数</li>
+<li>error，连接的失败执行的回调函数</li>
+<li>destroyed，连接销毁时的回调函数</li>
+</ul>
+<p>在上述几个字段中，最关键的是<code>success</code>回调函数，我们看一下它都做了哪些事儿吧。</p>
+<h2 id="success-回调函数"><a href="#success-回调函数" class="headerlink" title="success 回调函数"></a>success 回调函数</h2><p>其实，在 <code>success</code> 回调函数中也没干别的，只调用 <code>janus.attach</code> 方法。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">success: function() &#123;</span><br><span class="line">    janus.attach(</span><br><span class="line">                    &#123;</span><br><span class="line">                        plugin: &quot;janus.plugin.videoroom&quot;,</span><br><span class="line">                        opaqueId: opaqueId,</span><br><span class="line">                        success: function(pluginHandle) &#123; ... &#125;,</span><br><span class="line">                        error: function(error) &#123; ... &#125;,</span><br><span class="line">                        consentDialog: function(on) &#123; ... &#125;,</span><br><span class="line">                        iceState: function(state) &#123; ... &#125;,</span><br><span class="line">                        mediaState: function(medium, on) &#123; ... &#125;,</span><br><span class="line">                        webrtcState: function(on) &#123; ... &#125;,</span><br><span class="line">                        onmessage: function(msg, jsep) &#123; ... &#125;,</span><br><span class="line">                        onlocalstream: function(stream) &#123; ... &#125;,</span><br><span class="line">                        onremotestream: function(stream) &#123; ... &#125;,</span><br><span class="line">                        oncleanup: function() &#123; ... &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方法的作用我们在之前的<code>janus.js分析</code>一文中已经向你做过介绍了，实际上就是与服务端的<code>插件</code>进行绑定。对于我们今天的场景呢，就是与<code>videoroom</code>插件进行绑定。</p>
+<p>在调用<code>attach</code>方法时，也要传一个<code>JSON</code>格式的对象。在该对像包含了很多属性，这些属性的含义如下：</p>
+<ul>
+<li>plugin，要绑定的<code>janus</code>插件，这里要绑定插件为<code>janus.plugin.videoroom</code>。</li>
+<li>opaqueId，一个随机值，插件的唯一ID。</li>
+<li>success，<code>attach</code>方法执行成功后的回调函数。</li>
+<li>error，<code>attach</code>方法执行失败后的回调函数。</li>
+<li>consentDialog,</li>
+<li>iceState，可以通过该函数更新ICE状态。在<code>videoroomtest.js</code>中没有做任何处理。</li>
+<li>mediaState，可以通过该函数更新媒体状态。该方法也没有做任你可事儿。</li>
+<li>webrtcState，更改WebRTC状态的回调函数。</li>
+<li>onmessage，收到事件消自己的回调函数。</li>
+<li>onlocalstream，收到本地流时的回调函数。</li>
+<li>onremotestream，收到远端流时的回调函数。</li>
+<li>oncleanup，销毁时的回调函数。</li>
+</ul>
+<p>在上面属性中，比较关键的是<code>success</code>、<code>webrtceState</code>、<code>onmessage</code>、<code>onlocalstream</code>和<code>onremotestream</code> 。实际上，这几个属性都是回调函数，都是在<code>janus.js</code>中调用的。下面我们就对这几个回调函数做一下详细分析。</p>
+<h2 id="attach的success回调函数"><a href="#attach的success回调函数" class="headerlink" title="attach的success回调函数"></a>attach的success回调函数</h2><p>首先我们来看一下传给<code>attach</code>方法的<code>success</code>回调函数是何时被调用的？<code>janus.js</code>通过<code>websocket</code>或<code>http resful</code>向janus服务器发送<code>attach</code>请求后，<code>janus</code>服务器会给<code>janus.js</code>返回该请求处理的结果，要么<code>success</code>，要么<code>error</code>。当收到janus服务端的<code>success</code>响应后，此时调用从<code>attch</code>传入的<code>success</code>回调函数是最好的时机。</p>
+<p>这里需要注意的是，有两个<code>success</code>回调：一个是janus服务器处理成功返回的<code>success</code>；另一个是从<code>janus.js</code>的<code>attach</code>处理成功返回的<code>success</code>。在<code>janus.js</code>中的关键代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">this.attach &#x3D; function(callbacks) &#123; createHandle(callbacks); &#125;;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">function createHandle(callbacks) &#123;</span><br><span class="line">    ...</span><br><span class="line">    Janus.httpAPICall( server + &quot;&#x2F;&quot; + sessionId,</span><br><span class="line">                       &#123;</span><br><span class="line">                            verb: &#39;POST&#39;,</span><br><span class="line">                            withCredentials: withCredentials,</span><br><span class="line">                            body: request,</span><br><span class="line">                            success: function() &#123;</span><br><span class="line">                                var pluginHandle &#x3D; &#123; ... &#125;;</span><br><span class="line">                                callbacks.success(pluginHandle);</span><br><span class="line">                            &#125;,</span><br><span class="line">                            error: function() &#123; ... &#125;</span><br><span class="line">                       &#125;</span><br><span class="line">                     );</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>从上面的代码中可以看到，<code>attach</code>方法只是一个包裹方法，内部调用了<code>createHandle</code>。<code>createHandle</code>方法向janus服务器发送了<code>http</code>请求，并为该请求设置了<code>success</code>和<code>error</code>回调函数。当请求成功后，返回<code>success</code>。而在<code>janus.js</code>对应的<code>success</code>回调函数中，首先创建<code>pluginHandle</code>对象，并把该对像作为参数，回调上层应用的<code>success</code> 方法，这样就从<code>janus.js</code>层回到了应用层的<code>success</code>方法。</p>
+<p>下面我们来看一下应用层<code>videoroomtest.js</code>中的<code>success</code>回调函数做了哪些事儿。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">janus.attach(</span><br><span class="line">                &#123;</span><br><span class="line">                    ...</span><br><span class="line">                    success: function(pluginHandle) &#123;</span><br><span class="line">                                ...</span><br><span class="line">                                sfutest &#x3D; pluginHandle;</span><br><span class="line">                                ...</span><br><span class="line">                             &#125;</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">            );</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>从代码中我们可以看到，应用层调用<code>attach</code>绑定某个插件时，如果绑定成功则会回调<code>success</code>方法。该方法逻辑比较简单，它会将<code>janus.js</code>层创建的<code>pluginHanle</code>保存起来以备后用，剩下的其它的一些代码是与界面相关的，我们这里就不介绍了。</p>
+<h2 id="onmessage-回调函数"><a href="#onmessage-回调函数" class="headerlink" title="onmessage 回调函数"></a>onmessage 回调函数</h2><p><code>onmessagee</code>实现的是应用层对janus服务端返回事件的处理。我们依然还是先看看在<code>janus.js</code>中是如何调用该函数的。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function handleEvent(json, skipTimeout) &#123;</span><br><span class="line">    ...</span><br><span class="line">    else if(json[&quot;janus&quot;] &#x3D;&#x3D;&#x3D; &quot;event&quot;) &#123;</span><br><span class="line">        ...</span><br><span class="line">        var sender &#x3D; json[&quot;sender&quot;];</span><br><span class="line">        var pluginHandle &#x3D; pluginHandles[sender];</span><br><span class="line">        ...</span><br><span class="line">        var plugindata &#x3D; json[&quot;plugindata&quot;];</span><br><span class="line">        ...</span><br><span class="line">        var jsep &#x3D; json[&quot;jsep&quot;];</span><br><span class="line">        var callback &#x3D; pluginHandle.onmessage;</span><br><span class="line">        if(callback) &#123;</span><br><span class="line">            callback(data, jsep);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面就是<code>janus.js</code>调用<code>onmessage</code>函数的主要逻辑了，当<code>janus.js</code>收到janus服务端发来的<code>event</code>事件后，从中取出必要的信息，然后调用<code>pluginHandle.onmessage</code>方法回调回应用层。</p>
+<p>onmessage 函数又做了哪些事儿呢？可以说<code>onmessage</code>里实现的是整个应用层的核心代码。它会根据从janus服务端收到的不同消息类型做不同的逻辑处理，其主逻辑框架如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">onmessage: function(msg, jsep) &#123;</span><br><span class="line">            var event &#x3D; msg[&quot;videoroom&quot;];</span><br><span class="line">            if(event) &#123;</span><br><span class="line">                if(event &#x3D;&#x3D;&#x3D; &quot;joined&quot;) &#123;</span><br><span class="line">                    ...</span><br><span class="line">                    publishOwnFeed(true);</span><br><span class="line">                    ...</span><br><span class="line">                &#125; else if(event &#x3D;&#x3D;&#x3D; &quot;destroyed&quot;) &#123;</span><br><span class="line">                    ...</span><br><span class="line">                &#125; else if(event &#x3D;&#x3D;&#x3D; &quot;event&quot;) &#123;</span><br><span class="line">                    if(msg[&quot;publishers&quot;]) &#123;</span><br><span class="line">                        ...</span><br><span class="line">                    &#125; else if(msg[&quot;leaving&quot;]) &#123;</span><br><span class="line">                        ...</span><br><span class="line">                    &#125; else if(msg[&quot;unpublished&quot;]) &#123;</span><br><span class="line">                        ...</span><br><span class="line">                    &#125;else if(msg[&quot;error&quot;]) &#123;</span><br><span class="line">                        ...</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(jsep) &#123;</span><br><span class="line">                ...</span><br><span class="line">                sfutest.handleRemoteJsep(&#123; jsep: jsep &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>下面我们就对<code>onmessage</code>的实现逻辑做下详细分析。在<code>onmessage</code>函数中会对3种事件消息做处理，它们分别是：</p>
+<ul>
+<li>joined，表示有用户加入了</li>
+<li>destroyed, 表示有用户退出</li>
+</ul>
+]]></content>
+      <categories>
+        <category>WebRTC</category>
+      </categories>
+      <tags>
+        <tag>janus</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>janus的videoroom插件</title>
     <url>/bb906872/</url>
     <content><![CDATA[<p><img data-src="http://cdn.avdancedu.com/image/article/videoroom/videoroom.jpg" alt="videoroom"></p>
