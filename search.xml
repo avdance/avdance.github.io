@@ -136,7 +136,7 @@
 
 <h2 id="janus系列文章"><a href="#janus系列文章" class="headerlink" title="janus系列文章"></a>janus系列文章</h2><p>下面的这些文章是按照<strong>认知</strong>、<strong>使用</strong>、<strong>逐步深入</strong>的顺序做了编排，这种阅读顺序应该会使你更容易理解<code>janus</code>的整个运行机制。</p>
 <ul>
-<li><a href="">WebRTC流媒体服务器比较</a></li>
+<li><a href="http://avdancedu.com/947c722a/" target="_blank" rel="noopener">WebRTC流媒体服务器比较</a></li>
 <li><a href="https://avdancedu.com/ed54b3d4/" target="_blank" rel="noopener">音视频会议系统-janus的编译与安装</a></li>
 <li><a href="https://avdancedu.com/fdfe2594/" target="_blank" rel="noopener">janus各文件及目录的作用</a></li>
 <li><a href="https://avdancedu.com/8f43ddc9/" target="_blank" rel="noopener">深入理解janus的线程模型</a></li>
