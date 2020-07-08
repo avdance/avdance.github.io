@@ -624,7 +624,7 @@
 </tr>
 </tbody></table>
 <p>了解了这些基本信息后，接下来我们看看 FFMPEG 具体都能干些什么吧。</p>
-<p>##录制<br>首先通过下面的命令查看一下 mac 上都有哪些设备。</p>
+<h2 id="录制"><a href="#录制" class="headerlink" title="录制"></a>录制</h2><p>首先通过下面的命令查看一下 mac 上都有哪些设备。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -f avfoundation -list_devices true -i &quot;&quot;</span><br></pre></td></tr></table></figure>
 <p><strong>录屏</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -f avfoundation -i 1 -r 30 out.yuv</span><br></pre></td></tr></table></figure>
@@ -833,8 +833,7 @@
 <p><strong>将ts文件按时间切片</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg  -i somefile.ts  -f segment -segment_time 3  -c copy out%03d.ts</span><br></pre></td></tr></table></figure>
 
-<p>##视频图片互转</p>
-<p><strong>视频转JPEG</strong></p>
+<h2 id="视频图片互转"><a href="#视频图片互转" class="headerlink" title="视频图片互转"></a>视频图片互转</h2><p><strong>视频转JPEG</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i test.flv -r 1 -f image2 image-%3d.jpeg</span><br></pre></td></tr></table></figure>
 
 <p><strong>视频转gif</strong></p>
@@ -846,8 +845,7 @@
 <p><strong>一张图片转成5秒视频</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -loop 1 -i .&#x2F;xxx.jpeg -pix_fmt yuv420p -c:v libx264 -preset veryfast -r 25 -t 5 b.mp4</span><br></pre></td></tr></table></figure>
 
-<p>##直播相关</p>
-<p><strong>推流</strong></p>
+<h2 id="直播相关"><a href="#直播相关" class="headerlink" title="直播相关"></a>直播相关</h2><p><strong>推流</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -re -i out.mp4 -c copy -f flv rtmp:&#x2F;&#x2F;server&#x2F;live&#x2F;streamName</span><br></pre></td></tr></table></figure>
 <ul>
 <li>re的含义 ，Read input at native frame rate. Mainly used to simulate a grab device, or live input stream (e.g. when reading from a file). Should not be used with actual grab devices or live input streams (where it can cause packet loss). By default ffmpeg attempts to read the input(s) as fast as possible. This option will slow down the reading of the input(s) to the native frame rate of the input(s). It is useful for real-time output (e.g. live streaming).</li>
