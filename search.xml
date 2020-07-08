@@ -758,6 +758,7 @@
 </ul>
 <p><strong>对称视频</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg  -i out.mp4 -filter_complex &quot;[0:v]pad&#x3D;w&#x3D;2*iw[a];[0:v]hflip[b];[a][b]overlay&#x3D;x&#x3D;w&quot; duicheng.mp4</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>hflip 水平翻转</li>
 </ul>
@@ -777,21 +778,50 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i killer.mp4 -vf &quot;select&#x3D;not(mod(n\,250)),scale&#x3D;320:240,tile&#x3D;2x3&quot; -an  out%3d.png</span><br></pre></td></tr></table></figure>
 
 <h2 id="一些比较有意思的滤镜"><a href="#一些比较有意思的滤镜" class="headerlink" title="一些比较有意思的滤镜"></a>一些比较有意思的滤镜</h2><ul>
-<li>镜像<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">crop&#x3D;iw&#x2F;2:ih:0:0,split[left][tmp];[tmp]hflip[right];</span><br></pre></td></tr></table></figure></li>
-<li>复古<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;vintage;</span><br></pre></td></tr></table></figure></li>
-<li>光晕<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vignette&#x3D;PI&#x2F;4</span><br></pre></td></tr></table></figure></li>
-<li>变暗<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">colorlevels&#x3D;rimin&#x3D;0.058:gimin&#x3D;0.058:bimin&#x3D;0.058</span><br></pre></td></tr></table></figure></li>
-<li>增加对比度<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;0:weight_Y&#x3D;&#39;exp(-4 * ((Y+X)&#x2F;(W+H)))</span><br></pre></td></tr></table></figure></li>
-<li>降噪<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hqdn3d&#x3D;luma_spatial&#x3D;15.0</span><br></pre></td></tr></table></figure></li>
-<li>强对比度<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;strong_contrast</span><br></pre></td></tr></table></figure></li>
-<li>变亮<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;lighter</span><br></pre></td></tr></table></figure></li>
-<li>锐化<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;0:weight_Y&#x3D;&#39;1+squish(1-(Y+X)&#x2F;100)&#39;</span><br></pre></td></tr></table></figure></li>
-<li>低通滤波<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;0:weight_Y&#x3D;&#39;squish((Y+X)&#x2F;100-1)&#39;</span><br></pre></td></tr></table></figure></li>
-<li>高通滤波<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;128:weight_Y&#x3D;&#39;squish(1-(Y+X)&#x2F;100)&#39;</span><br></pre></td></tr></table></figure></li>
-<li>复古<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;vintage</span><br></pre></td></tr></table></figure></li>
-<li>边缘检测<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">edgedetect</span><br></pre></td></tr></table></figure></li>
-<li>底片<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">negate</span><br></pre></td></tr></table></figure></li>
-<li>彩色底片<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves &#x3D; ‘none’‘color_negative’</span><br></pre></td></tr></table></figure>
+<li><p>镜像</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">crop&#x3D;iw&#x2F;2:ih:0:0,split[left][tmp];[tmp]hflip[right];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复古</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;vintage;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>光晕</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vignette&#x3D;PI&#x2F;4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>变暗</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">colorlevels&#x3D;rimin&#x3D;0.058:gimin&#x3D;0.058:bimin&#x3D;0.058</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加对比度</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;0:weight_Y&#x3D;&#39;exp(-4 * ((Y+X)&#x2F;(W+H)))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>降噪</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hqdn3d&#x3D;luma_spatial&#x3D;15.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>强对比度</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;strong_contrast</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>变亮</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;lighter</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>锐化</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;0:weight_Y&#x3D;&#39;1+squish(1-(Y+X)&#x2F;100)&#39;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>低通滤波</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;0:weight_Y&#x3D;&#39;squish((Y+X)&#x2F;100-1)&#39;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>高通滤波</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fftfilt&#x3D;dc_Y&#x3D;128:weight_Y&#x3D;&#39;squish(1-(Y+X)&#x2F;100)&#39;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复古</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves&#x3D;vintage</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>边缘检测</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">edgedetect</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>底片</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">negate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>彩色底片</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curves &#x3D; ‘none’‘color_negative’</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -805,14 +835,19 @@
 <p><strong>视频合并</strong></p>
 <p>首先创建一个 inputs.txt 文件，文件内容如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">file &#39;1.flv&#39;</span><br><span class="line">file &#39;2.flv&#39;</span><br><span class="line">file &#39;3.flv&#39;</span><br></pre></td></tr></table></figure>
+
 <p>然后执行下面的命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -f concat -i inputs.txt -c copy output.flv</span><br></pre></td></tr></table></figure>
+
 <p><strong>音频合并</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i text.mp3 -i silenceall.mp3 -filter_complex &#39;[0:0] [1:0] concat&#x3D;n&#x3D;2:v&#x3D;0:a&#x3D;1 [a]&#39; -map [a] test.mp3</span><br></pre></td></tr></table></figure>
+
 <p><strong>音频混音</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i test.mp4 -i test.mp3 -filter_complex &quot;[0:a] [1:a]amerge&#x3D;inputs&#x3D;2[aout]&quot; -map &quot;[aout]&quot; -ac 2 mix_amerge.aac</span><br></pre></td></tr></table></figure>
+
 <p>或</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i INPUT1 -i INPUT2 -i INPUT3 -filter_complex &#39;amix&#x3D;inputs&#x3D;3:duration&#x3D;first:dropout_transition&#x3D;3&#39; OUTPUT</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>inputs: The number of inputs. If unspecified, it defaults to 2.//输入的数量，如果没有指明，默认为2.</li>
 <li>duration: How to determine the end-of-stream.//决定了流的结束</li>
@@ -847,6 +882,7 @@
 
 <h2 id="直播相关"><a href="#直播相关" class="headerlink" title="直播相关"></a>直播相关</h2><p><strong>推流</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -re -i out.mp4 -c copy -f flv rtmp:&#x2F;&#x2F;server&#x2F;live&#x2F;streamName</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>re的含义 ，Read input at native frame rate. Mainly used to simulate a grab device, or live input stream (e.g. when reading from a file). Should not be used with actual grab devices or live input streams (where it can cause packet loss). By default ffmpeg attempts to read the input(s) as fast as possible. This option will slow down the reading of the input(s) to the native frame rate of the input(s). It is useful for real-time output (e.g. live streaming).</li>
 </ul>
@@ -861,11 +897,13 @@
 
 <p><strong>转流</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i rtmp:&#x2F;&#x2F;server&#x2F;live&#x2F;originalStream -c:a copy -c:v copy -f flv rtmp:&#x2F;&#x2F;server&#x2F;live&#x2F;h264Stream</span><br></pre></td></tr></table></figure>
+
 <p><strong>实时推流</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -framerate 15 -f avfoundation -i &quot;1&quot; -s 1280x720 -c:v libx264  -f  flv rtmp:&#x2F;&#x2F;localhost:1935&#x2F;live&#x2F;room</span><br></pre></td></tr></table></figure>
 
 <h2 id="ffplay"><a href="#ffplay" class="headerlink" title="ffplay"></a>ffplay</h2><p><strong>播放YUV 数据</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffplay -pix_fmt nv12 -s 192x144 1.yuv</span><br></pre></td></tr></table></figure>
+
 <p><strong>播放YUV中的 Y平面</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffplay -pix_fmt nv21 -s 640x480 -vf extractplanes&#x3D;&#39;y&#39; 1.yuv</span><br></pre></td></tr></table></figure>
 
@@ -877,6 +915,7 @@
 
 <p><strong>输出包信息</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffprobe -show_packets 多媒体文件</span><br></pre></td></tr></table></figure>
+
 <h2 id="我的ffmpeg视频课地址"><a href="#我的ffmpeg视频课地址" class="headerlink" title="我的ffmpeg视频课地址"></a>我的ffmpeg视频课地址</h2><p><a href="http://www.imooc.com/u/4873493/courses?sort=publish" target="_blank" rel="noopener">课程主页地址</a></p>
 ]]></content>
       <categories>
