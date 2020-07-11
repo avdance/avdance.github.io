@@ -372,6 +372,102 @@
       </tags>
   </entry>
   <entry>
+    <title>[转]Mac配置中文man手册</title>
+    <url>/a77533/</url>
+    <content><![CDATA[<p>转自： <a href="http://www.jackaiup.com/index/detail?id=10234" target="_blank" rel="noopener">http://www.jackaiup.com/index/detail?id=10234</a></p>
+<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><ul>
+<li>安装软件依赖</li>
+<li>编译安装man手册</li>
+<li>修改配置文件</li>
+<li>解决乱码问题</li>
+</ul>
+<h2 id="软件依赖"><a href="#软件依赖" class="headerlink" title="软件依赖"></a>软件依赖</h2><ul>
+<li>autotools (autoconf, automake)</li>
+<li>python3</li>
+<li>opencc 1.x</li>
+</ul>
+<p>可以通过homebrew自行安装:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install autotools</span><br><span class="line">brew install python3</span><br><span class="line">brew install opencc</span><br></pre></td></tr></table></figure>
+<h2 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h2><blockquote>
+<p>git clone  <a href="https://github.com/man-pages-zh/manpages-zh" target="_blank" rel="noopener">https://github.com/man-pages-zh/manpages-zh</a>    #下载文件<br>cd manpages-zh<br>autoreconf –install –force     #构建configure文件<br>./configure<br>make<br>make install                     #需要超级用户权限</p>
+</blockquote>
+<h2 id="添加手册路径"><a href="#添加手册路径" class="headerlink" title="添加手册路径"></a>添加手册路径</h2><p>打开 man 手册配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;man.conf</span><br></pre></td></tr></table></figure>
+<p>修改配置文件，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line">MANPATH &#x2F;usr&#x2F;local&#x2F;share&#x2F;man              #line 44</span><br><span class="line">MANPATH &#x2F;usr&#x2F;local&#x2F;share&#x2F;man&#x2F;zh_CN        #添加中文手册路径</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
+
+<p>可以通过下面的命令查看是否中文文档已经加载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">man -aw</span><br></pre></td></tr></table></figure>
+<p>如果出现下面的信息表示已加载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;share&#x2F;man:&#x2F;usr&#x2F;share&#x2F;man:&#x2F;usr&#x2F;local&#x2F;share&#x2F;man&#x2F;zh_CN         #已经加载</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看中文文档"><a href="#查看中文文档" class="headerlink" title="查看中文文档"></a>查看中文文档</h2><p>执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">man -aw ls            &lt;&#x3D; 查看有几个中文文档</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;usr&#x2F;share&#x2F;man&#x2F;man1&#x2F;ls.1                 &lt;&#x3D; 默认文档</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;share&#x2F;man&#x2F;zh_CN&#x2F;man1&#x2F;ls.1     &lt;&#x3D; 中文文档</span><br></pre></td></tr></table></figure>
+<p>查看文档内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">man -a ls             &lt;&#x3D; 查看文档内容</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LS(1)                     BSD General Commands Manual                    LS(1)</span><br><span class="line">NAME</span><br><span class="line">     ls — list directory contents</span><br><span class="line">SYNOPSIS</span><br><span class="line">     ls [-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1] [file ...]</span><br><span class="line">DESCRIPTION</span><br><span class="line">     For each operand that names a file of a type other than directory, ls displays its name as</span><br><span class="line">     well as any requested, associated information.  For each operand that names a file of type</span><br><span class="line">     directory, ls displays the names of files contained within that directory, as well as any</span><br><span class="line">     requested, associated information.</span><br><span class="line">     If no operands are given, the contents of the current directory are displayed.  If more than</span><br><span class="line">     one operand is given, non-directory operands are displayed first; directory and non-direc‐</span><br><span class="line">     tory operands are sorted separately and in lexicographical order.</span><br><span class="line">     The following options are available:</span><br><span class="line">     -@      Display extended attribute keys and sizes in long (-l) output.</span><br><span class="line">     -1      (The numeric digit “one”.)  Force output to be one entry per line.  This is the</span><br><span class="line">     ...</span><br><span class="line">    按【q】进入中文文档</span><br><span class="line"></span><br><span class="line">LS(1)                                General Commands Manual                                LS(1)</span><br><span class="line">NAME</span><br><span class="line">       ls, dir, vdir - 列目录内容</span><br><span class="line">提要</span><br><span class="line">       ls [选项] [文件名...]</span><br><span class="line">       POSIX 标准选项: [-CFRacdilqrtu1]</span><br><span class="line">GNU 选项 (短格式):</span><br><span class="line">       [-1abcdfgiklmnopqrstuxABCDFGLNQRSUX]  [-w  cols]  [-T  cols]  [-I  pattern]  [--full-time]</span><br><span class="line">       [--format&#x3D;&#123;long,verbose,commas,across,vertical,single-column&#125;]</span><br><span class="line">       [--sort&#x3D;&#123;none,time,size,extension&#125;]               [--time&#x3D;&#123;atime,access,use,ctime,status&#125;]</span><br><span class="line">       [--color[&#x3D;&#123;none,auto,always&#125;]] [--help] [--version] [--]</span><br><span class="line">描述（ DESCRIPTION ）</span><br><span class="line">       程序ls先列出非目录的文件项，然后是每一个目录中的“可显示”文件。如果</span><br><span class="line">       没有选项之外的参数【译注：即文件名部分为空】出现，缺省为   &quot;.&quot;   （当前目录）。  选项“  -d</span><br><span class="line">       ”使得目录与非目录项同样对待。除非“ -a ” 选项出现，文 件名以“.”开始的文件不属“可显示”文件。</span><br><span class="line">       以当前目录为准，每一组文件（包括非目录文件项，以及每一内含文件的目录）分</span><br><span class="line">       别按文件名比较顺序排序。如果“-l”选项存在，每组文件前显示一摘要行:</span><br><span class="line">       ...</span><br><span class="line">【注】默认进入英文文档，按【q】可进入中文文档，再次按【q】则退出文档</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决乱码"><a href="#解决乱码" class="headerlink" title="解决乱码"></a>解决乱码</h2><p>如果系统的groff版本太低，文档可能出现乱码，可以将groff更新到最新版本（1.22.3，可能的话请使用尚未发布的 1.22.4）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install groff</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，配置man.conf</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;man.conf</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">#修改NROFF配置如下（将UTF8编码的MAN页面通过转码而被groff识别）</span><br><span class="line">#line 95</span><br><span class="line"></span><br><span class="line">NROFF preconv -e utf8 | &#x2F;usr&#x2F;local&#x2F;bin&#x2F;groff -Wall -mtty-char -Tutf8 -mandoc -c</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">#修改PAGER配置如下（这样可以避免MAN手册页面中的ANSI Escape字符序列干扰（用于控制显示粗体等格式））</span><br><span class="line">#line 106</span><br><span class="line"></span><br><span class="line">PAGER &#x2F;usr&#x2F;bin&#x2F;less -isR</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">:wq</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>man</category>
+      </categories>
+      <tags>
+        <tag>man</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ffmpeg特效处理</title>
+    <url>/b8012c60/</url>
+    <content><![CDATA[<h2 id="视频裁剪"><a href="#视频裁剪" class="headerlink" title="视频裁剪"></a>视频裁剪</h2><p>不进行编码，速度更快</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i xxx -ss 00:02:34 -t 00:00:20 cut.mp4</span><br></pre></td></tr></table></figure>
+
+<p>重新编码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i xxx -c:v libx264 -r 24 -s 1280x786 -ss 00:02:34 -t 00:00:20 cut.mp4</span><br></pre></td></tr></table></figure>
+
+<h2 id="视频去水印"><a href="#视频去水印" class="headerlink" title="视频去水印"></a>视频去水印</h2><p>首先确定视频中logo的位置，使用drawbox filter</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffplay -i .&#x2F;cut1.mp4 -an -vf drawbox&#x3D;x&#x3D;1120:y&#x3D;40:w&#x3D;120:h&#x3D;60:color&#x3D;green</span><br></pre></td></tr></table></figure>
+
+<p>确定好位置后，使用delogo filter将logo删除掉</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i .&#x2F;cut1.mp4 -vf delogo&#x3D;x&#x3D;1120:y&#x3D;40:w&#x3D;120:h&#x3D;60 output.mp4</span><br></pre></td></tr></table></figure>
+
+<h2 id="提取出视频"><a href="#提取出视频" class="headerlink" title="提取出视频"></a>提取出视频</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i  output.mp4 -an -c:v copy video.mp4</span><br></pre></td></tr></table></figure>
+
+<h2 id="提取出音视"><a href="#提取出音视" class="headerlink" title="提取出音视"></a>提取出音视</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i outmpt.mp4 -vn -c:a copy audio.aac</span><br></pre></td></tr></table></figure>
+
+<h2 id="合并音视频"><a href="#合并音视频" class="headerlink" title="合并音视频"></a>合并音视频</h2><p>准备视频</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i outmpt.mp4 -vn -c:a copy audio.aac</span><br></pre></td></tr></table></figure>
+
+<p>准备音频</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i xxx -c:a libfdk_aac -ar 44100 -ac 2 -f s16le -profile:a aav_he_v2 xxx.aac</span><br></pre></td></tr></table></figure>
+
+<p>将音频与视频合并到一起，并取其中最短的一个为最终时长</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i video.h264 -i huankuai.aac -shortest output3.mp4</span><br></pre></td></tr></table></figure>
+
+<p>音视频同步，按最长的走，其中短的反复循环播放</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -stream_loop -1 -i video.mp4 -i huankuai.aac -shortest output4.mp4</span><br></pre></td></tr></table></figure>
+
+<h2 id="音频混音"><a href="#音频混音" class="headerlink" title="音频混音"></a>音频混音</h2><p>在ffmpeg中有两种混音方式：</p>
+<ul>
+<li>amerge，它是将多个输入音频文件的channnel放到一个音频文件中。比如第三个音频文件有两个channel，第二个音频文件也有两个channel，它是将第一个音频的channel与第二个音频文件的channel都拷贝到输出文件中，所以输出文件有四个channel。其前提条件是，这些channel的所有参数格式必须一致。</li>
+<li>amix，是真的进行混音计算，将所有的音频进行混音，混音完成后输出到输出文件中。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i end.aac -i voice.wav -filter_complex &quot;amix&#x3D;inputs&#x3D;2:duration&#x3D;first:dropout_transition&#x3D;0:weights&#x3D;&#39;0.1 0.9&#39;&quot; mix2.aac</span><br></pre></td></tr></table></figure>
+
+<h2 id="调整音量大小"><a href="#调整音量大小" class="headerlink" title="调整音量大小"></a>调整音量大小</h2><p>音量，<a href="https://zhuanlan.zhihu.com/p/22821588" target="_blank" rel="noopener">参考这里</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i end.aac -i voice.wav -filter_complex &quot;amix&#x3D;inputs&#x3D;2:duration&#x3D;first:dropout_transition&#x3D;0:weights&#x3D;&#39;0.1 0.9&#39;[o];[o]volume&#x3D;60dB[v]&quot; -map &quot;[v]&quot;  mix3.aac</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+  </entry>
+  <entry>
     <title>ffmpeg命令详解</title>
     <url>/92d94a35/</url>
     <content><![CDATA[<p><img data-src="http://upload-images.jianshu.io/upload_images/5956443-29b1eff4f8ce0e61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1600" alt="ffmpegX.png"></p>
