@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.avdancedu.com/631d466a/</loc>
+    
+    <lastmod>2020-07-13T08:53:40.978Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.avdancedu.com/postbak/WebRTC%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0.html</loc>
+    
+    <lastmod>2020-07-12T23:08:08.418Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.avdancedu.com/a77533/</loc>
     
     <lastmod>2020-07-11T16:31:48.507Z</lastmod>
@@ -9,7 +23,7 @@
   </url>
   
   <url>
-    <loc>https://blog.avdancedu.com/b8012c60/</loc>
+    <loc>https://blog.avdancedu.com/postbak/ffmpeg%E7%89%B9%E6%95%88%E5%A4%84%E7%90%86.html</loc>
     
     <lastmod>2020-07-11T16:31:48.506Z</lastmod>
     
@@ -163,7 +177,7 @@
   </url>
   
   <url>
-    <loc>https://blog.avdancedu.com/40f49286/</loc>
+    <loc>https://blog.avdancedu.com/postbak/%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3glib-main-loop.html</loc>
     
     <lastmod>2020-06-27T10:07:29.817Z</lastmod>
     
@@ -194,13 +208,6 @@
     <loc>https://blog.avdancedu.com/423abe9e/</loc>
     
     <lastmod>2020-06-09T00:28:13.400Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.avdancedu.com/631d466a/</loc>
-    
-    <lastmod>2020-06-08T04:47:36.006Z</lastmod>
     
   </url>
   

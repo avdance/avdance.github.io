@@ -342,21 +342,20 @@
 <li>没有安装 SDL2 库。解决办法是通过 brew/apt/yum install sdl2 即可 或 通过 SDL2 源码安装。<strong>安装完成后，要重新进行到 ffmpeg目录下，执行 ./configure…这指命令。</strong></li>
 <li>有的同学编译ffmpeg时，在ffmpeg目录执行./configure …时没有添加 –enable-sdl2 选项也会导致无法编译出 ffplay</li>
 <li>SDL2与最新的Mac系统 mojave不兼容。解决办法：<ul>
-<li>方法一<ul>
+<li>方法一</li>
 <li>从 <a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.tar.gz" target="_blank" rel="noopener">SDL</a>下载 2.0.9版本或以后的SDL2代码。</li>
 <li>执行 ./configure</li>
 <li>执行 make &amp;&amp; sudo make install</li>
 <li>执行 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</li>
 <li>[重新]编译ffmpeg</li>
-</ul>
-</li>
-<li>方法二<ul>
+<li>方法二</li>
 <li>从<a href="https://www.libsdl.org/tmp/release/SDL2-2.0.9.dmg" target="_blank" rel="noopener">SDL</a>下载dmg包。</li>
 <li>执行 open SDL2-2.0.9.dmg</li>
 <li>[重新]编译ffmpeg</li>
 </ul>
 </li>
-</ul>
+<li>如果是ubuntu系统可以用下面的命令安装  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apt install sdl2-dev</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h2 id="Q-非Mac同学如何学习本课程"><a href="#Q-非Mac同学如何学习本课程" class="headerlink" title="Q: 非Mac同学如何学习本课程"></a>Q: 非Mac同学如何学习本课程</h2><p>A：本课程中的例子的界面是由 Swift 编写的，如果你没有 Mac 系统的话，你可以用 Qt 甚至不用界面开发，代码中与ffmpeg相着的代码都是跨平台的。</p>
@@ -422,50 +421,6 @@
       <tags>
         <tag>man</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>ffmpeg特效处理</title>
-    <url>/b8012c60/</url>
-    <content><![CDATA[<h2 id="视频裁剪"><a href="#视频裁剪" class="headerlink" title="视频裁剪"></a>视频裁剪</h2><p>不进行编码，速度更快</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i xxx -ss 00:02:34 -t 00:00:20 cut.mp4</span><br></pre></td></tr></table></figure>
-
-<p>重新编码</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i xxx -c:v libx264 -r 24 -s 1280x786 -ss 00:02:34 -t 00:00:20 cut.mp4</span><br></pre></td></tr></table></figure>
-
-<h2 id="视频去水印"><a href="#视频去水印" class="headerlink" title="视频去水印"></a>视频去水印</h2><p>首先确定视频中logo的位置，使用drawbox filter</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffplay -i .&#x2F;cut1.mp4 -an -vf drawbox&#x3D;x&#x3D;1120:y&#x3D;40:w&#x3D;120:h&#x3D;60:color&#x3D;green</span><br></pre></td></tr></table></figure>
-
-<p>确定好位置后，使用delogo filter将logo删除掉</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i .&#x2F;cut1.mp4 -vf delogo&#x3D;x&#x3D;1120:y&#x3D;40:w&#x3D;120:h&#x3D;60 output.mp4</span><br></pre></td></tr></table></figure>
-
-<h2 id="提取出视频"><a href="#提取出视频" class="headerlink" title="提取出视频"></a>提取出视频</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i  output.mp4 -an -c:v copy video.mp4</span><br></pre></td></tr></table></figure>
-
-<h2 id="提取出音视"><a href="#提取出音视" class="headerlink" title="提取出音视"></a>提取出音视</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i outmpt.mp4 -vn -c:a copy audio.aac</span><br></pre></td></tr></table></figure>
-
-<h2 id="合并音视频"><a href="#合并音视频" class="headerlink" title="合并音视频"></a>合并音视频</h2><p>准备视频</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i outmpt.mp4 -vn -c:a copy audio.aac</span><br></pre></td></tr></table></figure>
-
-<p>准备音频</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i xxx -c:a libfdk_aac -ar 44100 -ac 2 -f s16le -profile:a aav_he_v2 xxx.aac</span><br></pre></td></tr></table></figure>
-
-<p>将音频与视频合并到一起，并取其中最短的一个为最终时长</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i video.h264 -i huankuai.aac -shortest output3.mp4</span><br></pre></td></tr></table></figure>
-
-<p>音视频同步，按最长的走，其中短的反复循环播放</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -stream_loop -1 -i video.mp4 -i huankuai.aac -shortest output4.mp4</span><br></pre></td></tr></table></figure>
-
-<h2 id="音频混音"><a href="#音频混音" class="headerlink" title="音频混音"></a>音频混音</h2><p>在ffmpeg中有两种混音方式：</p>
-<ul>
-<li>amerge，它是将多个输入音频文件的channnel放到一个音频文件中。比如第三个音频文件有两个channel，第二个音频文件也有两个channel，它是将第一个音频的channel与第二个音频文件的channel都拷贝到输出文件中，所以输出文件有四个channel。其前提条件是，这些channel的所有参数格式必须一致。</li>
-<li>amix，是真的进行混音计算，将所有的音频进行混音，混音完成后输出到输出文件中。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i end.aac -i voice.wav -filter_complex &quot;amix&#x3D;inputs&#x3D;2:duration&#x3D;first:dropout_transition&#x3D;0:weights&#x3D;&#39;0.1 0.9&#39;&quot; mix2.aac</span><br></pre></td></tr></table></figure>
-
-<h2 id="调整音量大小"><a href="#调整音量大小" class="headerlink" title="调整音量大小"></a>调整音量大小</h2><p>音量，<a href="https://zhuanlan.zhihu.com/p/22821588" target="_blank" rel="noopener">参考这里</a></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i end.aac -i voice.wav -filter_complex &quot;amix&#x3D;inputs&#x3D;2:duration&#x3D;first:dropout_transition&#x3D;0:weights&#x3D;&#39;0.1 0.9&#39;[o];[o]volume&#x3D;60dB[v]&quot; -map &quot;[v]&quot;  mix3.aac</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
   </entry>
   <entry>
     <title>ffmpeg命令详解</title>
@@ -1767,24 +1722,6 @@
       </categories>
       <tags>
         <tag>janus</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>正确理解glib main loop</title>
-    <url>/40f49286/</url>
-    <content><![CDATA[<p>我想应该很多人都不太了解<code>glib</code>库，只有那些长时间在Linux系统上搞开发的同学才知道这个库。但即便知道有这么一个库，使用它的人也少之又少。</p>
-<p><code>glib</code>库是<code>Linux</code>系统下极重要的一个<code>C</code>语言开发的开源库，Linux系统下很多开具都是以它为基础的，比如说<code>GTK</code>、<code>gstreamer</code>以及我向大家介绍的<code>janus</code>程序。</p>
-<a id="more"></a>
-
-<p><code>glib</code>库涉及的内容很多，今天我主要给大家介绍一下<code>glib</code>中的<code>main loop</code>机制。实际<code>glib</code>的<code>main loop</code>在它的官方文档中有清晰的说明，地址在<a href="https://developer.gnome.org/glib/stable/glib-The-Main-Event-Loop.html#g-main-loop-new" target="_blank" rel="noopener">这里</a>大家可以自己阅读一下。</p>
-<h2 id="什么是Main-Loop"><a href="#什么是Main-Loop" class="headerlink" title="什么是Main Loop"></a>什么是Main Loop</h2><p>实际上，<code>GLib</code>的<code>Main Loop</code>就是对 <code>select</code>、<code>pool</code>、<code>epoll</code>的封装。它可以处理不同类型的<code>源</code>，像文件描述符（普通文件、管道、socket)和超时。新的事件源类型可以通过<code>g_source_attach</code>添加到<code>Main Loop</code>上。</p>
-<p>为了可以在不同的线程中处理不同的<code>源</code>集，每个<code>源</code>都与一个<code>GMainContext</code>相关。一个<code>GMainContext</code>只能运行在一个线程中，但<code>源</code>是可以跨线程的。在GMainContext或内置GSource上运行的所有函数都是线程安全的。</p>
-<p>每个<code>源</code>都有没一个优先级，默认是<code>G_PRIORITY_DEFAULT</code>，也就是0。小于0的值有更高的优先权。高优先级的<code>源</code>总是优先于低优先级的<code>源</code>得到处理。</p>
-<p>idle函数也能添加到<code>MainLoop</code>中，当没有任何更高优先级的事件需要处理时就会执行它。</p>
-<p><code>GMainLoop</code>表示一个主循环。它由<code>g_main_loop_new</code>函数创建。添加了初始化事件源后，就可以调用<code>g_main_loop_run()</code>函数了。该函数会持续的检测每个事件源是否有新事件，然后处理这些新事件。当不需要处理事件时，可以调用<code>g_main_loop_quit()</code>退出<code>main loop</code>。</p>
-<h2 id="如何创建一个新的事件源"><a href="#如何创建一个新的事件源" class="headerlink" title="如何创建一个新的事件源"></a>如何创建一个新的事件<code>源</code></h2>]]></content>
-      <tags>
-        <tag>glib</tag>
       </tags>
   </entry>
   <entry>
