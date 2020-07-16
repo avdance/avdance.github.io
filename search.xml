@@ -393,9 +393,9 @@
 <p>forward实现了两个模板函数，一个接收左值，另一个接收右值。在上面有代码中：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typename</span> <span class="built_in">std</span>::remove_reference&lt;T&gt;::type</span><br></pre></td></tr></table></figure>
 
-<p>的含义我们在<a href="http://avdancedu.com/a39d51f9/" target="_blank" rel="noopener">分析std::move</a>时已经向你做了说细的介绍，就是获得参数去掉引用的类型。所以上面的两上模板中，第一个是左值引用模板，第二个是右值引用模板。</p>
-<p>紧接着对传入的参数进行强制转换，转换的目标类型符合引用折叠规则。所以左值参数最终转换后仍为左值，右值参数最终转成右值。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文我们首先通一个小例子向你介绍了std::forward的作用为“完美转发”，也就是不改变原值的属性。接着我带你分析了std::forward的原码实现，如果你看了我这前对<a href="http://avdancedu.com/a39d51f9/" target="_blank" rel="noopener">std::move的分析文章</a>相信std:forward的实现代码阅读起来会非常简单。</p>
+<p>的含义我们在<a href="http://avdancedu.com/a39d51f9/" target="_blank" rel="noopener">分析std::move</a>时已经向你做了说细的说明，其作用就是获得去掉引用后的参数类型。所以在上面的两上模板函数中，第一个是左值引用模板函数，第二个是右值引用模板函数。</p>
+<p>紧接着forward模板函数对传入的参数进行强制转换，转换的目标类型符合引用折叠规则，因此左值参数最终转换后仍为左值，右值参数最终转成右值。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文我们首先通一个小例子向你介绍了std::forward的作用为“完美转发”，也就是不改变原值的属性。接着我带你分析了std::forward的原码实现，如果你看过我之前对std::move的分析文章，相信你在阅读std:forward的代码实现时不会遇到什么困难。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://avdancedu.com/a39d51f9/" target="_blank" rel="noopener">C++高阶知识：深入分析移动构造函数及其原理</a><br><a href="https://avdancedu.com/9683d88/" target="_blank" rel="noopener">细说智能指针</a><br><a href="https://avdancedu/670ef31f/" target="_blank" rel="noopener">聊聊C++中的类型转换</a><br><a href="https://avdancedu.com/5e7916e3/" target="_blank" rel="noopener">重学C/C++中的const</a>;</p>
 ]]></content>
       <categories>
