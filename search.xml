@@ -278,7 +278,7 @@
 <p>实际上，大部分同学提出的问题都是重复的。因此，我将一些最常见的问题整理出了答案放在这里，同学们可以根据自己的情况去查找相应的解决办法，以免我个人原因不能及时回答问题时，给大家的学习造成麻烦和不便。</p>
 <a id="more"></a>
 
-<h2 id="遇到下面的问题该怎么办？"><a href="#遇到下面的问题该怎么办？" class="headerlink" title="遇到下面的问题该怎么办？"></a>遇到下面的问题该怎么办？</h2><p><img data-src="https://cdn.avdancedu.com/image/article/av_base/mac_error.jpg" alt=""></p>
+<h2 id="遇到下面的问题该怎么办？"><a href="#遇到下面的问题该怎么办？" class="headerlink" title="遇到下面的问题该怎么办？"></a>遇到下面的问题该怎么办？</h2><p><img data-src="https://cdn.avdancedu.com/image/article/av_base/mac_error.png" alt=""></p>
 <p>如果你的程序可以正常运行，这个错误可以忽略，这应该是Mac新版本引用的问题。</p>
 <h2 id="Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash"><a href="#Q-在-Mac-10-15-3-系统下编译-ffmpeg-成功后，在运行-ffmpeg-命令时出现crash" class="headerlink" title="Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash."></a>Q: 在 Mac 10.15.3 系统下编译 ffmpeg 成功后，在运行 ffmpeg 命令时出现crash.</h2><p>A: 重新编译ffmpeg，在执行 ./configure 时增加 –extra-cflags=”fno-static-check” 选项，注意该选项一定要放在前面，否则编译有问题。</p>
 <h2 id="Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash"><a href="#Q-在Mac下添加-–extra-cflags-”fno-static-check”-选项仍然-crash" class="headerlink" title="Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash"></a>Q: 在Mac下添加 –extra-cflags=”fno-static-check” 选项仍然 crash</h2><p>A: 编译时保持尽量少的参数，应该是与其它一些参数有突冲。</p>
