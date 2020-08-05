@@ -121,7 +121,7 @@
 </blockquote>
 <h3 id="Q-有mediasoup、janus、licode等流媒体服务器的比较吗？"><a href="#Q-有mediasoup、janus、licode等流媒体服务器的比较吗？" class="headerlink" title="Q: 有mediasoup、janus、licode等流媒体服务器的比较吗？"></a>Q: 有mediasoup、janus、licode等流媒体服务器的比较吗？</h3><p>A: <a href="https://www.avdancedu.com/947c722a/" target="_blank" rel="noopener">可以看我这篇文章</a></p>
 <h3 id="Q-有各流媒体服务器之间的性能比较吗？"><a href="#Q-有各流媒体服务器之间的性能比较吗？" class="headerlink" title="Q: 有各流媒体服务器之间的性能比较吗？"></a>Q: 有各流媒体服务器之间的性能比较吗？</h3><p>A: <a href="https://webrtchacks.com/sfu-load-testing/" target="_blank" rel="noopener">可以看这篇文章</a></p>
-<h3 id="Q-单台mediasoup流媒体服务器能承载多少路流？"><a href="#Q-单台mediasoup流媒体服务器能承载多少路流？" class="headerlink" title="Q: 单台mediasoup流媒体服务器能承载多少路流？"></a>Q: 单台mediasoup流媒体服务器能承载多少路流？</h3><p>A: 官方答案为 500 路流。</p>
+<h3 id="Q-单台mediasoup流媒体服务器能承载多少路流？"><a href="#Q-单台mediasoup流媒体服务器能承载多少路流？" class="headerlink" title="Q: 单台mediasoup流媒体服务器能承载多少路流？"></a>Q: 单台mediasoup流媒体服务器能承载多少路流？</h3><p>A: 官方答案为单核支持 500 路流。</p>
 <h3 id="Q-布署流媒体服务器是需要怎样的配置"><a href="#Q-布署流媒体服务器是需要怎样的配置" class="headerlink" title="Q: 布署流媒体服务器是需要怎样的配置?"></a>Q: 布署流媒体服务器是需要怎样的配置?</h3><p>A: <a href="https://github.com/havfo/multiparty-meeting/wiki/Scaling-and-recommended-Hardware" target="_blank" rel="noopener">这里有一份说明</a></p>
 <h3 id="Q-mediasoup安装时报错是什么原因？"><a href="#Q-mediasoup安装时报错是什么原因？" class="headerlink" title="Q: mediasoup安装时报错是什么原因？"></a>Q: mediasoup安装时报错是什么原因？</h3><p>A: 建议使用Ubuntu18.04 安装mediasoup。</p>
 <h3 id="Q-在Ubuntu18-04上安装也报错"><a href="#Q-在Ubuntu18-04上安装也报错" class="headerlink" title="Q: 在Ubuntu18.04上安装也报错"></a>Q: 在Ubuntu18.04上安装也报错</h3><p>A: node 版本在 10 以上，npm 版本在 6.4 版本以上。</p>
