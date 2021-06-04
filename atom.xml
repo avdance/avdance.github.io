@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-06-04T04:54:23.277Z</updated>
+  <updated>2021-06-04T04:56:55.567Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Windows下构建C++OpenCV开发环境方法</title>
-    <link href="https://blog.avdancedu.com/3b25fa32/"/>
-    <id>https://blog.avdancedu.com/3b25fa32/</id>
-    <published>2021-06-04T04:54:22.762Z</published>
-    <updated>2021-06-04T04:54:23.277Z</updated>
+    <title>在Windows下使用VS编译OpenCV库</title>
+    <link href="https://blog.avdancedu.com/d6343897/"/>
+    <id>https://blog.avdancedu.com/d6343897/</id>
+    <published>2021-06-04T04:56:55.567Z</published>
+    <updated>2021-06-04T04:56:55.567Z</updated>
     
     <content type="html"><![CDATA[<h2 id="我的主页"><a href="#我的主页" class="headerlink" title="我的主页"></a>我的主页</h2><p><a href="https://avdancedu.com" target="_blank" rel="noopener">https://avdancedu.com</a></p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近发现有很多同学在学习OpenCV时，不知道该如何在Windows下编译OpenCV源码，这里我整理了一份Windows编译OpenCV的具体步聚，希望可以帮助到大家。</p><p>Windows下编译OpenCV分为四步，即：</p><ul><li>一、下载安装必要的工具</li><li>二、下载OpenCV源码</li><li>三、生成编译脚本</li><li>四、使用VS工程编译OpenCV</li></ul><h2 id="下载必要的工具"><a href="#下载必要的工具" class="headerlink" title="下载必要的工具"></a>下载必要的工具</h2><ol><li>安装python3和numpy库，<a href="https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe" target="_blank" rel="noopener">下载地址：https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe</a></li><li>安装 VS, 下载社区版即可，<a href="https://visualstudio.microsoft.com/zh-hans/downloads/" target="_blank" rel="noopener">下载地址： https://visualstudio.microsoft.com/zh-hans/downloads/</a></li><li>安装 cmake，<a href="https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-windows-x86_64.msi" target="_blank" rel="noopener">下载地址：https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-windows-x86_64.msi</a></li><li>下载IPPICV，<a href="https://github.com/opencv/opencv_3rdparty.git" target="_blank" rel="noopener">下载地址：https://github.com/opencv/opencv_3rdparty.git</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv_3rdparty.git</span><br></pre></td></tr></table></figure></li></ol><h2 id="下载opencv源码"><a href="#下载opencv源码" class="headerlink" title="下载opencv源码"></a>下载opencv源码</h2><ol><li><p>下载opencv源码, 方法：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv.git</span><br></pre></td></tr></table></figure></li><li><p>下载opencv-contrib源码, 方法：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv_contrib.git</span><br></pre></td></tr></table></figure></li></ol><h2 id="生成编译脚本"><a href="#生成编译脚本" class="headerlink" title="生成编译脚本"></a>生成编译脚本</h2><ol><li>在存放opencv源码目录中创建build目录</li><li>运行cmake</li><li>选择opencv源码目录</li><li>选择编译目录</li><li>选择CPU架构</li><li>增加opencv-contrib选项, OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules</li><li>检查编译选项，并<ol><li>勾选 opencv_world</li><li>勾选 ffmpeg</li><li>勾选 IPPICV，这步容易出错，如果你访问不了外网的话一般会出错。可以偿试手工下载IPPICV，进行设置。</li></ol></li><li>生成编译脚本</li></ol><h2 id="使用VS编译OpenCV"><a href="#使用VS编译OpenCV" class="headerlink" title="使用VS编译OpenCV"></a>使用VS编译OpenCV</h2><ol><li>选择输出版本类型</li><li>进行编译</li></ol><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在上述步骤中，第三步<strong>生成编译脚本</strong>是最容易出错的，其中第7步是导致出错的最大原因，所以在生成编译脚本时一定要仔细检查这几项是否都是OK的。</p><h2 id="我的课程"><a href="#我的课程" class="headerlink" title="我的课程"></a>我的课程</h2><p>-<a href="https://coding.imooc.com/class/496.html" target="_blank" rel="noopener">OpenCV入门与实战</a></p><p>-<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">音视频系统入门</a></p><p>-<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">ffmpeg精讲</a></p><p>-<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">WebRTC入门与实战</a></p><p>-<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">WebRTC高并发流媒体服务器</a></p><p>-<a href="https://time.geekbang.org/column/article/111337" target="_blank" rel="noopener">从0开始构造直播系统</a></p>]]></content>
     
@@ -30,31 +30,6 @@
       
       
         &lt;h2 id=&quot;我的主页&quot;&gt;&lt;a href=&quot;#我的主页&quot; class=&quot;headerlink&quot; title=&quot;我的主页&quot;&gt;&lt;/a&gt;我的主页&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://avdancedu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>在Windows下使用VS编译OpenCV库</title>
-    <link href="https://blog.avdancedu.com/d6343897/"/>
-    <id>https://blog.avdancedu.com/d6343897/</id>
-    <published>2021-06-04T04:18:14.666Z</published>
-    <updated>2021-06-04T04:52:23.442Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近发现有很多同学在学习OpenCV时，不知道该如何在Windows下编译OpenCV源码，这里我整理了一份Windows编译OpenCV的具体步聚，希望可以帮助到大家。</p><p>Windows下编译OpenCV分为四步，即：</p><ul><li>一、下载安装必要的工具</li><li>二、下载OpenCV源码</li><li>三、生成编译脚本</li><li>四、使用VS工程编译OpenCV</li></ul><h2 id="下载必要的工具"><a href="#下载必要的工具" class="headerlink" title="下载必要的工具"></a>下载必要的工具</h2><ol><li>安装python3和numpy库，<a href="https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe" target="_blank" rel="noopener">下载地址：https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe</a></li><li>安装 VS, 下载社区版即可，<a href="https://visualstudio.microsoft.com/zh-hans/downloads/" target="_blank" rel="noopener">下载地址： https://visualstudio.microsoft.com/zh-hans/downloads/</a></li><li>安装 cmake，<a href="https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-windows-x86_64.msi" target="_blank" rel="noopener">下载地址：https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-windows-x86_64.msi</a></li><li>下载IPPICV，<a href="https://github.com/opencv/opencv_3rdparty.git" target="_blank" rel="noopener">下载地址：https://github.com/opencv/opencv_3rdparty.git</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv_3rdparty.git</span><br></pre></td></tr></table></figure></li></ol><h2 id="下载opencv源码"><a href="#下载opencv源码" class="headerlink" title="下载opencv源码"></a>下载opencv源码</h2><ol><li><p>下载opencv源码, 方法：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv.git</span><br></pre></td></tr></table></figure></li><li><p>下载opencv-contrib源码, 方法：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;opencv&#x2F;opencv_contrib.git</span><br></pre></td></tr></table></figure></li></ol><h2 id="生成编译脚本"><a href="#生成编译脚本" class="headerlink" title="生成编译脚本"></a>生成编译脚本</h2><ol><li>在存放opencv源码目录中创建build目录</li><li>运行cmake</li><li>选择opencv源码目录</li><li>选择编译目录</li><li>选择CPU架构</li><li>增加opencv-contrib选项, OPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules</li><li>检查编译选项，并<ol><li>勾选 opencv_world</li><li>勾选 ffmpeg</li><li>勾选 IPPICV，这步容易出错，如果你访问不了外网的话一般会出错。可以偿试手工下载IPPICV，进行设置。</li></ol></li><li>生成编译脚本</li></ol><h2 id="使用VS编译OpenCV"><a href="#使用VS编译OpenCV" class="headerlink" title="使用VS编译OpenCV"></a>使用VS编译OpenCV</h2><ol><li>选择输出版本类型</li><li>进行编译</li></ol><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在上述步骤中，第三步<strong>生成编译脚本</strong>是最容易出错的，其中第7步是导致出错的最大原因，所以在生成编译脚本时一定要仔细检查这几项是否都是OK的。</p><h2 id="我的课程"><a href="#我的课程" class="headerlink" title="我的课程"></a>我的课程</h2><p>-<a href="https://coding.imooc.com/class/496.html" target="_blank" rel="noopener">OpenCV入门与实战</a></p><p>-<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">音视频系统入门</a></p><p>-<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">ffmpeg精讲</a></p><p>-<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">WebRTC入门与实战</a></p><p>-<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">WebRTC高并发流媒体服务器</a></p><p>-<a href="https://time.geekbang.org/column/article/111337" target="_blank" rel="noopener">从0开始构造直播系统</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;最近发现有很多同学在学习OpenCV时，不知道该如何在Windows下编译OpenCV源码，这里我整理了一份Windows编译OpenCV的具体步聚，希望可以帮助到大家。&lt;/p&gt;
-&lt;p&gt;Windows下编译OpenCV分为四步，即：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一、下载安装必
       
     
     </summary>
@@ -481,6 +456,31 @@
     
     
       <category term="janus" scheme="https://blog.avdancedu.com/tags/janus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>音视频学习路线图</title>
+    <link href="https://blog.avdancedu.com/12dc77f9/"/>
+    <id>https://blog.avdancedu.com/12dc77f9/</id>
+    <published>2020-06-23T01:41:26.000Z</published>
+    <updated>2020-06-23T15:12:25.597Z</updated>
+    
+    <content type="html"><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/av_path/av_learn_path.jpg" alt=""></p><p>这是我制订的一个<a href="https://coding.imooc.com/learningpath/route?pathId=39" target="_blank" rel="noopener">音视频学习线路图</a>，希望对学习音视频的同学能所有帮助!</p><p>从2018年制作第一门音视频课<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">《ffmpeg精讲》</a>开始，到今年3月我已经陆续录制了4门与音视频相关的课程和一个专栏，分别是<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">《音视频系统入门》</a>、<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">《ffmpeg精讲》</a>、<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a>、<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级WebRTC流媒体服务器》</a>以及<a href="https://time.geekbang.org/column/article/107916" target="_blank" rel="noopener">《从0开始打造音视频直播系统》</a>，他们基本覆盖了音视频从入门到高阶的所有内容。</p><a id="more"></a><p>如果你对音视频感兴趣的话，可以根据自己的情况选择自己感兴趣的课程学习，当然也可以按照下面的路线图进行学习，</p><p>首先是<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">《音视频系统入门》</a>，这门课是学习音视频至关重要的课程，是所有其它课程的基础。如果你之前对音视频没有任何概念，或者基础不牢的话，建议先从这门课开始学起。这门课讲解了最基本的音视频知识，如音频三要素、PCM、AAC编码、YUV、H264编码原理、音视频数据采集、FLV/RTMP、可商用的RTMP流媒体服务器等知识。课程中包括了大量实战，而且是手把手带你一行一行代码写起，特别适合于新入门的同学。这门课的知识是每个搞音视频研发的同学必须 100% 撑握的内容，很多音视频面试题也是考的这部分内容。</p><p>学完<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">《音视频系统入门》</a>之后，你可以继续学习高阶的<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">《ffmpeg精讲》</a>，这门课详细讲解了ffmpeg的运行机制，重点讲解了音视频同步，音视频线程的协作等。并通过这些知识实现了一个播放器内核。如果你的工作是做音视频编辑(如音视频的裁剪、音视拆分合并等）、音视频的编解码、音视频播放器研发的工作，那这门课就特别适合你。</p><p>当然，如果你想做实时互动直播（如音视频会议、在线教育）产品，那么WebRTC是你必须要学习的内容。WebRTC现在越来越强大，强大到你通过浏览器编写几行代码就可能实现1对1的实时通信。因此你可以选择学习<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a> 和<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级WebRTC流媒体服务器》</a>。 这两门课一门是讲解客户端的一门是讲解服务端的。</p><p><a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a>讲解了WebRTC的工作原理，如如何采集音视频，媒体协商，以及理底层的ICE、P2P、DTLS-SRTP、RTP/RTCP、STUN等，但其侧重点还是教你如何使用WebRTC库实现实时通信。在这门课中实现了浏览器端、Android、iOS三个端。并且三个端之间都可以彼此进行 1对1 的实时通信。</p><p>另一门课<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级WebRTC流媒体服务器》</a>是讲解WebRTC流媒体服务器的高阶课程，这门课里面详细讲解了如何在Linux上开发高并发流媒体服务器，讲解了信号处理、多进程/多线程、select/poll/epoll/libevent/libev异步事件处理机制等，并重点对性能最好的WebRTC流媒体服务器<code>mediasoup</code>做了深入剖析。相信学完这门课后你去应聘相关的工作时，技术上已经不会有任何问题了。甚至是各大厂争抢的人才。</p><p>上面的视频课都是针对于某一方面做的重点讲解，但如果你想对整个音视频技术做全面了解，并且对更愿意阅读文字的话，阅读我的专栏 <a href="https://time.geekbang.org/column/article/107916" target="_blank" rel="noopener">《从0开始打造音视频直播系统》</a>是个不错的选择。专栏中我对上面所有的内容做了概括性的讲解，如 WebRTC的使用、WebRTC流媒体服务器的分析、传统RTMP直播技术以及各种播放器都做了讲解。如果你对音视频各方面知识都有了一定的了解，建议你再读一下这个专栏，它会对你的音视频知识做一个系统的梳理，从而让你对音视频的认知更上一个台阶。</p><p><img data-src="https://cdn.avdancedu.com/image/article/av_path/path.jpg" alt="音视频知识图谱"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/av_path/av_learn_path.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这是我制订的一个&lt;a href=&quot;https://coding.imooc.com/learningpath/route?pathId=39&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;音视频学习线路图&lt;/a&gt;，希望对学习音视频的同学能所有帮助!&lt;/p&gt;
+&lt;p&gt;从2018年制作第一门音视频课&lt;a href=&quot;https://coding.imooc.com/class/279.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《ffmpeg精讲》&lt;/a&gt;开始，到今年3月我已经陆续录制了4门与音视频相关的课程和一个专栏，分别是&lt;a href=&quot;https://coding.imooc.com/class/415.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《音视频系统入门》&lt;/a&gt;、&lt;a href=&quot;https://coding.imooc.com/class/279.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《ffmpeg精讲》&lt;/a&gt;、&lt;a href=&quot;https://coding.imooc.com/class/329.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《WebRTC入门与实战》&lt;/a&gt;、&lt;a href=&quot;https://coding.imooc.com/class/387.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《百万级WebRTC流媒体服务器》&lt;/a&gt;以及&lt;a href=&quot;https://time.geekbang.org/column/article/107916&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《从0开始打造音视频直播系统》&lt;/a&gt;，他们基本覆盖了音视频从入门到高阶的所有内容。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="音视频" scheme="https://blog.avdancedu.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
+    
+    
+      <category term="音视频" scheme="https://blog.avdancedu.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
     
   </entry>
   
