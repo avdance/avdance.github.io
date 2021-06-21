@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-06-06T08:29:01.643Z</updated>
+  <updated>2021-06-21T11:17:04.735Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>音频3A问题经验分享</title>
+    <link href="https://blog.avdancedu.com/5756c48d/"/>
+    <id>https://blog.avdancedu.com/5756c48d/</id>
+    <published>2021-06-21T11:17:04.735Z</published>
+    <updated>2021-06-21T11:17:04.735Z</updated>
+    
+    <content type="html"><![CDATA[<p>一直以来音频的3A（回音消除、降噪、自动增益）问题都是音视频实时通信中特别关键，也特别难以解决的问题。尤其是回音消除问题，更是难上加难，它就好比你向水中倒了一些墨汁，现在又想将它从水中提取出来一样困难。</p><p>对于做音视频 PaaS (提供API接口服务）的公司而言，只有将3A问题处理好，才能在音视频实时通信市场上占有一席之地，否则就没法与声网、腾讯等这些老牌或巨头公司进行竞争。正是由于3A 问题是做音视频公司必须要解决好的问题，所以它们对能够解决这类问题的人才都求贤若渴，对于想进入音视频行业的同学来说，如果你能具有3A问题的解决能力，那你一定会成为各音视频大厂挣抢的“香饽饽”。</p><p>为了让大家学到更多的干货，这次我特意邀请到拍乐云合伙人&amp;音频专家 Ark，请他为大家详细介绍在商业应用中都会遇到哪些3A问题，遇到这类问题时该如何解决，对于初入门的同学又该如何学习音频技术。相信通过这次分享，一定会让大家会收获满满。</p><p>感兴趣的小伙伴请加入讨论群：</p><p><img data-src="https://cdn.avdancedu.com/image/article/3A/audio_3A.jpeg" alt="音频3A经验分享群"></p><a id="more"></a><h2 id="本次分享的大体题纲如下："><a href="#本次分享的大体题纲如下：" class="headerlink" title="本次分享的大体题纲如下："></a>本次分享的大体题纲如下：</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ul><li>音频的一些基本知识，音量（响度），分贝，频率、振幅与音量的关系，为什么音量是负值？</li><li>增益是指什么？它与音量大小的区别是什么？如何进行自动增益？<h3 id="降噪相关"><a href="#降噪相关" class="headerlink" title="降噪相关"></a>降噪相关</h3></li><li>什么是噪音，算法是如何判断出噪音的？</li><li>噪音是有颜色的，这是什么意思？</li><li>降噪的难点是什么？什么样的噪音不好降？</li><li>我们是否应该优先使用硬件降噪？移动端与PC端有什么区别吗？</li><li>什么是舒适噪音？为什么要增加舒适噪音？<h3 id="回音相关"><a href="#回音相关" class="headerlink" title="回音相关"></a>回音相关</h3></li><li>回音消除的难点是什么？</li><li>是否可以简要的介绍一下回音产生的一个大体原理？</li><li>机端的回音消除是否比PC端的回音更好消除一些？其中的原理是否可以比大家介绍一下？</li><li>WebRTC在回音消除方法做了哪些工作，最新的AEC3 与以前的回音消除算法有什么显著的差别？<h3 id="学习相关"><a href="#学习相关" class="headerlink" title="学习相关"></a>学习相关</h3></li><li>在解决实际3A问题时，一定要用到数学吗？</li><li>未来的技术方向</li><li>学习音频的基本路径是什么？</li><li>能否给推荐几本好书？</li></ul><h2 id="分享嘉宾"><a href="#分享嘉宾" class="headerlink" title="分享嘉宾"></a>分享嘉宾</h2><p>Ark，拍乐云合伙人&amp;音频专家。中科大硕士毕业，多年音频开发经验，5年WebEx音频专家工作经验，精通音频3A算法，深入理解实时通信音频框架，主导设计了多套音频处理框架，对于音频算法、移动端设备适配、大屏远场算法优化、智能手表音频优化等都非常了解。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直以来音频的3A（回音消除、降噪、自动增益）问题都是音视频实时通信中特别关键，也特别难以解决的问题。尤其是回音消除问题，更是难上加难，它就好比你向水中倒了一些墨汁，现在又想将它从水中提取出来一样困难。&lt;/p&gt;
+&lt;p&gt;对于做音视频 PaaS (提供API接口服务）的公司而言，只有将3A问题处理好，才能在音视频实时通信市场上占有一席之地，否则就没法与声网、腾讯等这些老牌或巨头公司进行竞争。正是由于3A 问题是做音视频公司必须要解决好的问题，所以它们对能够解决这类问题的人才都求贤若渴，对于想进入音视频行业的同学来说，如果你能具有3A问题的解决能力，那你一定会成为各音视频大厂挣抢的“香饽饽”。&lt;/p&gt;
+&lt;p&gt;为了让大家学到更多的干货，这次我特意邀请到拍乐云合伙人&amp;amp;音频专家 Ark，请他为大家详细介绍在商业应用中都会遇到哪些3A问题，遇到这类问题时该如何解决，对于初入门的同学又该如何学习音频技术。相信通过这次分享，一定会让大家会收获满满。&lt;/p&gt;
+&lt;p&gt;感兴趣的小伙伴请加入讨论群：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/3A/audio_3A.jpeg&quot; alt=&quot;音频3A经验分享群&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>在Windows下使用VS编译OpenCV库</title>
@@ -460,31 +483,6 @@
     
     
       <category term="janus" scheme="https://blog.avdancedu.com/tags/janus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>音视频学习路线图</title>
-    <link href="https://blog.avdancedu.com/12dc77f9/"/>
-    <id>https://blog.avdancedu.com/12dc77f9/</id>
-    <published>2020-06-23T01:41:26.000Z</published>
-    <updated>2020-06-23T15:12:25.597Z</updated>
-    
-    <content type="html"><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/av_path/av_learn_path.jpg" alt=""></p><p>这是我制订的一个<a href="https://coding.imooc.com/learningpath/route?pathId=39" target="_blank" rel="noopener">音视频学习线路图</a>，希望对学习音视频的同学能所有帮助!</p><p>从2018年制作第一门音视频课<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">《ffmpeg精讲》</a>开始，到今年3月我已经陆续录制了4门与音视频相关的课程和一个专栏，分别是<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">《音视频系统入门》</a>、<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">《ffmpeg精讲》</a>、<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a>、<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级WebRTC流媒体服务器》</a>以及<a href="https://time.geekbang.org/column/article/107916" target="_blank" rel="noopener">《从0开始打造音视频直播系统》</a>，他们基本覆盖了音视频从入门到高阶的所有内容。</p><a id="more"></a><p>如果你对音视频感兴趣的话，可以根据自己的情况选择自己感兴趣的课程学习，当然也可以按照下面的路线图进行学习，</p><p>首先是<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">《音视频系统入门》</a>，这门课是学习音视频至关重要的课程，是所有其它课程的基础。如果你之前对音视频没有任何概念，或者基础不牢的话，建议先从这门课开始学起。这门课讲解了最基本的音视频知识，如音频三要素、PCM、AAC编码、YUV、H264编码原理、音视频数据采集、FLV/RTMP、可商用的RTMP流媒体服务器等知识。课程中包括了大量实战，而且是手把手带你一行一行代码写起，特别适合于新入门的同学。这门课的知识是每个搞音视频研发的同学必须 100% 撑握的内容，很多音视频面试题也是考的这部分内容。</p><p>学完<a href="https://coding.imooc.com/class/415.html" target="_blank" rel="noopener">《音视频系统入门》</a>之后，你可以继续学习高阶的<a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">《ffmpeg精讲》</a>，这门课详细讲解了ffmpeg的运行机制，重点讲解了音视频同步，音视频线程的协作等。并通过这些知识实现了一个播放器内核。如果你的工作是做音视频编辑(如音视频的裁剪、音视拆分合并等）、音视频的编解码、音视频播放器研发的工作，那这门课就特别适合你。</p><p>当然，如果你想做实时互动直播（如音视频会议、在线教育）产品，那么WebRTC是你必须要学习的内容。WebRTC现在越来越强大，强大到你通过浏览器编写几行代码就可能实现1对1的实时通信。因此你可以选择学习<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a> 和<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级WebRTC流媒体服务器》</a>。 这两门课一门是讲解客户端的一门是讲解服务端的。</p><p><a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a>讲解了WebRTC的工作原理，如如何采集音视频，媒体协商，以及理底层的ICE、P2P、DTLS-SRTP、RTP/RTCP、STUN等，但其侧重点还是教你如何使用WebRTC库实现实时通信。在这门课中实现了浏览器端、Android、iOS三个端。并且三个端之间都可以彼此进行 1对1 的实时通信。</p><p>另一门课<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级WebRTC流媒体服务器》</a>是讲解WebRTC流媒体服务器的高阶课程，这门课里面详细讲解了如何在Linux上开发高并发流媒体服务器，讲解了信号处理、多进程/多线程、select/poll/epoll/libevent/libev异步事件处理机制等，并重点对性能最好的WebRTC流媒体服务器<code>mediasoup</code>做了深入剖析。相信学完这门课后你去应聘相关的工作时，技术上已经不会有任何问题了。甚至是各大厂争抢的人才。</p><p>上面的视频课都是针对于某一方面做的重点讲解，但如果你想对整个音视频技术做全面了解，并且对更愿意阅读文字的话，阅读我的专栏 <a href="https://time.geekbang.org/column/article/107916" target="_blank" rel="noopener">《从0开始打造音视频直播系统》</a>是个不错的选择。专栏中我对上面所有的内容做了概括性的讲解，如 WebRTC的使用、WebRTC流媒体服务器的分析、传统RTMP直播技术以及各种播放器都做了讲解。如果你对音视频各方面知识都有了一定的了解，建议你再读一下这个专栏，它会对你的音视频知识做一个系统的梳理，从而让你对音视频的认知更上一个台阶。</p><p><img data-src="https://cdn.avdancedu.com/image/article/av_path/path.jpg" alt="音视频知识图谱"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/av_path/av_learn_path.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;这是我制订的一个&lt;a href=&quot;https://coding.imooc.com/learningpath/route?pathId=39&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;音视频学习线路图&lt;/a&gt;，希望对学习音视频的同学能所有帮助!&lt;/p&gt;
-&lt;p&gt;从2018年制作第一门音视频课&lt;a href=&quot;https://coding.imooc.com/class/279.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《ffmpeg精讲》&lt;/a&gt;开始，到今年3月我已经陆续录制了4门与音视频相关的课程和一个专栏，分别是&lt;a href=&quot;https://coding.imooc.com/class/415.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《音视频系统入门》&lt;/a&gt;、&lt;a href=&quot;https://coding.imooc.com/class/279.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《ffmpeg精讲》&lt;/a&gt;、&lt;a href=&quot;https://coding.imooc.com/class/329.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《WebRTC入门与实战》&lt;/a&gt;、&lt;a href=&quot;https://coding.imooc.com/class/387.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《百万级WebRTC流媒体服务器》&lt;/a&gt;以及&lt;a href=&quot;https://time.geekbang.org/column/article/107916&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《从0开始打造音视频直播系统》&lt;/a&gt;，他们基本覆盖了音视频从入门到高阶的所有内容。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="音视频" scheme="https://blog.avdancedu.com/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
-    
-    
-      <category term="音视频" scheme="https://blog.avdancedu.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
     
   </entry>
   
