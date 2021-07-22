@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-07-22T13:13:10.879Z</updated>
+  <updated>2021-07-22T13:22:03.374Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -20,8 +20,8 @@
     <title>我的新书《WebRTC音视频实时互动技术--原理、实战与源码分析》终于出版了</title>
     <link href="https://blog.avdancedu.com/bc71cb9a/"/>
     <id>https://blog.avdancedu.com/bc71cb9a/</id>
-    <published>2021-07-22T13:13:10.878Z</published>
-    <updated>2021-07-22T13:13:10.879Z</updated>
+    <published>2021-07-22T13:22:03.373Z</published>
+    <updated>2021-07-22T13:22:03.374Z</updated>
     
     <content type="html"><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_book.png" alt=""></p><p>近年来，在音视频领域WebRTC越来越受到大家的追棒，它就像音视频技术的一顶“王冠”，上面嵌了大大小小、各种各样的“宝石”，如回音消除、降噪、自动增益、NetEQ、网络拥塞控制……不胜枚举！几乎所有的实时直播客户端都或多或少的使用了WebRTC的代码或借鉴了WebRTC的思想。</p><a id="more"></a><h2 id="WebRTC服务质量"><a href="#WebRTC服务质量" class="headerlink" title="WebRTC服务质量"></a>WebRTC服务质量</h2><p>为什么WebRTC会受到如此追棒呢？我想，究其原因是它有非常好的服务质量（网络服务质量、音视频服务质量）。</p><p>在众多的服务质量中，网络服务质量是最为关键的。你可以想像一下，如果网络是“畅通无阻”的：有无限的带宽，不丢包、不延时，那一切都变得美好了。但现实中，不可能每个用户都有如此好的网络，更多的是网络不佳，带宽受限。而让那些网络不佳、带宽受限的用户也能享受较好的服务，则是WebRTC一直孜孜不倦追求的目标。</p><p>为了达到这个目标，WebRTC发明了一种网控拥塞控制算法，称为GCC。该算法最厉害的地方是可以根据网络的丢包情况和延时趋势准确的判断出用户带宽的大小，并根据带宽的大小来控制发包的速度，从而避免网络拥塞的发生。</p><p>这项技术是十分关键的。大多数情况下，用户的带宽是动态变化的，如果我们不能实时的、有效的判断出带宽的大小，那么很有可能会因为发送音视频码流过大，导致网络拥塞，最终引起网络瘫痪。举个典型的例子，像长城宽带这种共享网络，假如你购买的是 100M 带宽，但实际使用时，分到的带宽并不是 100M，它的波动是非常大的。在早上人少的时候，带宽可以接近 100M；但晚上人多时，可能还 2M都达不到。如果没有拥塞控制算法，不能动态的判断出带宽的大小，我们发送大码流的时候，后果就可想而知了。</p><p>当然，能够准确的评估出带宽，只是“万里长征”的第一步，后面还有很多事情要做呢，如：如何进行发送码流的控制？只控制发送速度就可以了吗？如果不对“源”（产生音频与视频数据的地方）进行控制，就会导致内存爆长，从而引起系统崩溃。</p><p>此外，传输的实时性也是非常关键的。此时又涉及到传输协议的选择了，我们在传输音视频数据时，是应该选择TCP还是UDP？在极端网络情况下为什么要选择UDP？这些都是值得深入探讨的问题。</p><p>当传输协议选好后，端与端之间连接通路的选择对传输的实时性也起着至关重要的作用。如果通信的双方在同一个局域网内，那么它们应该首先选择局域网这条通路，而不是将包发向外网绕一圈再回来；如果不在同一个局域网内，则应该优先选择P2P直连；只有在直连不通的情况下，才应该考虑通过中继服务器进行数据中转，从而达到数据实时传输的目的。</p><p>总之，为了达到更好的服务质量，WebRTC想到了各种办法，可以说无所不用其极。这里我对其方法做了一下总结，分成五大类，如下图所示：</p><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_qos.png" alt=""></p><h2 id="我的新书"><a href="#我的新书" class="headerlink" title="我的新书"></a>我的新书</h2><p>实际上，上面这些内容，都在我的书《WebRTC音视频实时互动技术–原理、实战与源码分析》中做了详细介绍。</p><p>本书不仅对WebRTC的网络传输做了细致、大量的分析，而且还向你详细介绍了如何通过WebRTC实现Web端与Android和iOS端的互联互通；并且还在本书的最后三章对WebRTC的源码进行了剖析，以使你不但可以知道如何使用WebRTC实现音视频通信，还能让你了解其中的原理，并知道WebRTC具体是如何做的。</p><p>总体来说，本书是一本WebRTC入门到进阶的书籍，尤其适合对于WebRTC有一定了解，想进阶的同学来说，非常适合学习本书的内容。以下是本书的目录:</p><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_dir1.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_dir2.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_dir3.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_dir4.png" alt=""></p><h2 id="购买地址"><a href="#购买地址" class="headerlink" title="购买地址"></a>购买地址</h2><p><a href="https://item.jd.com/10033954503352.html" target="_blank" rel="noopener">机械工业出版社(华章)</a></p><h2 id="沟通群"><a href="#沟通群" class="headerlink" title="沟通群"></a>沟通群</h2><p>对于图中的任何疑问可以到微信群中提问。</p><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_group.jpeg" alt=""></p>]]></content>
     
