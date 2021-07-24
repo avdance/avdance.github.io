@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-07-22T13:22:03.374Z</updated>
+  <updated>2021-07-24T02:25:02.690Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
+    <link href="https://blog.avdancedu.com/f2403a12/"/>
+    <id>https://blog.avdancedu.com/f2403a12/</id>
+    <published>2021-07-24T02:25:02.690Z</published>
+    <updated>2021-07-24T02:25:02.690Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png" alt=""></p><h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P175，10.1 节的第一段修改为如下：</p><p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于接收端的拥塞控制算法 Goog-REMB。”</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;勘误一&quot;&gt;&lt;a href=&quot;#勘误一&quot; class=&quot;headerlink&quot; title=&quot;勘误一&quot;&gt;&lt;/a&gt;勘误一&lt;/h2&gt;&lt;p&gt;P168，图9.10有误，正确的图如下所示：&lt;br&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;勘误二&quot;&gt;&lt;a href=&quot;#勘误二&quot; class=&quot;headerlink&quot; title=&quot;勘误二&quot;&gt;&lt;/a&gt;勘误二&lt;/h2&gt;&lt;p&gt;P175，10.1 节的第一段修改为如下：&lt;/p&gt;
+&lt;p&gt;“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于接收端的拥塞控制算法 Goog-REMB。”&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>我的新书《WebRTC音视频实时互动技术--原理、实战与源码分析》终于出版了</title>
@@ -447,30 +468,6 @@
     
       &lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/janus_file/janus_arch.jpg&quot; alt=&quot;janus架构图&quot;&gt;&lt;/p&gt;
 &lt;p&gt;在&lt;a href=&quot;https://avdancedu.com/ed54b3d4/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《音视频会议系统-janus的安装与布署》&lt;/a&gt;一文中我已经向你介绍了如何布署&lt;code&gt;janus&lt;/code&gt;，今天我们再来了解一下&lt;code&gt;janus&lt;/code&gt;的源码，看看&lt;code&gt;janus&lt;/code&gt;包括哪些文件以及它们所起的作用是什么。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WebRTC" scheme="https://blog.avdancedu.com/categories/WebRTC/"/>
-    
-    
-      <category term="janus" scheme="https://blog.avdancedu.com/tags/janus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>音视频会议系统-janus的编译与布署</title>
-    <link href="https://blog.avdancedu.com/ed54b3d4/"/>
-    <id>https://blog.avdancedu.com/ed54b3d4/</id>
-    <published>2020-06-28T11:13:12.000Z</published>
-    <updated>2020-06-29T04:13:49.754Z</updated>
-    
-    <content type="html"><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/janus_deploy/janus.jpg" alt=""></p><p>说到WebRTC流媒体服务器就不得不提janus。说实话我以前对这款流媒体服务器并没有进行特别深入的研究，不过2019年10月我有幸作为声网RTC大会 Workshop 分会场的主讲嘉宾及串场人与janus的创始人<strong>Lorenzo Miniero</strong>有了一次深入交流，从中了解到janus的强大，因此决定有时间一定要对janus做下深入分析。</p><a id="more"></a><p><img data-src="https://cdn.avdancedu.com/image/article/janus_deploy/agora.jpg" alt="声网RTC大会"></p><p>正好前段时间忙完了手头的一些工作，终于可以有时间来对janus做详细研究了，而本篇则是对janus分析的第一篇文章。</p><p>下面我们就来看一下如何在一台 Ubuntu 系统下安装布署 janus。</p><h1 id="janus的布署方法"><a href="#janus的布署方法" class="headerlink" title="janus的布署方法"></a>janus的布署方法</h1><p>不得不说janus提供的文档还是非常全面的，如果你英文比较好的话，完全可以按它的文档进行操作。但对于一些新手来说，通过阅读本文可以让你快速的在本机搭建出janus Demo，所以本文对你仍然是非常有意义的。</p><h2 id="布署环境"><a href="#布署环境" class="headerlink" title="布署环境"></a>布署环境</h2><p>janus的官方文档建议你把它安装在Linux系统上，可以是 Ubuntu、CentOS等。当然你也可以在MacOS上安装它，而文档中明确说明它不支持Ｗindows系统，因此千万不要再在Windows上浪费时间了。</p><p>对于我来说，我一直比较倾向于使用Ubuntu系统，最主要的原因是安装依赖包比较方便。如果你是Linux新手，我更是强烈推建你使用Ubuntu，这样可以让你更快速入门Linux。而CentOS安装依赖包则会麻烦得多，虽然它也提供yum（类似Ubuntu中的apt）工具，但有很多库都必须通过源码编译的方式安装，这样很繁琐。</p><p>今天我们就使用<strong>Ubuntu系统</strong>作为janus的布署环境，而且这个环境是一台<strong>本地主机</strong>，而不是云主机，这样可以大大减少很多不必要的麻烦。</p><h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h2><p>在我们正式布署janus之前，需要先在Ubuntu系统上安装上必要的依赖包。在Ubuntu上安装依赖包非常方便，只要执行下面的命令就好了：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install libmicrohttpd-dev libjansson-dev \</span><br><span class="line">       libssl-dev libsofia-sip-ua-dev libglib2.0-dev libopus-dev \</span><br><span class="line">       libogg-dev libcurl4-openssl-dev liblua5.3-ev libconfig-dev\</span><br><span class="line">       pkg-config gengetopt libtool automake libscrtp-dev \</span><br><span class="line">               libwebsockets-dev  librabbitmq-dev libnanomsg-dev libnice-dev \</span><br><span class="line">               gtk-doc-tools doxygen graphviz</span><br></pre></td></tr></table></figure><p>除了以上这些可以通过 apt工具安装的依赖包外，还有一个依赖库是必须通过源码安装的，它就是libsrtp库。</p><p>libsrtp库的主要作用是对数据进行加密。之所以要通过源码安装，是因为在apt源上的libsrtp库没有将ssl库编译上，而janus又需要使ssl库对数据做最终的加密，所以我们只能使用源码的方式安装了。具体操作步骤如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;cisco&#x2F;libsrtp&#x2F;archive&#x2F;v2.2.0.tar.gz</span><br><span class="line">tar xfv v2.2.0.tar.gz</span><br><span class="line">cd libsrtp-2.2.0</span><br><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr --enable-openssl</span><br><span class="line">make shared_library &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure><h2 id="编译安装janus"><a href="#编译安装janus" class="headerlink" title="编译安装janus"></a>编译安装janus</h2><p>布署环境搭建好之后，编译安装janus还是非常简单的，就按下面的三步执行就好了：</p><ul><li>下载 janus 源码</li><li>执行 ./configure 生成 Makefile 文件</li><li>执行 make -j 4 &amp; sudo make install</li></ul><p>首先我们来看看如何下载janus的源码，操作如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;meetecho&#x2F;janus-gateway.git</span><br><span class="line">cd janus-gateway</span><br></pre></td></tr></table></figure><p>源码下载好后，执行./configure就可以生成Makefile文件了。但需要注意的是，在执行./configure之前，先要执行autogen.sh脚本，这样才能生成./configure文件。具体操作步骤如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;autogen.sh</span><br><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;janus</span><br></pre></td></tr></table></figure><p>当./configure执行完成后，Makefile文件就生成了，紧接着我们要开始编译安装 janus 了。按下面的执行步骤操作就好了：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -j 4</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure><p>通过上面的步骤，我们就将janus编译好并成功安装了。</p><h1 id="启动janus"><a href="#启动janus" class="headerlink" title="启动janus"></a>启动janus</h1><p>安装好janus 后，启动它非常容易，但在启动之前，我们还要为它准备好配置文件。</p><p>janus在启动时会分析配置文件，然后按照配置文件中的信息启动加载对应的模块。该如何构建配置文件呢？对于初学janus的新手来说，看到janus有一堆的参数，在构造配置文件时可能就有点懵了。</p><p>不过janus已经为我们想好了解决方案，就是从它的配置文件模板中拷贝一份作为janus的配置文件。其中最简单的就是将 janus.jcfg.sample作为配置文件即可。具体操作如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &lt;installdir&gt;&#x2F;etc&#x2F;janus&#x2F;</span><br><span class="line">cp janus.jcfg.sample janus.jcfg</span><br></pre></td></tr></table></figure><p>有了janus配置文件之后，我们就可以直接启动janus了，执行如下命令</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;janus</span><br></pre></td></tr></table></figure><p>OK，到目前为止，我们就已经将janus启动好了。此时，如果有用户连接janus的话，你就可以从终端上看到对应的连接信息。</p><p>上面的启动方式非常适合于我们观察和调试janus，但如果你想让它像服务器一样一直运行，则需要让janus到Linux系统的后台运行。这该如何实现呢？其实操作也很简单，只要执行下面的命令就好了：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;janus &amp;</span><br></pre></td></tr></table></figure><h1 id="janus-Demo的布署"><a href="#janus-Demo的布署" class="headerlink" title="janus Demo的布署"></a>janus Demo的布署</h1><p>通过上面的步骤我们已经将janus网关布署好了，但此时janus Demo还无法使用，我们还必须搭建一台WebServer，将janus Demo 客户端发布出来才行。</p><p>关于WebServer的搭建方法我这里就不做详细介绍了，大家应该在网上都可以找到方法，比如使用 nginx、nodejs、Apache、Tomcat等都是可以的。</p><p>当WebServer搭建好后，将/usr/local/janus/share/janus/demo目录中的内容全部拷贝到WebServer的发布目录下即可，这样我们就大功告成了！</p><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>通过上面的描述，我们就将如何搭建janus Demo的步骤向你做了详细的介绍，让你知道了如何在Ubuntu下搭建janus服务，又该如何将janus Demo布署好。总结起来就是以下三步：</p><ul><li>安装依赖包</li><li>编译安装janus</li><li>布署WebServer，并将 janus Demo 代码放到 WebServer发布目录下</li></ul><p>需要注意的是，我这里提供的方法只适用于本机，如果你想在云服务器上布署 janus的话，还有其它一些工作要做。对于这一点，我在这里就不做详细论述了，有兴趣的同学可以去参考我在慕课网的课程。</p><p>谢谢！</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul><li><a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级高并发WebRTC流媒体服务器设计与开发》</a></li><li><a href="https://time.geekbang.org/column/intro/207" target="_blank" rel="noopener">《从0打造音视频直播系统》</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/janus_deploy/janus.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;说到WebRTC流媒体服务器就不得不提janus。说实话我以前对这款流媒体服务器并没有进行特别深入的研究，不过2019年10月我有幸作为声网RTC大会 Workshop 分会场的主讲嘉宾及串场人与janus的创始人&lt;strong&gt;Lorenzo Miniero&lt;/strong&gt;有了一次深入交流，从中了解到janus的强大，因此决定有时间一定要对janus做下深入分析。&lt;/p&gt;
     
     </summary>
     

@@ -3205,4 +3205,13 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 <p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_qos/webrtc_group.jpeg" alt=""></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
+    <url>/f2403a12/</url>
+    <content><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png" alt=""></p>
+<h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P175，10.1 节的第一段修改为如下：</p>
+<p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于接收端的拥塞控制算法 Goog-REMB。”</p>
+<a id="more"></a>
+]]></content>
+  </entry>
 </search>
