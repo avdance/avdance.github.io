@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-07-26T07:57:36.077Z</updated>
+  <updated>2021-07-26T11:49:22.009Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -20,16 +20,17 @@
     <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
     <link href="https://blog.avdancedu.com/f2403a12/"/>
     <id>https://blog.avdancedu.com/f2403a12/</id>
-    <published>2021-07-26T07:57:36.077Z</published>
-    <updated>2021-07-26T07:57:36.077Z</updated>
+    <published>2021-07-26T11:49:22.009Z</published>
+    <updated>2021-07-26T11:49:22.009Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>P103，6.4.2小节倒数第二段修改如下：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/turn_protocal.png" alt=""></p><p>“因为主机 A 拿到了主机 B 的 Relay 类型的 Candidate，即 RelayB，所以主机 A 可以直接将音视频数据发向 RelayB。TurnServer 从 RelayB 接收到数据后，会将数据 打包成 TURN 消息，经 3478 端口发往主机 B。主机 B 收数据后，再利用 TurnClient 模块将数据从 TURN 消息中取出，交给其它模块做进一步处理; 同理，主机 B 与主机 A 的操作流程是一样的。TurnServer 从 RelayA 收到数据后，将其打包成 TURN 消息， 也要经过 3478 端口转发给主机 A。”</p><h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P98，表6.2各NAT之间可穿越表：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/NAT_table.png" alt=""></p><a id="more"></a><h2 id="勘误三"><a href="#勘误三" class="headerlink" title="勘误三"></a>勘误三</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png" alt=""></p><h2 id="勘误四"><a href="#勘误四" class="headerlink" title="勘误四"></a>勘误四</h2><p>P175，10.1 节的第一段修改为如下：</p><p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于<strong>接收端</strong>的拥塞控制算法 Goog-REMB。”</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>a. P3, 1.2节，第三段中的 AVI 应为 AV1.<br>b. P11,  2.1.3节，第一段中的 AVI 应为 AV1<br>c. P23，3.2.3 节，第二段中的所有 AVI 应为 AV1<br>d. P261， 13.5节，第二段中的 AVI 应为 AV1</p><h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P15，第三段应为：</p><p>“从上面的描述中你可以看到，在 WebRTC 架构的四层中，最复杂、最核心的是第三层，即 引擎层，因此，这里我再对引擎层内部的关系做下简要介绍。引擎层包括三部分内容，分别是: <strong>音频引擎</strong>、视频引擎以及网络传输。其中音频引擎和视频引擎是相对比较独立的。不过，它们 都需要与网络传输层(transport)打交道。也就是说，它们都需要将自己产生的数据通过网络 传输层发送出去;同时，也需要通过网络传输层接收其它端发过来的数据。此外，音频引擎与 视频引擎由于要进行音视频同步的原因，所以它们之间也存在着关联关系。”</p><h2 id="勘误三"><a href="#勘误三" class="headerlink" title="勘误三"></a>勘误三</h2><p>P98，表6.2各NAT之间可穿越表应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/NAT_table.png" alt=""></p><a id="more"></a><h2 id="勘误四"><a href="#勘误四" class="headerlink" title="勘误四"></a>勘误四</h2><p>P103，6.4.2小节倒数第二应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/turn_protocal.png" alt=""></p><p>“因为主机 A 拿到了主机 B 的 Relay 类型的 Candidate，即 RelayB，所以主机 A 可以直接将音视频数据发向 RelayB。TurnServer 从 RelayB 接收到数据后，会将数据 打包成 TURN 消息，经 3478 端口发往主机<strong>B</strong>。主机<strong>B</strong>收数据后，再利用 TurnClient 模块将数据从 TURN 消息中取出，交给其它模块做进一步处理; 同理，主机 B 与主机 A 的操作流程是一样的。TurnServer 从 RelayA 收到数据后，将其打包成 TURN 消息， 也要经过 3478 端口转发给主机<strong>A</strong>。”</p><h2 id="勘误五"><a href="#勘误五" class="headerlink" title="勘误五"></a>勘误五</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png" alt=""></p><h2 id="勘误六"><a href="#勘误六" class="headerlink" title="勘误六"></a>勘误六</h2><p>P175，10.1 节的第一段应为：</p><p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于<strong>接收端</strong>的拥塞控制算法 Goog-REMB。”</p>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;勘误一&quot;&gt;&lt;a href=&quot;#勘误一&quot; class=&quot;headerlink&quot; title=&quot;勘误一&quot;&gt;&lt;/a&gt;勘误一&lt;/h2&gt;&lt;p&gt;P103，6.4.2小节倒数第二段修改如下：&lt;br&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/webrtc_book_kw/turn_protocal.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;“因为主机 A 拿到了主机 B 的 Relay 类型的 Candidate，即 RelayB，所以主机 A 可以直接将音视频数据发向 RelayB。TurnServer 从 RelayB 接收到数据后，会将数据 打包成 TURN 消息，经 3478 端口发往主机 B。主机 B 收数据后，再利用 TurnClient 模块将数据从 TURN 消息中取出，交给其它模块做进一步处理; 同理，主机 B 与主机 A 的操作流程是一样的。TurnServer 从 RelayA 收到数据后，将其打包成 TURN 消息， 也要经过 3478 端口转发给主机 A。”&lt;/p&gt;
-&lt;h2 id=&quot;勘误二&quot;&gt;&lt;a href=&quot;#勘误二&quot; class=&quot;headerlink&quot; title=&quot;勘误二&quot;&gt;&lt;/a&gt;勘误二&lt;/h2&gt;&lt;p&gt;P98，表6.2各NAT之间可穿越表：&lt;br&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/webrtc_book_kw/NAT_table.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+      &lt;h2 id=&quot;勘误一&quot;&gt;&lt;a href=&quot;#勘误一&quot; class=&quot;headerlink&quot; title=&quot;勘误一&quot;&gt;&lt;/a&gt;勘误一&lt;/h2&gt;&lt;p&gt;a. P3, 1.2节，第三段中的 AVI 应为 AV1.&lt;br&gt;b. P11,  2.1.3节，第一段中的 AVI 应为 AV1&lt;br&gt;c. P23，3.2.3 节，第二段中的所有 AVI 应为 AV1&lt;br&gt;d. P261， 13.5节，第二段中的 AVI 应为 AV1&lt;/p&gt;
+&lt;h2 id=&quot;勘误二&quot;&gt;&lt;a href=&quot;#勘误二&quot; class=&quot;headerlink&quot; title=&quot;勘误二&quot;&gt;&lt;/a&gt;勘误二&lt;/h2&gt;&lt;p&gt;P15，第三段应为：&lt;/p&gt;
+&lt;p&gt;“从上面的描述中你可以看到，在 WebRTC 架构的四层中，最复杂、最核心的是第三层，即 引擎层，因此，这里我再对引擎层内部的关系做下简要介绍。引擎层包括三部分内容，分别是: &lt;strong&gt;音频引擎&lt;/strong&gt;、视频引擎以及网络传输。其中音频引擎和视频引擎是相对比较独立的。不过，它们 都需要与网络传输层(transport)打交道。也就是说，它们都需要将自己产生的数据通过网络 传输层发送出去;同时，也需要通过网络传输层接收其它端发过来的数据。此外，音频引擎与 视频引擎由于要进行音视频同步的原因，所以它们之间也存在着关联关系。”&lt;/p&gt;
+&lt;h2 id=&quot;勘误三&quot;&gt;&lt;a href=&quot;#勘误三&quot; class=&quot;headerlink&quot; title=&quot;勘误三&quot;&gt;&lt;/a&gt;勘误三&lt;/h2&gt;&lt;p&gt;P98，表6.2各NAT之间可穿越表应为：&lt;br&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/webrtc_book_kw/NAT_table.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
