@@ -12,7 +12,7 @@
 <h2 id="勘误四"><a href="#勘误四" class="headerlink" title="勘误四"></a>勘误四</h2><p>P103，6.4.2小节倒数第二应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/turn_protocal.png" alt=""></p>
 <p>“因为主机 A 拿到了主机 B 的 Relay 类型的 Candidate，即 RelayB，所以主机 A 可以直接将音视频数据发向 RelayB。TurnServer 从 RelayB 接收到数据后，会将数据 打包成 TURN 消息，经 3478 端口发往主机<strong>B</strong>。主机<strong>B</strong>收数据后，再利用 TurnClient 模块将数据从 TURN 消息中取出，交给其它模块做进一步处理; 同理，主机 B 与主机 A 的操作流程是一样的。TurnServer 从 RelayA 收到数据后，将其打包成 TURN 消息， 也要经过 3478 端口转发给主机<strong>A</strong>。”</p>
 <h2 id="勘误五"><a href="#勘误五" class="headerlink" title="勘误五"></a>勘误五</h2><p>P114，第一段应为：</p>
-<p>“程， 默认情况下 WebRTC 会将 VP8/H264 等编码器编码后的数据再交由 red 模块编码，生成带一些冗余信息的数据包，这样当传输中某个包丢了，就可以通过其他包将其恢复回来，而不用重传丢失的包。了解了上面这些内容后，第 16～18 行代码的含义应该就清楚了，即 PT 值为 124 表示需要使用 red 对之前编码好的数据再进行 red 处理，119 是 PT=124 重传数据 包的 PayloadType。如果用 Wireshark 等抓包工具抓取 WebRTC 媒体数据包时会发现它们都 是 red 包，而在 red 包里装的是 VP8/H264 编码的数据。”</p>
+<p>“程， 默认情况下 WebRTC 会将 VP8/H264 等编码器编码后的数据再交由 red 模块编码，生成带一些冗余信息的数据包，这样当传输中某个包丢了，就可以通过其他包将其恢复回来，而不用重传丢失的包。了解了上面这些内容后，第 <strong>16～18</strong> 行代码的含义应该就清楚了，即 PT 值为 124 表示需要使用 red 对之前编码好的数据再进行 red 处理，119 是 PT=124 重传数据 包的 PayloadType。如果用 Wireshark 等抓包工具抓取 WebRTC 媒体数据包时会发现它们都 是 red 包，而在 red 包里装的是 VP8/H264 编码的数据。”</p>
 <h2 id="勘误六"><a href="#勘误六" class="headerlink" title="勘误六"></a>勘误六</h2><p>P124，代码行号69，内容应为：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">69 使用Opus时，每个视频帧的最小间隔为10毫秒，使用带内FEC</span><br><span class="line">70 a&#x3D;fmtp:111 minptime&#x3D;10;useinbandfec&#x3D;1</span><br></pre></td></tr></table></figure>
 
