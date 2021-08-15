@@ -19,6 +19,10 @@
 <h2 id="勘误七"><a href="#勘误七" class="headerlink" title="勘误七"></a>勘误七</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png" alt=""></p>
 <h2 id="勘误八"><a href="#勘误八" class="headerlink" title="勘误八"></a>勘误八</h2><p>P175，10.1 节的第一段应为：</p>
 <p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于<strong>接收端</strong>的拥塞控制算法 Goog-REMB。”</p>
+<h2 id="勘误九"><a href="#勘误九" class="headerlink" title="勘误九"></a>勘误九</h2><p>P183, 公式10.19 下面一段的第一句应为：</p>
+<p>“在上述公式中，d(i) 表示当前包组到达时长与包组发送时长之差，<strong>参见公式10.4。</strong>正常情况下该值有正有负, ……”</p>
+<h2 id="勘误十"><a href="#勘误十" class="headerlink" title="勘误十"></a>勘误十</h2><p>P271, 第一段应为：</p>
+<p>“在上述代码中，如果对其再进行简化的话，可以发现 StartNextDecode() 方法中只调用了frame_buffer_对象的 NextFrame() 这个方法。由于该方法传入参数过于复杂，所以不太好理解，其实关键点是掌握其核心代码的第9～15行。”</p>
 ]]></content>
   </entry>
   <entry>
@@ -3126,6 +3130,14 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 <h2 id="显示所有远程分支"><a href="#显示所有远程分支" class="headerlink" title="显示所有远程分支"></a>显示所有远程分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
 <h2 id="显示远端地址"><a href="#显示远端地址" class="headerlink" title="显示远端地址"></a>显示远端地址</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
 <h2 id="创建一个新分支"><a href="#创建一个新分支" class="headerlink" title="创建一个新分支"></a>创建一个新分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout -b new_branch</span><br><span class="line">git --set-upstream origin new_branch</span><br><span class="line">git push origin new_branch</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout -b new_branch refs&#x2F;remotes&#x2F;branch-heads&#x2F;branch</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch -d branch</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除远端分支"><a href="#删除远端分支" class="headerlink" title="删除远端分支"></a>删除远端分支</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git push origin --delete remotebranch</span><br></pre></td></tr></table></figure>
+
 <h2 id="远程仓库已经删除，而本地仓库还在，如果清除？"><a href="#远程仓库已经删除，而本地仓库还在，如果清除？" class="headerlink" title="远程仓库已经删除，而本地仓库还在，如果清除？"></a>远程仓库已经删除，而本地仓库还在，如果清除？</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git pull -p</span><br></pre></td></tr></table></figure>
 <h2 id="git-diff-不显示修改的内容"><a href="#git-diff-不显示修改的内容" class="headerlink" title="git diff 不显示修改的内容"></a>git diff 不显示修改的内容</h2><p>有些情况下，通过 <code>git status</code> 能查到某些文件有变化，但使用 <code>git diff</code> 却看不到修改的内容。可以使用下面的面试查看变化。</p>
 <ul>
