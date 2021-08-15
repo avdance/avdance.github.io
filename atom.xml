@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-08-15T11:23:07.774Z</updated>
+  <updated>2021-08-15T13:27:20.284Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>非常棒的GDB与LLDB命令对照表</title>
+    <link href="https://blog.avdancedu.com/2ffb45c8/"/>
+    <id>https://blog.avdancedu.com/2ffb45c8/</id>
+    <published>2021-08-15T13:27:20.284Z</published>
+    <updated>2021-08-15T13:27:20.284Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="GDB与LLDB命令对照表"><a href="#GDB与LLDB命令对照表" class="headerlink" title="GDB与LLDB命令对照表"></a>GDB与LLDB命令对照表</h2><hr><p><a href="https://lldb.llvm.org/lldb-gdb.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表1</a><br><a href="https://developer.apple.com/library/content/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-command-examples.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表2</a></p><hr><a id="more"></a><h2 id="设置观察点"><a href="#设置观察点" class="headerlink" title="设置观察点"></a>设置观察点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wa s v 变量名</span><br><span class="line">或 watchpoint set variable 变量名</span><br></pre></td></tr></table></figure><ul><li>观察点必须是独立的原始变量，而不能是类变量或结构体变量。</li></ul><h2 id="目前-LLDB-无法打印宏信息"><a href="#目前-LLDB-无法打印宏信息" class="headerlink" title="目前 LLDB 无法打印宏信息"></a>目前 LLDB 无法打印宏信息</h2><h2 id="查看内存内容"><a href="#查看内存内容" class="headerlink" title="查看内存内容"></a>查看内存内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x -s4 -fx -c4 0xbffff3c0</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;GDB与LLDB命令对照表&quot;&gt;&lt;a href=&quot;#GDB与LLDB命令对照表&quot; class=&quot;headerlink&quot; title=&quot;GDB与LLDB命令对照表&quot;&gt;&lt;/a&gt;GDB与LLDB命令对照表&lt;/h2&gt;&lt;hr&gt;
+&lt;p&gt;&lt;a href=&quot;https://lldb.llvm.org/lldb-gdb.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GDB 与 LLDB 命令对照表1&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://developer.apple.com/library/content/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-command-examples.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GDB 与 LLDB 命令对照表2&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
@@ -447,29 +468,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>janus的线程模型</title>
-    <link href="https://blog.avdancedu.com/8f43ddc9/"/>
-    <id>https://blog.avdancedu.com/8f43ddc9/</id>
-    <published>2020-06-29T05:33:58.000Z</published>
-    <updated>2020-06-29T06:16:06.150Z</updated>
-    
-    <content type="html"><![CDATA[<p>我们要想把一个系统搞清楚，首先要把它的线程模型弄明白。比如它是单线程的还是多线程的？如果它是单线程的，那逻辑就比较简单了，像mediasoup就是单进程多实例的模型；如果是多线程的，那它的线程是如何分配的？每个线程的作用是什么？我们必须把这些都要弄清楚才行，否则我们就无法将这个系统彻底搞明白。</p><a id="more"></a><p>在分析 <code>janus</code> 的时候，我们也应尊循上面的原则。因此在分析<code>janus</code>之前，我们先来问几个问题，<code>janus</code>是多线程的模式吗？如果是多线程模式，那它一共有几个线程呢？ 这些线程又分别起什么作用？</p><p>如果我们将上面的问题回答好了，我想我们基本上就将<code>janus</code>的线程模型搞清楚了，搞清了它的线程模型也就撑握了<code>janus</code>的系统大体脉络。</p><h1 id="janus是多线程模式吗？"><a href="#janus是多线程模式吗？" class="headerlink" title="janus是多线程模式吗？"></a>janus是多线程模式吗？</h1><p>其实这个问题非常好回答，通过查看<code>janus</code>的主文件janus.c我们就能知道答案了。在janus.c中我们可以发现下面的代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">GThread *watchdog &#x3D; g_thread_try_new(&quot;timeout watchdog&quot;, &amp;janus_sessions_watchdog, watchdog_loop, &amp;error);</span><br><span class="line">...</span><br><span class="line">GThread *requests_thread &#x3D; g_thread_try_new(&quot;sessions requests&quot;, &amp;janus_transport_requests, NULL, &amp;error);</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p><code>janus</code>是基于Linux 的GLIB库开发出来的，因此所有对系统的调用都是使用的GLIB库的API。而<code>g_thread_try_new</code>函数正中GLIB中用来创建线程的，在<code>g_thread_try_new</code>的底层真正调用的是<code>pthread</code>的相关API。</p><p><strong>通这上面的分析，我们可以知道janus是多线程的模式。</strong></p><h1 id="janus一共有几个线程？"><a href="#janus一共有几个线程？" class="headerlink" title="janus一共有几个线程？"></a>janus一共有几个线程？</h1><p>除了我们上面介绍的两个线程外，<code>janus</code>还使用了线程池的概念。在<code>janus</code>的初始化阶段就将线程池创建出来了。代码如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">tasks &#x3D; g_thread_pool_new(janus_transport_task, NULL, -1, FALSE, &amp;error);</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>查看<code>g_thread_pool_new</code>API的帮助文档，其定义如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GThreadPool *</span><br><span class="line">g_thread_pool_new (GFunc func,</span><br><span class="line">                   gpointer user_data,</span><br><span class="line">                   gint max_threads,</span><br><span class="line">                   gboolean exclusive,</span><br><span class="line">                   GError **error);</span><br></pre></td></tr></table></figure><p>通过这个定义我们可以知道<code>janus</code>创建的线程池时并没有对线程数进制控制。也就是说它可以开出系统可以支持的最大限度的线程个数。<strong>会在高并发时出现性能问题呢？这个还要等我们后面的深入分析才能清楚，目前来说这行代码还是有风险的。</strong></p><p>下面我们总结一下，通过对janus.c文件的分析，我们现在可以知道<code>janus</code>的线程模型是由两个专用线程<code>watchdog</code>、<code>request</code>和一个通用任务线程池构成的。如下图所示：</p><p><img data-src="https://cdn.avdancedu.com/image/article/janus_thread/janus_thread.jpg" alt="janus线程模型"></p><p>了解了<code>janus</code>的线程模型后，下面我们来看一下 <code>janus</code> 每个线程的作用吧。</p><h1 id="每个线程的作用"><a href="#每个线程的作用" class="headerlink" title="每个线程的作用"></a>每个线程的作用</h1><p>通过阅读代码，我们可以了解到这几个线程的主要作用是什么，下面我们来一一介绍一下。</p><p><strong>首先是主线程</strong>，这个线程的主要作用就是初始化的工作。主要包括以下几方面的工作：</p><ul><li>从配置文件中读配置信息，然后根据配置信息进行初始化工作</li><li>启动其它线程</li><li>动态加载plugin</li></ul><p><strong>WatchDog 线程</strong>，通过名子我们基本上就可以清楚它的作用了。它是监控线程，它每隔２秒做一次扫描，查看transport的session是否过期了。如果过期了，则给对应的transport发通知让transport结束处理。需要注意的是，这里的 trasnport代表的是不同协议的接入口，如RabbitMQ、MQTT、HTTP等。</p><p><strong>Request线程</strong>，用于处理接口请求。一般将接口请求分为两大类，文本类请求和命令类请求。如果是文本类请求的，则会启动新线程（从线程池中获取）进行处理；如果是命令的类的，则可以直接处理。当然对于命令类型的Request可能处理上会比较复杂，有可能会分成多个阶段处理，而在每个不同的阶段又会生成新的Request。</p><p><strong>最后一个就是线程池了</strong>，线程池的作用上面我已经介绍了，就是在处理Request时会从线程池中分配线程，然后执行Request任务，任务完成后再回收到线程池里。　</p><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>通过上面的描述我们可以看到<code>janus</code>的线程模型并不复杂，它启动了两个专门的线程，一个用于处理transport的session是否过期；另一个用于处理Request请求，当收到Request请求后，它又会把请求交给新的线程做延时处理。</p><p>以上我们就将 <code>janus</code> 的线程模型分析完了，读到这里我相信你已经对<code>janus</code>的线程模型有了一个大体的了解了。当然你仍然会很许多疑惑，这只能对照着<code>janus</code>的代码分析才能让你体会的更深刻！</p><p>谢谢！</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul><li><a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门》</a></li><li><a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《百万级高并发WebRTC流媒体服务器设计与开发》</a></li><li><a href="https://time.geekbang.org/column/intro/207" target="_blank" rel="noopener">《从0打造音视频直播系统》</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我们要想把一个系统搞清楚，首先要把它的线程模型弄明白。比如它是单线程的还是多线程的？如果它是单线程的，那逻辑就比较简单了，像mediasoup就是单进程多实例的模型；如果是多线程的，那它的线程是如何分配的？每个线程的作用是什么？我们必须把这些都要弄清楚才行，否则我们就无法将这个系统彻底搞明白。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WebRTC" scheme="https://blog.avdancedu.com/categories/WebRTC/"/>
-    
-    
-      <category term="thread" scheme="https://blog.avdancedu.com/tags/thread/"/>
     
   </entry>
   
