@@ -3362,6 +3362,17 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 <p>编译成功后，执行下面的命令生成VS工程文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ gn gen --ide&#x3D;vs out\Default</span><br></pre></td></tr></table></figure>
 <p>这时，我们就可以在 src\out\Default\ 目录下找到 all.sln 这个工程文件，到这里我们就大功告成了。</p>
+<h2 id="切换Branch"><a href="#切换Branch" class="headerlink" title="切换Branch"></a>切换Branch</h2><p>有时候我们需要切到WebRTC的某个分支，可以按下面的步聚操作：</p>
+<ul>
+<li>查看WebRTC远端有哪些分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切换到某个具体的分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git checkout -b my_branch refs&#x2F;remotes&#x2F;branch-heads&#x2F;xxxx</span><br><span class="line">gclient sync</span><br></pre></td></tr></table></figure>
+
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>我们上面详细介绍了编译WebRTC的步骤，由于WebRTC本身的原因，大家在操作时一定要仔细阅读每一步，否则都有可能导致编译失败。</p>
 <p>谢谢！</p>
 ]]></content>
