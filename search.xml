@@ -3520,7 +3520,7 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <url>/56ef4bcb/</url>
     <content><![CDATA[<p>推荐阅读：</p>
 <ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -3680,7 +3680,7 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 <p>从另一方面讲，SDL 是一款非常优秀有多媒体库，除了使用它，其实我们还可以通过对其源码的分析，从中学到很多使用底层API的技巧。尤其是想学习播放器开发的同学，更是应该学好 SDL，因为著名的 ffplay 就是用的 SDL 做视频和音频的最终渲染与播放的。</p>
 <p>最后，希望本文能帮你进行到 SDL 的世界。</p>
 <h2 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h2><ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -3696,7 +3696,7 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <content><![CDATA[<p>今天将向大家介绍一下SDL中的多线程的使用。通过下面对SDL 线程与锁相关的API介绍，你会发现，它与 Linux, Windows相关的API几乎是一模一样的。从这里可以推断出，其实SDL对于多线程的处理只是为大家提供了一套统一接口，并没有做其它太多的工作。</p>
 <p>这是我们介绍 SDL 的第六篇文章。有兴趣的同学可以通过下面的链接查看其它几篇文章。</p>
 <ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -3782,7 +3782,8 @@ return 0;</code></pre><p>}</p>
 希望本文能对你有所帮助，谢谢！
 
 ## 隆重推荐
-* [SDL 入门](http://www.avdanchedu.com/671897450)
+
+* [SDL 入门](http://www.avdanchedu.com/56ef4bcb)
 * [SDL窗口渲染](http://www.avdancedu.com/287ad9ab)
 * [SDL基本图形绘制](http://www.avdancedu.com/24ee78a8)
 * [SDL事件处事](http://www.avdancedu.com/a0ec02a7)
@@ -3796,7 +3797,7 @@ return 0;</code></pre><p>}</p>
     <url>/a0ec02a7/</url>
     <content><![CDATA[<p>前面我为大家介绍了 SDL 的三个主题：</p>
 <ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 </ul>
@@ -3836,7 +3837,7 @@ return 0;</code></pre><p>}</p>
 <p>另外，我在文章的最后，介绍了SDL_PollEvent 与 SDL_WaitEvent两个 API的区别。这也是使用 SDL 事件处理中最容易引起困惑的地方。</p>
 <p>希望本文能对您有所帮助，谢谢！</p>
 <h2 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h2><ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -3852,7 +3853,7 @@ return 0;</code></pre><p>}</p>
     <content><![CDATA[<p>今天向大家介绍一下如何通过 SDL 实现一个PCM音频播放器。这是一个最简单的播放器，它不涉及到音频的解复用，解码等工作。我们只需要将音频原始数据喂给 SDL 音频接口就可以听到悦耳的声音了。在下面的列子中我将向你演示，使用 SDL 做这样一个播放器是何等的简单。</p>
 <p>当然这个看似简单的播放器其实是由许多的理论基础在底层支持着的。如果在这方面没有什么基础的同学可以通过下面的链接去自行学习。</p>
 <ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -3956,7 +3957,7 @@ return 0;</code></pre><p>}</p>
 <p>当然这个播放器还是有点 Low,不过不要紧，随着后面文章的推出，你会逐渐看到一个完整的播放器是如何被打造出来的。</p>
 <p>希望本文能对你有所帮助，谢谢！</p>
 <h2 id="隆重推荐"><a href="#隆重推荐" class="headerlink" title="隆重推荐"></a>隆重推荐</h2><ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -3972,7 +3973,7 @@ return 0;</code></pre><p>}</p>
     <url>/287ad9ab/</url>
     <content><![CDATA[<p>推荐阅读：</p>
 <ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -4047,7 +4048,7 @@ return 0;</code></pre><p>}</p>
 <p>后面的文章我将向大家重点介绍如何在窗口绘制一些常用图形。</p>
 <p>谢谢！</p>
 <h2 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h2><ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -4062,7 +4063,7 @@ return 0;</code></pre><p>}</p>
     <url>/24ee78a8/</url>
     <content><![CDATA[<p>之前的SDL的两篇文章我向大家介绍了如何编译使用 SDL，以及如何才能让窗口显示出来。想了解相关内容的同学可以点击下面的链接查看相关内容。</p>
 <ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -4132,7 +4133,7 @@ return 0;</code></pre><p>}</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文重点介绍了 SDL 绘制经常使用的几个基本图形API，通过这些API你可以构造出更加复杂的图形。</p>
 <p>希望本文能对你所有帮助，谢谢！</p>
 <h2 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h2><ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -4148,7 +4149,7 @@ return 0;</code></pre><p>}</p>
     <content><![CDATA[<p>这是SDL系列文章的第五篇，本文将彻底让你理解什么是纹理。并带你深入探讨SDL的几个重要概念SDL_Window、SDL_Render、SDL_Surface 与 SDL_Texture。在文章的最后向你展示SDL如何通过SDL_Texture进行渲染。</p>
 <p>对于前面系列文章感兴趣的同学可以通过下面的链接查看：</p>
 <ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
@@ -4205,7 +4206,7 @@ return 0;</code></pre><p>}</p>
 <p>大家一定要仔细的理解文章中所讲的内容，在我后序的文章中，尤其是后面介绍 播放器 相关内容时，都要用到现在所讲的这些内容。</p>
 <p>希望本文能对你有所帮助，谢谢！</p>
 <h2 id="隆重推荐"><a href="#隆重推荐" class="headerlink" title="隆重推荐"></a>隆重推荐</h2><ul>
-<li><a href="http://www.avdanchedu.com/671897450" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdanchedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
 <li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
 <li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
 <li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
