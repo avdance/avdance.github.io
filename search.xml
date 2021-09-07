@@ -4206,7 +4206,8 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
   <entry>
     <title>VS调试技巧</title>
     <url>/736c6e64/</url>
-    <content><![CDATA[<h2 id="常用调试快捷键"><a href="#常用调试快捷键" class="headerlink" title="常用调试快捷键"></a>常用调试快捷键</h2><ul>
+    <content><![CDATA[<p>文中记录了一些我经常使用的VS快捷键以及调试工具，希望也能帮助到其它同学。</p>
+<h2 id="常用调试快捷键"><a href="#常用调试快捷键" class="headerlink" title="常用调试快捷键"></a>常用调试快捷键</h2><ul>
 <li>F5 : 运行程序</li>
 <li>F10：单步调试</li>
 <li>F11：进入函数</li>
@@ -4220,17 +4221,25 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 <li>crtl + -: 跳回去，与F12方向向反。</li>
 </ul>
 <h2 id="查看变量内存值"><a href="#查看变量内存值" class="headerlink" title="查看变量内存值"></a>查看变量内存值</h2><ul>
-<li><p>打开内存显示窗口</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DEBUG-&gt;windows-&gt;memory</span><br></pre></td></tr></table></figure></li>
+<li>打开内存显示窗口</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DEBUG-&gt;windows-&gt;memory</span><br></pre></td></tr></table></figure>
+<ul>
 <li><p>在内存显示窗口里贴入要查看的变量地址</p>
 </li>
 <li><p>查看当前所有线程</p>
+</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">点击 Debug -&gt; Windows -&gt; Threads</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看线程视图</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Debug -&gt; Windows -&gt; Parallel Stack</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>注意，在程序中打断点，然后启动调试（线程窗口需要启动调试才可以看得到）</p>
 </blockquote>
-</li>
-</ul>
 <h2 id="VS常用设置"><a href="#VS常用设置" class="headerlink" title="VS常用设置"></a>VS常用设置</h2><ul>
 <li><p>如何设置 $(Outdir)  路径</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉输出目录</span><br></pre></td></tr></table></figure></li>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-09-07T03:20:29.751Z</updated>
+  <updated>2021-09-07T03:51:23.269Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VS调试技巧</title>
+    <link href="https://blog.avdancedu.com/736c6e64/"/>
+    <id>https://blog.avdancedu.com/736c6e64/</id>
+    <published>2021-09-07T03:51:23.269Z</published>
+    <updated>2021-09-07T03:51:23.269Z</updated>
+    
+    <content type="html"><![CDATA[<p>文中记录了一些我经常使用的VS快捷键以及调试工具，希望也能帮助到其它同学。</p><h2 id="常用调试快捷键"><a href="#常用调试快捷键" class="headerlink" title="常用调试快捷键"></a>常用调试快捷键</h2><ul><li>F5 : 运行程序</li><li>F10：单步调试</li><li>F11：进入函数</li><li>Shift+F11: 跳出函数</li><li>F9：设置或取消断点</li></ul><a id="more"></a><h2 id="阅读代码快捷键"><a href="#阅读代码快捷键" class="headerlink" title="阅读代码快捷键"></a>阅读代码快捷键</h2><ul><li>F12 :  函数间跳转</li><li>crtl + -: 跳回去，与F12方向向反。</li></ul><h2 id="查看变量内存值"><a href="#查看变量内存值" class="headerlink" title="查看变量内存值"></a>查看变量内存值</h2><ul><li>打开内存显示窗口</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEBUG-&gt;windows-&gt;memory</span><br></pre></td></tr></table></figure><ul><li><p>在内存显示窗口里贴入要查看的变量地址</p></li><li><p>查看当前所有线程</p></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">点击 Debug -&gt; Windows -&gt; Threads</span><br></pre></td></tr></table></figure><ul><li>查看线程视图</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Debug -&gt; Windows -&gt; Parallel Stack</span><br></pre></td></tr></table></figure><blockquote><p>注意，在程序中打断点，然后启动调试（线程窗口需要启动调试才可以看得到）</p></blockquote><h2 id="VS常用设置"><a href="#VS常用设置" class="headerlink" title="VS常用设置"></a>VS常用设置</h2><ul><li><p>如何设置 $(Outdir)  路径</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉输出目录</span><br></pre></td></tr></table></figure></li><li><p>如何设置输出文件类型</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉项目默认值-&gt;配置类型</span><br></pre></td></tr></table></figure></li><li><p>如何设置目标文件名</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉目标文件名</span><br></pre></td></tr></table></figure></li><li><p>如何设置目标扩展名</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉目标扩展名</span><br></pre></td></tr></table></figure></li><li><p>如何修改C/C++中将警告视为错误</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉C&#x2F;C++-&gt;将警告视为错误</span><br></pre></td></tr></table></figure></li><li><p>当一个工程里有多个项目时，要设置一个启动项目做为开始</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉设置为启动项目</span><br></pre></td></tr></table></figure></li></ul><h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>持继更新中……</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文中记录了一些我经常使用的VS快捷键以及调试工具，希望也能帮助到其它同学。&lt;/p&gt;
+&lt;h2 id=&quot;常用调试快捷键&quot;&gt;&lt;a href=&quot;#常用调试快捷键&quot; class=&quot;headerlink&quot; title=&quot;常用调试快捷键&quot;&gt;&lt;/a&gt;常用调试快捷键&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;F5 : 运行程序&lt;/li&gt;
+&lt;li&gt;F10：单步调试&lt;/li&gt;
+&lt;li&gt;F11：进入函数&lt;/li&gt;
+&lt;li&gt;Shift+F11: 跳出函数&lt;/li&gt;
+&lt;li&gt;F9：设置或取消断点&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>SDL多线程</title>
@@ -38,31 +64,6 @@
 &lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/a6aca2fe&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;SDL孙悟空与多线程&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/f94132a0&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;PCM音频播放器的实现&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://coding.imooc.com/class/279.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ffmpeg精讲&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>VS调试技巧</title>
-    <link href="https://blog.avdancedu.com/736c6e64/"/>
-    <id>https://blog.avdancedu.com/736c6e64/</id>
-    <published>2021-09-07T03:17:29.149Z</published>
-    <updated>2021-09-07T03:17:29.149Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="常用调试快捷键"><a href="#常用调试快捷键" class="headerlink" title="常用调试快捷键"></a>常用调试快捷键</h2><ul><li>F5 : 运行程序</li><li>F10：单步调试</li><li>F11：进入函数</li><li>Shift+F11: 跳出函数</li><li>F9：设置或取消断点</li></ul><a id="more"></a><h2 id="阅读代码快捷键"><a href="#阅读代码快捷键" class="headerlink" title="阅读代码快捷键"></a>阅读代码快捷键</h2><ul><li>F12 :  函数间跳转</li><li>crtl + -: 跳回去，与F12方向向反。</li></ul><h2 id="查看变量内存值"><a href="#查看变量内存值" class="headerlink" title="查看变量内存值"></a>查看变量内存值</h2><ul><li><p>打开内存显示窗口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEBUG-&gt;windows-&gt;memory</span><br></pre></td></tr></table></figure></li><li><p>在内存显示窗口里贴入要查看的变量地址</p></li><li><p>查看当前所有线程</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">点击 Debug -&gt; Windows -&gt; Threads</span><br></pre></td></tr></table></figure><blockquote><p>注意，在程序中打断点，然后启动调试（线程窗口需要启动调试才可以看得到）</p></blockquote></li></ul><h2 id="VS常用设置"><a href="#VS常用设置" class="headerlink" title="VS常用设置"></a>VS常用设置</h2><ul><li><p>如何设置 $(Outdir)  路径</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉输出目录</span><br></pre></td></tr></table></figure></li><li><p>如何设置输出文件类型</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉项目默认值-&gt;配置类型</span><br></pre></td></tr></table></figure></li><li><p>如何设置目标文件名</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉目标文件名</span><br></pre></td></tr></table></figure></li><li><p>如何设置目标扩展名</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉目标扩展名</span><br></pre></td></tr></table></figure></li><li><p>如何修改C/C++中将警告视为错误</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉C&#x2F;C++-&gt;将警告视为错误</span><br></pre></td></tr></table></figure></li><li><p>当一个工程里有多个项目时，要设置一个启动项目做为开始</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉设置为启动项目</span><br></pre></td></tr></table></figure></li></ul><h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>持继更新中……</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;常用调试快捷键&quot;&gt;&lt;a href=&quot;#常用调试快捷键&quot; class=&quot;headerlink&quot; title=&quot;常用调试快捷键&quot;&gt;&lt;/a&gt;常用调试快捷键&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;F5 : 运行程序&lt;/li&gt;
-&lt;li&gt;F10：单步调试&lt;/li&gt;
-&lt;li&gt;F11：进入函数&lt;/li&gt;
-&lt;li&gt;Shift+F11: 跳出函数&lt;/li&gt;
-&lt;li&gt;F9：设置或取消断点&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>
