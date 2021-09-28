@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2021-09-11T20:48:00.710Z</updated>
+  <updated>2021-09-28T10:39:26.144Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
+    <link href="https://blog.avdancedu.com/f2403a12/"/>
+    <id>https://blog.avdancedu.com/f2403a12/</id>
+    <published>2021-09-28T10:39:26.144Z</published>
+    <updated>2021-09-28T10:39:26.144Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>a. P3, 1.2节，第三段中的 AVI 应为 AV1.<br>b. P11,  2.1.3节，第一段中的 AVI 应为 AV1<br>c. P22，3.2.2 节，第三段中的所有 AVI 应为 AV1<br>d. P261， 13.5节，第二段中的 AVI 应为 AV1</p><h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P10, P11, P12 中的三张图，修改如下：</p><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive2.png" alt=""></p><a id="more"></a><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive3.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_plugin.png" alt=""></p><h2 id="勘误三"><a href="#勘误三" class="headerlink" title="勘误三"></a>勘误三</h2><p>P15，第三段应为：</p><p>“从上面的描述中你可以看到，在 WebRTC 架构的四层中，最复杂、最核心的是第三层，即 引擎层，因此，这里我再对引擎层内部的关系做下简要介绍。引擎层包括三部分内容，分别是: 音频引擎、视频引擎以及网络传输。其中<strong>音频引擎</strong>和视频引擎是相对比较独立的。不过，它们 都需要与网络传输层(transport)打交道。也就是说，它们都需要将自己产生的数据通过网络 传输层发送出去;同时，也需要通过网络传输层接收其它端发过来的数据。此外，音频引擎与 视频引擎由于要进行音视频同步的原因，所以它们之间也存在着关联关系。”</p><h2 id="勘误四"><a href="#勘误四" class="headerlink" title="勘误四"></a>勘误四</h2><p>P34，代码4.4 修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.to(room).emit(&#39;cmd&#39;);</span><br></pre></td></tr></table></figure><h2 id="勘误五"><a href="#勘误五" class="headerlink" title="勘误五"></a>勘误五</h2><p>P39，代码98行，修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.to(room).emit(&#39;other_join&#39;, room, socket.id);</span><br></pre></td></tr></table></figure><h2 id="勘误六"><a href="#勘误六" class="headerlink" title="勘误六"></a>勘误六</h2><p>P40, 代码120行，修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.emit(&#39;left&#39;, room, socket.id);</span><br></pre></td></tr></table></figure><h2 id="勘误七"><a href="#勘误七" class="headerlink" title="勘误七"></a>勘误七</h2><p>P43，第四段第一个单词<strong>groudId</strong>应为<strong>groupId</strong>。</p><h2 id="勘误八"><a href="#勘误八" class="headerlink" title="勘误八"></a>勘误八</h2><p>P50, 代码20行，修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(&#39;other_join&#39;, (roomid) &#x3D;&gt; &#123;</span><br></pre></td></tr></table></figure><h2 id="勘误九"><a href="#勘误九" class="headerlink" title="勘误九"></a>勘误九</h2><p>P70, 代码170行，修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(&#39;other_join&#39;, (roomid) &#x3D;&gt; &#123;</span><br></pre></td></tr></table></figure><h2 id="勘误十"><a href="#勘误十" class="headerlink" title="勘误十"></a>勘误十</h2><p>P71, 代码210行，修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(&#39;left&#39;, (roomid, id) &#x3D;&gt; &#123;</span><br></pre></td></tr></table></figure><h2 id="勘误十一"><a href="#勘误十一" class="headerlink" title="勘误十一"></a>勘误十一</h2><p>P98，表6.2各NAT之间可穿越表应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/NAT_table.png" alt=""></p><h2 id="勘误十二"><a href="#勘误十二" class="headerlink" title="勘误十二"></a>勘误十二</h2><p>P103，6.4.2小节倒数第二应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/turn_protocal.png" alt=""></p><p>“因为主机 A 拿到了主机 B 的 Relay 类型的 Candidate，即 RelayB，所以主机 A 可以直接将音视频数据发向 RelayB。TurnServer 从 RelayB 接收到数据后，会将数据 打包成 TURN 消息，经 3478 端口发往主机<strong>B</strong>。主机<strong>B</strong>收数据后，再利用 TurnClient 模块将数据从 TURN 消息中取出，交给其它模块做进一步处理; 同理，主机 B 与主机 A 的操作流程是一样的。TurnServer 从 RelayA 收到数据后，将其打包成 TURN 消息， 也要经过 3478 端口转发给主机<strong>A</strong>。”</p><h2 id="勘误十三"><a href="#勘误十三" class="headerlink" title="勘误十三"></a>勘误十三</h2><p>P114，第一段应为：</p><p>“程， 默认情况下 WebRTC 会将 VP8/H264 等编码器编码后的数据再交由 red 模块编码，生成带一些冗余信息的数据包，这样当传输中某个包丢了，就可以通过其他包将其恢复回来，而不用重传丢失的包。了解了上面这些内容后，第 <strong>16～18</strong> 行代码的含义应该就清楚了，即 PT 值为 124 表示需要使用 red 对之前编码好的数据再进行 red 处理，119 是 PT=124 重传数据 包的 PayloadType。如果用 Wireshark 等抓包工具抓取 WebRTC 媒体数据包时会发现它们都 是 red 包，而在 red 包里装的是 VP8/H264 编码的数据。”</p><h2 id="勘误十四"><a href="#勘误十四" class="headerlink" title="勘误十四"></a>勘误十四</h2><p>P124，代码行号69，内容应为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">69 使用Opus时，每个音频帧的最小间隔为10毫秒，使用带内FEC</span><br><span class="line">70 a&#x3D;fmtp:111 minptime&#x3D;10;useinbandfec&#x3D;1</span><br></pre></td></tr></table></figure><h2 id="勘误十五"><a href="#勘误十五" class="headerlink" title="勘误十五"></a>勘误十五</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png" alt=""></p><h2 id="勘误十六"><a href="#勘误十六" class="headerlink" title="勘误十六"></a>勘误十六</h2><p>P175，10.1 节的第一段应为：</p><p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于<strong>接收端</strong>的拥塞控制算法 Goog-REMB。”</p><h2 id="勘误十七"><a href="#勘误十七" class="headerlink" title="勘误十七"></a>勘误十七</h2><p>P176，第一段中的<strong>QUICK</strong>应该为<strong>QUIC</strong>。此外，注脚中的<strong>QUICK</strong>，也应为<strong>QUIC</strong>。</p><h2 id="勘误十八"><a href="#勘误十八" class="headerlink" title="勘误十八"></a>勘误十八</h2><p>P183, 公式10.19 下面一段的第一句应为：</p><p>“在上述公式中，d(i) 表示当前包组到达时长与包组发送时长之差，<strong>参见公式10.4。</strong>正常情况下该值有正有负, ……”</p><h2 id="勘误十九"><a href="#勘误十九" class="headerlink" title="勘误十九"></a>勘误十九</h2><p>P271, 第一段应为：</p><p>“在上述代码中，如果对其再进行简化的话，可以发现 StartNextDecode() 方法中只调用了frame_buffer_对象的 NextFrame() 这个方法。由于该方法传入参数过于复杂，所以不太好理解，其实关键点是掌握其核心代码的第9～15行。”</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;勘误一&quot;&gt;&lt;a href=&quot;#勘误一&quot; class=&quot;headerlink&quot; title=&quot;勘误一&quot;&gt;&lt;/a&gt;勘误一&lt;/h2&gt;&lt;p&gt;a. P3, 1.2节，第三段中的 AVI 应为 AV1.&lt;br&gt;b. P11,  2.1.3节，第一段中的 AVI 应为 AV1&lt;br&gt;c. P22，3.2.2 节，第三段中的所有 AVI 应为 AV1&lt;br&gt;d. P261， 13.5节，第二段中的 AVI 应为 AV1&lt;/p&gt;
+&lt;h2 id=&quot;勘误二&quot;&gt;&lt;a href=&quot;#勘误二&quot; class=&quot;headerlink&quot; title=&quot;勘误二&quot;&gt;&lt;/a&gt;勘误二&lt;/h2&gt;&lt;p&gt;P10, P11, P12 中的三张图，修改如下：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>音视频通信为什么要选择WebRTC？</title>
@@ -261,27 +282,6 @@
 &lt;p&gt;SDL是 “Simple DirectMedia Layer”的缩写，它是一个开源的项目。其主要用于游戏开发中的多媒体处理，如视频渲染，音频播放，鼠标/键盘控制等操作。&lt;/p&gt;
 &lt;p&gt;并且它是一个跨平台的多媒体库。也就是说它对外接供了一套统一的接口，但在内部，它会根据不同平台调用不同的底层 API库。如在 Linux 系统下，它会使用 opengl 做渲染，而在 Window 下它会调用 D3D API进行渲染。&lt;/p&gt;
 &lt;p&gt;我之所以要介绍它，主要是因为我要在开发的多媒体播放器中使用它。&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
-    <link href="https://blog.avdancedu.com/f2403a12/"/>
-    <id>https://blog.avdancedu.com/f2403a12/</id>
-    <published>2021-08-23T02:48:36.240Z</published>
-    <updated>2021-08-23T02:48:36.240Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>a. P3, 1.2节，第三段中的 AVI 应为 AV1.<br>b. P11,  2.1.3节，第一段中的 AVI 应为 AV1<br>c. P22，3.2.2 节，第三段中的所有 AVI 应为 AV1<br>d. P261， 13.5节，第二段中的 AVI 应为 AV1</p><h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P10, P11, P12 中的三张图，修改如下：</p><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive2.png" alt=""></p><a id="more"></a><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive3.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_plugin.png" alt=""></p><h2 id="勘误三"><a href="#勘误三" class="headerlink" title="勘误三"></a>勘误三</h2><p>P15，第三段应为：</p><p>“从上面的描述中你可以看到，在 WebRTC 架构的四层中，最复杂、最核心的是第三层，即 引擎层，因此，这里我再对引擎层内部的关系做下简要介绍。引擎层包括三部分内容，分别是: 音频引擎、视频引擎以及网络传输。其中<strong>音频引擎</strong>和视频引擎是相对比较独立的。不过，它们 都需要与网络传输层(transport)打交道。也就是说，它们都需要将自己产生的数据通过网络 传输层发送出去;同时，也需要通过网络传输层接收其它端发过来的数据。此外，音频引擎与 视频引擎由于要进行音视频同步的原因，所以它们之间也存在着关联关系。”</p><h2 id="勘误四"><a href="#勘误四" class="headerlink" title="勘误四"></a>勘误四</h2><p>P34，代码4.4 修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.to(room).emit(&#39;cmd&#39;);</span><br></pre></td></tr></table></figure><h2 id="勘误五"><a href="#勘误五" class="headerlink" title="勘误五"></a>勘误五</h2><p>P43，第四段第一个单词<strong>groudId</strong>应为<strong>groupId</strong>。</p><h2 id="勘误六"><a href="#勘误六" class="headerlink" title="勘误六"></a>勘误六</h2><p>P98，表6.2各NAT之间可穿越表应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/NAT_table.png" alt=""></p><h2 id="勘误七"><a href="#勘误七" class="headerlink" title="勘误七"></a>勘误七</h2><p>P103，6.4.2小节倒数第二应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/turn_protocal.png" alt=""></p><p>“因为主机 A 拿到了主机 B 的 Relay 类型的 Candidate，即 RelayB，所以主机 A 可以直接将音视频数据发向 RelayB。TurnServer 从 RelayB 接收到数据后，会将数据 打包成 TURN 消息，经 3478 端口发往主机<strong>B</strong>。主机<strong>B</strong>收数据后，再利用 TurnClient 模块将数据从 TURN 消息中取出，交给其它模块做进一步处理; 同理，主机 B 与主机 A 的操作流程是一样的。TurnServer 从 RelayA 收到数据后，将其打包成 TURN 消息， 也要经过 3478 端口转发给主机<strong>A</strong>。”</p><h2 id="勘误八"><a href="#勘误八" class="headerlink" title="勘误八"></a>勘误八</h2><p>P114，第一段应为：</p><p>“程， 默认情况下 WebRTC 会将 VP8/H264 等编码器编码后的数据再交由 red 模块编码，生成带一些冗余信息的数据包，这样当传输中某个包丢了，就可以通过其他包将其恢复回来，而不用重传丢失的包。了解了上面这些内容后，第 <strong>16～18</strong> 行代码的含义应该就清楚了，即 PT 值为 124 表示需要使用 red 对之前编码好的数据再进行 red 处理，119 是 PT=124 重传数据 包的 PayloadType。如果用 Wireshark 等抓包工具抓取 WebRTC 媒体数据包时会发现它们都 是 red 包，而在 red 包里装的是 VP8/H264 编码的数据。”</p><h2 id="勘误九"><a href="#勘误九" class="headerlink" title="勘误九"></a>勘误九</h2><p>P124，代码行号69，内容应为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">69 使用Opus时，每个音频帧的最小间隔为10毫秒，使用带内FEC</span><br><span class="line">70 a&#x3D;fmtp:111 minptime&#x3D;10;useinbandfec&#x3D;1</span><br></pre></td></tr></table></figure><h2 id="勘误十"><a href="#勘误十" class="headerlink" title="勘误十"></a>勘误十</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png" alt=""></p><h2 id="勘误十一"><a href="#勘误十一" class="headerlink" title="勘误十一"></a>勘误十一</h2><p>P175，10.1 节的第一段应为：</p><p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于<strong>接收端</strong>的拥塞控制算法 Goog-REMB。”</p><h2 id="勘误十二"><a href="#勘误十二" class="headerlink" title="勘误十二"></a>勘误十二</h2><p>P176，第一段中的<strong>QUICK</strong>应该为<strong>QUIC</strong>。此外，注脚中的<strong>QUICK</strong>，也应为<strong>QUIC</strong>。</p><h2 id="勘误十三"><a href="#勘误十三" class="headerlink" title="勘误十三"></a>勘误十三</h2><p>P183, 公式10.19 下面一段的第一句应为：</p><p>“在上述公式中，d(i) 表示当前包组到达时长与包组发送时长之差，<strong>参见公式10.4。</strong>正常情况下该值有正有负, ……”</p><h2 id="勘误十四"><a href="#勘误十四" class="headerlink" title="勘误十四"></a>勘误十四</h2><p>P271, 第一段应为：</p><p>“在上述代码中，如果对其再进行简化的话，可以发现 StartNextDecode() 方法中只调用了frame_buffer_对象的 NextFrame() 这个方法。由于该方法传入参数过于复杂，所以不太好理解，其实关键点是掌握其核心代码的第9～15行。”</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;勘误一&quot;&gt;&lt;a href=&quot;#勘误一&quot; class=&quot;headerlink&quot; title=&quot;勘误一&quot;&gt;&lt;/a&gt;勘误一&lt;/h2&gt;&lt;p&gt;a. P3, 1.2节，第三段中的 AVI 应为 AV1.&lt;br&gt;b. P11,  2.1.3节，第一段中的 AVI 应为 AV1&lt;br&gt;c. P22，3.2.2 节，第三段中的所有 AVI 应为 AV1&lt;br&gt;d. P261， 13.5节，第二段中的 AVI 应为 AV1&lt;/p&gt;
-&lt;h2 id=&quot;勘误二&quot;&gt;&lt;a href=&quot;#勘误二&quot; class=&quot;headerlink&quot; title=&quot;勘误二&quot;&gt;&lt;/a&gt;勘误二&lt;/h2&gt;&lt;p&gt;P10, P11, P12 中的三张图，修改如下：&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
