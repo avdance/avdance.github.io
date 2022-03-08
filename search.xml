@@ -454,6 +454,8 @@
 </li>
 </ul>
 <h2 id="Q-非Mac同学如何学习本课程"><a href="#Q-非Mac同学如何学习本课程" class="headerlink" title="Q: 非Mac同学如何学习本课程"></a>Q: 非Mac同学如何学习本课程</h2><p>A：本课程中的例子的界面是由 Swift 编写的，如果你没有 Mac 系统的话，你可以用 Qt 甚至不用界面开发，代码中与ffmpeg相着的代码都是跨平台的。</p>
+<h2 id="Q-在windows下的mingw环境中出现下面错误该如何解决？"><a href="#Q-在windows下的mingw环境中出现下面错误该如何解决？" class="headerlink" title="Q: 在windows下的mingw环境中出现下面错误该如何解决？"></a>Q: 在windows下的mingw环境中出现下面错误该如何解决？</h2><p>A:<br><img data-src="https://cdn.avdancedu.com/image/article/av_base/mingw_error.png" alt=""><br>安装一下工具链，命令如下：pacman -S gcc mingw-w64-x86_64-toolchain yasm mingw-w64-x86_64-SDL2 make diffutils pkg-config</p>
+<h2 id="Q-为什么-avformat-open-input返回错误码-22？"><a href="#Q-为什么-avformat-open-input返回错误码-22？" class="headerlink" title="Q: 为什么 avformat_open_input返回错误码 -22？"></a>Q: 为什么 avformat_open_input返回错误码 -22？</h2><p>A: 将avformat_open_input中的第一个参数，上下文（ctx）初始化为NULL。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://coding.imooc.com/class/415.html?mc_marking=b587280c0c1c0e76c1092aa21406565a&mc_channel=syb6" target="_blank" rel="noopener">音视频小白系统入门课</a></p>
 ]]></content>
       <categories>
