@@ -1,4 +1,429 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 4.2.1"><link rel="icon" type="image/png" sizes="32x32" href="/images/avdance32_32.ico"><link rel="icon" type="image/png" sizes="16x16" href="/images/avdance16_16.ico"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"blog.avdancedu.com",root:"/",scheme:"Gemini",version:"7.8.0",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!1,show_result:!1,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!0,pangu:!1,comments:{style:"tabs",active:"valine",storage:!0,lazyload:!1,nav:null,activeClass:"valine"},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},path:"search.xml"}</script><meta name="description" content="我精心打造的新课 《WebRTC源码深入剖析》 终于更新完了！！！ 背景2021年年初，在完成了我的处女作《WebRTC音视频实时互动技术——原理、实战与源码分析》一书之后，我终于下定决心，出一部WebRTC源码分析的课程了。"><meta property="og:type" content="article"><meta property="og:title" content="《WebRTC源码深入剖析》总结"><meta property="og:url" content="https://blog.avdancedu.com/59ecb92/index.html"><meta property="og:site_name" content="音视跳动科技"><meta property="og:description" content="我精心打造的新课 《WebRTC源码深入剖析》 终于更新完了！！！ 背景2021年年初，在完成了我的处女作《WebRTC音视频实时互动技术——原理、实战与源码分析》一书之后，我终于下定决心，出一部WebRTC源码分析的课程了。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/fengmian.jpeg"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping1.png"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping2.png"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping3.png"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping4.png"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-1.png"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-2.png"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-3.png"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-4.png"><meta property="article:published_time" content="2022-06-05T03:46:33.976Z"><meta property="article:modified_time" content="2022-06-05T03:46:33.976Z"><meta property="article:author" content="音视跳动"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/fengmian.jpeg"><link rel="canonical" href="https://blog.avdancedu.com/59ecb92/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>《WebRTC源码深入剖析》总结 | 音视跳动科技</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript><link rel="alternate" href="/atom.xml" title="音视跳动科技" type="application/atom+xml"></head><body itemscope itemtype="https://schema.org/WebPage"><div class="container"><div class="headband"></div><div id="needsharebutton-float"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div><header class="header" itemscope itemtype="https://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">音视跳动科技</h1><span class="logo-line-after"><i></i></span></a><p class="site-subtitle" itemprop="description">传播最前沿的科技知识！</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i> 首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i> 标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i> 分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i> 归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i> 关于</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i> 搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"> <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"><div id="no-result"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div></div></div></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div> <a href="https://github.com/avdance" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="https://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://blog.avdancedu.com/59ecb92/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="image" content="/images/avdancelogo.jpg"><meta itemprop="name" content="音视跳动"><meta itemprop="description" content="传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="音视跳动科技"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> 《WebRTC源码深入剖析》总结</h1><div class="post-meta"><i class="fa fa-thumb-tack"></i> <font color="7D26CD">置顶</font> <span class="post-meta-divider">|</span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2022-06-05 11:46:33" itemprop="dateCreated datePublished" datetime="2022-06-05T11:46:33+08:00">2022-06-05</time></span><span id="/59ecb92/" class="post-meta-item leancloud_visitors" data-flag-title="《WebRTC源码深入剖析》总结" title="阅读次数"><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数：</span><span class="leancloud-visitors-count"></span></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-comment-o"></i></span> <span class="post-meta-item-text">Valine：</span><a title="valine" href="/59ecb92/#valine-comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/59ecb92/" itemprop="commentCount"></span></a></span><br><span class="post-meta-item" title="本文字数"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">本文字数：</span> <span>2.7k</span></span></div></header><div class="post-body" itemprop="articleBody"><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/fengmian.jpeg" alt=""></p><p>我精心打造的新课 <strong><a href="https://coding.imooc.com/class/532.html" target="_blank" rel="noopener">《WebRTC源码深入剖析》</a></strong> 终于更新完了！！！</p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>2021年年初，在完成了我的处女作<a href="https://item.jd.com/10033954503352.html" target="_blank" rel="noopener">《WebRTC音视频实时互动技术——原理、实战与源码分析》</a>一书之后，我终于下定决心，出一部WebRTC源码分析的课程了。</p><a id="more"></a><p>我心里十分清楚，要完成这样一个“<strong>大部头</strong>” ，一定会遇到很多困难。比如，如何将这些苦涩难懂的代码讲的通俗易懂？多长时间能讲完？费那么大心血是否值得（有相应的回报） ……</p><p>但我内心又有几分笃定，一方面自2011年起，自己就开始关注WebRTC，最近几年也一直使用WebRTC做定制化开发。而且，在写<a href="https://item.jd.com/10033954503352.html" target="_blank" rel="noopener">《WebRTC音视频实时互动技术——原理、实战与源码分析》</a>一书时，我又对WebRTC源码翻了个底朝天；另一方面，自己已经推出多门视频课，对如何讲课，如何讲好课，也有了一些自己的心得。所以，对是否能讲好这门课，心里还是比较有把握的！<strong>更何况</strong>，这是我完成<strong>WebRTC三部曲</strong>的最后一步，无论付出多大代价都要完成的。唯一要做的选择是什么时候开始！</p><p>就是在这样一个背景下，2021年5月，<strong>我开始行动了！</strong></p><h2 id="WebRTC三部曲"><a href="#WebRTC三部曲" class="headerlink" title="WebRTC三部曲"></a>WebRTC三部曲</h2><p><strong>完成WebRTC三部曲！</strong> 是我这几年的一个<strong>梦想</strong>（显然这个梦想不够高远，因为已经实现了^V^）。音视频实时通信领域的技术有多难，只有自己亲自做过的人才知道，为了保障实时通信时的音视频质量，你不仅要解决音视频编码问题，还必须要解决网络质量，丢包、乱序、延时、重传等等，这些都属于网络质量问题。那为什么会引起网络质量问题呢？比如，发包量超过带宽大小，会导致丢包；线路本身质量带来的问题，各运营商之间的自我保护…..总之，用户看到的都是视频卡了，花屏了，但背后的原因可能各不相同。</p><p>要解决在不同的终端（设备）上进行音视频采集/播放，不同编解码格式的数据可以互通，在各种复杂网络环境中能够保障最佳的实时通话质量，难度之大，真如李白诗中描述的“难于上青天！”。而这样一个天大的难题，却被WebRTC“轻松”化解了。神奇不神奇？意外不意外？因此，自WebRTC被开源，便被业内人奉为圭臬，受到人们的追捧。可以说，所有做实时通信的技术人，无不以熟悉WebRTC而自傲！</p><p>WebRTC到底是怎么做的呢？我们遇到的各种问题为什么WebRTC却处理的很好呢？这些问题一直萦绕在每个技术人的心里。既然WebRTC开源了，那就好办了，读它的代码！！！</p><p>如电视剧的发展情节一样，事情总不会那么一帆风顺，想读懂WebRTC源码？那可不是一件容易的事儿！</p><ul><li><strong>第一关</strong>，代码下不下来。中美之间的关系大家都清楚，没有点<strong>小手段</strong>想从Goole的源码库中将WebRTC代码拉下来，那是不可能的！</li><li><strong>第二关</strong>，代码拉下来又能怎样呢？10多个G的代码，怎么看？从哪个模块看起？那行代码是头儿？</li><li><strong>第三关</strong>，有决心，硬着头皮看？WebRTC的多线程就可以把你搞死！</li><li>……</li></ul><p>好吧！对于绝大多数同学来说，读WebRTC源码的结果就是一轮游，或是<strong>从入门到放弃</strong>（超不过三天）！</p><p>2015年，一个偶然的机会，我加入了当时的明星创业团队–<strong>跟谁学</strong>，在那儿一年多的时间里，让我真正了解了什么是创业。<strong>几十个人，没日没夜，为了一个共同的目标，为了心中的梦想（愿景）一起奋斗！拼一把，为社会，为家庭，更是为自己</strong>。</p><p>这段经历为我埋下了创业的种子。我在想，要不要自己也做点事儿呢？30多岁，创业不年轻，但也绝不老！有体力，有心力，多少还有一点财力。当时的<strong>在线教育</strong>是一股热潮，WebRTC这么好的东西，这么一个宝藏，又是未来技术的方向，为什么不把它讲出来，让更多的人知道呢？</p><p><strong>WebRTC三部曲</strong>，这个计划渐渐的在我的脑海中浮现出来，于是2017年我出来创业了。</p><p>WebRTC三部曲的第一部是<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a>，这门课从WebRTC的应用角度来讲，主要讲WebRTC都能做什么，该怎么使用它，包括各个终端的互联互通。这门课已于2019年上线；第二部<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《WebRTC流媒体服器》</a>讲的是如何设计、实现一个可以高负载、大并发，并且能与WebRTC（浏览器）互通的流媒体服务器，这门课同样于2019年上线；第三部就是刚刚更新完的<a href="https://coding.imooc.com/class/532.html" target="_blank" rel="noopener">《WebRTC源码深入剖析》</a>。</p><p>这门课对WebRTC进行了抽丝剥茧的分析。从WebRTC的Demo开始讲起，之后讲解WebRTC是如何控制音视频设备采集数据的；采集的数据是如何一步步转给编码器进行编码的；在编码的同时还要进行本地预览，预览的视频数据是在编码前还是编码后？这类大家比较关心的问题在课程中都做了详尽说明。此外，编码后的数据是如何通过网络传输给对端的；当有多个网络可以选择时，WebRTC是如何做选出最优链路的；WebRTC是如何保障网络质量的……所有的这些问题都在课程中一一做了剖析。</p><p><strong>至此，WebRTC三部曲计划完成！！！</strong></p><h2 id="呕心沥血，精心打造"><a href="#呕心沥血，精心打造" class="headerlink" title="呕心沥血，精心打造"></a>呕心沥血，精心打造</h2><p>如我在<strong>背景</strong>一节所述，我对录制这门课的难度是有预估的。但当真正开始录制之后，才发现难度远超想象。最大的困哪莫过于如何将各个类之间的错综复杂的关系讲明白。如果只讲类关系图，可以很好的梳理出它们的关系和脉络，但同学们看不到代码，看不到细节，这样的课能叫源码剖析吗？如果带着大家一行行看代码，似乎又只见树木不见森林，同样无法达到好的预期。光是为了解决这个问题就花了我好长时间。</p><p>本来计划这门课用6个月的时间录制完成，结果一拖再拖，最后花了整整一年的时间才完成。一年内，没有节假日，没有参加任何活动，全身心投入其中，不夸张的说，为了这门课，真的是<strong>呕心沥血了！</strong></p><p>在这一年中，我写了近 <strong>1400</strong> 页的PPT，画了 <strong>200</strong> 多张精美的图片， 录制了 <strong>200</strong> 多节课，剪辑出了近 <strong>40</strong> 个小时的视频。</p><p>讲解的知识之多，内容跨度之大也超出想象，包括：WebRTC线程模型、Windows CoreAudio、DirectShow、媒体协商过程、音频引擎、视频引擎、网络传输、Qos（Nack/RTX、jitterbuffer、FEC、NetEq)、Simulcast、SVC等等。</p><p>不夸张的说，这门至少在最近几年内，是同类课程的<strong>天花板</strong>了。而且课程还会不断更新，将一些当时想讲，但时间不够没有讲的内容陆续更新到课程中。相信这样一门精心打造的课程，一定会让你觉得<strong>物超所值</strong>！</p><h2 id="价格贵不贵？"><a href="#价格贵不贵？" class="headerlink" title="价格贵不贵？"></a>价格贵不贵？</h2><p>有同学说，这门课<strong>499</strong>的价格是不是有点小贵? 我们来简单的算一算你就清楚这个定价贵不贵了。 按课节算，200节课程，499/200，每节课才2块多钱；按小时算，近 40 个小时，每小时才10块多一点点。要知道我在外面线下培训每小时是几千块。</p><p><strong>你觉得这样的价格贵吗?</strong></p><h2 id="好评如潮"><a href="#好评如潮" class="headerlink" title="好评如潮"></a>好评如潮</h2><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping1.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping2.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping3.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping4.png" alt=""></p><h2 id="课程目录"><a href="#课程目录" class="headerlink" title="课程目录"></a>课程目录</h2><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-1.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-2.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-3.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-4.png" alt=""></p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在更新完课程的最后一天做个总结，一方面记录一下<strong>WebRTC三部曲</strong>的完成（这件事儿对我意义重大），另一方面也为下一阶段开启一个新的篇章，同时为这门课做个小小的宣传！</p></div><div class="reward-container"><div></div> <button onclick='var qr=document.getElementById("qr");qr.style.display="none"===qr.style.display?"block":"none"'> 打赏</button><div id="qr" style="display:none"><div style="display:inline-block"> <img src="https://cdn.avdancedu.com/image/next/wechat.jpeg" alt="音视跳动 微信支付"><p>微信支付</p></div><div style="display:inline-block"> <img src="https://cdn.avdancedu.com/image/next/alipay.jpeg" alt="音视跳动 支付宝"><p>支付宝</p></div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"> <strong>本文作者：</strong> 音视跳动-李超 [avdance@163.com]</li><li class="post-copyright-link"> <strong>本文链接：</strong> <a href="https://blog.avdancedu.com/59ecb92/" title="《WebRTC源码深入剖析》总结">https://blog.avdancedu.com/59ecb92/</a></li><li class="post-copyright-license"> <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class="followme"><p>欢迎关注我的其它发布渠道</p><div class="social-list"><div class="social-item"><a target="_blank" class="social-link" href="https://cdn.avdancedu.com/image/next/WeChat.jpeg"><span class="icon"><i class="fa fa-wechat"></i></span> <span class="label">WeChat</span></a></div><div class="social-item"><a target="_blank" class="social-link" href="/atom.xml"><span class="icon"><i class="fa fa-rss"></i></span> <span class="label">RSS</span></a></div></div></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-item"><a href="/f2403a12/" rel="prev" title="《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表"><i class="fa fa-chevron-left"></i> 《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</a></div><div class="post-nav-item"></div></div></footer></article></div><div class="comments" id="valine-comments"></div><script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avdance32_32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avdance16_16.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.avdancedu.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我精心打造的新课 《WebRTC源码深入剖析》 终于更新完了！！！ 背景2021年年初，在完成了我的处女作《WebRTC音视频实时互动技术——原理、实战与源码分析》一书之后，我终于下定决心，出一部WebRTC源码分析的课程了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《WebRTC源码深入剖析》总结">
+<meta property="og:url" content="https://blog.avdancedu.com/59ecb92/index.html">
+<meta property="og:site_name" content="音视跳动科技">
+<meta property="og:description" content="我精心打造的新课 《WebRTC源码深入剖析》 终于更新完了！！！ 背景2021年年初，在完成了我的处女作《WebRTC音视频实时互动技术——原理、实战与源码分析》一书之后，我终于下定决心，出一部WebRTC源码分析的课程了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/fengmian.jpeg">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping1.png">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping2.png">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping3.png">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping4.png">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-1.png">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-2.png">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-3.png">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-4.png">
+<meta property="article:published_time" content="2022-06-05T03:46:33.976Z">
+<meta property="article:modified_time" content="2022-06-05T03:46:33.976Z">
+<meta property="article:author" content="音视跳动">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.avdancedu.com/image/article/webrtc_parse/fengmian.jpeg">
+
+<link rel="canonical" href="https://blog.avdancedu.com/59ecb92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《WebRTC源码深入剖析》总结 | 音视跳动科技</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="音视跳动科技" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    
+        <div id="needsharebutton-float">
+          <span class="btn">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+          </span>
+        </div>
+    
+
+    <header class="header" itemscope itemtype="https://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">音视跳动科技</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">传播最前沿的科技知识！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/avdance" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="https://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.avdancedu.com/59ecb92/">
+
+    <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="image" content="/images/avdancelogo.jpg">
+      <meta itemprop="name" content="音视跳动">
+      <meta itemprop="description" content="传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="音视跳动科技">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《WebRTC源码深入剖析》总结
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <i class="fa fa-thumb-tack"></i>
+            <font color=7D26CD>置顶</font>
+            <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-05 11:46:33" itemprop="dateCreated datePublished" datetime="2022-06-05T11:46:33+08:00">2022-06-05</time>
+            </span>
+
+          
+            <span id="/59ecb92/" class="post-meta-item leancloud_visitors" data-flag-title="《WebRTC源码深入剖析》总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/59ecb92/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/59ecb92/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/fengmian.jpeg" alt=""></p>
+<p>我精心打造的新课 <strong><a href="https://coding.imooc.com/class/532.html" target="_blank" rel="noopener">《WebRTC源码深入剖析》</a></strong> 终于更新完了！！！</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>2021年年初，在完成了我的处女作<a href="https://item.jd.com/10033954503352.html" target="_blank" rel="noopener">《WebRTC音视频实时互动技术——原理、实战与源码分析》</a>一书之后，我终于下定决心，出一部WebRTC源码分析的课程了。</p>
+<a id="more"></a>
+
+<p>我心里十分清楚，要完成这样一个“<strong>大部头</strong>” ，一定会遇到很多困难。比如，如何将这些苦涩难懂的代码讲的通俗易懂？多长时间能讲完？费那么大心血是否值得（有相应的回报） ……</p>
+<p>但我内心又有几分笃定，一方面自2011年起，自己就开始关注WebRTC，最近几年也一直使用WebRTC做定制化开发。而且，在写<a href="https://item.jd.com/10033954503352.html" target="_blank" rel="noopener">《WebRTC音视频实时互动技术——原理、实战与源码分析》</a>一书时，我又对WebRTC源码翻了个底朝天；另一方面，自己已经推出多门视频课，对如何讲课，如何讲好课，也有了一些自己的心得。所以，对是否能讲好这门课，心里还是比较有把握的！<strong>更何况</strong>，这是我完成<strong>WebRTC三部曲</strong>的最后一步，无论付出多大代价都要完成的。唯一要做的选择是什么时候开始！</p>
+<p>就是在这样一个背景下，2021年5月，<strong>我开始行动了！</strong></p>
+<h2 id="WebRTC三部曲"><a href="#WebRTC三部曲" class="headerlink" title="WebRTC三部曲"></a>WebRTC三部曲</h2><p><strong>完成WebRTC三部曲！</strong> 是我这几年的一个<strong>梦想</strong>（显然这个梦想不够高远，因为已经实现了^V^）。音视频实时通信领域的技术有多难，只有自己亲自做过的人才知道，为了保障实时通信时的音视频质量，你不仅要解决音视频编码问题，还必须要解决网络质量，丢包、乱序、延时、重传等等，这些都属于网络质量问题。那为什么会引起网络质量问题呢？比如，发包量超过带宽大小，会导致丢包；线路本身质量带来的问题，各运营商之间的自我保护…..总之，用户看到的都是视频卡了，花屏了，但背后的原因可能各不相同。</p>
+<p>要解决在不同的终端（设备）上进行音视频采集/播放，不同编解码格式的数据可以互通，在各种复杂网络环境中能够保障最佳的实时通话质量，难度之大，真如李白诗中描述的“难于上青天！”。而这样一个天大的难题，却被WebRTC“轻松”化解了。神奇不神奇？意外不意外？因此，自WebRTC被开源，便被业内人奉为圭臬，受到人们的追捧。可以说，所有做实时通信的技术人，无不以熟悉WebRTC而自傲！</p>
+<p>WebRTC到底是怎么做的呢？我们遇到的各种问题为什么WebRTC却处理的很好呢？这些问题一直萦绕在每个技术人的心里。既然WebRTC开源了，那就好办了，读它的代码！！！</p>
+<p>如电视剧的发展情节一样，事情总不会那么一帆风顺，想读懂WebRTC源码？那可不是一件容易的事儿！</p>
+<ul>
+<li><strong>第一关</strong>，代码下不下来。中美之间的关系大家都清楚，没有点<strong>小手段</strong>想从Goole的源码库中将WebRTC代码拉下来，那是不可能的！</li>
+<li><strong>第二关</strong>，代码拉下来又能怎样呢？10多个G的代码，怎么看？从哪个模块看起？那行代码是头儿？</li>
+<li><strong>第三关</strong>，有决心，硬着头皮看？WebRTC的多线程就可以把你搞死！</li>
+<li>……</li>
+</ul>
+<p>好吧！对于绝大多数同学来说，读WebRTC源码的结果就是一轮游，或是<strong>从入门到放弃</strong>（超不过三天）！</p>
+<p>2015年，一个偶然的机会，我加入了当时的明星创业团队–<strong>跟谁学</strong>，在那儿一年多的时间里，让我真正了解了什么是创业。<strong>几十个人，没日没夜，为了一个共同的目标，为了心中的梦想（愿景）一起奋斗！拼一把，为社会，为家庭，更是为自己</strong>。</p>
+<p>这段经历为我埋下了创业的种子。我在想，要不要自己也做点事儿呢？30多岁，创业不年轻，但也绝不老！有体力，有心力，多少还有一点财力。当时的<strong>在线教育</strong>是一股热潮，WebRTC这么好的东西，这么一个宝藏，又是未来技术的方向，为什么不把它讲出来，让更多的人知道呢？</p>
+<p><strong>WebRTC三部曲</strong>，这个计划渐渐的在我的脑海中浮现出来，于是2017年我出来创业了。</p>
+<p>WebRTC三部曲的第一部是<a href="https://coding.imooc.com/class/329.html" target="_blank" rel="noopener">《WebRTC入门与实战》</a>，这门课从WebRTC的应用角度来讲，主要讲WebRTC都能做什么，该怎么使用它，包括各个终端的互联互通。这门课已于2019年上线；第二部<a href="https://coding.imooc.com/class/387.html" target="_blank" rel="noopener">《WebRTC流媒体服器》</a>讲的是如何设计、实现一个可以高负载、大并发，并且能与WebRTC（浏览器）互通的流媒体服务器，这门课同样于2019年上线；第三部就是刚刚更新完的<a href="https://coding.imooc.com/class/532.html" target="_blank" rel="noopener">《WebRTC源码深入剖析》</a>。</p>
+<p>这门课对WebRTC进行了抽丝剥茧的分析。从WebRTC的Demo开始讲起，之后讲解WebRTC是如何控制音视频设备采集数据的；采集的数据是如何一步步转给编码器进行编码的；在编码的同时还要进行本地预览，预览的视频数据是在编码前还是编码后？这类大家比较关心的问题在课程中都做了详尽说明。此外，编码后的数据是如何通过网络传输给对端的；当有多个网络可以选择时，WebRTC是如何做选出最优链路的；WebRTC是如何保障网络质量的……所有的这些问题都在课程中一一做了剖析。</p>
+<p><strong>至此，WebRTC三部曲计划完成！！！</strong></p>
+<h2 id="呕心沥血，精心打造"><a href="#呕心沥血，精心打造" class="headerlink" title="呕心沥血，精心打造"></a>呕心沥血，精心打造</h2><p>如我在<strong>背景</strong>一节所述，我对录制这门课的难度是有预估的。但当真正开始录制之后，才发现难度远超想象。最大的困哪莫过于如何将各个类之间的错综复杂的关系讲明白。如果只讲类关系图，可以很好的梳理出它们的关系和脉络，但同学们看不到代码，看不到细节，这样的课能叫源码剖析吗？如果带着大家一行行看代码，似乎又只见树木不见森林，同样无法达到好的预期。光是为了解决这个问题就花了我好长时间。</p>
+<p>本来计划这门课用6个月的时间录制完成，结果一拖再拖，最后花了整整一年的时间才完成。一年内，没有节假日，没有参加任何活动，全身心投入其中，不夸张的说，为了这门课，真的是<strong>呕心沥血了！</strong></p>
+<p>在这一年中，我写了近 <strong>1400</strong> 页的PPT，画了 <strong>200</strong> 多张精美的图片， 录制了 <strong>200</strong> 多节课，剪辑出了近 <strong>40</strong> 个小时的视频。</p>
+<p>讲解的知识之多，内容跨度之大也超出想象，包括：WebRTC线程模型、Windows CoreAudio、DirectShow、媒体协商过程、音频引擎、视频引擎、网络传输、Qos（Nack/RTX、jitterbuffer、FEC、NetEq)、Simulcast、SVC等等。</p>
+<p>不夸张的说，这门至少在最近几年内，是同类课程的<strong>天花板</strong>了。而且课程还会不断更新，将一些当时想讲，但时间不够没有讲的内容陆续更新到课程中。相信这样一门精心打造的课程，一定会让你觉得<strong>物超所值</strong>！</p>
+<h2 id="价格贵不贵？"><a href="#价格贵不贵？" class="headerlink" title="价格贵不贵？"></a>价格贵不贵？</h2><p>有同学说，这门课<strong>499</strong>的价格是不是有点小贵? 我们来简单的算一算你就清楚这个定价贵不贵了。 按课节算，200节课程，499/200，每节课才2块多钱；按小时算，近 40 个小时，每小时才10块多一点点。要知道我在外面线下培训每小时是几千块。</p>
+<p><strong>你觉得这样的价格贵吗?</strong></p>
+<h2 id="好评如潮"><a href="#好评如潮" class="headerlink" title="好评如潮"></a>好评如潮</h2><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping1.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping2.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping3.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/haoping4.png" alt=""></p>
+<h2 id="课程目录"><a href="#课程目录" class="headerlink" title="课程目录"></a>课程目录</h2><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-1.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-2.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-3.png" alt=""><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_parse/dir-4.png" alt=""></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在更新完课程的最后一天做个总结，一方面记录一下<strong>WebRTC三部曲</strong>的完成（这件事儿对我意义重大），另一方面也为下一阶段开启一个新的篇章，同时为这门课做个小小的宣传！</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://cdn.avdancedu.com/image/next/wechat.jpeg" alt="音视跳动 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://cdn.avdancedu.com/image/next/alipay.jpeg" alt="音视跳动 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>音视跳动-李超 [avdance@163.com]
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.avdancedu.com/59ecb92/" title="《WebRTC源码深入剖析》总结">https://blog.avdancedu.com/59ecb92/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://cdn.avdancedu.com/image/next/WeChat.jpeg">
+            <span class="icon">
+              <i class="fa fa-wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/b363212d/" rel="prev" title="音视频通信为什么要选择WebRTC？">
+      <i class="fa fa-chevron-left"></i> 音视频通信为什么要选择WebRTC？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/f2403a12/" rel="next" title="《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表">
+      《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
   window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
@@ -18,7 +443,133 @@
       localStorage.setItem('comments_active', commentClass);
     });
   }
-</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc"> 文章目录</li><li class="sidebar-nav-overview"> 站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebRTC三部曲"><span class="nav-number">2.</span> <span class="nav-text">WebRTC三部曲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#呕心沥血，精心打造"><span class="nav-number">3.</span> <span class="nav-text">呕心沥血，精心打造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#价格贵不贵？"><span class="nav-number">4.</span> <span class="nav-text">价格贵不贵？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#好评如潮"><span class="nav-number">5.</span> <span class="nav-text">好评如潮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程目录"><span class="nav-number">6.</span> <span class="nav-text">课程目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person"> <img class="site-author-image" itemprop="image" alt="音视跳动" src="/images/avdancelogo.jpg"><p class="site-author-name" itemprop="name">音视跳动</p><div class="site-description" itemprop="description">传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">50</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">7</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">26</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/avdance" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;avdance" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="https://www.zhihu.com/people/garrylea/posts" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;garrylea&#x2F;posts" rel="noopener" target="_blank"><i class="fa fa-fw fa-zhihu"></i> ZhiHu</a></span></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="beian"><a href="https://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19056322号-1</a> <img src="/images/beianico.png" style="display:inline-block"><a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011102001366" rel="noopener" target="_blank">京公网安备11011102001366号</a></div><div class="copyright"> &copy; <span itemprop="copyrightYear">2022</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">李超</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span title="站点总字数">230k</span></div><script>
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebRTC三部曲"><span class="nav-number">2.</span> <span class="nav-text">WebRTC三部曲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#呕心沥血，精心打造"><span class="nav-number">3.</span> <span class="nav-text">呕心沥血，精心打造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#价格贵不贵？"><span class="nav-number">4.</span> <span class="nav-text">价格贵不贵？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#好评如潮"><span class="nav-number">5.</span> <span class="nav-text">好评如潮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程目录"><span class="nav-number">6.</span> <span class="nav-text">课程目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="音视跳动"
+      src="/images/avdancelogo.jpg">
+  <p class="site-author-name" itemprop="name">音视跳动</p>
+  <div class="site-description" itemprop="description">传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/avdance" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;avdance" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/garrylea/posts" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;garrylea&#x2F;posts" rel="noopener" target="_blank"><i class="fa fa-fw fa-zhihu"></i>ZhiHu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      
+        <!--
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/" rel="tag">const</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/janus/" rel="tag">janus</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/man/" rel="tag">man</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mediasoup/" rel="tag">mediasoup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">next</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/" rel="tag">plugin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slot/" rel="tag">slot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/" rel="tag">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/videoroom/" rel="tag">videoroom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E5%BA%8F%E5%9B%BE/" rel="tag">时序图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag">直播</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="tag">移动构造函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="tag">类型转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">4</span></li></ul>
+                </canvas>
+            </div>
+         </div>
+         -->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19056322号-1 </a>
+      <img src="/images/beianico.png" style="display: inline-block;"><a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011102001366" rel="noopener" target="_blank">京公网安备11011102001366号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李超</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">230k</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
   (function() {
     function leancloudSelector(url) {
       url = encodeURI(url);
@@ -108,7 +659,191 @@
         });
     }
   })();
-</script></div></footer></div><script src="/lib/anime.min.js"></script><script src="/lib/lozad.min.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/pisces.js"></script><script src="/js/next-boot.js"></script><script src="/js/local-search.js"></script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz","5dKv9XFD2w3gjJnb0xnWIIWz")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.min.css"><script src="/lib/needsharebutton/needsharebutton.min.js"></script><script>flOptions={iconStyle:"box",boxForm:"horizontal",position:"topRight",networks:"Weibo,Wechat,QQZone"},new needShareButton("#needsharebutton-float",flOptions)</script><script>
+</script>
+
+
+      </div>
+    </footer>
+
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz", "5dKv9XFD2w3gjJnb0xnWIIWz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.min.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.min.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,QQZone";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+
+<script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('/lib/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
@@ -134,4 +869,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script></body></html>
+</script>
+
+
+</body>
+</html>
