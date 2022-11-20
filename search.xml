@@ -854,8 +854,8 @@
   </entry>
   <entry>
     <title>GDB与LLDB</title>
-    <url>/a0ec02a7/</url>
-    <content><![CDATA[<h2 id="abbrlink-2ffb45c8"><a href="#abbrlink-2ffb45c8" class="headerlink" title="abbrlink: 2ffb45c8"></a>abbrlink: 2ffb45c8</h2><h2 id="GDB与LLDB命令对照表"><a href="#GDB与LLDB命令对照表" class="headerlink" title="GDB与LLDB命令对照表"></a>GDB与LLDB命令对照表</h2><hr>
+    <url>/2ffb45c8/</url>
+    <content><![CDATA[<h2 id="GDB与LLDB命令对照表"><a href="#GDB与LLDB命令对照表" class="headerlink" title="GDB与LLDB命令对照表"></a>GDB与LLDB命令对照表</h2><hr>
 <p><a href="https://lldb.llvm.org/lldb-gdb.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表1</a><br><a href="https://developer.apple.com/library/content/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-command-examples.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表2</a></p>
 <hr>
 <a id="more"></a>

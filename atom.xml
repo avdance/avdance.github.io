@@ -185,16 +185,16 @@
   
   <entry>
     <title>GDB与LLDB</title>
-    <link href="https://blog.avdancedu.com/a0ec02a7/"/>
-    <id>https://blog.avdancedu.com/a0ec02a7/</id>
+    <link href="https://blog.avdancedu.com/2ffb45c8/"/>
+    <id>https://blog.avdancedu.com/2ffb45c8/</id>
     <published>2022-11-19T06:52:00.000Z</published>
-    <updated>2022-11-20T04:56:06.270Z</updated>
+    <updated>2022-11-20T05:10:05.569Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="abbrlink-2ffb45c8"><a href="#abbrlink-2ffb45c8" class="headerlink" title="abbrlink: 2ffb45c8"></a>abbrlink: 2ffb45c8</h2><h2 id="GDB与LLDB命令对照表"><a href="#GDB与LLDB命令对照表" class="headerlink" title="GDB与LLDB命令对照表"></a>GDB与LLDB命令对照表</h2><hr><p><a href="https://lldb.llvm.org/lldb-gdb.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表1</a><br><a href="https://developer.apple.com/library/content/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-command-examples.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表2</a></p><hr><a id="more"></a><h2 id="设置观察点"><a href="#设置观察点" class="headerlink" title="设置观察点"></a>设置观察点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wa s v 变量名</span><br><span class="line">或 watchpoint set variable 变量名</span><br></pre></td></tr></table></figure><ul><li>观察点必须是独立的原始变量，而不能是类变量或结构体变量。</li></ul><h2 id="目前-LLDB-无法打印宏信息"><a href="#目前-LLDB-无法打印宏信息" class="headerlink" title="目前 LLDB 无法打印宏信息"></a>目前 LLDB 无法打印宏信息</h2><h2 id="查看内存内容"><a href="#查看内存内容" class="headerlink" title="查看内存内容"></a>查看内存内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x -s4 -fx -c4 0xbffff3c0</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="GDB与LLDB命令对照表"><a href="#GDB与LLDB命令对照表" class="headerlink" title="GDB与LLDB命令对照表"></a>GDB与LLDB命令对照表</h2><hr><p><a href="https://lldb.llvm.org/lldb-gdb.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表1</a><br><a href="https://developer.apple.com/library/content/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-command-examples.html" target="_blank" rel="noopener">GDB 与 LLDB 命令对照表2</a></p><hr><a id="more"></a><h2 id="设置观察点"><a href="#设置观察点" class="headerlink" title="设置观察点"></a>设置观察点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wa s v 变量名</span><br><span class="line">或 watchpoint set variable 变量名</span><br></pre></td></tr></table></figure><ul><li>观察点必须是独立的原始变量，而不能是类变量或结构体变量。</li></ul><h2 id="目前-LLDB-无法打印宏信息"><a href="#目前-LLDB-无法打印宏信息" class="headerlink" title="目前 LLDB 无法打印宏信息"></a>目前 LLDB 无法打印宏信息</h2><h2 id="查看内存内容"><a href="#查看内存内容" class="headerlink" title="查看内存内容"></a>查看内存内容</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x -s4 -fx -c4 0xbffff3c0</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;abbrlink-2ffb45c8&quot;&gt;&lt;a href=&quot;#abbrlink-2ffb45c8&quot; class=&quot;headerlink&quot; title=&quot;abbrlink: 2ffb45c8&quot;&gt;&lt;/a&gt;abbrlink: 2ffb45c8&lt;/h2&gt;&lt;h2 id=&quot;GDB与LLDB命令对照表&quot;&gt;&lt;a href=&quot;#GDB与LLDB命令对照表&quot; class=&quot;headerlink&quot; title=&quot;GDB与LLDB命令对照表&quot;&gt;&lt;/a&gt;GDB与LLDB命令对照表&lt;/h2&gt;&lt;hr&gt;
+      &lt;h2 id=&quot;GDB与LLDB命令对照表&quot;&gt;&lt;a href=&quot;#GDB与LLDB命令对照表&quot; class=&quot;headerlink&quot; title=&quot;GDB与LLDB命令对照表&quot;&gt;&lt;/a&gt;GDB与LLDB命令对照表&lt;/h2&gt;&lt;hr&gt;
 &lt;p&gt;&lt;a href=&quot;https://lldb.llvm.org/lldb-gdb.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GDB 与 LLDB 命令对照表1&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://developer.apple.com/library/content/documentation/IDEs/Conceptual/gdb_to_lldb_transition_guide/document/lldb-command-examples.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GDB 与 LLDB 命令对照表2&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
     
