@@ -82,7 +82,7 @@
       </tags>
   </entry>
   <entry>
-    <title>勘误表</title>
+    <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
     <url>/f2403a12/</url>
     <content><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>a. P3, 1.2节，第三段中的 AVI 应为 AV1.<br>b. P11,  2.1.3节，第一段中的 AVI 应为 AV1<br>c. P22，3.2.2 节，第三段中的所有 AVI 应为 AV1<br>d. P261， 13.5节，第二段中的 AVI 应为 AV1</p>
 <h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P10, P11, P12 中的三张图，修改如下：</p>
@@ -134,6 +134,7 @@
 <li>P129，代码254行，应修改为：“PT=125，代表视频编码器H264 / 采样率为90000”</li>
 <li>P129，代码271行，应修改为：“PT=108，代表视频编码器H264 / 采样率为90000”</li>
 </ul>
+<h2 id="勘误二十一"><a href="#勘误二十一" class="headerlink" title="勘误二十一"></a>勘误二十一</h2><p>P198, “博利叶算法”应改为”傅立叶算法”</p>
 ]]></content>
       <categories>
         <category>WebRTC</category>
