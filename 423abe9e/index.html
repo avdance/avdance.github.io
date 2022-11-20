@@ -1,4 +1,564 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 4.2.1"><link rel="icon" type="image/png" sizes="32x32" href="/images/avdance32_32.ico"><link rel="icon" type="image/png" sizes="16x16" href="/images/avdance16_16.ico"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"blog.avdancedu.com",root:"/",scheme:"Gemini",version:"7.8.0",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!1,show_result:!1,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!0,pangu:!1,comments:{style:"tabs",active:"valine",storage:!0,lazyload:!1,nav:null,activeClass:"valine"},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},path:"search.xml"}</script><meta name="description" content="本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。"><meta property="og:type" content="article"><meta property="og:title" content="git常用命令及一些特殊用法"><meta property="og:url" content="https://blog.avdancedu.com/423abe9e/index.html"><meta property="og:site_name" content="音视跳动科技"><meta property="og:description" content="本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/git/git-banner.jpg"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/git/git_base.jpg"><meta property="og:image" content="https://cdn.avdancedu.com/image/article/git/git_branch.jpg"><meta property="article:published_time" content="2020-06-05T05:44:03.000Z"><meta property="article:modified_time" content="2021-08-15T11:03:25.748Z"><meta property="article:author" content="音视跳动"><meta property="article:tag" content="git"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://cdn.avdancedu.com/image/article/git/git-banner.jpg"><link rel="canonical" href="https://blog.avdancedu.com/423abe9e/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>git常用命令及一些特殊用法 | 音视跳动科技</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript><link rel="alternate" href="/atom.xml" title="音视跳动科技" type="application/atom+xml"></head><body itemscope itemtype="https://schema.org/WebPage"><div class="container"><div class="headband"></div><div id="needsharebutton-float"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div><header class="header" itemscope itemtype="https://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">音视跳动科技</h1><span class="logo-line-after"><i></i></span></a><p class="site-subtitle" itemprop="description">传播最前沿的科技知识！</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i> 首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i> 标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i> 分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i> 归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i> 关于</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i> 搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"> <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"><div id="no-result"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div></div></div></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div> <a href="https://github.com/avdance" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="https://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://blog.avdancedu.com/423abe9e/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="image" content="/images/avdancelogo.jpg"><meta itemprop="name" content="音视跳动"><meta itemprop="description" content="传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="音视跳动科技"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> git常用命令及一些特殊用法</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2020-06-05 13:44:03" itemprop="dateCreated datePublished" datetime="2020-06-05T13:44:03+08:00">2020-06-05</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i></span> <span class="post-meta-item-text">更新于</span> <time title="修改时间：2021-08-15 19:03:25" itemprop="dateModified" datetime="2021-08-15T19:03:25+08:00">2021-08-15</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span></span><span id="/423abe9e/" class="post-meta-item leancloud_visitors" data-flag-title="git常用命令及一些特殊用法" title="阅读次数"><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数：</span><span class="leancloud-visitors-count"></span></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-comment-o"></i></span> <span class="post-meta-item-text">Valine：</span><a title="valine" href="/423abe9e/#valine-comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/423abe9e/" itemprop="commentCount"></span></a></span><br><span class="post-meta-item" title="本文字数"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">本文字数：</span> <span>4.2k</span></span></div></header><div class="post-body" itemprop="articleBody"><p><img data-src="https://cdn.avdancedu.com/image/article/git/git-banner.jpg" alt=""><br>本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。</p><a id="more"></a><h2 id="git-的基本工作原理"><a href="#git-的基本工作原理" class="headerlink" title="git 的基本工作原理"></a>git 的基本工作原理</h2><p>其实要想使用好git，你必须要知道一点git的工作原理，否则你在使用git时就只能死记硬背一些命令。如果你还处理死记硬背一些git命令的阶段，那么一旦你遇到一个非常复杂的或非手棘手的git case时，可以100%肯定你是无法解决的。</p><p>因此，了解一点git的基本工作原理是我们每个开发人员都必须的基础知识，下面我就对git的的基本工作原理做一下简要介绍。</p><h3 id="git的结构"><a href="#git的结构" class="headerlink" title="git的结构"></a>git的结构</h3><p>首先我们必须要清楚是，git是由三大部分组成的，即本地工作区，本地仓库以及远程仓库。</p><ul><li>本地工作区，就是你平常写代码或修改代码的地方。</li><li>本地仓库，就是我们工作区中.git目录。它里边有一堆子目录，这些子目录都有各自的用途，我们暂且不管。</li><li>远程仓库，这个比较好理解了，就是远端的git仓库，比如我们在github上创建的仓库。</li></ul><p>通过下面这张图我们可以更直观的了解这三大部分：<br><img data-src="https://cdn.avdancedu.com/image/article/git/git_base.jpg" alt="git结构图"></p><p>从图中我们可以清楚的知道，平时我们使用git的三个主要命令(git add、git commit、git push)具体都做了些什么:</p><ul><li>git add: 将本地工作区中代码的修改保存到本地仓库的staged区，即暂存区。</li><li>git commit: 将staged区中的内容保存到本地仓库。</li><li>git push: 将本地仓库中的内容推送给远程仓库保存。</li></ul><p>通过上面这张图我们可以得出以下几点重要结论。</p><p>第一，git在处理我们的提交时是按顺序、分阶段的。比如我们的一个提交，必须先到 staged 后才能进入本地仓库，这个处理顺序是不能乱的。</p><p>第二，git管理中有一个 HEAD 指针，它始终指向正在处理的git commit。而它的前一次git commit 可以用<code>HEAD^</code>表式，它的上上次commit可以用<code>HEAD ^^</code>表式。</p><p>第三，当我们想用地本仓库的内容更新本地工作区的内容时，如果 staged 中没有内容，则可以直接用本地仓库的内容更新本地工作区内容。但如果 staged 中有内容，则需要先更新staged ，然后再更新本地工作区。</p><p>第四，git的核心是本地仓库，所有的操作都是围绕着它来的。它既是用户<code>commit</code>的终点，又是远程仓库的接收<code>commit</code>起点。我们在使用git时，可以向本地仓库提交多次修改，而只向远程仓库推送一次，git推送时会将之前的多个<code>commit</code>合并到一起。</p><h3 id="git的分支管理"><a href="#git的分支管理" class="headerlink" title="git的分支管理"></a>git的分支管理</h3><p>在git中还有一个特别重要的概念就是branch，即分支。它是我们多人合作开发的基础。如下图所示：<br><img data-src="https://cdn.avdancedu.com/image/article/git/git_branch.jpg" alt="git 分支"></p><p>通过上图我们可以清楚的知道，git是以<strong>指针</strong>的方式对分支进行管理的。下面我们来详述一下git是如何管理分支的。</p><p>当我们执行<code>git init</code>时，git默认为我们创建一个分支，即<code>Master</code>分支。而HEAD指针也被初始化指向Master分支，因此每当你提交新的修改时，这些修改都会被压入到Master分支<strong>栈</strong>上。</p><p>当然一般情况下我们都不会轻易对Master分支做操作，而是创建一个<code>Dev</code>分支作为我们的开发分支。在git中你可以执行<code>git branch branchname</code>命令来创建一个新分支，比如将branchname设置为<code>Dev</code>，这样我们就创建出了<code>Dev</code>分支。</p><p>然后你可以执行<code>git checkout Dev</code> 命令，它的作用是让<code>HEAD</code>指向Dev分支。后面你所有的commit就都被<strong>push</strong>到Dev分支上了。</p><p>如果你觉得执行两条命令比较麻烦，你也可以将上面的两步合并为一步，执行<code>git checkout -b branchname</code>这一条命令就可以了，这也是我们平常真正使用的命令。</p><p>通过上面的描述，我想你应该对git的工作原理有了最基本的了解了，下面我们再来看这些命令时就很容易理解它们的作用以及为什么要这么做了。</p><h2 id="已有代码该如何提效到仓库中"><a href="#已有代码该如何提效到仓库中" class="headerlink" title="已有代码该如何提效到仓库中"></a>已有代码该如何提效到仓库中</h2><p>第一步，在github 上创建一个仓库。<br>第二步，执行下面的代码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:avdance&#x2F;test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure><h2 id="本地与远程有突冲，想放弃本地修改"><a href="#本地与远程有突冲，想放弃本地修改" class="headerlink" title="本地与远程有突冲，想放弃本地修改"></a>本地与远程有突冲，想放弃本地修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard FETCH_HEAD</span><br></pre></td></tr></table></figure><h2 id="重新从远端拉取某个文件"><a href="#重新从远端拉取某个文件" class="headerlink" title="重新从远端拉取某个文件"></a>重新从远端拉取某个文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- a.c</span><br></pre></td></tr></table></figure><h2 id="撤消某次-add"><a href="#撤消某次-add" class="headerlink" title="撤消某次 add"></a>撤消某次 add</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached &lt;added_file_to_undo&gt;</span><br></pre></td></tr></table></figure><h2 id="撤消某次-commit"><a href="#撤消某次-commit" class="headerlink" title="撤消某次 commit"></a>撤消某次 commit</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft commitID  只是删除了commitId之后的commit记录,但是代码改动仍然存在</span><br><span class="line">git reset --hard commitID  彻底的回到CommitID时候的版本,之后的改动不存在了</span><br></pre></td></tr></table></figure><h2 id="将本地修改先暂存起来"><a href="#将本地修改先暂存起来" class="headerlink" title="将本地修改先暂存起来"></a>将本地修改先暂存起来</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash 将本地修改暂存起来</span><br><span class="line">git stash pop 弹出暂存的修改</span><br></pre></td></tr></table></figure><h2 id="查看有冲突的文件"><a href="#查看有冲突的文件" class="headerlink" title="查看有冲突的文件"></a>查看有冲突的文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status -uno</span><br></pre></td></tr></table></figure><h2 id="不显示临时文件"><a href="#不显示临时文件" class="headerlink" title="不显示临时文件"></a>不显示临时文件</h2><p>在 .gitignore 中添加不想被 git staus 看到的文件或目录</p><h2 id="暂时回滚到某版本"><a href="#暂时回滚到某版本" class="headerlink" title="暂时回滚到某版本"></a>暂时回滚到某版本</h2><p>首先通过 git log查看你之前的提交码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log | more</span><br></pre></td></tr></table></figure><blockquote><p>commit 4adb3f0ecd9dbc79bd09666d88f8c2520305c001<br>Author: xxxxxx<br>Date: Thu Jan 25 11:51:45 2018 +0800</p></blockquote><p>摘取 commit 码的前 7位，执行下面的命令</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout 4adb3f0</span><br><span class="line">git reset --hard 4adb3f0</span><br></pre></td></tr></table></figure><h2 id="切换-回滚到主分支"><a href="#切换-回滚到主分支" class="headerlink" title="切换/回滚到主分支"></a>切换/回滚到主分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure><h2 id="服务端有更新，但你却-commit了你的代码"><a href="#服务端有更新，但你却-commit了你的代码" class="headerlink" title="服务端有更新，但你却 commit了你的代码"></a>服务端有更新，但你却 commit了你的代码</h2><ul><li><p>先拉取服务端代码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure></li><li><p>提交代码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure></li><li><p>如果你在 dev分支，此时还要拉取master的代码<br><strong>1. 先 切换到 master 分支</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure><p><strong>2. 拉取代码</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure><p><strong>3. 重新切换到 dev 分支</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure></li></ul><h2 id="查看每次提交的文件列表"><a href="#查看每次提交的文件列表" class="headerlink" title="查看每次提交的文件列表"></a>查看每次提交的文件列表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --stat | more</span><br></pre></td></tr></table></figure><h2 id="查看某些提交代码的变化"><a href="#查看某些提交代码的变化" class="headerlink" title="查看某些提交代码的变化"></a>查看某些提交代码的变化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show &lt;commit id&gt; [&lt;filename&gt;]</span><br></pre></td></tr></table></figure><h2 id="显示所有本地与远端分支"><a href="#显示所有本地与远端分支" class="headerlink" title="显示所有本地与远端分支"></a>显示所有本地与远端分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure><h2 id="显示所有远程分支"><a href="#显示所有远程分支" class="headerlink" title="显示所有远程分支"></a>显示所有远程分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure><h2 id="显示远端地址"><a href="#显示远端地址" class="headerlink" title="显示远端地址"></a>显示远端地址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure><h2 id="创建一个新分支"><a href="#创建一个新分支" class="headerlink" title="创建一个新分支"></a>创建一个新分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch</span><br><span class="line">git --set-upstream origin new_branch</span><br><span class="line">git push origin new_branch</span><br></pre></td></tr></table></figure><p>或</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch refs&#x2F;remotes&#x2F;branch-heads&#x2F;branch</span><br></pre></td></tr></table></figure><h2 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d branch</span><br></pre></td></tr></table></figure><h2 id="删除远端分支"><a href="#删除远端分支" class="headerlink" title="删除远端分支"></a>删除远端分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete remotebranch</span><br></pre></td></tr></table></figure><h2 id="远程仓库已经删除，而本地仓库还在，如果清除？"><a href="#远程仓库已经删除，而本地仓库还在，如果清除？" class="headerlink" title="远程仓库已经删除，而本地仓库还在，如果清除？"></a>远程仓库已经删除，而本地仓库还在，如果清除？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull -p</span><br></pre></td></tr></table></figure><h2 id="git-diff-不显示修改的内容"><a href="#git-diff-不显示修改的内容" class="headerlink" title="git diff 不显示修改的内容"></a>git diff 不显示修改的内容</h2><p>有些情况下，通过 <code>git status</code> 能查到某些文件有变化，但使用 <code>git diff</code> 却看不到修改的内容。可以使用下面的面试查看变化。</p><ul><li>第一种方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached 文件名</span><br></pre></td></tr></table></figure></li><li>或者<br>先将修改的文件重命名，然后执行下面的语句<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD</span><br></pre></td></tr></table></figure></li></ul><h2 id="配置更好的-git-diff-工具"><a href="#配置更好的-git-diff-工具" class="headerlink" title="配置更好的 git diff 工具"></a>配置更好的 git diff 工具</h2><p>在使用 git diff 时，常常发现有很多不方便的地方。因为git diff 默认使用 patch 方式展示代码的不同。如果想看修改后代码的上下文就比较麻烦了（比如代码 review）。</p><p>其实 git 已经提供了扩展功能。可经将它的默认 diff 工具修改为vimdiff。配置如下：</p><ul><li>首先打开 git config 文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure></li><li>增加配置项<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[difftool]</span><br><span class="line">    prompt &#x3D; false</span><br><span class="line">[diff]</span><br><span class="line">    vimdiff</span><br><span class="line">    tool &#x3D; vimdiff</span><br><span class="line">[difftool &quot;vimdiff&quot;]</span><br><span class="line">    path &#x3D; &#x2F;usr&#x2F;bin&#x2F;vimdiff</span><br></pre></td></tr></table></figure></li></ul><h2 id="打tag"><a href="#打tag" class="headerlink" title="打tag"></a>打tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;为git打tag, 第一次需要在前面加一个v</span><br><span class="line">git tag &quot;v1.0.0&quot;</span><br><span class="line">&#x2F;&#x2F;将tag推送到远程仓库</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure><h2 id="git-merge-每次都生成一次commit"><a href="#git-merge-每次都生成一次commit" class="headerlink" title="git merge 每次都生成一次commit"></a>git merge 每次都生成一次commit</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --no-ff</span><br></pre></td></tr></table></figure><blockquote><p>注：ff表示 fast forward</p></blockquote><h2 id="切到某个tag"><a href="#切到某个tag" class="headerlink" title="切到某个tag"></a>切到某个tag</h2><p>与切到某个分支是类似的，只不过将branch 名换为 tag 名而以。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout tag_name</span><br></pre></td></tr></table></figure><h2 id="查看某个人的所有提交"><a href="#查看某个人的所有提交" class="headerlink" title="查看某个人的所有提交"></a>查看某个人的所有提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --author&#x3D;“author”</span><br></pre></td></tr></table></figure><h2 id="为git设置默认用户名和密码"><a href="#为git设置默认用户名和密码" class="headerlink" title="为git设置默认用户名和密码"></a>为git设置默认用户名和密码</h2><p>在使用Git 的时候，经常会遇到需要频繁输入密码的情况，每次git push 和 git pull 都要求输入用户名和密码，如果提交频繁的话就十分不方便。</p><p>可以使用下面的方法，只需要第一次输入用户名和密码，以后都不用再输入了。</p><h3 id="进入Git-配置文件"><a href="#进入Git-配置文件" class="headerlink" title="进入Git 配置文件"></a>进入Git 配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure><h3 id="修改配置文件，添加下面这一行。"><a href="#修改配置文件，添加下面这一行。" class="headerlink" title="修改配置文件，添加下面这一行。"></a>修改配置文件，添加下面这一行。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[credential]  </span><br><span class="line">    helper &#x3D; store</span><br></pre></td></tr></table></figure><p>##修改已提交的commit的用户名邮箱</p><ol><li><p>第一步</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;newName&quot;</span><br><span class="line">git config --global user.email &quot;newEmail&quot;</span><br></pre></td></tr></table></figure></li><li><p>修改已提交commit的用户名邮箱</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend --author&#x3D;&quot;userName &lt;userEmail&gt;&quot;</span><br></pre></td></tr></table></figure></li></ol><p><strong>注意不能缺少<code>&lt; &gt;</code></strong><br><strong>此指令仅能更新最近的一次commit的用户名邮箱</strong></p><h2 id="git-应用-patch"><a href="#git-应用-patch" class="headerlink" title="git 应用 patch"></a>git 应用 patch</h2><ol><li>预览patch的结是</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git apply --stat file.patch</span><br></pre></td></tr></table></figure><ol start="2"><li>检测patch后是否有错误</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git apply --check file.patch</span><br></pre></td></tr></table></figure><ol start="3"><li>打patch</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git am --signoff &lt; a_file.patch</span><br></pre></td></tr></table></figure><ol start="4"><li>执行commit</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git  commit -m &quot;&quot;</span><br></pre></td></tr></table></figure><ol start="5"><li>提交代码</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure><h2 id="循环克隆"><a href="#循环克隆" class="headerlink" title="循环克隆"></a>循环克隆</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --recursive https:&#x2F;&#x2F;xxx.git</span><br></pre></td></tr></table></figure><h2 id="给代码设置两个不同的源"><a href="#给代码设置两个不同的源" class="headerlink" title="给代码设置两个不同的源"></a>给代码设置两个不同的源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https:&#x2F;&#x2F;xxx.git</span><br></pre></td></tr></table></figure><h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>命令在不断更新中…</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">廖雪峰git教程</a></p></div><div class="reward-container"><div></div> <button onclick='var qr=document.getElementById("qr");qr.style.display="none"===qr.style.display?"block":"none"'> 打赏</button><div id="qr" style="display:none"><div style="display:inline-block"> <img src="https://cdn.avdancedu.com/image/next/wechat.jpeg" alt="音视跳动 微信支付"><p>微信支付</p></div><div style="display:inline-block"> <img src="https://cdn.avdancedu.com/image/next/alipay.jpeg" alt="音视跳动 支付宝"><p>支付宝</p></div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"> <strong>本文作者：</strong> 音视跳动-李超 [avdance@163.com]</li><li class="post-copyright-link"> <strong>本文链接：</strong> <a href="https://blog.avdancedu.com/423abe9e/" title="git常用命令及一些特殊用法">https://blog.avdancedu.com/423abe9e/</a></li><li class="post-copyright-license"> <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class="followme"><p>欢迎关注我的其它发布渠道</p><div class="social-list"><div class="social-item"><a target="_blank" class="social-link" href="https://cdn.avdancedu.com/image/next/WeChat.jpeg"><span class="icon"><i class="fa fa-wechat"></i></span> <span class="label">WeChat</span></a></div><div class="social-item"><a target="_blank" class="social-link" href="/atom.xml"><span class="icon"><i class="fa fa-rss"></i></span> <span class="label">RSS</span></a></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a></div><div class="post-nav"><div class="post-nav-item"><a href="/f3f66133/" rel="prev" title="ffmpeg精讲常见问题"><i class="fa fa-chevron-left"></i> ffmpeg精讲常见问题</a></div><div class="post-nav-item"> <a href="/f3ccc53/" rel="next" title="hexo中如何画图">hexo中如何画图<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><div class="comments" id="valine-comments"></div><script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avdance32_32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avdance16_16.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.avdancedu.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git常用命令及一些特殊用法">
+<meta property="og:url" content="https://blog.avdancedu.com/423abe9e/index.html">
+<meta property="og:site_name" content="音视跳动科技">
+<meta property="og:description" content="本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/git/git-banner.jpg">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/git/git_base.jpg">
+<meta property="og:image" content="https://cdn.avdancedu.com/image/article/git/git_branch.jpg">
+<meta property="article:published_time" content="2020-06-05T05:44:03.000Z">
+<meta property="article:modified_time" content="2021-08-15T11:03:25.748Z">
+<meta property="article:author" content="音视跳动">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.avdancedu.com/image/article/git/git-banner.jpg">
+
+<link rel="canonical" href="https://blog.avdancedu.com/423abe9e/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git常用命令及一些特殊用法 | 音视跳动科技</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="音视跳动科技" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    
+        <div id="needsharebutton-float">
+          <span class="btn">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+          </span>
+        </div>
+    
+
+    <header class="header" itemscope itemtype="https://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">音视跳动科技</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">传播最前沿的科技知识！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/avdance" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="https://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.avdancedu.com/423abe9e/">
+
+    <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="image" content="/images/avdancelogo.jpg">
+      <meta itemprop="name" content="音视跳动">
+      <meta itemprop="description" content="传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="音视跳动科技">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git常用命令及一些特殊用法
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-05 13:44:03" itemprop="dateCreated datePublished" datetime="2020-06-05T13:44:03+08:00">2020-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-15 19:03:25" itemprop="dateModified" datetime="2021-08-15T19:03:25+08:00">2021-08-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/423abe9e/" class="post-meta-item leancloud_visitors" data-flag-title="git常用命令及一些特殊用法" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/423abe9e/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/423abe9e/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img data-src="https://cdn.avdancedu.com/image/article/git/git-banner.jpg" alt=""><br>本文主要记录一些工作中常用的 git 命令，以及一些比较特殊的git用法，希望这些命令对您也能有所帮助。</p>
+<a id="more"></a>
+
+<h2 id="git-的基本工作原理"><a href="#git-的基本工作原理" class="headerlink" title="git 的基本工作原理"></a>git 的基本工作原理</h2><p>其实要想使用好git，你必须要知道一点git的工作原理，否则你在使用git时就只能死记硬背一些命令。如果你还处理死记硬背一些git命令的阶段，那么一旦你遇到一个非常复杂的或非手棘手的git case时，可以100%肯定你是无法解决的。</p>
+<p>因此，了解一点git的基本工作原理是我们每个开发人员都必须的基础知识，下面我就对git的的基本工作原理做一下简要介绍。</p>
+<h3 id="git的结构"><a href="#git的结构" class="headerlink" title="git的结构"></a>git的结构</h3><p>首先我们必须要清楚是，git是由三大部分组成的，即本地工作区，本地仓库以及远程仓库。</p>
+<ul>
+<li>本地工作区，就是你平常写代码或修改代码的地方。</li>
+<li>本地仓库，就是我们工作区中.git目录。它里边有一堆子目录，这些子目录都有各自的用途，我们暂且不管。</li>
+<li>远程仓库，这个比较好理解了，就是远端的git仓库，比如我们在github上创建的仓库。</li>
+</ul>
+<p>通过下面这张图我们可以更直观的了解这三大部分：<br><img data-src="https://cdn.avdancedu.com/image/article/git/git_base.jpg" alt="git结构图"></p>
+<p>从图中我们可以清楚的知道，平时我们使用git的三个主要命令(git add、git commit、git push)具体都做了些什么:</p>
+<ul>
+<li>git add: 将本地工作区中代码的修改保存到本地仓库的staged区，即暂存区。</li>
+<li>git commit: 将staged区中的内容保存到本地仓库。</li>
+<li>git push: 将本地仓库中的内容推送给远程仓库保存。</li>
+</ul>
+<p>通过上面这张图我们可以得出以下几点重要结论。</p>
+<p>第一，git在处理我们的提交时是按顺序、分阶段的。比如我们的一个提交，必须先到 staged 后才能进入本地仓库，这个处理顺序是不能乱的。</p>
+<p>第二，git管理中有一个 HEAD 指针，它始终指向正在处理的git commit。而它的前一次git commit 可以用<code>HEAD^</code>表式，它的上上次commit可以用<code>HEAD ^^</code>表式。</p>
+<p>第三，当我们想用地本仓库的内容更新本地工作区的内容时，如果 staged 中没有内容，则可以直接用本地仓库的内容更新本地工作区内容。但如果 staged 中有内容，则需要先更新staged ，然后再更新本地工作区。</p>
+<p>第四，git的核心是本地仓库，所有的操作都是围绕着它来的。它既是用户<code>commit</code>的终点，又是远程仓库的接收<code>commit</code>起点。我们在使用git时，可以向本地仓库提交多次修改，而只向远程仓库推送一次，git推送时会将之前的多个<code>commit</code>合并到一起。</p>
+<h3 id="git的分支管理"><a href="#git的分支管理" class="headerlink" title="git的分支管理"></a>git的分支管理</h3><p>在git中还有一个特别重要的概念就是branch，即分支。它是我们多人合作开发的基础。如下图所示：<br><img data-src="https://cdn.avdancedu.com/image/article/git/git_branch.jpg" alt="git 分支"></p>
+<p>通过上图我们可以清楚的知道，git是以<strong>指针</strong>的方式对分支进行管理的。下面我们来详述一下git是如何管理分支的。</p>
+<p>当我们执行<code>git init</code>时，git默认为我们创建一个分支，即<code>Master</code>分支。而HEAD指针也被初始化指向Master分支，因此每当你提交新的修改时，这些修改都会被压入到Master分支<strong>栈</strong>上。</p>
+<p>当然一般情况下我们都不会轻易对Master分支做操作，而是创建一个<code>Dev</code>分支作为我们的开发分支。在git中你可以执行<code>git branch branchname</code>命令来创建一个新分支，比如将branchname设置为<code>Dev</code>，这样我们就创建出了<code>Dev</code>分支。</p>
+<p>然后你可以执行<code>git checkout Dev</code> 命令，它的作用是让<code>HEAD</code>指向Dev分支。后面你所有的commit就都被<strong>push</strong>到Dev分支上了。</p>
+<p>如果你觉得执行两条命令比较麻烦，你也可以将上面的两步合并为一步，执行<code>git checkout -b branchname</code>这一条命令就可以了，这也是我们平常真正使用的命令。</p>
+<p>通过上面的描述，我想你应该对git的工作原理有了最基本的了解了，下面我们再来看这些命令时就很容易理解它们的作用以及为什么要这么做了。</p>
+<h2 id="已有代码该如何提效到仓库中"><a href="#已有代码该如何提效到仓库中" class="headerlink" title="已有代码该如何提效到仓库中"></a>已有代码该如何提效到仓库中</h2><p>第一步，在github 上创建一个仓库。<br>第二步，执行下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:avdance&#x2F;test.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地与远程有突冲，想放弃本地修改"><a href="#本地与远程有突冲，想放弃本地修改" class="headerlink" title="本地与远程有突冲，想放弃本地修改"></a>本地与远程有突冲，想放弃本地修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard FETCH_HEAD</span><br></pre></td></tr></table></figure>
+
+<h2 id="重新从远端拉取某个文件"><a href="#重新从远端拉取某个文件" class="headerlink" title="重新从远端拉取某个文件"></a>重新从远端拉取某个文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- a.c</span><br></pre></td></tr></table></figure>
+
+<h2 id="撤消某次-add"><a href="#撤消某次-add" class="headerlink" title="撤消某次 add"></a>撤消某次 add</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached &lt;added_file_to_undo&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="撤消某次-commit"><a href="#撤消某次-commit" class="headerlink" title="撤消某次 commit"></a>撤消某次 commit</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft commitID  只是删除了commitId之后的commit记录,但是代码改动仍然存在</span><br><span class="line">git reset --hard commitID  彻底的回到CommitID时候的版本,之后的改动不存在了</span><br></pre></td></tr></table></figure>
+
+<h2 id="将本地修改先暂存起来"><a href="#将本地修改先暂存起来" class="headerlink" title="将本地修改先暂存起来"></a>将本地修改先暂存起来</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash 将本地修改暂存起来</span><br><span class="line">git stash pop 弹出暂存的修改</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看有冲突的文件"><a href="#查看有冲突的文件" class="headerlink" title="查看有冲突的文件"></a>查看有冲突的文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status -uno</span><br></pre></td></tr></table></figure>
+
+<h2 id="不显示临时文件"><a href="#不显示临时文件" class="headerlink" title="不显示临时文件"></a>不显示临时文件</h2><p>在 .gitignore 中添加不想被 git staus 看到的文件或目录</p>
+<h2 id="暂时回滚到某版本"><a href="#暂时回滚到某版本" class="headerlink" title="暂时回滚到某版本"></a>暂时回滚到某版本</h2><p>首先通过 git log查看你之前的提交码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log | more</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>commit 4adb3f0ecd9dbc79bd09666d88f8c2520305c001<br>Author: xxxxxx<br>Date:   Thu Jan 25 11:51:45 2018 +0800</p>
+</blockquote>
+<p>摘取 commit 码的前 7位，执行下面的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout 4adb3f0</span><br><span class="line">git reset --hard 4adb3f0</span><br></pre></td></tr></table></figure>
+
+<h2 id="切换-回滚到主分支"><a href="#切换-回滚到主分支" class="headerlink" title="切换/回滚到主分支"></a>切换/回滚到主分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务端有更新，但你却-commit了你的代码"><a href="#服务端有更新，但你却-commit了你的代码" class="headerlink" title="服务端有更新，但你却 commit了你的代码"></a>服务端有更新，但你却 commit了你的代码</h2><ul>
+<li><p>先拉取服务端代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure></li>
+<li><p>提交代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure></li>
+<li><p>如果你在 dev分支，此时还要拉取master的代码<br><strong>1. 先 切换到 master 分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 拉取代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 重新切换到 dev 分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="查看每次提交的文件列表"><a href="#查看每次提交的文件列表" class="headerlink" title="查看每次提交的文件列表"></a>查看每次提交的文件列表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --stat | more</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看某些提交代码的变化"><a href="#查看某些提交代码的变化" class="headerlink" title="查看某些提交代码的变化"></a>查看某些提交代码的变化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show &lt;commit id&gt; [&lt;filename&gt;]</span><br></pre></td></tr></table></figure>
+<h2 id="显示所有本地与远端分支"><a href="#显示所有本地与远端分支" class="headerlink" title="显示所有本地与远端分支"></a>显示所有本地与远端分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<h2 id="显示所有远程分支"><a href="#显示所有远程分支" class="headerlink" title="显示所有远程分支"></a>显示所有远程分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+<h2 id="显示远端地址"><a href="#显示远端地址" class="headerlink" title="显示远端地址"></a>显示远端地址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h2 id="创建一个新分支"><a href="#创建一个新分支" class="headerlink" title="创建一个新分支"></a>创建一个新分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch</span><br><span class="line">git --set-upstream origin new_branch</span><br><span class="line">git push origin new_branch</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch refs&#x2F;remotes&#x2F;branch-heads&#x2F;branch</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d branch</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除远端分支"><a href="#删除远端分支" class="headerlink" title="删除远端分支"></a>删除远端分支</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete remotebranch</span><br></pre></td></tr></table></figure>
+
+<h2 id="远程仓库已经删除，而本地仓库还在，如果清除？"><a href="#远程仓库已经删除，而本地仓库还在，如果清除？" class="headerlink" title="远程仓库已经删除，而本地仓库还在，如果清除？"></a>远程仓库已经删除，而本地仓库还在，如果清除？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull -p</span><br></pre></td></tr></table></figure>
+<h2 id="git-diff-不显示修改的内容"><a href="#git-diff-不显示修改的内容" class="headerlink" title="git diff 不显示修改的内容"></a>git diff 不显示修改的内容</h2><p>有些情况下，通过 <code>git status</code> 能查到某些文件有变化，但使用 <code>git diff</code> 却看不到修改的内容。可以使用下面的面试查看变化。</p>
+<ul>
+<li>第一种方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached 文件名</span><br></pre></td></tr></table></figure></li>
+<li>或者<br>先将修改的文件重命名，然后执行下面的语句<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="配置更好的-git-diff-工具"><a href="#配置更好的-git-diff-工具" class="headerlink" title="配置更好的 git diff 工具"></a>配置更好的 git diff 工具</h2><p>在使用 git diff 时，常常发现有很多不方便的地方。因为git diff 默认使用 patch 方式展示代码的不同。如果想看修改后代码的上下文就比较麻烦了（比如代码 review）。</p>
+<p>其实 git 已经提供了扩展功能。可经将它的默认 diff 工具修改为vimdiff。配置如下：</p>
+<ul>
+<li>首先打开 git config 文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure></li>
+<li>增加配置项<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[difftool]</span><br><span class="line">    prompt &#x3D; false</span><br><span class="line">[diff]</span><br><span class="line">    vimdiff</span><br><span class="line">    tool &#x3D; vimdiff</span><br><span class="line">[difftool &quot;vimdiff&quot;]</span><br><span class="line">    path &#x3D; &#x2F;usr&#x2F;bin&#x2F;vimdiff</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="打tag"><a href="#打tag" class="headerlink" title="打tag"></a>打tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;为git打tag, 第一次需要在前面加一个v</span><br><span class="line">git tag &quot;v1.0.0&quot;</span><br><span class="line">&#x2F;&#x2F;将tag推送到远程仓库</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-merge-每次都生成一次commit"><a href="#git-merge-每次都生成一次commit" class="headerlink" title="git merge 每次都生成一次commit"></a>git merge 每次都生成一次commit</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --no-ff</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：ff表示 fast forward</p>
+</blockquote>
+<h2 id="切到某个tag"><a href="#切到某个tag" class="headerlink" title="切到某个tag"></a>切到某个tag</h2><p>与切到某个分支是类似的，只不过将branch 名换为 tag 名而以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout tag_name</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看某个人的所有提交"><a href="#查看某个人的所有提交" class="headerlink" title="查看某个人的所有提交"></a>查看某个人的所有提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --author&#x3D;“author”</span><br></pre></td></tr></table></figure>
+
+<h2 id="为git设置默认用户名和密码"><a href="#为git设置默认用户名和密码" class="headerlink" title="为git设置默认用户名和密码"></a>为git设置默认用户名和密码</h2><p>在使用Git 的时候，经常会遇到需要频繁输入密码的情况，每次git push 和 git pull 都要求输入用户名和密码，如果提交频繁的话就十分不方便。</p>
+<p>可以使用下面的方法，只需要第一次输入用户名和密码，以后都不用再输入了。</p>
+<h3 id="进入Git-配置文件"><a href="#进入Git-配置文件" class="headerlink" title="进入Git 配置文件"></a>进入Git 配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置文件，添加下面这一行。"><a href="#修改配置文件，添加下面这一行。" class="headerlink" title="修改配置文件，添加下面这一行。"></a>修改配置文件，添加下面这一行。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[credential]  </span><br><span class="line">    helper &#x3D; store</span><br></pre></td></tr></table></figure>
+
+<p>##修改已提交的commit的用户名邮箱</p>
+<ol>
+<li><p>第一步</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;newName&quot;</span><br><span class="line">git config --global user.email &quot;newEmail&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改已提交commit的用户名邮箱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend --author&#x3D;&quot;userName &lt;userEmail&gt;&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>注意不能缺少<code>&lt; &gt;</code></strong><br><strong>此指令仅能更新最近的一次commit的用户名邮箱</strong></p>
+<h2 id="git-应用-patch"><a href="#git-应用-patch" class="headerlink" title="git 应用 patch"></a>git 应用 patch</h2><ol>
+<li>预览patch的结是</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git apply --stat file.patch</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>检测patch后是否有错误</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git apply --check file.patch</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>打patch</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git am --signoff &lt; a_file.patch</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>执行commit</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git  commit -m &quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>提交代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环克隆"><a href="#循环克隆" class="headerlink" title="循环克隆"></a>循环克隆</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --recursive https:&#x2F;&#x2F;xxx.git</span><br></pre></td></tr></table></figure>
+<h2 id="给代码设置两个不同的源"><a href="#给代码设置两个不同的源" class="headerlink" title="给代码设置两个不同的源"></a>给代码设置两个不同的源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https:&#x2F;&#x2F;xxx.git</span><br></pre></td></tr></table></figure>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>命令在不断更新中…</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">廖雪峰git教程</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://cdn.avdancedu.com/image/next/wechat.jpeg" alt="音视跳动 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://cdn.avdancedu.com/image/next/alipay.jpeg" alt="音视跳动 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>音视跳动-李超 [avdance@163.com]
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.avdancedu.com/423abe9e/" title="git常用命令及一些特殊用法">https://blog.avdancedu.com/423abe9e/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://cdn.avdancedu.com/image/next/WeChat.jpeg">
+            <span class="icon">
+              <i class="fa fa-wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          </div>
+
+        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/f3f66133/" rel="prev" title="ffmpeg精讲常见问题">
+      <i class="fa fa-chevron-left"></i> ffmpeg精讲常见问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/f3ccc53/" rel="next" title="hexo中如何画图">
+      hexo中如何画图 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
   window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
@@ -18,7 +578,133 @@
       localStorage.setItem('comments_active', commentClass);
     });
   }
-</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc"> 文章目录</li><li class="sidebar-nav-overview"> 站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-的基本工作原理"><span class="nav-number">1.</span> <span class="nav-text">git 的基本工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git的结构"><span class="nav-number">1.1.</span> <span class="nav-text">git的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git的分支管理"><span class="nav-number">1.2.</span> <span class="nav-text">git的分支管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#已有代码该如何提效到仓库中"><span class="nav-number">2.</span> <span class="nav-text">已有代码该如何提效到仓库中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地与远程有突冲，想放弃本地修改"><span class="nav-number">3.</span> <span class="nav-text">本地与远程有突冲，想放弃本地修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新从远端拉取某个文件"><span class="nav-number">4.</span> <span class="nav-text">重新从远端拉取某个文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤消某次-add"><span class="nav-number">5.</span> <span class="nav-text">撤消某次 add</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤消某次-commit"><span class="nav-number">6.</span> <span class="nav-text">撤消某次 commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将本地修改先暂存起来"><span class="nav-number">7.</span> <span class="nav-text">将本地修改先暂存起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看有冲突的文件"><span class="nav-number">8.</span> <span class="nav-text">查看有冲突的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不显示临时文件"><span class="nav-number">9.</span> <span class="nav-text">不显示临时文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂时回滚到某版本"><span class="nav-number">10.</span> <span class="nav-text">暂时回滚到某版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换-回滚到主分支"><span class="nav-number">11.</span> <span class="nav-text">切换&#x2F;回滚到主分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端有更新，但你却-commit了你的代码"><span class="nav-number">12.</span> <span class="nav-text">服务端有更新，但你却 commit了你的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看每次提交的文件列表"><span class="nav-number">13.</span> <span class="nav-text">查看每次提交的文件列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看某些提交代码的变化"><span class="nav-number">14.</span> <span class="nav-text">查看某些提交代码的变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示所有本地与远端分支"><span class="nav-number">15.</span> <span class="nav-text">显示所有本地与远端分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示所有远程分支"><span class="nav-number">16.</span> <span class="nav-text">显示所有远程分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示远端地址"><span class="nav-number">17.</span> <span class="nav-text">显示远端地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个新分支"><span class="nav-number">18.</span> <span class="nav-text">创建一个新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除本地分支"><span class="nav-number">19.</span> <span class="nav-text">删除本地分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除远端分支"><span class="nav-number">20.</span> <span class="nav-text">删除远端分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库已经删除，而本地仓库还在，如果清除？"><span class="nav-number">21.</span> <span class="nav-text">远程仓库已经删除，而本地仓库还在，如果清除？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-diff-不显示修改的内容"><span class="nav-number">22.</span> <span class="nav-text">git diff 不显示修改的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置更好的-git-diff-工具"><span class="nav-number">23.</span> <span class="nav-text">配置更好的 git diff 工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打tag"><span class="nav-number">24.</span> <span class="nav-text">打tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-merge-每次都生成一次commit"><span class="nav-number">25.</span> <span class="nav-text">git merge 每次都生成一次commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切到某个tag"><span class="nav-number">26.</span> <span class="nav-text">切到某个tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看某个人的所有提交"><span class="nav-number">27.</span> <span class="nav-text">查看某个人的所有提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为git设置默认用户名和密码"><span class="nav-number">28.</span> <span class="nav-text">为git设置默认用户名和密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进入Git-配置文件"><span class="nav-number">28.1.</span> <span class="nav-text">进入Git 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改配置文件，添加下面这一行。"><span class="nav-number">28.2.</span> <span class="nav-text">修改配置文件，添加下面这一行。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-应用-patch"><span class="nav-number">29.</span> <span class="nav-text">git 应用 patch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环克隆"><span class="nav-number">30.</span> <span class="nav-text">循环克隆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给代码设置两个不同的源"><span class="nav-number">31.</span> <span class="nav-text">给代码设置两个不同的源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">32.</span> <span class="nav-text">结束语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">33.</span> <span class="nav-text">参考</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person"> <img class="site-author-image" itemprop="image" alt="音视跳动" src="/images/avdancelogo.jpg"><p class="site-author-name" itemprop="name">音视跳动</p><div class="site-description" itemprop="description">传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">51</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">10</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">36</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/avdance" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;avdance" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="https://www.zhihu.com/people/garrylea/posts" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;garrylea&#x2F;posts" rel="noopener" target="_blank"><i class="fa fa-fw fa-zhihu"></i> ZhiHu</a></span></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="beian"><a href="https://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19056322号-1</a> <img src="/images/beianico.png" style="display:inline-block"><a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011102001366" rel="noopener" target="_blank">京公网安备11011102001366号</a></div><div class="copyright"> &copy; <span itemprop="copyrightYear">2022</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">李超</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span title="站点总字数">231k</span></div><script>
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-的基本工作原理"><span class="nav-number">1.</span> <span class="nav-text">git 的基本工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git的结构"><span class="nav-number">1.1.</span> <span class="nav-text">git的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git的分支管理"><span class="nav-number">1.2.</span> <span class="nav-text">git的分支管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#已有代码该如何提效到仓库中"><span class="nav-number">2.</span> <span class="nav-text">已有代码该如何提效到仓库中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地与远程有突冲，想放弃本地修改"><span class="nav-number">3.</span> <span class="nav-text">本地与远程有突冲，想放弃本地修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新从远端拉取某个文件"><span class="nav-number">4.</span> <span class="nav-text">重新从远端拉取某个文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤消某次-add"><span class="nav-number">5.</span> <span class="nav-text">撤消某次 add</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤消某次-commit"><span class="nav-number">6.</span> <span class="nav-text">撤消某次 commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将本地修改先暂存起来"><span class="nav-number">7.</span> <span class="nav-text">将本地修改先暂存起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看有冲突的文件"><span class="nav-number">8.</span> <span class="nav-text">查看有冲突的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不显示临时文件"><span class="nav-number">9.</span> <span class="nav-text">不显示临时文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暂时回滚到某版本"><span class="nav-number">10.</span> <span class="nav-text">暂时回滚到某版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换-回滚到主分支"><span class="nav-number">11.</span> <span class="nav-text">切换&#x2F;回滚到主分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端有更新，但你却-commit了你的代码"><span class="nav-number">12.</span> <span class="nav-text">服务端有更新，但你却 commit了你的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看每次提交的文件列表"><span class="nav-number">13.</span> <span class="nav-text">查看每次提交的文件列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看某些提交代码的变化"><span class="nav-number">14.</span> <span class="nav-text">查看某些提交代码的变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示所有本地与远端分支"><span class="nav-number">15.</span> <span class="nav-text">显示所有本地与远端分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示所有远程分支"><span class="nav-number">16.</span> <span class="nav-text">显示所有远程分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示远端地址"><span class="nav-number">17.</span> <span class="nav-text">显示远端地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个新分支"><span class="nav-number">18.</span> <span class="nav-text">创建一个新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除本地分支"><span class="nav-number">19.</span> <span class="nav-text">删除本地分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除远端分支"><span class="nav-number">20.</span> <span class="nav-text">删除远端分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库已经删除，而本地仓库还在，如果清除？"><span class="nav-number">21.</span> <span class="nav-text">远程仓库已经删除，而本地仓库还在，如果清除？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-diff-不显示修改的内容"><span class="nav-number">22.</span> <span class="nav-text">git diff 不显示修改的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置更好的-git-diff-工具"><span class="nav-number">23.</span> <span class="nav-text">配置更好的 git diff 工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打tag"><span class="nav-number">24.</span> <span class="nav-text">打tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-merge-每次都生成一次commit"><span class="nav-number">25.</span> <span class="nav-text">git merge 每次都生成一次commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切到某个tag"><span class="nav-number">26.</span> <span class="nav-text">切到某个tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看某个人的所有提交"><span class="nav-number">27.</span> <span class="nav-text">查看某个人的所有提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为git设置默认用户名和密码"><span class="nav-number">28.</span> <span class="nav-text">为git设置默认用户名和密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进入Git-配置文件"><span class="nav-number">28.1.</span> <span class="nav-text">进入Git 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改配置文件，添加下面这一行。"><span class="nav-number">28.2.</span> <span class="nav-text">修改配置文件，添加下面这一行。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-应用-patch"><span class="nav-number">29.</span> <span class="nav-text">git 应用 patch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环克隆"><span class="nav-number">30.</span> <span class="nav-text">循环克隆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给代码设置两个不同的源"><span class="nav-number">31.</span> <span class="nav-text">给代码设置两个不同的源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">32.</span> <span class="nav-text">结束语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">33.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="音视跳动"
+      src="/images/avdancelogo.jpg">
+  <p class="site-author-name" itemprop="name">音视跳动</p>
+  <div class="site-description" itemprop="description">传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/avdance" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;avdance" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/garrylea/posts" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;garrylea&#x2F;posts" rel="noopener" target="_blank"><i class="fa fa-fw fa-zhihu"></i>ZhiHu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      
+        <!--
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/" rel="tag">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SDL/" rel="tag">SDL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">WebRTC流媒体服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/" rel="tag">const</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/janus/" rel="tag">janus</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/man/" rel="tag">man</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mediasoup/" rel="tag">mediasoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">next</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/" rel="tag">plugin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slot/" rel="tag">slot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/" rel="tag">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/videoroom/" rel="tag">videoroom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag">人工智能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E5%BA%8F%E5%9B%BE/" rel="tag">时序图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag">直播</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="tag">移动构造函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="tag">类型转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93/" rel="tag">视频渲染</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">4</span></li></ul>
+                </canvas>
+            </div>
+         </div>
+         -->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19056322号-1 </a>
+      <img src="/images/beianico.png" style="display: inline-block;"><a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011102001366" rel="noopener" target="_blank">京公网安备11011102001366号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李超</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">231k</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
   (function() {
     function leancloudSelector(url) {
       url = encodeURI(url);
@@ -108,7 +794,191 @@
         });
     }
   })();
-</script></div></footer></div><script src="/lib/anime.min.js"></script><script src="/lib/lozad.min.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/pisces.js"></script><script src="/js/next-boot.js"></script><script src="/js/local-search.js"></script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz","5dKv9XFD2w3gjJnb0xnWIIWz")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.min.css"><script src="/lib/needsharebutton/needsharebutton.min.js"></script><script>flOptions={iconStyle:"box",boxForm:"horizontal",position:"topRight",networks:"Weibo,Wechat,QQZone"},new needShareButton("#needsharebutton-float",flOptions)</script><script>
+</script>
+
+
+      </div>
+    </footer>
+
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz", "5dKv9XFD2w3gjJnb0xnWIIWz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.min.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.min.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,QQZone";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+
+<script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('/lib/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
@@ -134,4 +1004,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script></body></html>
+</script>
+
+
+</body>
+</html>

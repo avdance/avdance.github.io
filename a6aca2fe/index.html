@@ -1,4 +1,483 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 4.2.1"><link rel="icon" type="image/png" sizes="32x32" href="/images/avdance32_32.ico"><link rel="icon" type="image/png" sizes="16x16" href="/images/avdance16_16.ico"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"blog.avdancedu.com",root:"/",scheme:"Gemini",version:"7.8.0",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!1,show_result:!1,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!0,pangu:!1,comments:{style:"tabs",active:"valine",storage:!0,lazyload:!1,nav:null,activeClass:"valine"},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},path:"search.xml"}</script><meta name="description" content="今天将向大家介绍一下SDL中的多线程的使用。通过下面对SDL 线程与锁相关的API介绍，你会发现，它与 Linux, Windows相关的API几乎是一模一样的。从这里可以推断出，其实SDL对于多线程的处理只是为大家提供了一套统一接口，并没有做其它太多的工作。 这是我们介绍 SDL 的第六篇文章。有兴趣的同学可以通过下面的链接查看其它几篇文章。  SDL 入门 SDL窗口渲染 SDL基本图形绘制"><meta property="og:type" content="article"><meta property="og:title" content="SDL多线程"><meta property="og:url" content="https://blog.avdancedu.com/a6aca2fe/index.html"><meta property="og:site_name" content="音视跳动科技"><meta property="og:description" content="今天将向大家介绍一下SDL中的多线程的使用。通过下面对SDL 线程与锁相关的API介绍，你会发现，它与 Linux, Windows相关的API几乎是一模一样的。从这里可以推断出，其实SDL对于多线程的处理只是为大家提供了一套统一接口，并没有做其它太多的工作。 这是我们介绍 SDL 的第六篇文章。有兴趣的同学可以通过下面的链接查看其它几篇文章。  SDL 入门 SDL窗口渲染 SDL基本图形绘制"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2022-11-19T06:52:00.000Z"><meta property="article:modified_time" content="2022-11-19T11:36:13.303Z"><meta property="article:author" content="音视跳动"><meta property="article:tag" content="SDL, AAA"><meta name="twitter:card" content="summary"><link rel="canonical" href="https://blog.avdancedu.com/a6aca2fe/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>SDL多线程 | 音视跳动科技</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript><link rel="alternate" href="/atom.xml" title="音视跳动科技" type="application/atom+xml"></head><body itemscope itemtype="https://schema.org/WebPage"><div class="container"><div class="headband"></div><div id="needsharebutton-float"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div><header class="header" itemscope itemtype="https://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">音视跳动科技</h1><span class="logo-line-after"><i></i></span></a><p class="site-subtitle" itemprop="description">传播最前沿的科技知识！</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i> 首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i> 标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i> 分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i> 归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i> 关于</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i> 搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"> <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"><div id="no-result"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div></div></div></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div> <a href="https://github.com/avdance" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="https://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://blog.avdancedu.com/a6aca2fe/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="image" content="/images/avdancelogo.jpg"><meta itemprop="name" content="音视跳动"><meta itemprop="description" content="传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="音视跳动科技"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> SDL多线程</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2022-11-19 14:52:00 / 修改时间：19:36:13" itemprop="dateCreated datePublished" datetime="2022-11-19T14:52:00+08:00">2022-11-19</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93/" itemprop="url" rel="index"><span itemprop="name">视频渲染</span></a></span></span><span id="/a6aca2fe/" class="post-meta-item leancloud_visitors" data-flag-title="SDL多线程" title="阅读次数"><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数：</span><span class="leancloud-visitors-count"></span></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-comment-o"></i></span> <span class="post-meta-item-text">Valine：</span><a title="valine" href="/a6aca2fe/#valine-comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/a6aca2fe/" itemprop="commentCount"></span></a></span><br><span class="post-meta-item" title="本文字数"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">本文字数：</span> <span>3.1k</span></span></div></header><div class="post-body" itemprop="articleBody"><p>今天将向大家介绍一下SDL中的多线程的使用。通过下面对SDL 线程与锁相关的API介绍，你会发现，它与 Linux, Windows相关的API几乎是一模一样的。从这里可以推断出，其实SDL对于多线程的处理只是为大家提供了一套统一接口，并没有做其它太多的工作。</p><p>这是我们介绍 SDL 的第六篇文章。有兴趣的同学可以通过下面的链接查看其它几篇文章。</p><ul><li><a href="http://www.avdancedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li><li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li><li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li><li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li><li><a href="http://www.avdancedu.com/67189745" target="_blank" rel="noopener">彻底理解SDL纹理</a></li><li><a href="http://www.avdancedu.com/a6aca2fe" target="_blank" rel="noopener">SDL孙悟空与多线程</a></li><li><a href="http://www.avdancedu.com/f94132a0" target="_blank" rel="noopener">PCM音频播放器的实现</a></li><li><a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">ffmpeg精讲</a></li></ul><a id="more"></a><h2 id="为啥要用多线程？"><a href="#为啥要用多线程？" class="headerlink" title="为啥要用多线程？"></a>为啥要用多线程？</h2><p>我觉得这个小节的标题就是一个废话。不过为了文章的完整性，还是简单的说一说吧。多线程（多进程）是啥意思呢？做个不恰当的比喻，可以把CPU看成是孙悟空，它有一个能耐，从后脑揪几个猴毛就可以变出许多的小猴子。</p><p>多线程（多进程）就是这些小猴子。当干一件比较复杂的事儿时，可以孙悟空一个人干，这样自己比较累。它还有一种选择就是揪几根猴毛，让小猴子们一起帮着干。这样一件复杂的事件，分给许多猴子干，每只猴只干一部分，事情很快就被做完了，这样岂不是比一个人干要强的多？</p><p>当然，有好处也有坏外。猴子多了就需要管理，如果管理不好，就会闹翻天。比如，只有一块肉，该给哪个猴子吃呢？这真是一个另人头痛的问题。</p><p>实际上整个操作系统的演进，就是一部管理学的演进。如何才能让CPU，内存，磁盘I/O，各种设备之间高效的工作，一直是操作系统追求的目标。当然，这话有点扯远了。</p><p>今天我们要讲的就是多线程（多进程）之间该如何高效的工作。要想让多线程之间高效工作，就要给它们之间立点规矩，大家都要遵守的规矩。</p><h2 id="线程互斥与同步"><a href="#线程互斥与同步" class="headerlink" title="线程互斥与同步"></a>线程互斥与同步</h2><p>当僧多粥少时，就引入了互斥的概念。再举个我们生活中的例子吧，比如有一大家族住在同一个大屋子里，却只有一个厕所。早上起来大家都想去厕所，这时有谁先抢到了厕所，其它人就只能等他出来后再进入了，这就是<strong>互斥</strong>。</p><p>当仅有一份资源，大家都需要时，这就产生了管理问题。解决的办法就是通过互斥方法来解决。这种情况是在做多线程处理时要尽量避免的；如果资源足够呢？那当然是平均分配，人人有份了。这中情况是多线路程最希望的。</p><p>除了互斥之外，有些情况还需要更精细化的管理，比如说<strong>同步</strong>。例如车间里的流水线，每个人负责一块，每一块都是半成品，第一个人完成之后交给第二个人做下一步，而后面的人又必须依赖于前而人的结果，依次类推，最后一个人才能完成最终的产品。这就是线程间的精细化管理<strong>同步</strong>。</p><p>要想实现互斥和同步，就需要一种机制。在操作系统上提供了锁的概念来达到互斥与同步。</p><h2 id="锁的种类"><a href="#锁的种类" class="headerlink" title="锁的种类"></a>锁的种类</h2><p>在操作系统上有很种锁，有读写锁、自旋锁、可重入锁等。下面我简单的介绍一下它们之间的不同。</p><p>读写锁: 分为读锁与写锁。所谓读锁就是被访问的资源只要你不改变它的值，你就可以访问，但如果你想改变它，那么就需要等所有读它的线程都释放了它们的锁后，才可以进行修改；写锁是同一时刻只能有一个人访问，当资源被加锁后，其它人只能等待。</p><p>自旋锁: 偿试着给访问资源加锁，如果此时被访问资源已经上锁了，那就一直不停的偿试，直到加锁成功为止。由于它会非常消耗CPU资源，所以一般只锁今资源非常短的情况下才能使用它。</p><p>可重入锁: 同一个线程对被访问资源可以一直加锁。但如果被访问资源已经上锁了，那么其它线程则无法对其加锁。</p><p>锁是解决互斥的一种好办法，但同样有利必有弊。如果使用不善就会出现死锁。</p><h2 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题"></a>死锁问题</h2><p>死锁顾名思意，就是打不开的锁。它是怎么产生的呢？举个例子，两个人需要一起完成一件事儿，A说他要等B做完了，他才能开始；而B说它要等A做完了，它才能开使。于时他们在相互等待中老去。</p><p>看类很简单的问题，但这类事情经常在我们的工作中出现。而在我们开发的多线程程序中更是频繁出现。别说人没遇到过哟！</p><p>如何解决？那就是考验你的管理能力了。共实很多情况是出现了死锁我们自己却不知道，否则的话，凭我们的聪名才智怎么能让他们一直锁在那儿呢。</p><h2 id="SDL多线程"><a href="#SDL多线程" class="headerlink" title="SDL多线程"></a>SDL多线程</h2><p>上面介绍了一大堆的理论，现在来看看 SDL 为我们都提供了那些API吧。</p><ul><li><p>创建线程</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SDL_Thread* SDL_CreateThread(SDL_ThreadFunction fn,</span><br><span class="line">                           const char*        name,</span><br><span class="line">                           void*              data)</span><br></pre></td></tr></table></figure><ul><li>fn: 线程要运行的函数。</li><li>name: 线程名。</li><li>data: 函数参数。</li></ul></li><li><p>等待线程</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void SDL_WaitThread(SDL_Thread* thread,</span><br><span class="line">                  int*        status)</span><br></pre></td></tr></table></figure><p>等待线程结束。</p></li><li><p>创建互斥量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SDL_mutex* SDL_CreateMutex(void)</span><br></pre></td></tr></table></figure><p>也就是创建一个稀有资源，这样大家就去抢这个资源。从而达到为真正资源加锁的目的。</p></li></ul><ul><li><p>销毁互斥量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void SDL_DestroyMutex(SDL_mutex* mutex)</span><br></pre></td></tr></table></figure></li><li><p>加锁</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int SDL_LockMutex(SDL_mutex* mutex)</span><br></pre></td></tr></table></figure></li><li><p>解锁</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int SDL_UnlockMutex(SDL_mutex* mutex)</span><br></pre></td></tr></table></figure></li></ul><p>常用的与线程和锁相关的 API 就以上几个，是不是非常简单？下面我们来看一个简单的例子吧。</p><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>下面这个例子是在主线程中创建了一个子线程。然后主线程就一直等待子线程结束。等子线程结束后，主线程也随之结束。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;SDL.h&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;* Very simple thread - counts 0 to 9 delaying 50ms between increments *&#x2F;</span><br><span class="line">static int TestThread(void *ptr)</span><br><span class="line">&#123;</span><br><span class="line">    int cnt;</span><br><span class="line"></span><br><span class="line">    for (cnt &#x3D; 0; cnt &lt; 10; ++cnt) &#123;</span><br><span class="line">        printf(&quot;\nThread counter: %d&quot;, cnt);</span><br><span class="line">        SDL_Delay(50);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    SDL_Thread *thread;</span><br><span class="line">    int         threadReturnValue;</span><br><span class="line"></span><br><span class="line">    printf(&quot;\nSimple SDL_CreateThread test:&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;* Simply create a thread *&#x2F;</span><br><span class="line">    thread &#x3D; SDL_CreateThread(TestThread, &quot;TestThread&quot;, (void *)NULL);</span><br><span class="line"></span><br><span class="line">    if (NULL &#x3D;&#x3D; thread) &#123;</span><br><span class="line">        printf(&quot;\nSDL_CreateThread failed: %s\n&quot;, SDL_GetError());</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        SDL_WaitThread(thread, &amp;threadReturnValue);</span><br><span class="line">        printf(&quot;\nThread returned value: %d&quot;, threadReturnValue);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文主要介绍了两方面的内容。一是对多线程理论做了一下简单的介绍；二是介绍了SDL中与线程和锁相关的API。</p><p>最后通过一个例子显示了如何使用 SDL 中的多线程。</p><p>希望本文能对你有所帮助，谢谢！</p><h2 id="隆重推荐"><a href="#隆重推荐" class="headerlink" title="隆重推荐"></a>隆重推荐</h2><ul><li><a href="http://www.avdancedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li><li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li><li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li><li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li><li><a href="http://www.avdancedu.com/67189745" target="_blank" rel="noopener">彻底理解SDL纹理</a></li><li><a href="http://www.avdancedu.com/a6aca2fe" target="_blank" rel="noopener">SDL孙悟空与多线程</a></li><li><a href="http://www.avdancedu.com/f94132a0" target="_blank" rel="noopener">PCM音频播放器的实现</a></li><li><a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">ffmpeg精讲</a></li></ul></div><div class="reward-container"><div></div> <button onclick='var qr=document.getElementById("qr");qr.style.display="none"===qr.style.display?"block":"none"'> 打赏</button><div id="qr" style="display:none"><div style="display:inline-block"> <img src="https://cdn.avdancedu.com/image/next/wechat.jpeg" alt="音视跳动 微信支付"><p>微信支付</p></div><div style="display:inline-block"> <img src="https://cdn.avdancedu.com/image/next/alipay.jpeg" alt="音视跳动 支付宝"><p>支付宝</p></div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"> <strong>本文作者：</strong> 音视跳动-李超 [avdance@163.com]</li><li class="post-copyright-link"> <strong>本文链接：</strong> <a href="https://blog.avdancedu.com/a6aca2fe/" title="SDL多线程">https://blog.avdancedu.com/a6aca2fe/</a></li><li class="post-copyright-license"> <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><div class="followme"><p>欢迎关注我的其它发布渠道</p><div class="social-list"><div class="social-item"><a target="_blank" class="social-link" href="https://cdn.avdancedu.com/image/next/WeChat.jpeg"><span class="icon"><i class="fa fa-wechat"></i></span> <span class="label">WeChat</span></a></div><div class="social-item"><a target="_blank" class="social-link" href="/atom.xml"><span class="icon"><i class="fa fa-rss"></i></span> <span class="label">RSS</span></a></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/SDL-AAA/" rel="tag"><i class="fa fa-tag"></i> SDL, AAA</a></div><div class="post-nav"><div class="post-nav-item"><a href="/56ef4bcb/" rel="prev" title="SDL入门"><i class="fa fa-chevron-left"></i> SDL入门</a></div><div class="post-nav-item"> <a href="/a0ec02a7/" rel="next" title="SDL事件处理">SDL事件处理<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><div class="comments" id="valine-comments"></div><script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avdance32_32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avdance16_16.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.avdancedu.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天将向大家介绍一下SDL中的多线程的使用。通过下面对SDL 线程与锁相关的API介绍，你会发现，它与 Linux, Windows相关的API几乎是一模一样的。从这里可以推断出，其实SDL对于多线程的处理只是为大家提供了一套统一接口，并没有做其它太多的工作。 这是我们介绍 SDL 的第六篇文章。有兴趣的同学可以通过下面的链接查看其它几篇文章。  SDL 入门 SDL窗口渲染 SDL基本图形绘制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SDL多线程">
+<meta property="og:url" content="https://blog.avdancedu.com/a6aca2fe/index.html">
+<meta property="og:site_name" content="音视跳动科技">
+<meta property="og:description" content="今天将向大家介绍一下SDL中的多线程的使用。通过下面对SDL 线程与锁相关的API介绍，你会发现，它与 Linux, Windows相关的API几乎是一模一样的。从这里可以推断出，其实SDL对于多线程的处理只是为大家提供了一套统一接口，并没有做其它太多的工作。 这是我们介绍 SDL 的第六篇文章。有兴趣的同学可以通过下面的链接查看其它几篇文章。  SDL 入门 SDL窗口渲染 SDL基本图形绘制">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-19T06:52:00.000Z">
+<meta property="article:modified_time" content="2022-11-20T04:06:46.407Z">
+<meta property="article:author" content="音视跳动">
+<meta property="article:tag" content="SDL">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.avdancedu.com/a6aca2fe/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SDL多线程 | 音视跳动科技</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="音视跳动科技" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    
+        <div id="needsharebutton-float">
+          <span class="btn">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+          </span>
+        </div>
+    
+
+    <header class="header" itemscope itemtype="https://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">音视跳动科技</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">传播最前沿的科技知识！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/avdance" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="https://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.avdancedu.com/a6aca2fe/">
+
+    <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="image" content="/images/avdancelogo.jpg">
+      <meta itemprop="name" content="音视跳动">
+      <meta itemprop="description" content="传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="音视跳动科技">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SDL多线程
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-19 14:52:00" itemprop="dateCreated datePublished" datetime="2022-11-19T14:52:00+08:00">2022-11-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-20 12:06:46" itemprop="dateModified" datetime="2022-11-20T12:06:46+08:00">2022-11-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93/" itemprop="url" rel="index"><span itemprop="name">视频渲染</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/a6aca2fe/" class="post-meta-item leancloud_visitors" data-flag-title="SDL多线程" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/a6aca2fe/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/a6aca2fe/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今天将向大家介绍一下SDL中的多线程的使用。通过下面对SDL 线程与锁相关的API介绍，你会发现，它与 Linux, Windows相关的API几乎是一模一样的。从这里可以推断出，其实SDL对于多线程的处理只是为大家提供了一套统一接口，并没有做其它太多的工作。</p>
+<p>这是我们介绍 SDL 的第六篇文章。有兴趣的同学可以通过下面的链接查看其它几篇文章。</p>
+<ul>
+<li><a href="http://www.avdancedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
+<li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
+<li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
+<li><a href="http://www.avdancedu.com/67189745" target="_blank" rel="noopener">彻底理解SDL纹理</a></li>
+<li><a href="http://www.avdancedu.com/a6aca2fe" target="_blank" rel="noopener">SDL孙悟空与多线程</a></li>
+<li><a href="http://www.avdancedu.com/f94132a0" target="_blank" rel="noopener">PCM音频播放器的实现</a></li>
+<li><a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">ffmpeg精讲</a></li>
+</ul>
+<a id="more"></a>
+
+<h2 id="为啥要用多线程？"><a href="#为啥要用多线程？" class="headerlink" title="为啥要用多线程？"></a>为啥要用多线程？</h2><p>我觉得这个小节的标题就是一个废话。不过为了文章的完整性，还是简单的说一说吧。多线程（多进程）是啥意思呢？做个不恰当的比喻，可以把CPU看成是孙悟空，它有一个能耐，从后脑揪几个猴毛就可以变出许多的小猴子。</p>
+<p>多线程（多进程）就是这些小猴子。当干一件比较复杂的事儿时，可以孙悟空一个人干，这样自己比较累。它还有一种选择就是揪几根猴毛，让小猴子们一起帮着干。这样一件复杂的事件，分给许多猴子干，每只猴只干一部分，事情很快就被做完了，这样岂不是比一个人干要强的多？</p>
+<p>当然，有好处也有坏外。猴子多了就需要管理，如果管理不好，就会闹翻天。比如，只有一块肉，该给哪个猴子吃呢？这真是一个另人头痛的问题。</p>
+<p>实际上整个操作系统的演进，就是一部管理学的演进。如何才能让CPU，内存，磁盘I/O，各种设备之间高效的工作，一直是操作系统追求的目标。当然，这话有点扯远了。</p>
+<p>今天我们要讲的就是多线程（多进程）之间该如何高效的工作。要想让多线程之间高效工作，就要给它们之间立点规矩，大家都要遵守的规矩。</p>
+<h2 id="线程互斥与同步"><a href="#线程互斥与同步" class="headerlink" title="线程互斥与同步"></a>线程互斥与同步</h2><p>当僧多粥少时，就引入了互斥的概念。再举个我们生活中的例子吧，比如有一大家族住在同一个大屋子里，却只有一个厕所。早上起来大家都想去厕所，这时有谁先抢到了厕所，其它人就只能等他出来后再进入了，这就是<strong>互斥</strong>。</p>
+<p>当仅有一份资源，大家都需要时，这就产生了管理问题。解决的办法就是通过互斥方法来解决。这种情况是在做多线程处理时要尽量避免的；如果资源足够呢？那当然是平均分配，人人有份了。这中情况是多线路程最希望的。</p>
+<p>除了互斥之外，有些情况还需要更精细化的管理，比如说<strong>同步</strong>。例如车间里的流水线，每个人负责一块，每一块都是半成品，第一个人完成之后交给第二个人做下一步，而后面的人又必须依赖于前而人的结果，依次类推，最后一个人才能完成最终的产品。这就是线程间的精细化管理<strong>同步</strong>。</p>
+<p>要想实现互斥和同步，就需要一种机制。在操作系统上提供了锁的概念来达到互斥与同步。</p>
+<h2 id="锁的种类"><a href="#锁的种类" class="headerlink" title="锁的种类"></a>锁的种类</h2><p>在操作系统上有很种锁，有读写锁、自旋锁、可重入锁等。下面我简单的介绍一下它们之间的不同。</p>
+<p>读写锁: 分为读锁与写锁。所谓读锁就是被访问的资源只要你不改变它的值，你就可以访问，但如果你想改变它，那么就需要等所有读它的线程都释放了它们的锁后，才可以进行修改；写锁是同一时刻只能有一个人访问，当资源被加锁后，其它人只能等待。</p>
+<p>自旋锁: 偿试着给访问资源加锁，如果此时被访问资源已经上锁了，那就一直不停的偿试，直到加锁成功为止。由于它会非常消耗CPU资源，所以一般只锁今资源非常短的情况下才能使用它。</p>
+<p>可重入锁: 同一个线程对被访问资源可以一直加锁。但如果被访问资源已经上锁了，那么其它线程则无法对其加锁。</p>
+<p>锁是解决互斥的一种好办法，但同样有利必有弊。如果使用不善就会出现死锁。</p>
+<h2 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题"></a>死锁问题</h2><p>死锁顾名思意，就是打不开的锁。它是怎么产生的呢？举个例子，两个人需要一起完成一件事儿，A说他要等B做完了，他才能开始；而B说它要等A做完了，它才能开使。于时他们在相互等待中老去。</p>
+<p>看类很简单的问题，但这类事情经常在我们的工作中出现。而在我们开发的多线程程序中更是频繁出现。别说人没遇到过哟！</p>
+<p>如何解决？那就是考验你的管理能力了。共实很多情况是出现了死锁我们自己却不知道，否则的话，凭我们的聪名才智怎么能让他们一直锁在那儿呢。</p>
+<h2 id="SDL多线程"><a href="#SDL多线程" class="headerlink" title="SDL多线程"></a>SDL多线程</h2><p>上面介绍了一大堆的理论，现在来看看 SDL 为我们都提供了那些API吧。</p>
+<ul>
+<li><p>创建线程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SDL_Thread* SDL_CreateThread(SDL_ThreadFunction fn,</span><br><span class="line">                           const char*        name,</span><br><span class="line">                           void*              data)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>fn: 线程要运行的函数。</li>
+<li>name: 线程名。</li>
+<li>data: 函数参数。</li>
+</ul>
+</li>
+<li><p>等待线程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void SDL_WaitThread(SDL_Thread* thread,</span><br><span class="line">                  int*        status)</span><br></pre></td></tr></table></figure>
+
+<p>等待线程结束。</p>
+</li>
+<li><p>创建互斥量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SDL_mutex* SDL_CreateMutex(void)</span><br></pre></td></tr></table></figure>
+
+<p>也就是创建一个稀有资源，这样大家就去抢这个资源。从而达到为真正资源加锁的目的。</p>
+</li>
+</ul>
+<ul>
+<li><p>销毁互斥量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void SDL_DestroyMutex(SDL_mutex* mutex)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int SDL_LockMutex(SDL_mutex* mutex)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int SDL_UnlockMutex(SDL_mutex* mutex)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>常用的与线程和锁相关的 API 就以上几个，是不是非常简单？下面我们来看一个简单的例子吧。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>下面这个例子是在主线程中创建了一个子线程。然后主线程就一直等待子线程结束。等子线程结束后，主线程也随之结束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;SDL.h&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;* Very simple thread - counts 0 to 9 delaying 50ms between increments *&#x2F;</span><br><span class="line">static int TestThread(void *ptr)</span><br><span class="line">&#123;</span><br><span class="line">    int cnt;</span><br><span class="line"></span><br><span class="line">    for (cnt &#x3D; 0; cnt &lt; 10; ++cnt) &#123;</span><br><span class="line">        printf(&quot;\nThread counter: %d&quot;, cnt);</span><br><span class="line">        SDL_Delay(50);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[])</span><br><span class="line">&#123;</span><br><span class="line">    SDL_Thread *thread;</span><br><span class="line">    int         threadReturnValue;</span><br><span class="line"></span><br><span class="line">    printf(&quot;\nSimple SDL_CreateThread test:&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;* Simply create a thread *&#x2F;</span><br><span class="line">    thread &#x3D; SDL_CreateThread(TestThread, &quot;TestThread&quot;, (void *)NULL);</span><br><span class="line"></span><br><span class="line">    if (NULL &#x3D;&#x3D; thread) &#123;</span><br><span class="line">        printf(&quot;\nSDL_CreateThread failed: %s\n&quot;, SDL_GetError());</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        SDL_WaitThread(thread, &amp;threadReturnValue);</span><br><span class="line">        printf(&quot;\nThread returned value: %d&quot;, threadReturnValue);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文主要介绍了两方面的内容。一是对多线程理论做了一下简单的介绍；二是介绍了SDL中与线程和锁相关的API。</p>
+<p>最后通过一个例子显示了如何使用 SDL 中的多线程。</p>
+<p>希望本文能对你有所帮助，谢谢！</p>
+<h2 id="隆重推荐"><a href="#隆重推荐" class="headerlink" title="隆重推荐"></a>隆重推荐</h2><ul>
+<li><a href="http://www.avdancedu.com/56ef4bcb" target="_blank" rel="noopener">SDL 入门</a></li>
+<li><a href="http://www.avdancedu.com/287ad9ab" target="_blank" rel="noopener">SDL窗口渲染</a></li>
+<li><a href="http://www.avdancedu.com/24ee78a8" target="_blank" rel="noopener">SDL基本图形绘制</a></li>
+<li><a href="http://www.avdancedu.com/a0ec02a7" target="_blank" rel="noopener">SDL事件处事</a></li>
+<li><a href="http://www.avdancedu.com/67189745" target="_blank" rel="noopener">彻底理解SDL纹理</a></li>
+<li><a href="http://www.avdancedu.com/a6aca2fe" target="_blank" rel="noopener">SDL孙悟空与多线程</a></li>
+<li><a href="http://www.avdancedu.com/f94132a0" target="_blank" rel="noopener">PCM音频播放器的实现</a></li>
+<li><a href="https://coding.imooc.com/class/279.html" target="_blank" rel="noopener">ffmpeg精讲</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://cdn.avdancedu.com/image/next/wechat.jpeg" alt="音视跳动 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://cdn.avdancedu.com/image/next/alipay.jpeg" alt="音视跳动 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>音视跳动-李超 [avdance@163.com]
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.avdancedu.com/a6aca2fe/" title="SDL多线程">https://blog.avdancedu.com/a6aca2fe/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://cdn.avdancedu.com/image/next/WeChat.jpeg">
+            <span class="icon">
+              <i class="fa fa-wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SDL/" rel="tag"><i class="fa fa-tag"></i> SDL</a>
+          </div>
+
+        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/56ef4bcb/" rel="prev" title="SDL入门">
+      <i class="fa fa-chevron-left"></i> SDL入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/a0ec02a7/" rel="next" title="SDL事件处理">
+      SDL事件处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
   window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
@@ -18,7 +497,133 @@
       localStorage.setItem('comments_active', commentClass);
     });
   }
-</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc"> 文章目录</li><li class="sidebar-nav-overview"> 站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为啥要用多线程？"><span class="nav-number">1.</span> <span class="nav-text">为啥要用多线程？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程互斥与同步"><span class="nav-number">2.</span> <span class="nav-text">线程互斥与同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的种类"><span class="nav-number">3.</span> <span class="nav-text">锁的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁问题"><span class="nav-number">4.</span> <span class="nav-text">死锁问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDL多线程"><span class="nav-number">5.</span> <span class="nav-text">SDL多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隆重推荐"><span class="nav-number">8.</span> <span class="nav-text">隆重推荐</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person"> <img class="site-author-image" itemprop="image" alt="音视跳动" src="/images/avdancelogo.jpg"><p class="site-author-name" itemprop="name">音视跳动</p><div class="site-description" itemprop="description">传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">51</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">10</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">36</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/avdance" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;avdance" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="https://www.zhihu.com/people/garrylea/posts" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;garrylea&#x2F;posts" rel="noopener" target="_blank"><i class="fa fa-fw fa-zhihu"></i> ZhiHu</a></span></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="beian"><a href="https://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19056322号-1</a> <img src="/images/beianico.png" style="display:inline-block"><a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011102001366" rel="noopener" target="_blank">京公网安备11011102001366号</a></div><div class="copyright"> &copy; <span itemprop="copyrightYear">2022</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">李超</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span title="站点总字数">231k</span></div><script>
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为啥要用多线程？"><span class="nav-number">1.</span> <span class="nav-text">为啥要用多线程？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程互斥与同步"><span class="nav-number">2.</span> <span class="nav-text">线程互斥与同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的种类"><span class="nav-number">3.</span> <span class="nav-text">锁的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁问题"><span class="nav-number">4.</span> <span class="nav-text">死锁问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDL多线程"><span class="nav-number">5.</span> <span class="nav-text">SDL多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隆重推荐"><span class="nav-number">8.</span> <span class="nav-text">隆重推荐</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="音视跳动"
+      src="/images/avdancelogo.jpg">
+  <p class="site-author-name" itemprop="name">音视跳动</p>
+  <div class="site-description" itemprop="description">传输最前沿的科技知识，学习音视频的圣地！ffmpeg, webrtc, H264, AAC</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/avdance" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;avdance" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/garrylea/posts" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;garrylea&#x2F;posts" rel="noopener" target="_blank"><i class="fa fa-fw fa-zhihu"></i>ZhiHu</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      
+        <!--
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+            <h3 class="widget-title">标签云</h3>
+            <div id="myCanvasContainer" class="widget tagcloud">
+                <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C/C++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/" rel="tag">GO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SDL/" rel="tag">SDL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">WebRTC流媒体服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/" rel="tag">const</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/" rel="tag">ffmpeg</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/janus/" rel="tag">janus</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/man/" rel="tag">man</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mediasoup/" rel="tag">mediasoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">next</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/" rel="tag">plugin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slot/" rel="tag">slot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/" rel="tag">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/videoroom/" rel="tag">videoroom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag">人工智能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E5%BA%8F%E5%9B%BE/" rel="tag">时序图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="tag">智能指针</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag">直播</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="tag">移动构造函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="tag">类型转换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93/" rel="tag">视频渲染</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" rel="tag">音视频</a><span class="tag-list-count">4</span></li></ul>
+                </canvas>
+            </div>
+         </div>
+         -->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备19056322号-1 </a>
+      <img src="/images/beianico.png" style="display: inline-block;"><a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011102001366" rel="noopener" target="_blank">京公网安备11011102001366号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李超</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">231k</span>
+</div>
+
+        
+
+
+
+
+
+
+<script>
   (function() {
     function leancloudSelector(url) {
       url = encodeURI(url);
@@ -108,7 +713,191 @@
         });
     }
   })();
-</script></div></footer></div><script src="/lib/anime.min.js"></script><script src="/lib/lozad.min.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/pisces.js"></script><script src="/js/next-boot.js"></script><script src="/js/local-search.js"></script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz","5dKv9XFD2w3gjJnb0xnWIIWz")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.min.css"><script src="/lib/needsharebutton/needsharebutton.min.js"></script><script>flOptions={iconStyle:"box",boxForm:"horizontal",position:"topRight",networks:"Weibo,Wechat,QQZone"},new needShareButton("#needsharebutton-float",flOptions)</script><script>
+</script>
+
+
+      </div>
+    </footer>
+
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Cu6h7B3RnNt3uEMrRWpVlIU6-gzGzoHsz", "5dKv9XFD2w3gjJnb0xnWIIWz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.min.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.min.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,QQZone";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+
+<script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   NexT.utils.getScript('/lib/Valine.min.js', () => {
     var GUEST = ['nick', 'mail', 'link'];
@@ -134,4 +923,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
   }, window.Valine);
 });
-</script></body></html>
+</script>
+
+
+</body>
+</html>
