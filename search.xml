@@ -1807,7 +1807,8 @@
       </categories>
       <tags>
         <tag>WebRTC</tag>
-        <tag>docker mediasoup</tag>
+        <tag>mediasoup</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
