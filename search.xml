@@ -1675,8 +1675,8 @@
   </entry>
   <entry>
     <title>音视频通信为什么要选择WebRTC</title>
-    <url>/a0ec02a7/</url>
-    <content><![CDATA[<h2 id="abbrlink-b363212d"><a href="#abbrlink-b363212d" class="headerlink" title="abbrlink: b363212d"></a>abbrlink: b363212d</h2><p><img data-src="https://cdn.avdancedu.com/image/article/select_webrtc/webrtc_win_event.jpg" alt=""><br>在网上经常看到有人说：“在线教育直播是用WebRTC做的”，“音视频会议是用WebRTC做的”……；“声网、腾讯、阿里……都使用的WebRTC”。但你有没有好奇，这些一线大厂为什么都要使用WebRTC呢？换句话说，WebRTC到底好在哪里呢？</p>
+    <url>/b363212d/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/select_webrtc/webrtc_win_event.jpg" alt=""><br>在网上经常看到有人说：“在线教育直播是用WebRTC做的”，“音视频会议是用WebRTC做的”……；“声网、腾讯、阿里……都使用的WebRTC”。但你有没有好奇，这些一线大厂为什么都要使用WebRTC呢？换句话说，WebRTC到底好在哪里呢？</p>
 <p>这个问题，对于长期做音视频实时通信的老手来说是不言而喻的；但对于新手，则是急切想知道，而又很难得到答案的问题。那么本文我将采用对比法，向你详细阐述一下WebRTC到底好在哪里。</p>
 <p>这次我们对比的指标包括：性能、易用性、可维护性、流行性、代码风格等多个方面。不过，要做这样的对比并非易事儿，首先要解决的难点是，目前市面上没有一款与WebRTC接近或有相似功能的开源库。这真成了无米之炊了！</p>
 <p>好在这点困难并难不倒我们，既然没有与之可比较的开源库，那我们就自己“造”一个，用自研系统与WebRTC作比较。评估一下自研系统与基于WebRTC开发的音视频客户端，哪个成本更低、质量更好。通过这样的对比，相信能让你更加了解WebRTC，知道其到底有多优秀了。</p>
@@ -1794,7 +1794,7 @@
 </li>
 </ul>
 <p>到此，mediaosoup-demo就算部署好了。现在让我们来测试一下吧！</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在chrome 浏览器中输入<a href="https://IP:3000，如果一切顺利的话，你将能够看到mediasoup-demo中熟悉的背景，并必本地摄像头也被打开了。">https://IP:3000，如果一切顺利的话，你将能够看到mediasoup-demo中熟悉的背景，并必本地摄像头也被打开了。</a></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在chrome 浏览器中输入<code>https://IP:3000</code>，如果一切顺利的话，你将能够看到mediasoup-demo中熟悉的背景，并必本地摄像头也被打开了。</p>
 <p>然后复制页面地址，打开一个新标签页，现在两个页面应该就可以通信了。</p>
 <blockquote>
 <p>注意，我在测试时发现chrome 102 这个版本是可以通信的，而用最新的chrome会报错。该问题我已经提交给mediasoup官网，如果有进一步的消息我会及时进行更新。</p>
@@ -1972,7 +1972,7 @@
   <entry>
     <title>ffmpeg命令详解</title>
     <url>/92d94a35/</url>
-    <content><![CDATA[<p><img data-src="http://upload-images.jianshu.io/upload_images/5956443-29b1eff4f8ce0e61.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1600" alt="ffmpegX.png"></p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/ffmpeg/ffmpeg.png" alt="ffmpegX.png"></p>
 <p>FFMPEG是特别强大的专门用于处理音视频的开源库。你既可以使用它的API对音视频进行处理，也可以使用它提供的工具，如 ffmpeg, ffplay, ffprobe，来编辑你的音视频文件。</p>
 <p>本文将简要介绍一下 FFMPEG 库的基本目录结构及其功能，然后详细介绍一下我们在日常工作中，如何使用 ffmpeg 提供的工具来处理音视频文件。</p>
 <a id="more"></a>
