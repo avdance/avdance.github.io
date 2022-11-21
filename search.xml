@@ -1800,6 +1800,7 @@
 <blockquote>
 <p>注意，我在测试时发现chrome 102 这个版本是可以通信的，而用最新的chrome会报错。该问题我已经提交给mediasoup官网，如果有进一步的消息我会及时进行更新。</p>
 </blockquote>
+<h2 id="下载老版本Chrome地址"><a href="#下载老版本Chrome地址" class="headerlink" title="下载老版本Chrome地址"></a>下载老版本Chrome地址</h2><p><a href="https://www.slimjet.com/chrome/google-chrome-old-version.php" target="_blank" rel="noopener">下载old Chrome</a></p>
 ]]></content>
       <categories>
         <category>WebRTC</category>
