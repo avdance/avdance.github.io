@@ -1784,8 +1784,10 @@
 </blockquote>
 <h2 id="下载run-sh脚本"><a href="#下载run-sh脚本" class="headerlink" title="下载run.sh脚本"></a>下载run.sh脚本</h2><p>你可以从<a href="https://cdn.avdancedu.com/image/article/docker/v1/run.sh" target="_blank" rel="noopener">这里下载run.sh</a>，下载成功后可以将它保存在任意目录下。</p>
 <h2 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h2><p>使用下面的命令来启动docker</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod +x run.sh</span><br><span class="line">sudo MEDIASOUP_ANNOUNCED_IP&#x3D;外网IP&#x2F;你主机IP .&#x2F;run.sh</span><br></pre></td></tr></table></figure>
-<p>这里需要说明的是，如果你是在云主机上部署的，则<strong>MEDIASOUP_ANNOUNCED_IP</strong>设置成你云主机的外网IP地址，如果你是在自己的主机上部署的，则需要填你主机的IP，它一般是以<code>192.</code>开头的。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod +x run.sh</span><br><span class="line">sudo MEDIASOUP_ANNOUNCED_IP&#x3D;你的IP .&#x2F;run.sh</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，上面的IP在不同的情况下需要填入不同的值。如果你是在云主机上部署的，则<strong>MEDIASOUP_ANNOUNCED_IP</strong>设置成你云主机的外网IP地址；如果你是在自己的主机上部署的，IP地址则需要填你主机的IP，它一般是以<code>192.</code>开头的。</p>
+</blockquote>
 <h2 id="启动mediasoup"><a href="#启动mediasoup" class="headerlink" title="启动mediasoup"></a>启动mediasoup</h2><p>上面的步骤执行成功后，我们需要启动mediasoup服务，启动的办法也很简单:</p>
 <ul>
 <li><p>首先执行下面的命令进入到docker中</p>
