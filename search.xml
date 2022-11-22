@@ -4179,8 +4179,7 @@ Bob-->Alice: I am good thanks!</textarea><textarea id="sequence-0-options" style
 
 <h3 id="修改配置文件，添加下面这一行。"><a href="#修改配置文件，添加下面这一行。" class="headerlink" title="修改配置文件，添加下面这一行。"></a>修改配置文件，添加下面这一行。</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[credential]  </span><br><span class="line">    helper &#x3D; store</span><br></pre></td></tr></table></figure>
 
-<p>##修改已提交的commit的用户名邮箱</p>
-<ol>
+<h2 id="修改已提交的commit的用户名邮箱"><a href="#修改已提交的commit的用户名邮箱" class="headerlink" title="修改已提交的commit的用户名邮箱"></a>修改已提交的commit的用户名邮箱</h2><ol>
 <li><p>第一步</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;newName&quot;</span><br><span class="line">git config --global user.email &quot;newEmail&quot;</span><br></pre></td></tr></table></figure>
 </li>
