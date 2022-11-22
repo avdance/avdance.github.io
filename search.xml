@@ -675,7 +675,7 @@
 <li>在虚拟机上安装完系统后，一定要安装虚拟的<a href="https://jingyan.baidu.com/article/6525d4b13b7d0fac7d2e94ef.html" target="_blank" rel="noopener">增强驱动</a>，这样虚拟机要才能全屏显示。不会的可去问度娘。</li>
 </ol>
 <h2 id="安装-Visual-Stuido"><a href="#安装-Visual-Stuido" class="headerlink" title="安装 Visual Stuido"></a>安装 Visual Stuido</h2><p>官网上已经明确说可以使用<strong>Visual Studio 2022</strong>来编译WebRTC了，亲测确实可行!</p>
-<p><strong>但需要注意的是，最新的WebRTC代码中的peerconnection_client程序无法与peerconnection_server连接，该问题已经存在一段时间了，目前还没有修复。所以，如果你想运行peerconnection_client程序，那么你需要将WebRTC切换到</strong>M93(4577)<strong>之前的版本。而WebRTC M93(4577)</strong>之前的版本必须使用VS2019，这一点你一定要清楚。**</p>
+<p><strong>但需要注意的是，最新的WebRTC代码中的peerconnection_client程序无法与peerconnection_server连接，该问题已经存在一段时间了，目前还没有修复。所以，如果你想运行peerconnection_client程序，那么你需要将WebRTC切换到</strong>M93(4577)<strong>之前的版本。而WebRTC M93(4577)之前的版本必须使用VS2019，这一点你一定要清楚。</strong></p>
 <p>在安装Visual Studio 时，可以使用免费的 Community Edition 版本。</p>
 <h3 id="下载Visual-Studio-2022"><a href="#下载Visual-Studio-2022" class="headerlink" title="下载Visual Studio 2022"></a>下载Visual Studio 2022</h3><ul>
 <li>VS2022版本可以从<a href="https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false" target="_blank" rel="noopener">这里下载</a></li>
