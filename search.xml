@@ -4625,7 +4625,7 @@ Bob-->Alice: I am good thanks!</textarea><textarea id="sequence-0-options" style
   <entry>
     <title>VS中引入并使用WebRTC库</title>
     <url>/fcd68433/</url>
-    <content><![CDATA[<p>前段时间经常有同学问我，如何在Windows下利用编译出的WebRTC库开发自己的应用程序，当时特别忙就让同学到网上找答案了，没想到过了几天同学们又来问，说网上找不到……</p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/webrtc_banner.png" alt="banner"><br>前段时间经常有同学问我，如何在Windows下利用编译出的WebRTC库开发自己的应用程序，当时特别忙就让同学到网上找答案了，没想到过了几天同学们又来问，说网上找不到……</p>
 <p>相对于移动端，在Windows下使用WebRTC库确实困难些。在移动端（iOS、Andorid），你可以直接从Google提供的Pod库中拉取编译好的WebRTC库，而在Windows端则需要我们自己编译WebRTC库，并导出WebRTC头文件。</p>
 <p>这几天手头的工作终于忙的差不多了，今天就花点时间整理一下这方面的知识，给同学们搭个<strong>台阶</strong>，让同学们快尽入手WebRTC:)。</p>
 <a id="more"></a>
@@ -4640,7 +4640,7 @@ Bob-->Alice: I am good thanks!</textarea><textarea id="sequence-0-options" style
 
 <p>而必须明确指明编译出的WebRTC是<strong>Debug</strong>版本，还是<strong>Release</strong>版本；是<strong>x86</strong>版本还是<strong>x64</strong>版本……</p>
 <p>因此，应该使用下面的命令编译WebRTC:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gn gen --target&#x3D;x64 --ide&#x3D;vs2019 --args&#x3D;&quot;is_debug&#x3D;true rtc_enable_protobuf&#x3D;false is_clang&#x3D;false target_cpu&#x3D;\&quot;x64\&quot;  enable_iterator_debugging&#x3D;true  use_custom_libcxx&#x3D;false symbol_level&#x3D;0 rtc_include_tests&#x3D;false&quot; out&#x2F;debug_x64</span><br><span class="line"></span><br><span class="line">ninja - C out&#x2F;debug_x64</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gn gen --target&#x3D;x64 --ide&#x3D;vs2019 --args&#x3D;&quot;is_debug&#x3D;true rtc_enable_protobuf&#x3D;false is_clang&#x3D;false target_cpu&#x3D;\&quot;x64\&quot;  enable_iterator_debugging&#x3D;true  use_custom_libcxx&#x3D;false symbol_level&#x3D;0 rtc_include_tests&#x3D;false&quot; out&#x2F;debug_x64</span><br><span class="line">ninja - C out&#x2F;debug_x64</span><br></pre></td></tr></table></figure>
 <p>上述 <strong>gn</strong> 中的几个参数含义如下：</p>
 <ul>
 <li>–target，顾名思义，生成x64版本的WebRTC库</li>
