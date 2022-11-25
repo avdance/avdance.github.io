@@ -4666,14 +4666,14 @@ Bob-->Alice: I am good thanks!</textarea><textarea id="sequence-0-options" style
 <li>第五步，同时勾选<strong>空项目</strong><br><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/vs5.png" alt="图5"></li>
 </ul>
 <p>至此，我们就构建出了一个VS<strong>空项目</strong>，它里边没有任何文件，如下图所示：</p>
-<p><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/vs6.png" alt="图6"></p>
+<p><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/vs6_new.png" alt="图6"></p>
 <p>空项目创建好后，紧接着我们来移植peerconnection_client代码到新项目中，步骤如下：</p>
 <ul>
 <li><p>第一步，从WebRTC源码中拷贝peerconnection_client中的代码到新项目的目录中，在我这里是<br>将<code>C:\webrtc\webrtc-checkout\src\exmaples\peerconnection\client</code>目录中的代码拷贝到<code>C:\Users\lichao\sourceMyWebRTCDemo</code>目录下。如下图所示：</p>
 <p><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/code1.png" alt="code1"></p>
 <p><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/code2.png" alt="code2"></p>
 </li>
-<li><p>第二步，将新项目中的代码<strong>拖</strong>到VS项目中<br><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/code3.png" alt="code3"></p>
+<li><p>第二步，将新项目中的代码<strong>拖</strong>到VS项目中<br><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/code3_new.png" alt="code3"></p>
 </li>
 </ul>
 <p>通过以上步骤我们就将peerconnection_client中的代码移植好了。接下来咱们来看<strong>重头戏</strong>，如何在项目中引入WebRTC库。</p>
