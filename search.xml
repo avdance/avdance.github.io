@@ -4625,7 +4625,8 @@ Bob-->Alice: I am good thanks!</textarea><textarea id="sequence-0-options" style
   <entry>
     <title>VS中引入并使用WebRTC库</title>
     <url>/fcd68433/</url>
-    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/import_webrtc/webrtc_banner_new.png" alt="banner"><br>前段时间经常有同学问我，如何在Windows下利用编译出的WebRTC库开发自己的应用程序，当时特别忙就让同学到网上找答案了，没想到过了几天同学们又来问，说网上找不到……</p>
+    <content><![CDATA[<p><img data-src="https://avdancevod.oss-cn-beijing.aliyuncs.com/image/article/import_webrtc/webrtc_banner_1.jpeg" alt="banner"></p>
+<p>前段时间经常有同学问我，如何在Windows下利用编译出的WebRTC库开发自己的应用程序，当时特别忙就让同学到网上找答案了，没想到过了几天同学们又来问，说网上找不到……</p>
 <p>相对于移动端，在Windows下使用WebRTC库确实困难些。在移动端（iOS、Andorid），你可以直接从Google提供的Pod库中拉取编译好的WebRTC库，而在Windows端则需要我们自己编译WebRTC库，并导出WebRTC头文件。</p>
 <p>这几天手头的工作终于忙的差不多了，今天就花点时间整理一下这方面的知识，给同学们搭个<strong>台阶</strong>，让同学们快尽入手WebRTC:)。</p>
 <a id="more"></a>
