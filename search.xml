@@ -619,11 +619,11 @@
 
 <p>上述代码中，调用了FFmpeg中的两个API，分别是 <code>av_log_set_level(...)</code>以及<code>av_log(...)</code>，这两个函数都是FFmpeg中avutil库中的API。所以在使用这两个API之前我们要在main.c中通过<code>#include</code>关键字将 <strong>libavtuil/log.h</strong> 这个头文件引入进来。</p>
 <p>此外，由于FFmpeg是C语言库，而我们用VS创建的是C++工程，所以在引入头文件时需要加上<code>extern &quot;C&quot;</code>，否则的话无法将其成功编译。</p>
-<h2 id="运行编译好的程序"><a href="#运行编译好的程序" class="headerlink" title="运行编译好的程序"></a>运行编译好的程序</h2><p>上面当我们将自己的程序编译好运行时你会发现，它会报 <strong>“无法找到xxx.dll库的”</strong> 出错信息。共原因是在运行时无法找到需要的动态库。</p>
-<p>解决办法是将我们之前编译好的FFmpeg库，即提示的我法找到的<code>.dll</code>库拷贝到执行程序的同一目录下，这样执行程序就可以找到该库并正确执行了。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面就是在Windows下编译和使用FFmpeg的方法，如果你在Linux或Mac下可以熟练的编译FFmpeg，你会发现在Window下编译FFmpeg的步骤与Linux和Mac下编译的步骤是一样的，关键点是在Windows下该如何搭建编译环境。</p>
-<p>此外需要强调的是，在Windows下编译FFmpeg时，由于它不能识别 CC_IDENT关键字，所以会报错，我们只需要使用该关键字的语句注释掉即可。</p>
-<p>另外在程序中通过<code>#include</code>引用FFmpeg头文件时一定要记得加 <code>extern &quot;C&quot;</code>关键字，告诉C++编译器，这个头文件是一个C类型的头文件，这样才能正确编译。</p>
+<h2 id="运行编译好的程序"><a href="#运行编译好的程序" class="headerlink" title="运行编译好的程序"></a>运行编译好的程序</h2><p>上面当我们将自己的程序编译好运行时你会发现，它会报 <strong>“无法找到xxx.dll库”</strong> 的出错信息。其原因是在运行时无法找到需要的动态库。</p>
+<p>解决办法是将我们之前编译好的FFmpeg库，即提示的无法找到的<code>.dll</code>库，拷贝到执行程序的同一目录下，这样执行程序就可以找到该库并正确执行了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面就是在Windows下编译和使用FFmpeg的方法。如果你在Linux或Mac下可以熟练的编译FFmpeg，你会发现，在Window下编译FFmpeg的步骤与在Linux和Mac下编译的步骤是一样的，关键点是在Windows下该如何搭建好编译环境。</p>
+<p>此外需要强调的是，在Windows下编译FFmpeg时，由于它不能识别 <strong>CC_IDENT</strong> 关键字，所以编译时会报错，我们只需将使用该关键字的语句注释掉即可解决该问题。</p>
+<p>另外，在程序中通过<code>#include</code>引用FFmpeg头文件时，一定要记得加 <code>extern &quot;C&quot;</code>关键字，告诉C++编译器，这个头文件是一个C类型的头文件，这样它才能正确编译。</p>
 ]]></content>
       <categories>
         <category>FFmpeg</category>
