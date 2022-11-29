@@ -565,7 +565,7 @@
 此时，代码就被下载到<code>D:</code>盘的ffmpeg目录下了</li>
 </ul>
 <h2 id="Windows下编译FFmpeg的方法"><a href="#Windows下编译FFmpeg的方法" class="headerlink" title="Windows下编译FFmpeg的方法"></a>Windows下编译FFmpeg的方法</h2><p>当 FFmpeg 源码准备就绪后，我们就可以编译FFmpeg了。</p>
-<p>首先，进入MSYS2的安装目录，比如我这里将MSYS2安装到了<code>D:\MSYS64</code>目录下。在该目录下打开 <strong>msys2_shell.cmd</strong> 文件，将该文件第 <strong>21</strong> 行代码的注释打开，即去掉 <strong>rem</strong> 关键字，如下所示：</p>
+<p>首先，进入MSYS2的安装目录，比如我这里将MSYS2安装到了<code>D:\MSYS64</code>目录下。在该目录下打开 <strong>msys2_shell.cmd</strong> 文件，将该文件第 <strong>17</strong> 行代码的注释打开，即去掉 <strong>rem</strong> 关键字，如下所示：</p>
 <figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">setlocal</span> EnableDelayedExpansion</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> "WD=<span class="variable">%__CD__%</span>"</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">NOT</span> <span class="keyword">EXIST</span> "<span class="variable">%WD%</span>msys-<span class="number">2</span>.<span class="number">0</span>.dll" <span class="built_in">set</span> "WD=%~dp0usr\bin\"</span><br><span class="line"><span class="built_in">set</span> "LOGINSHELL=bash"</span><br><span class="line"><span class="built_in">set</span> /a msys2_shiftCounter=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">rem To activate windows native symlinks uncomment next line</span></span><br><span class="line"><span class="comment">rem set MSYS=winsymlinks:nativestrict</span></span><br><span class="line"></span><br><span class="line"><span class="comment">rem Set debugging program for errors</span></span><br><span class="line"><span class="comment">rem set MSYS=error_start:%WD%../../mingw64/bin/qtcreator.exe^|-debug^|^&lt;process-id^&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">rem To export full current PATH from environment into MSYS2 use '-use-full-path' parameter</span></span><br><span class="line"><span class="comment">rem or uncomment next line</span></span><br><span class="line"><span class="built_in">set</span> MSYS2_PATH_TYPE=inherit</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 <p>之所以要打开该注释，是为了让MSYS2可以继承Windows控制台的环境变量。</p>
@@ -590,6 +590,9 @@
 <p>需要注意的是，編译时有你有可能会遇到到如下错误：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...... error C2065: “slib”: 未声明的标识符</span><br><span class="line">...... error C2296: “%”: 非法，左操作数包含“char [138]”类型</span><br></pre></td></tr></table></figure>
 <p>该问题是因为在Windows下无法识别 <strong>CC_IDENT</strong> 导致的。只需将包括 <strong>CC_IDENT</strong>关键字的那行代码注释掉即可。</p>
+<h2 id="在Windows上找到编译好的FFmpeg库"><a href="#在Windows上找到编译好的FFmpeg库" class="headerlink" title="在Windows上找到编译好的FFmpeg库"></a>在Windows上找到编译好的FFmpeg库</h2><p>上面我将编译好的FFmpeg库安装到了<code>/usr/local/ffmpeg</code>目录下，但在Windows下如何找到这个目录呢？</p>
+<p>其实非常简单，你只需确定好MSYS2的根目录是哪儿就可以找到编译好的FFmpeg库了。以我的环境为例，我将MSYS2安装到了<code>D:\MSYS64</code>这个目录下，那么<code>D:\MSYS64</code>这个目录就是MSYS2的根目录。</p>
+<p>因此，我编译好的FFmpeg库就存放在<code>D:\MSYS64\usr\local\ffmpeg</code>目录下。</p>
 <h2 id="VS项目中引用FFmpeg库"><a href="#VS项目中引用FFmpeg库" class="headerlink" title="VS项目中引用FFmpeg库"></a>VS项目中引用FFmpeg库</h2><p>编译好FFmpeg库后，下面我们就可以在VS中引用它了。</p>
 <p>首先你要创建一个新的VS项目，具体方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">打开VS -&gt; 创建新项目 -&gt; 创建控制台项目 -&gt; 填写项目名</span><br></pre></td></tr></table></figure>
@@ -616,7 +619,12 @@
 
 <p>上述代码中，调用了FFmpeg中的两个API，分别是 <code>av_log_set_level(...)</code>以及<code>av_log(...)</code>，这两个函数都是FFmpeg中avutil库中的API。所以在使用这两个API之前我们要在main.c中通过<code>#include</code>关键字将 <strong>libavtuil/log.h</strong> 这个头文件引入进来。</p>
 <p>此外，由于FFmpeg是C语言库，而我们用VS创建的是C++工程，所以在引入头文件时需要加上<code>extern &quot;C&quot;</code>，否则的话无法将其成功编译。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="小节"><a href="#小节" class="headerlink" title="小节"></a>小节</h2>]]></content>
+<h2 id="运行编译好的程序"><a href="#运行编译好的程序" class="headerlink" title="运行编译好的程序"></a>运行编译好的程序</h2><p>上面当我们将自己的程序编译好运行时你会发现，它会报 <strong>“无法找到xxx.dll库的”</strong> 出错信息。共原因是在运行时无法找到需要的动态库。</p>
+<p>解决办法是将我们之前编译好的FFmpeg库，即提示的我法找到的<code>.dll</code>库拷贝到执行程序的同一目录下，这样执行程序就可以找到该库并正确执行了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面就是在Windows下编译和使用FFmpeg的方法，如果你在Linux或Mac下可以熟练的编译FFmpeg，你会发现在Window下编译FFmpeg的步骤与Linux和Mac下编译的步骤是一样的，关键点是在Windows下该如何搭建编译环境。</p>
+<p>此外需要强调的是，在Windows下编译FFmpeg时，由于它不能识别 CC_IDENT关键字，所以会报错，我们只需要使用该关键字的语句注释掉即可。</p>
+<p>另外在程序中通过<code>#include</code>引用FFmpeg头文件时一定要记得加 <code>extern &quot;C&quot;</code>关键字，告诉C++编译器，这个头文件是一个C类型的头文件，这样才能正确编译。</p>
+]]></content>
       <categories>
         <category>FFmpeg</category>
       </categories>
