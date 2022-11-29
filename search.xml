@@ -545,9 +545,12 @@
   <entry>
     <title>Windows下编译FFmpeg5.0</title>
     <url>/38b88453/</url>
-    <content><![CDATA[<p>在我的FFmpeg课程中，我总是推荐大家使用 <strong>Linux(Ubuntu)系统</strong> 或 <strong>Mac系统</strong> 来学习FFmpeg。其原因，是在Windows下编译FFmpeg太麻烦了，这大大增加了我们学习FFmpeg的成本。</p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/windows_ffmpeg/FFmpeg_logo.jpeg" alt=""></p>
+<p>在我的FFmpeg课程中，我总是推荐大家使用 <strong>Linux(Ubuntu)系统</strong> 或 <strong>Mac系统</strong> 来学习FFmpeg。其原因，是在Windows下编译FFmpeg太麻烦了，这大大增加了我们学习FFmpeg的成本。</p>
 <p>不光如此，在Windows下编译FFmpeg所需要的依赖库也很麻烦，比如我们经常使用的fdk-aac、x264等在Windows下都要单独编译才可以使用。</p>
 <p>不过，总还是有一些同学需要在Windows下使用FFmpeg，而FFmpeg官网上介绍的Windows下编译FFmpeg的<a href="https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false" target="_blank" rel="noopener">文章</a>实在是太老了，基本不可用。为了解决这部分同学的难题，这里我总结了一份Windows下编译和使用FFmpeg的方法，希望能帮助到大家！</p>
+<a id="more"></a>
+
 <h2 id="准备编译环境"><a href="#准备编译环境" class="headerlink" title="准备编译环境"></a>准备编译环境</h2><p>首先，我们要准备好编译环境，一台装有Windows10系统的电脑是必须的（没有比这再正确的废话了：））。</p>
 <p>同时，要将Visual Studio安装好，比如 VS2019 社区版或 VS2022社区版（VS2019可以到<a href="https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false" target="_blank" rel="noopener">这里下载</a>，VS2022可以到<a href="https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false" target="_blank" rel="noopener">这里下载</a>）。这两个版本你用哪个都行，根据自己的需要选择吧。如果不是工作中必须要使用VS2019，那我建议你使用最新版的VS2022。</p>
 <p>除了需要安装VS之外，还要安装<strong>MSYS2</strong>，这是一款Windows下模拟Linux的软件。FFmpeg的编译就是在该软件中进行的，而编译时使用的<strong>编译器</strong>(cl.exe)和<strong>链接器</strong>(link.exe)则是由Visual Studio提供的。MSYS2可以到<a href="https://github.com/msys2/msys2-installer/releases/download/2022-10-28/msys2-x86_64-20221028.exe" target="_blank" rel="noopener">这里下载</a></p>
@@ -614,6 +617,12 @@
 <p>上述代码中，调用了FFmpeg中的两个API，分别是 <code>av_log_set_level(...)</code>以及<code>av_log(...)</code>，这两个函数都是FFmpeg中avutil库中的API。所以在使用这两个API之前我们要在main.c中通过<code>#include</code>关键字将 <strong>libavtuil/log.h</strong> 这个头文件引入进来。</p>
 <p>此外，由于FFmpeg是C语言库，而我们用VS创建的是C++工程，所以在引入头文件时需要加上<code>extern &quot;C&quot;</code>，否则的话无法将其成功编译。</p>
 <h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="小节"><a href="#小节" class="headerlink" title="小节"></a>小节</h2>]]></content>
+      <categories>
+        <category>FFmpeg</category>
+      </categories>
+      <tags>
+        <tag>FFmpeg</tag>
+      </tags>
   </entry>
   <entry>
     <title>VS中引入并使用WebRTC库</title>
