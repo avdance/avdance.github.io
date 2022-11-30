@@ -621,9 +621,52 @@
 <p>此外，由于FFmpeg是C语言库，而我们用VS创建的是C++工程，所以在引入头文件时需要加上<code>extern &quot;C&quot;</code>，否则的话无法将其成功编译。</p>
 <h2 id="运行编译好的程序"><a href="#运行编译好的程序" class="headerlink" title="运行编译好的程序"></a>运行编译好的程序</h2><p>上面当我们将自己的程序编译好运行时你会发现，它会报 <strong>“无法找到xxx.dll库”</strong> 的出错信息。其原因是在运行时无法找到需要的动态库。</p>
 <p>解决办法是将我们之前编译好的FFmpeg库，即提示的无法找到的<code>.dll</code>库，拷贝到执行程序的同一目录下，这样执行程序就可以找到该库并正确执行了。</p>
+<h2 id="编译FFmpeg依赖库"><a href="#编译FFmpeg依赖库" class="headerlink" title="编译FFmpeg依赖库"></a>编译FFmpeg依赖库</h2><h3 id="编译SDL"><a href="#编译SDL" class="headerlink" title="编译SDL"></a>编译SDL</h3><p>首先从github上获取SDL源码，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;libsdl-org&#x2F;SDL.git</span><br><span class="line">git checkout release-2.26.x</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是，SDL现在已经发布了3.0版本，而ffmpeg目前只能用SDL2版本。所以在拉取代码后，需要切换到2.26这个版本</p>
+</blockquote>
+<p>下载好 SDL2 源码后，我们需要使用 <strong>CMake</strong> 为其生成VS工程，所以我们首先到这里<a href="https://github.com/Kitware/CMake/releases/download/v3.25.0/cmake-3.25.0-windows-x86_64.msi" target="_blank" rel="noopener">下载CMake</a>，并将其安装到Windows系统上。</p>
+<p>之后就可以使用 CMake-gui 来生成VS工程了。在CMake-gui中先指定SDL2所在的源码路径；再指定编译后的输出路径，随后点 <strong>Configure</strong> 生成Makefile文件，再点 <strong>Generate</strong> 便可以生成VS工程啦。</p>
+<p>有了VS工程，我们就可以通过VS2019或VS2022来编译SDL了，编译好的SDL会保存在指定输出目录的 <strong>Release</strong> 或 <strong>Debug</strong> 目录下（例如指定的输出目录为<code>/usr/local/sdl2</code>)。<strong>我们需要在指定输出目录下创建 **lib</strong> 目录，并将SDL2.lib 和 SDL2.dll文件拷贝到 lib 目录下；同时在 lib 目录下创建 pkgconfig 目录，将sdl2.pc 文件拷贝到该目录中**。</p>
+<p>另外我们还要修改 <strong>sdl2.pc</strong> 中的内容，将其中的库路径修改为指定的输出路径。完成的目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;sdl2</span><br><span class="line"> |------------ lib</span><br><span class="line"> |              |-- sdl2.lib</span><br><span class="line"> |              |-- sdl2.dll</span><br><span class="line"> |              |-- pkgconfig</span><br><span class="line"> |                     |----- sdl2.pc</span><br><span class="line"> |------------ include</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译x264"><a href="#编译x264" class="headerlink" title="编译x264"></a>编译x264</h3><p>x264库的编译还是经较简单的，与SDL一样我们首先也要先获取其源码，可以通过下面的命令获取x264源码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;code.videolan.org&#x2F;videolan&#x2F;x264.git</span><br></pre></td></tr></table></figure>
+
+<p>x264源码获取好后，可以直接在MSYS2环境下编译出Windows下可用的动态库，具体步骤如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过VS X64 Native... 窗口打开MSYS2</span></span><br><span class="line"></span><br><span class="line">cd /d/x264 # 在MSYS2中进入x264源码目录</span><br><span class="line"></span><br><span class="line">pacman -S automake autoconf libtool # 安装生成Makefile的工具</span><br><span class="line"></span><br><span class="line">CC=cl ./configure --prefix=/usr/local/x264 --enable-shared</span><br><span class="line"></span><br><span class="line">make -j 4 &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>通过上面的命令就可以将x264编译出来了。x264编译好后，其输出的目录结构与SDL2是一样的，在<code>/usr/local/x264</code>中包括了<code>include</code>、<code>lib</code>、<code>bin</code>等目录。</p>
+<p>需要注意的是，我们需要将<code>lib</code>目录下的<code>libx264.dll.lib</code>文件名修改为<code>libx264.lib</code>，否则ffmpeg编译时就无法找到该库。</p>
+<h3 id="编译fdk-aac"><a href="#编译fdk-aac" class="headerlink" title="编译fdk-aac"></a>编译fdk-aac</h3><p>fdk-aac的编译与SDL类似，同样要使用CMake生成VS工程文件，之后再通过VS编译该库。</p>
+<p>首先，通下面的的命令获取fdk-aac源码:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;mstorsjo&#x2F;fdk-aac.git</span><br></pre></td></tr></table></figure>
+
+<p>之后通过CMake生成VS工程文件，具体执行步骤参考 SDL 生成 VS 工程的步骤。</p>
+<p>接下来使用VS2019或VS2022编译fdk-aac，编译好的库会被输出到指定的目录下。</p>
+<p>后面我们同样像SDL一样组织fdk-aac的目录树，至此fdk-aac就算编译好了。</p>
+<blockquote>
+<p>需要注意的是，使用CMake的方式无法产生include头文件（这也有可能是我哪块执行的不对），所以我又用 MSYS2+mingw编译了一遍，然后将生成的头文件手动拷贝到了/usr/local/fdk-aac目录下。</p>
+</blockquote>
+<h3 id="FFmpeg如何使用上述编译好的库"><a href="#FFmpeg如何使用上述编译好的库" class="headerlink" title="FFmpeg如何使用上述编译好的库"></a>FFmpeg如何使用上述编译好的库</h3><p>首先我们要通过设置环境变量<code>PKG_CONFIG_PATH</code>，告诉FFmpeg上述几个库从哪儿可以找到，具体的设置方法如下：</p>
+<ul>
+<li>在MSYS2窗口中打开<code>.bashrc</code><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pacman -S vim</span><br><span class="line">vim ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure></li>
+<li>在<code>~/.bashrc</code>中设置环境变量<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PKG_CONFIG_PATH=/usr/local/sdl2/lib/pkgconfig:/usr/local/x264/lib/pkgconfig:/usr/local/fdk-aac/lib/pkgconfig:$PKG_CONFIG_PATH</span><br><span class="line"></span><br><span class="line">:wq #保存并退出vim</span><br></pre></td></tr></table></figure></li>
+<li>让环境变是生效<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>接下来重新生成FFmpeg的Makefile文件，并重新编译。命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/ffmpeg --arch=x86_64 --enable-shared --disable-ffprobe --disable-doc --enable-x264 --enable-gpl --enable-fdk-aac --enable-nonfree --toolchain=msvc</span><br><span class="line"></span><br><span class="line">make clean</span><br><span class="line"></span><br><span class="line">make -j 4 &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p><strong>最后，将sdl2的dll、x264的dll以及fdk-aac的dll拷贝到ffmpeg的bin目录下，这样就可以正确的执行 ffmpeg.exe 或 ffplay.exe 命令了</strong>。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面就是在Windows下编译和使用FFmpeg的方法。如果你在Linux或Mac下可以熟练的编译FFmpeg，你会发现，在Window下编译FFmpeg的步骤与在Linux和Mac下编译的步骤是一样的，关键点是在Windows下该如何搭建好编译环境。</p>
 <p>此外需要强调的是，在Windows下编译FFmpeg时，由于它不能识别 <strong>CC_IDENT</strong> 关键字，所以编译时会报错，我们只需将使用该关键字的语句注释掉即可解决该问题。</p>
 <p>另外，在程序中通过<code>#include</code>引用FFmpeg头文件时，一定要记得加 <code>extern &quot;C&quot;</code>关键字，告诉C++编译器，这个头文件是一个C类型的头文件，这样它才能正确编译。</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><ul>
+<li><a href="https://github.com/ShiftMediaProject/FFmpeg" target="_blank" rel="noopener">ShiftMediaProject</a>，有同学给我推荐了这个项目，我简单了解了一下，这个项目真不错，可以直接使用VS对FFmpeg进行调试，有兴趣的同学可以偿试一下。</li>
+</ul>
 ]]></content>
       <categories>
         <category>FFmpeg</category>
