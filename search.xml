@@ -589,14 +589,14 @@
 <p>当执行完这条命令后，在 <code>/usr/local/ffmpeg/bin</code> 目录下就可以找到编译好的FFmpeg库和FFmpeg命令了。</p>
 <p>需要注意的是，編译时有你有可能会遇到到如下错误：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...... error C2065: “slib”: 未声明的标识符</span><br><span class="line">...... error C2296: “%”: 非法，左操作数包含“char [138]”类型</span><br></pre></td></tr></table></figure>
-<p>该问题是因为在Windows下无法识别 <strong>CC_IDENT</strong> 导致的。只需将包括 <strong>CC_IDENT</strong>关键字的那行代码注释掉即可。</p>
+<p>该问题是因为在Windows下无法识别 <strong>CC_IDENT</strong> 导致的，只需将包括 <strong>CC_IDENT</strong>关键字的那行代码注释掉即可。</p>
 <h2 id="在Windows上找到编译好的FFmpeg库"><a href="#在Windows上找到编译好的FFmpeg库" class="headerlink" title="在Windows上找到编译好的FFmpeg库"></a>在Windows上找到编译好的FFmpeg库</h2><p>上面我将编译好的FFmpeg库安装到了<code>/usr/local/ffmpeg</code>目录下，但在Windows下如何找到这个目录呢？</p>
 <p>其实非常简单，你只需确定好MSYS2的根目录是哪儿就可以找到编译好的FFmpeg库了。以我的环境为例，我将MSYS2安装到了<code>D:\MSYS64</code>这个目录下，那么<code>D:\MSYS64</code>这个目录就是MSYS2的根目录。</p>
 <p>因此，我编译好的FFmpeg库就存放在<code>D:\MSYS64\usr\local\ffmpeg</code>目录下。</p>
 <h2 id="VS项目中引用FFmpeg库"><a href="#VS项目中引用FFmpeg库" class="headerlink" title="VS项目中引用FFmpeg库"></a>VS项目中引用FFmpeg库</h2><p>编译好FFmpeg库后，下面我们就可以在VS中引用它了。</p>
 <p>首先你要创建一个新的VS项目，具体方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">打开VS -&gt; 创建新项目 -&gt; 创建控制台项目 -&gt; 填写项目名</span><br></pre></td></tr></table></figure>
-<p>项目创建好后你会发现它里边只有一个<code>main.c</code>文件，该文件特别简单，只有一个<code>main(...)</code>函数和一条字符串输出语句。现在我们就可以在这个<code>main(...)</code>函数中调用FFmpeg API 了。</p>
+<p>项目创建好后你会发现它里边只有一个<code>testffmpeg.cpp</code>文件，该文件特别简单，只有一个<code>main(...)</code>函数和一条<code>cout &lt;&lt; ...</code>语句。现在我们就可以在这个<code>main(...)</code>函数中调用<strong>FFmpeg API</strong> 了。</p>
 <p>但在开始编码之前，我们需要将用到的FFmpeg库和头文件引入到VS工程中，这样后面VS才能正确的将程序编译出来。下面咱们来看看该如何在VS中引入FFmpeg库头文件、库文件：</p>
 <ul>
 <li><p>引入FFmpeg头文件</p>
@@ -615,13 +615,15 @@
 </li>
 </ul>
 <p>当上面这此工作完成后，我们就可以在<code>main(...)</code>函数中调用FFmpeg API了，如调用FFmpeg库中的日志函数：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">extern &quot;C&quot; </span><br><span class="line">&#123;</span><br><span class="line">#include &lt;libavtuil&#x2F;log.h&gt;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">int main(...)</span><br><span class="line">&#123;</span><br><span class="line">    av_log_set_level(AV_LOG_DEBUG);</span><br><span class="line">    av_log(NULL, AV_LOG_INFO, &quot;Hello World!\n);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;libavtuil/log.h&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    av_log_set_level(AV_LOG_DEBUG);</span><br><span class="line">    av_log(<span class="literal">NULL</span>, AV_LOG_INFO, <span class="string">"Hello World!\n);</span></span><br><span class="line"><span class="string">    ...</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>上述代码中，调用了FFmpeg中的两个API，分别是 <code>av_log_set_level(...)</code>以及<code>av_log(...)</code>，这两个函数都是FFmpeg中avutil库中的API。所以在使用这两个API之前我们要在main.c中通过<code>#include</code>关键字将 <strong>libavtuil/log.h</strong> 这个头文件引入进来。</p>
-<p>此外，由于FFmpeg是C语言库，而我们用VS创建的是C++工程，所以在引入头文件时需要加上<code>extern &quot;C&quot;</code>，否则的话无法将其成功编译。</p>
-<h2 id="运行编译好的程序"><a href="#运行编译好的程序" class="headerlink" title="运行编译好的程序"></a>运行编译好的程序</h2><p>上面当我们将自己的程序编译好运行时你会发现，它会报 <strong>“无法找到xxx.dll库”</strong> 的出错信息。其原因是在运行时无法找到需要的动态库。</p>
-<p>解决办法是将我们之前编译好的FFmpeg库，即提示的无法找到的<code>.dll</code>库，拷贝到执行程序的同一目录下，这样执行程序就可以找到该库并正确执行了。</p>
-<h2 id="编译FFmpeg依赖库"><a href="#编译FFmpeg依赖库" class="headerlink" title="编译FFmpeg依赖库"></a>编译FFmpeg依赖库</h2><h3 id="编译SDL"><a href="#编译SDL" class="headerlink" title="编译SDL"></a>编译SDL</h3><p>首先从github上获取SDL源码，命令如下：</p>
+<p>上述代码中，调用了FFmpeg中的两个API，分别是 <code>av_log_set_level(...)</code>以及<code>av_log(...)</code>，这两个函数都是FFmpeg avutil库中的API。所以在使用这两个API之前，我们要在main.c中需要通过<code>#include</code>关键字将 <strong>libavtuil/log.h</strong> 这个头文件引入进来。</p>
+<p>此外，由于FFmpeg是C语言库，而我们用VS创建的是C++工程，所以在引入头文件时需要加上<code>extern &quot;C&quot;</code>关键字，否则的话VS无法将其成功编译。</p>
+<h2 id="运行编译好的程序"><a href="#运行编译好的程序" class="headerlink" title="运行编译好的程序"></a>运行编译好的程序</h2><p>上面当我们运行编译好的程序时你会发现，它弹出了报错窗口，显示 <strong>“无法找到xxx.dll库”</strong> 的出错信息，其原因是在运行时无法找到需要的动态库。</p>
+<p>解决办法很简单，只需将我们之前编译好的FFmpeg库，即提示的无法找到的<code>.dll</code>库，拷贝到执行程序的同一目录下，这样执行程序就可以找到该库并正确执行了。</p>
+<h2 id="编译FFmpeg依赖库"><a href="#编译FFmpeg依赖库" class="headerlink" title="编译FFmpeg依赖库"></a>编译FFmpeg依赖库</h2><p>很多时候我们在编译FFmpeg库时还要增加一些其它库，如SDL、x264等，如何能将这些库添加到FFmpeg中呢？</p>
+<p>要想将这些库编译到FFmpeg中，首先我们要编译出Windows下可用的对应库，下面咱们就来看一下如何在Windows系统下将它们编译出来。</p>
+<h3 id="编译SDL"><a href="#编译SDL" class="headerlink" title="编译SDL"></a>编译SDL</h3><p>首先从github上获取SDL源码，命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;libsdl-org&#x2F;SDL.git</span><br><span class="line">git checkout release-2.26.x</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>需要注意的是，SDL现在已经发布了3.0版本，而ffmpeg目前只能用SDL2版本。所以在拉取代码后，需要切换到2.26这个版本</p>
