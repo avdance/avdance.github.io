@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2022-12-03T01:33:10.559Z</updated>
+  <updated>2022-12-09T13:45:29.908Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何使用VSCode调试Vue3+TypeScript+Vite应用</title>
+    <link href="https://blog.avdancedu.com/1c60b49f/"/>
+    <id>https://blog.avdancedu.com/1c60b49f/</id>
+    <published>2022-12-09T11:44:20.768Z</published>
+    <updated>2022-12-09T13:45:29.908Z</updated>
+    
+    <content type="html"><![CDATA[<p>目前 <strong>Vue3+TypeScript+Vite</strong> 这套组合已经成为了越来越流于的Web应用开发架构，我也要紧跟时代，把这块知识补一补。</p><p>我的学习习惯是在学习一门新知识之前，先将它的开发环境和调试环境搭建好，这样学习起来才能事半功倍，正所谓 <strong>“磨刀不误砍柴功”</strong> 嘛！</p><p>今天我就将 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境和调试环境的搭建过程记录以下，一方面是为自己作个学习记录，另一方面也可以帮助其它人少走些弯路，这种事情是我特别喜欢做的。</p><p>首先来看一下如何创建 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境。</p><h2 id="搭建-Vue3-TypeScript-Vite-开发环境"><a href="#搭建-Vue3-TypeScript-Vite-开发环境" class="headerlink" title="搭建 Vue3+TypeScript+Vite 开发环境"></a>搭建 <strong>Vue3+TypeScript+Vite</strong> 开发环境</h2><p>其实 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境特别好搭建，在<a href="https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application" target="_blank" rel="noopener"> <strong>官方</strong> </a>的文档中就有说明，其过程如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> npm init vue@latest</span></span><br></pre></td></tr></table></figure><p>该命令会安装并执行 <strong>create-vue</strong>，它是Vue官方的项目脚手架，之后你会看到下面的信息：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">✔ Project name: … &lt;your-project-name&gt;</span><br><span class="line">✔ Add TypeScript? … No / [Yes]</span><br><span class="line">✔ Add JSX Support? … [No] / Yes</span><br><span class="line">✔ Add Vue Router for Single Page Application development? … [No] / Yes</span><br><span class="line">✔ Add Pinia for state management? … [No] / Yes</span><br><span class="line">✔ Add Vitest for Unit testing? … [No] / Yes</span><br><span class="line">✔ Add Cypress for both Unit and End-to-End testing? … [No] / Yes</span><br><span class="line">✔ Add ESLint for code quality? … [No] / Yes</span><br><span class="line">✔ Add Prettier for code formatting? … [No] / Yes</span><br><span class="line"></span><br><span class="line">Scaffolding project in ./&lt;your-project-name&gt;...</span><br><span class="line">Done.</span><br></pre></td></tr></table></figure><p>在上面的信息中，选择<code>[]</code>中的选项即可。再执行下面的命令就可以将依赖安装好，并启动开发服务器：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> &lt;your-project-name&gt;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> npm install</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> npm run dev</span></span><br></pre></td></tr></table></figure><p>至此，<strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境就搭建好了。</p><h2 id="搭建-Vue3-TypeScript-Vite-调试环境"><a href="#搭建-Vue3-TypeScript-Vite-调试环境" class="headerlink" title="搭建 Vue3+TypeScript+Vite 调试环境"></a>搭建 <strong>Vue3+TypeScript+Vite</strong> 调试环境</h2><p><strong>Vue3+TypeScript+Vite</strong> 这套组合的调试环境也非常好搭建，首先将VSCode安装好，VSCode可以从这里<a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">下载</a>。</p><p>之后进入到前面创建的项目中，执行下面命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">进入到之前创建的vue项目</span></span><br><span class="line">code .</span><br></pre></td></tr></table></figure><p>在保证 <strong>开发服务器已经启动</strong> 的情况下，点击:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VSCode-&gt; 左侧工具栏 -&gt; 调试与运行 -&gt; 创建launch.json</span><br></pre></td></tr></table></figure><p>将launch.json中的内容修改如下：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>:<span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"confiugrations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"chrome"</span>,</span><br><span class="line">            <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Vue App"</span>,</span><br><span class="line">            <span class="attr">"url"</span>: <span class="string">"http://localhost:5173"</span>,</span><br><span class="line">            <span class="attr">"webRoot"</span>: <span class="string">"$&#123;worksapceFolder&#125;/dist"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>配置好VSCode后，我们就可以友好的调试咱们自己的程序了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;目前 &lt;strong&gt;Vue3+TypeScript+Vite&lt;/strong&gt; 这套组合已经成为了越来越流于的Web应用开发架构，我也要紧跟时代，把这块知识补一补。&lt;/p&gt;
+&lt;p&gt;我的学习习惯是在学习一门新知识之前，先将它的开发环境和调试环境搭建好，这样学习起来才能事半功
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Windows下编译FFmpeg5.0</title>
@@ -582,36 +605,6 @@
     
     
       <category term="WebRTC" scheme="https://blog.avdancedu.com/tags/WebRTC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何正确的部署mediasoup-demo</title>
-    <link href="https://blog.avdancedu.com/3ab8cfd4/"/>
-    <id>https://blog.avdancedu.com/3ab8cfd4/</id>
-    <published>2022-11-19T06:52:00.000Z</published>
-    <updated>2022-11-21T05:48:10.098Z</updated>
-    
-    <content type="html"><![CDATA[<p>现在发现很多同学部署mediasoup-demo时出现各种问题，最主要的原因是无法通过npm安装依赖包。几乎每天都有同学来问这类问题，解决的办法其实很简单，找个<strong>代理</strong>就好了。</p><p>但这又引来了同学们新的问题，哪种代理好？需要多少费用……</p><a id="more"></a><p>好吧，干脆我给大家做个docker吧，这样对于那些找不到代理，不想花钱的同学直接下载docker进行部署就好了。</p><p>使用docker部署mediasoup-demo的具体步骤如下：</p><ul><li>准备一台Ubuntu22.04的PC机</li><li>下载mediasoup-demo镜像</li><li>下载run.sh脚本</li><li>启动docker</li><li>启动mediasoup</li><li>测试</li></ul><h2 id="下载mediasoup-demo镜像"><a href="#下载mediasoup-demo镜像" class="headerlink" title="下载mediasoup-demo镜像"></a>下载mediasoup-demo镜像</h2><p>下载mediasoup-demo镜像的方法很简单，只要在你的Ubuntu系统下执行下面的命令即可。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull lc0060305&#x2F;mediasoup-demo:v5</span><br></pre></td></tr></table></figure><blockquote><p>需要注意的是，国内的云主机都对hub.docker.com的访问做了限制，可能无法从hub.docker.com下载docker镜像，或下载很慢，最好的方式当然是在国内找个docker镜像创库，把制作好的镜像放上去，但我没有找到特别好的免费的仓库。有同学有这方面资源的可以提供一下。在此表示感谢！</p></blockquote><h2 id="下载run-sh脚本"><a href="#下载run-sh脚本" class="headerlink" title="下载run.sh脚本"></a>下载run.sh脚本</h2><p>你可以从<a href="https://cdn.avdancedu.com/image/article/docker/v1/run.sh" target="_blank" rel="noopener">这里下载run.sh</a>，下载成功后可以将它保存在任意目录下。</p><h2 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h2><p>使用下面的命令来启动docker</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x run.sh</span><br><span class="line">sudo MEDIASOUP_ANNOUNCED_IP&#x3D;你的IP .&#x2F;run.sh</span><br></pre></td></tr></table></figure><blockquote><p>注意，上面的IP在不同的情况下需要填入不同的值。如果你是在云主机上部署的，则<strong>MEDIASOUP_ANNOUNCED_IP</strong>设置成你云主机的外网IP地址；如果你是在自己的主机上部署的，IP地址则需要填你主机的IP，它一般是以<code>192.</code>开头的。</p></blockquote><h2 id="启动mediasoup"><a href="#启动mediasoup" class="headerlink" title="启动mediasoup"></a>启动mediasoup</h2><p>上面的步骤执行成功后，我们需要启动mediasoup服务，启动的办法也很简单:</p><ul><li><p>首先执行下面的命令进入到docker中</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach containerID</span><br></pre></td></tr></table></figure></li><li><p>之后，在/service目录下执行下面的命令即可：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startservice.sh</span><br></pre></td></tr></table></figure></li><li><p>当服务启动好后，输入<code>ctrl+p, ctrl+q</code>退出docker</p></li></ul><p>到此，mediaosoup-demo就算部署好了。现在让我们来测试一下吧！</p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在chrome 浏览器中输入<code>https://IP:3000</code>，如果一切顺利的话，你将能够看到mediasoup-demo中熟悉的背景，并必本地摄像头也被打开了。</p><p>然后复制页面地址，打开一个新标签页，现在两个页面应该就可以通信了。</p><blockquote><p>注意，我在测试时发现chrome 102 这个版本是可以通信的，而用最新的chrome会报错。该问题我已经提交给mediasoup官网，如果有进一步的消息我会及时进行更新。</p></blockquote><h2 id="下载老版本Chrome地址"><a href="#下载老版本Chrome地址" class="headerlink" title="下载老版本Chrome地址"></a>下载老版本Chrome地址</h2><p><a href="https://www.slimjet.com/chrome/google-chrome-old-version.php" target="_blank" rel="noopener">下载old Chrome</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;现在发现很多同学部署mediasoup-demo时出现各种问题，最主要的原因是无法通过npm安装依赖包。几乎每天都有同学来问这类问题，解决的办法其实很简单，找个&lt;strong&gt;代理&lt;/strong&gt;就好了。&lt;/p&gt;
-&lt;p&gt;但这又引来了同学们新的问题，哪种代理好？需要多少费用……&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WebRTC" scheme="https://blog.avdancedu.com/categories/WebRTC/"/>
-    
-      <category term="mediasoup" scheme="https://blog.avdancedu.com/categories/WebRTC/mediasoup/"/>
-    
-    
-      <category term="WebRTC" scheme="https://blog.avdancedu.com/tags/WebRTC/"/>
-    
-      <category term="mediasoup" scheme="https://blog.avdancedu.com/tags/mediasoup/"/>
-    
-      <category term="docker" scheme="https://blog.avdancedu.com/tags/docker/"/>
     
   </entry>
   

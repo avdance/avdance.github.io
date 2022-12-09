@@ -543,6 +543,34 @@
       </tags>
   </entry>
   <entry>
+    <title>如何使用VSCode调试Vue3+TypeScript+Vite应用</title>
+    <url>/1c60b49f/</url>
+    <content><![CDATA[<p>目前 <strong>Vue3+TypeScript+Vite</strong> 这套组合已经成为了越来越流于的Web应用开发架构，我也要紧跟时代，把这块知识补一补。</p>
+<p>我的学习习惯是在学习一门新知识之前，先将它的开发环境和调试环境搭建好，这样学习起来才能事半功倍，正所谓 <strong>“磨刀不误砍柴功”</strong> 嘛！</p>
+<p>今天我就将 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境和调试环境的搭建过程记录以下，一方面是为自己作个学习记录，另一方面也可以帮助其它人少走些弯路，这种事情是我特别喜欢做的。</p>
+<p>首先来看一下如何创建 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境。</p>
+<h2 id="搭建-Vue3-TypeScript-Vite-开发环境"><a href="#搭建-Vue3-TypeScript-Vite-开发环境" class="headerlink" title="搭建 Vue3+TypeScript+Vite 开发环境"></a>搭建 <strong>Vue3+TypeScript+Vite</strong> 开发环境</h2><p>其实 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境特别好搭建，在<a href="https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application" target="_blank" rel="noopener"> <strong>官方</strong> </a>的文档中就有说明，其过程如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> npm init vue@latest</span></span><br></pre></td></tr></table></figure>
+
+<p>该命令会安装并执行 <strong>create-vue</strong>，它是Vue官方的项目脚手架，之后你会看到下面的信息：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">✔ Project name: … &lt;your-project-name&gt;</span><br><span class="line">✔ Add TypeScript? … No / [Yes]</span><br><span class="line">✔ Add JSX Support? … [No] / Yes</span><br><span class="line">✔ Add Vue Router for Single Page Application development? … [No] / Yes</span><br><span class="line">✔ Add Pinia for state management? … [No] / Yes</span><br><span class="line">✔ Add Vitest for Unit testing? … [No] / Yes</span><br><span class="line">✔ Add Cypress for both Unit and End-to-End testing? … [No] / Yes</span><br><span class="line">✔ Add ESLint for code quality? … [No] / Yes</span><br><span class="line">✔ Add Prettier for code formatting? … [No] / Yes</span><br><span class="line"></span><br><span class="line">Scaffolding project in ./&lt;your-project-name&gt;...</span><br><span class="line">Done.</span><br></pre></td></tr></table></figure>
+
+<p>在上面的信息中，选择<code>[]</code>中的选项即可。再执行下面的命令就可以将依赖安装好，并启动开发服务器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> &lt;your-project-name&gt;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> npm install</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> npm run dev</span></span><br></pre></td></tr></table></figure>
+
+<p>至此，<strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境就搭建好了。</p>
+<h2 id="搭建-Vue3-TypeScript-Vite-调试环境"><a href="#搭建-Vue3-TypeScript-Vite-调试环境" class="headerlink" title="搭建 Vue3+TypeScript+Vite 调试环境"></a>搭建 <strong>Vue3+TypeScript+Vite</strong> 调试环境</h2><p><strong>Vue3+TypeScript+Vite</strong> 这套组合的调试环境也非常好搭建，首先将VSCode安装好，VSCode可以从这里<a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">下载</a>。</p>
+<p>之后进入到前面创建的项目中，执行下面命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">进入到之前创建的vue项目</span></span><br><span class="line">code .</span><br></pre></td></tr></table></figure>
+<p>在保证 <strong>开发服务器已经启动</strong> 的情况下，点击:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">VSCode-&gt; 左侧工具栏 -&gt; 调试与运行 -&gt; 创建launch.json</span><br></pre></td></tr></table></figure>
+<p>将launch.json中的内容修改如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>:<span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"confiugrations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"chrome"</span>,</span><br><span class="line">            <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Vue App"</span>,</span><br><span class="line">            <span class="attr">"url"</span>: <span class="string">"http://localhost:5173"</span>,</span><br><span class="line">            <span class="attr">"webRoot"</span>: <span class="string">"$&#123;worksapceFolder&#125;/dist"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置好VSCode后，我们就可以友好的调试咱们自己的程序了。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Windows下编译FFmpeg5.0</title>
     <url>/38b88453/</url>
     <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/windows_ffmpeg/FFmpeg_logo.jpeg" alt=""></p>
