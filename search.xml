@@ -549,6 +549,8 @@
 <p>我的学习习惯是在学习一门新知识之前，先将它的开发环境和调试环境搭建好，这样学习起来才能事半功倍，正所谓 <strong>“磨刀不误砍柴功”</strong> 嘛！</p>
 <p>今天我就将 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境和调试环境的搭建过程记录以下，一方面是为自己作个学习记录，另一方面也可以帮助其它人少走些弯路，这种事情是我特别喜欢做的。</p>
 <p>首先来看一下如何创建 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境。</p>
+<a id="more"></a>
+
 <h2 id="搭建-Vue3-TypeScript-Vite-开发环境"><a href="#搭建-Vue3-TypeScript-Vite-开发环境" class="headerlink" title="搭建 Vue3+TypeScript+Vite 开发环境"></a>搭建 <strong>Vue3+TypeScript+Vite</strong> 开发环境</h2><p>其实 <strong>Vue3+TypeScript+Vite</strong> 这套组合的开发环境特别好搭建，在<a href="https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application" target="_blank" rel="noopener"> <strong>官方</strong> </a>的文档中就有说明，其过程如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> npm init vue@latest</span></span><br></pre></td></tr></table></figure>
 
@@ -569,6 +571,13 @@
 
 <p>配置好VSCode后，我们就可以友好的调试咱们自己的程序了。</p>
 ]]></content>
+      <categories>
+        <category>语言</category>
+      </categories>
+      <tags>
+        <tag>TypeScript</tag>
+        <tag>Vue3</tag>
+      </tags>
   </entry>
   <entry>
     <title>Windows下编译FFmpeg5.0</title>
