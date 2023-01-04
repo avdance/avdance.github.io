@@ -2126,7 +2126,7 @@
   <entry>
     <title>《WebRTC实时互动技术原理实战与源码分析》一书的源码</title>
     <url>/a0a831a3/</url>
-    <content><![CDATA[<h1 id="源码下截地址"><a href="#源码下截地址" class="headerlink" title="源码下截地址"></a>源码下截地址</h1><p><a href="https://cdn.avdancedu.com/image/article/webrtc_book_source/peerconnection_onebyone.zip" target="_blank" rel="noopener">客户端源码下载</a><br><a href="https://cdn.avdancedu.com/image/article/webrtc_book_source/server.js" target="_blank" rel="noopener">服务端源码下载</a></p>
+    <content><![CDATA[<h1 id="源码下截地址"><a href="#源码下截地址" class="headerlink" title="源码下截地址"></a>源码下截地址</h1><p><a href="https://cdn.avdancedu.com/image/article/webrtc_book_source/peerconnection_onebyone.zip" target="_blank" rel="noopener">客户端源码下载</a><br><a href="https://cdn.avdancedu.com/image/article/webrtc_book_source/server.zip" target="_blank" rel="noopener">服务端源码下载</a></p>
 ]]></content>
       <categories>
         <category>WebRTC</category>
