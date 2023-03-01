@@ -1291,7 +1291,7 @@
     <url>/38b88453/</url>
     <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/windows_ffmpeg/FFmpeg_logo.jpeg"></p>
 <p>在我的FFmpeg课程中，我总是推荐大家使用 <strong>Linux(Ubuntu)系统</strong> 或 <strong>Mac系统</strong> 来学习FFmpeg。其原因，是在Windows下编译FFmpeg太麻烦了，这大大增加了我们学习FFmpeg的成本。</p>
-<!-- more --->
+<span id="more"></span>
 
 <p>不光如此，在Windows下编译FFmpeg所需要的依赖库也很麻烦，比如我们经常使用的fdk-aac、x264等在Windows下都要单独编译才可以使用。</p>
 <p>不过，总还是有一些同学需要在Windows下使用FFmpeg，而FFmpeg官网上介绍的Windows下编译FFmpeg的<a href="https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false">文章</a>实在是太老了，基本不可用。为了解决这部分同学的难题，这里我总结了一份Windows下编译和使用FFmpeg的方法，希望能帮助到大家！</p>
@@ -5009,6 +5009,8 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <title>网络开发点滴.md</title>
     <url>/6373ddbf/</url>
     <content><![CDATA[<p>这里记录一些网络开发时的知识点</p>
+<span id="more"></span>
+
 <h2 id="为什么不建议使用0-0-0-0这个IP地址"><a href="#为什么不建议使用0-0-0-0这个IP地址" class="headerlink" title="为什么不建议使用0.0.0.0这个IP地址?"></a>为什么不建议使用0.0.0.0这个IP地址?</h2><p>在云主机上，不建议绑定 <strong>0.0.0.0</strong> 这个IP地址。其原因是，<strong>0.0.0.0</strong> 表示所有可用的IP地址，如果服务绑定在0.0.0.0上，将允许来自任何网络接口的所有请求都能够到达该服务，从而可能导致安全风险。例如，如果你的云主机同时有内网IP和外网IP，你可能只希望服务只监听外网IP地址，这样可以避免来自内网的非授权访问。</p>
 <p>因此，在云主机上，建议将服务绑定到具体的IP地址上，以增加网络安全性。</p>
 <h2 id="在云主机上有内网和外网地址，我们该用哪个？"><a href="#在云主机上有内网和外网地址，我们该用哪个？" class="headerlink" title="在云主机上有内网和外网地址，我们该用哪个？"></a>在云主机上有内网和外网地址，我们该用哪个？</h2><p>如果在云主机有一个公网 IP 和一个内网 IP，而您的网络服务需要对外提供服务，则应该使用公网 IP 地址和端口号。这样，外部用户可以通过 Internet 连接到您的服务。</p>
