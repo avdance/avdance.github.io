@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2023-02-22T04:55:29.521Z</updated>
+  <updated>2023-03-01T05:16:24.929Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows下编译Chrome浏览器</title>
+    <link href="https://blog.avdancedu.com/a5b21a51/"/>
+    <id>https://blog.avdancedu.com/a5b21a51/</id>
+    <published>2023-03-01T05:16:00.000Z</published>
+    <updated>2023-03-01T05:16:24.929Z</updated>
+    
+    <content type="html"><![CDATA[<p>随着技术的进步，浏览器在未来会扮演越来越得要的角色。我们基本可以确定，在不久的将来，大部分Native应用都会被Web应用所替代。因此，如果你想今后想找一份好工作，或写出更高效的Web应用，就必须要了解一下浏览器的工作原理。</p><p>了解浏览器工作原理的方法有很多，但对Chrome源码的阅读无缝是第一位的，只有这样我们才能获取第一手材料。</p><p>而阅读Chrome源码的第一位就是要能够下载或编译Chrome源码。而这篇文章就是告诉你如何下载并编译Chrome源码的。</p><span id="more"></span><h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p>编译Chrome源码要满足以下几点要求：</p><ul><li>具有至少 8GB RAM 的 64 位 Intel 机器。<strong>这里强烈建议超过 16GB，我用的是 32GB</strong></li><li>NTFS 格式的文件系统，至少要有 100GB 可用的磁盘空间。<strong>注意，FAT32文件系统不能用于编译Chrome，因为一些 Git 文件大于 4GB</strong></li><li>编辑器需要使用 Visual Studio 2022</li><li>操作系统是 Windows 10 或更新版本</li></ul><h2 id="安装Visual-Studio"><a href="#安装Visual-Studio" class="headerlink" title="安装Visual Studio"></a>安装Visual Studio</h2><p>编译 Chromium 源码我们需要安装 <strong>Visual Studio 2022 (&gt;&#x3D;17.0.0)</strong> 才行。虽然编译和调试 Chromium 使用的是 <strong>clang-cl</strong> 编译器，但它需要 Visual Studio 的一些头文件、库和工具。</p><p>当然，Visual Studio最好选择专业版，但如果你没有专业版的License，也可以使用社区版，即 <strong>Visual Studio Community Edition</strong>。</p><p>此外，在安装VS时，你还必须安装 <strong>“使用 C++ 进行桌面开发”</strong> 组件和 <strong>“MFC&#x2F;ATL 支持”</strong> 子组件。如何你不知道如何在安装界面中选择这些组件，可以使用下面的命令行安装：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ PATH_TO_INSTALLER.EXE ^</span><br><span class="line">--add Microsoft.VisualStudio.Workload.NativeDesktop ^</span><br><span class="line">--add Microsoft.VisualStudio.Component.VC.ATLMFC ^</span><br><span class="line">--includeRecommended</span><br></pre></td></tr></table></figure><h2 id="安装Windows-SDK"><a href="#安装Windows-SDK" class="headerlink" title="安装Windows SDK"></a>安装Windows SDK</h2><p>编译Chrome源码，Windows SDK是少不了的，它对SDK有如下要求：</p><ul><li>你必须安装 <code>10.0.22621.0</code> 版本的<strong>Windows 11 SDK</strong>。注意，<strong>即使在Win10系统下，也要安装Windows 11 的SDK，这一点特别重要</strong></li><li><a href="https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/">Windows SDK</a> 可以单独安装，也可以通过 Visual Studio 来安装。这里建议采用单独的方式安装。<strong>安装好Windows SDK 后，记得要重启一下系统</strong>。</li><li>安装Window SDK时，还必须安装 10.0.22621.755 (Windows 11) SDK 调试工具，以支持 Chrome 能访问大于 4 GiB PDB 的大页面。如果你不知道该如何选择的话，建议你安装Windows SDK时，<strong>将所有选项都勾选上</strong>，否则后面编译时会出现各种头文件找不到的情况。</li></ul><h2 id="安装depot-tools"><a href="#安装depot-tools" class="headerlink" title="安装depot_tools"></a>安装depot_tools</h2><p>首先，从这里下载 <a href="https://storage.googleapis.com/chrome-infra/depot_tools.zip">depot_tools</a> 包，并将其解压到某个目录下，例如：C:\src\depot_tools。</p><blockquote><p>注意：解压缩时，不要采用拖放或复制粘贴的方式提取。这种方法无法将隐藏的 <strong>“.git”</strong> 文件夹提取出来，而这是 depot_tools 自动更新时所必需的。</p></blockquote><p>之后，将 depot_tools 添加到 PATH 环境变量的开头（必须在任何 Python 安装之前）。</p><p>假设你将depot_tools解压到了 C:\src\depot_tools目录下，打开：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制面板 → 系统和安全 → 系统 → 高级系统设置</span><br></pre></td></tr></table></figure><p>如果你有管理员权限，请修改 PATH 系统环境变量，将C:\src\depot_tools放到PATH的最前面（或至少放在可能已经有 Python 或 Git 副本的任何目录的前面）。</p><p>如果您没有管理员权限，可以将其添加到用户级 PATH 环境变量中：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制面板→系统和安全→系统→搜索“为您的帐户编辑环境变量”</span><br></pre></td></tr></table></figure><p>不过，在没有管理员权限的情况下，当你的系统 PATH 中已经指定了Python路径，那么你就无法使用depot_tools中的python了。这将导致你无法顺利的将源码下载下来。所以 <strong>建议你还是找台有管理员权限的主机</strong>。</p><p>另外，还要在环境变是中添加 DEPOT_TOOLS_WIN_TOOLCHAIN 变量，并将其设置为 0。这会告诉 depot_tools 使用本地安装的 Visual Studio （默认情况下，depot_tools 将尝试使用 google 内部版本）。</p><p>除此之外，你还须设置一个名为 <strong>vs2022_install</strong>的环境变量，用于指定vs2022 的安装路径，如下所示:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set vs2022_install=C:\Program Files\Microsoft Visual Studio\2022\Professional</span><br></pre></td></tr></table></figure><p>之后，你就可以在 <strong>命令行窗口(CMD)</strong> 中运行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gclient</span><br></pre></td></tr></table></figure><p>来下载、更新必要的工具了。</p><p>首次运行gclient命令时， 它会安装一些特定的工具，如 msysgit 和 python。执行该命令时需要<strong>注意</strong>：</p><ul><li>如果您从 <strong>非命令行(CMD)</strong> 中（例如，cygwin、PowerShell）运行 gclient，它看起来可能运行正常，但 msysgit、python 以及其他工具却无法正确安装。所以你必须在标准的命令行窗口中运行glient</li><li>如果你第一次运行 gclient 时，看到一些陌生的错误，你可能需要禁用<a href="https://tortoisesvn.net/faq.html#cantmove2">Windows Indexing</a></li></ul><h2 id="检查-python-安装"><a href="#检查-python-安装" class="headerlink" title="检查 python 安装"></a>检查 python 安装</h2><p><code>gclient</code>执行完成后，在命令行窗口中键入<code>where python</code>，确认 <strong>depot_tools</strong> 中的<code>python.bat</code>位于任何其它 <code>python.exe</code> 之前。否则的话，会导致使用 gn 时出现构建失败，详细信息参见<a href="https://crbug.com/611087">crbug.com&#x2F;611087</a>。</p><p><a href="https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-extensions#alias">App Execution Aliases</a>这项服务可能与系统上安装的其他 python 有冲突，因此，需要将它关闭掉，具体方法是打开控制面板中的 <strong>“App execution aliases”</strong>，勾掉指向“python.exe”和“python3.exe”的复选框来禁用它们。</p><h2 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h2><p>由于众所周知的原因，在国内是不能直接下载Chrome源码的。因此，你要找一个靠谱的代理软件，而且给它一个最大的带宽。</p><p>我在下载的过程中，就由于网络的原因失败了好几次，既浪费的时间又浪费的金钱。</p><p>后来不得以，购买了10M的专线才好不容易将代码下载成功。</p><h2 id="获取代码"><a href="#获取代码" class="headerlink" title="获取代码"></a>获取代码</h2><p>首先，配置 Git：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;My Name&quot;</span><br><span class="line">$ git config --global user.email &quot;my-name@chromium.org&quot;</span><br><span class="line">$ git config --global core.autocrlf false</span><br><span class="line">$ git config --global core.filemode false</span><br><span class="line">$ git config --global branch.autosetuprebase always</span><br></pre></td></tr></table></figure><p>接着，创建一个chromium目录：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir chromium &amp;&amp; cd chromium</span><br></pre></td></tr></table></figure><p>之后，运行<code>fetch</code>命令，将代码及其依赖check out出来：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ fetch chromium</span><br></pre></td></tr></table></figure><p><strong>如果在checkout时，你不想要完整的repo历史记录，你可以给fetch添加<code>--no-history</code>标志，这样可以减少你获取代码的时间。</strong></p><p>获取代码时，即使你网络很快，预计也要会花费一个多小时才能将它下载下来。而在较慢的网络上，则需要数个小时。所以，您必须配置好你的PC，使它在获取代码时不要休眠，否则失败了还要重新下。</p><p><strong>如果在获取子仓库时发生错误</strong>，你可以选择重新开始，或者进入到 <strong>chromium&#x2F;src</strong> 目录，执行下面的命令来继续下载：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gclient sync</span><br></pre></td></tr></table></figure><p>完成fetch后，它将创建一个隐藏的 <strong>.gclient</strong> 文件和一个 <strong>src</strong> 的目录。接下来，你需要切换到src目录下： </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd src</span><br></pre></td></tr></table></figure><h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><p>Chromium 使用 <strong>Ninja</strong> 作为其主要构建工具，并使用名为 <strong>GN</strong> 的工具来生成.ninja文件。您可以创建任意数量的具有不同配置的构建目录。命令如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gn gen out/Default</span><br></pre></td></tr></table></figure><ul><li>您只需为每个新的构建目录运行一次，Ninja 将根据需要更新构建文件。</li><li>可以将Default换成别的名字，但应该在out子目录下。</li><li>对于其他构建参数，包括Release设置或使用 Visual Studio 的版本，请参阅 <a href="https://www.chromium.org/developers/gn-build-configuration">GN build configuration</a>。默认创建的是与当前操作系统和CPU匹配的Debug版本。</li><li>有关 GN 的更多信息，可以运行<code>gn help</code>阅读<a href="https://gn.googlesource.com/gn/+/main/docs/quick_start.md">快速入门指南</a>。</li></ul><h2 id="编译Chromium"><a href="#编译Chromium" class="headerlink" title="编译Chromium"></a>编译Chromium</h2><p>可以使用以下命令构建 Chromium（“chrome”目标）：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ autoninja - C out \Default chrome</span><br></pre></td></tr></table></figure><p>autoninja是一个包装器，它会为ninja提供最佳的参数。</p><p>关于一些参数的详细信息，可以通过 <code>gn ls out/Default</code>获取。</p><h2 id="更快的编译"><a href="#更快的编译" class="headerlink" title="更快的编译"></a>更快的编译</h2><p>我们可以通过下面的方法来加快编译速度：</p><ul><li>关闭防病毒软件，从而减少文件系统开销</li><li>将构建树存储在快速磁盘（最好是 SSD）上</li><li>内核越多越好，即使 64GB 也不算多</li></ul><p>还有一些 gn 参数可以提高构建速度，可以考虑使用的一些设置如下：</p><ul><li>is_component_build &#x3D; true，这会使用更多、更小的 DLL，并且可以避免每次更改后都必须重新链接 chrome.dll。</li><li>enable_nacl &#x3D; false，这会禁用本地构建通常不需要的 Native Client。</li><li>target_cpu &#x3D; “x86”，x86 构建可能比 x64 构建稍快。请注意，如果您设置了它，但不设置enable_nacl &#x3D; false，那么构建时间可能会变得更糟。</li><li>blink_symbol_level &#x3D; 0，关闭 blink 的源代码级调试以减少构建时间，如果您不打算调试 blink，可以这么干。</li><li>v8_symbol_level &#x3D; 0，关闭 v8 的源代码级调试以减少构建时间，如果您不打算调试 v8，可以这么干。</li></ul><p>为了加快链接速度，您可以设置symbol_level&#x3D;1 或 symbol_level&#x3D;0，这些选项减少编译器和链接器所做的工作：</p><ul><li>symbol_level &#x3D; 1，指明编译器要发出文件名和行号信息，因此您仍然可以进行源代码级调试，但不会有局部变量或类型信息。</li><li>symbol_level &#x3D; 0，表示没有源代码级调试，但调用堆栈仍然有函数名称。</li><li>此外，更改symbol_level需要重新编译所有内容。</li></ul><p>另外，谷歌员工应该使用分布式编译系统goma。详细信息可在内部获得，但相关的 gn arg 是：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use_goma = true</span><br></pre></td></tr></table></figure><p>要从 goma 中获得任何好处，重要的是将大的 -j 值传递给 ninja。一个好的默认值是 10<em>numCores 到 20</em>numCores。如果你运行 autoninja， 那么它会自动将适当的 -j 值传递给 ninja 是否为 goma。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ autoninja - C out \Default chrome</span><br></pre></td></tr></table></figure><p>调用 ninja 时，可以执定要编译的目标，如将 <strong>“chrome”</strong> 指定为目标，以避免同时构建所有测试二进制文件。</p><p><strong>尽管如此，在许多机器上构建仍需要花费数小时。</strong></p><h2 id="运行-Chromium"><a href="#运行-Chromium" class="headerlink" title="运行 Chromium"></a>运行 Chromium</h2><p>编译完成后，你就可以运行编译出的浏览器了：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$out\Default\chrome.exe</span><br></pre></td></tr></table></figure><h2 id="运行测试目标"><a href="#运行测试目标" class="headerlink" title="运行测试目标"></a>运行测试目标</h2><p>您可以用下面的方式运行测试。还可以使用 arg 限制运行哪些测试 <code>--gtest_filter</code>，例如：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$out\Default\unit_tests.exe --gtest_filter = &quot;PushClientTest.*&quot;</span><br></pre></td></tr></table></figure><p>这些参数可以在其<a href="https://github.com/google/googletest">GitHub页面</a>上找到更多有关 GoogleTest 的信息。</p><h2 id="更新checkout"><a href="#更新checkout" class="headerlink" title="更新checkout"></a>更新checkout</h2><p>更新存在的代码，可以运行下面的命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase-update</span><br><span class="line">$ gclient sync -D</span><br></pre></td></tr></table></figure><ul><li><p>第一个命令，更新 Chromium 的主要源代码仓库，并重新设置任何本地分支。如果你不想使用这个脚本，你也可以使用git pull或其他常用的 Git 命令来更新 repo。</p></li><li><p>第二个命令，将子仓库同步到适当的版本，删除不再需要的版本，并根据需要重新与运行挂钩。</p></li></ul><h2 id="使用-Visual-Studio-IDE-进行编辑和调试"><a href="#使用-Visual-Studio-IDE-进行编辑和调试" class="headerlink" title="使用 Visual Studio IDE 进行编辑和调试"></a>使用 Visual Studio IDE 进行编辑和调试</h2><p>您可以使用 Visual Studio IDE 编辑和调试 Chrome。</p><h3 id="使用-Visual-Studio-Intellisense（智能感知）"><a href="#使用-Visual-Studio-Intellisense（智能感知）" class="headerlink" title="使用 Visual Studio Intellisense（智能感知）"></a>使用 Visual Studio Intellisense（智能感知）</h3><p>如果您想在开发 Chromium 时使用 Visual Studio Intellisense，请在生成输出目录时使用–ide命令行参数。这是一个示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gn gen -- ide = vs --ninja-executable=C:\src\chromium\src\third_party\ninja\ninja.exe out\Default </span><br><span class="line">$ devenv out\Default\all.sln</span><br></pre></td></tr></table></figure><p>GN 将在您的构建目录中生成一个all.sln文件。其在内部使用 Ninja 进行编译。如果您再次手动运行“gen”，你需要重新提供此参数，但通常 GN 会在构建时自动将构建与IDE文件保持一致。</p><p>另外，由于生成的解决方案中包含数千个项目，因此加载速度非常慢。可以使用 <strong>–filters</strong> 参数来限制你感兴趣的代码生成在项目文件中。当然，这样也会限制一些文件无法在项目资源管理器中出现，但调试仍然有效。您可以手动打开文件，设置断点。极端情况下，最小的solution中不包含任何文件，但仍然可以让你在VS中编译和运行Chrome。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gn gen --ide=vs --ninja-executable=C:\src\chromium\src\third_party\ninja\ninja.exe --filters=//chrome --no-deps out\Default</span><br></pre></td></tr></table></figure><p>您可以有选择地将您关心的其他目录添加到过滤器中，如下所示<code>--filters=//chrome;//third_party/WebKit/*;//gpu/*</code></p><p>更多的信息请运行 gn help gen 查看相关的文档。</p><h3 id="在没有-Intellisense-的情况下使用-Visual-Studio"><a href="#在没有-Intellisense-的情况下使用-Visual-Studio" class="headerlink" title="在没有 Intellisense 的情况下使用 Visual Studio"></a>在没有 Intellisense 的情况下使用 Visual Studio</h3><p>没有 Intellisense，你仍然可以在 Visual Studio 中调试和开发 Chrome。你只需在</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File-&gt;Open-&gt;Project/Solution</span><br></pre></td></tr></table></figure><p>中，打开chrome.exe 这个二进制文件，或在命令窗口中输入</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devenv /debugexe out\Debug\chrome.exe &lt;your arguments&gt;</span><br></pre></td></tr></table></figure><p>即可。</p><p>在这种情况下，就不能浏览代码了，但通过安装<a href="https://chromium.github.io/vs-chromium/">VsChromium Visual Studio Extension</a>，可以获得源代码以及其他有用的功能（例如代码搜索）。</p><p>当然，你也可以将多个感兴趣的可执行文件，如base_unittests.exe、browser_tests.exe，添加到你的解决方案中，右键单击Solution Explorer，设置调试的程序为 <strong>Set as Startup Project</strong>。</p><p>默认情况下，当您在 Visual Studio 中开始调试时，调试器将仅附加到浏览器的主进程。要调试所有 Chrome，请安装Microsoft 的 <strong>Child Process Debugging Power Tool</strong> 工具。此外，您还需要以管理员身份运行 Visual Studio，否则它会默认是无法附加到 Chrome 的某些子进程的。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>以上就是下载和编译Windows Chromium源码的过程。在源码的下载过程中很容易失败，解决的办法是首先保障你的网络是可以正确的、高质量的访问外网，这一步是最关键的，之后如果失败了就多次偿试。</p><p>总之一句话，有好的、高质量的、高速的带宽是你下载Chrome源码的关键。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;随着技术的进步，浏览器在未来会扮演越来越得要的角色。我们基本可以确定，在不久的将来，大部分Native应用都会被Web应用所替代。因此，如果你想今后想找一份好工作，或写出更高效的Web应用，就必须要了解一下浏览器的工作原理。&lt;/p&gt;
+&lt;p&gt;了解浏览器工作原理的方法有很多，但对Chrome源码的阅读无缝是第一位的，只有这样我们才能获取第一手材料。&lt;/p&gt;
+&lt;p&gt;而阅读Chrome源码的第一位就是要能够下载或编译Chrome源码。而这篇文章就是告诉你如何下载并编译Chrome源码的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="浏览器" scheme="https://blog.avdancedu.com/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+    
+      <category term="Chrome" scheme="https://blog.avdancedu.com/tags/Chrome/"/>
+    
+      <category term="windows" scheme="https://blog.avdancedu.com/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络开发点滴.md</title>
+    <link href="https://blog.avdancedu.com/6373ddbf/"/>
+    <id>https://blog.avdancedu.com/6373ddbf/</id>
+    <published>2023-02-28T11:32:59.000Z</published>
+    <updated>2023-03-01T05:17:18.194Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里记录一些网络开发时的知识点</p><h2 id="为什么不建议使用0-0-0-0这个IP地址"><a href="#为什么不建议使用0-0-0-0这个IP地址" class="headerlink" title="为什么不建议使用0.0.0.0这个IP地址?"></a>为什么不建议使用0.0.0.0这个IP地址?</h2><p>在云主机上，不建议绑定 <strong>0.0.0.0</strong> 这个IP地址。其原因是，<strong>0.0.0.0</strong> 表示所有可用的IP地址，如果服务绑定在0.0.0.0上，将允许来自任何网络接口的所有请求都能够到达该服务，从而可能导致安全风险。例如，如果你的云主机同时有内网IP和外网IP，你可能只希望服务只监听外网IP地址，这样可以避免来自内网的非授权访问。</p><p>因此，在云主机上，建议将服务绑定到具体的IP地址上，以增加网络安全性。</p><h2 id="在云主机上有内网和外网地址，我们该用哪个？"><a href="#在云主机上有内网和外网地址，我们该用哪个？" class="headerlink" title="在云主机上有内网和外网地址，我们该用哪个？"></a>在云主机上有内网和外网地址，我们该用哪个？</h2><p>如果在云主机有一个公网 IP 和一个内网 IP，而您的网络服务需要对外提供服务，则应该使用公网 IP 地址和端口号。这样，外部用户可以通过 Internet 连接到您的服务。</p><p>如果您的服务只在内部网络中使用，那么可以使用内网 IP 地址和端口号。这样，只有内部网络中的用户才能连接到您的服务。</p><p>需要注意的是，在使用公网 IP 地址时，还需要在防火墙中打开相应的端口，以便外部用户可以连接到您的服务。而在使用内网 IP 地址时，通常不需要打开防火墙，因为内部网络是相对安全的，只有经过授权的用户才能连接到您的服务。</p><h2 id="客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？"><a href="#客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？" class="headerlink" title="客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？"></a>客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？</h2><p>可以通过向默认网关发ping消息来判断是否主机能与路由器联接。如果客户端可以收到路由器的返馈包，说明两者联接是好的。否则说明无法与路由器连接。</p><p>之后可以向一台云主机发包，如果云主机可以往回数据说明网络联接是好的，否则说明路由器无法联网。</p><h2 id="如何判断客户端主机IP是否被劫持了？"><a href="#如何判断客户端主机IP是否被劫持了？" class="headerlink" title="如何判断客户端主机IP是否被劫持了？"></a>如何判断客户端主机IP是否被劫持了？</h2><p>可以向多台云主机发送数据包，让云主机获取到的客户端主机IP地址返回，如果一致说明没有被劫持，否则说明某条线路的IP地址被劫持了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这里记录一些网络开发时的知识点&lt;/p&gt;
+&lt;h2 id=&quot;为什么不建议使用0-0-0-0这个IP地址&quot;&gt;&lt;a href=&quot;#为什么不建议使用0-0-0-0这个IP地址&quot; class=&quot;headerlink&quot; title=&quot;为什么不建议使用0.0.0.0这个IP地址?&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+    
+      <category term="网络传输" scheme="https://blog.avdancedu.com/categories/%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/"/>
+    
+    
+      <category term="网络传输" scheme="https://blog.avdancedu.com/tags/%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS下安装TikTok的过程</title>
@@ -545,68 +599,6 @@
     
     
       <category term="书" scheme="https://blog.avdancedu.com/tags/%E4%B9%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Windows下编译OpenCV库</title>
-    <link href="https://blog.avdancedu.com/d6343897/"/>
-    <id>https://blog.avdancedu.com/d6343897/</id>
-    <published>2022-11-19T06:52:00.000Z</published>
-    <updated>2022-11-20T04:50:46.846Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近发现有很多同学在学习OpenCV时，不知道该如何在Windows下编译OpenCV源码，这里我整理了一份Windows编译OpenCV的具体步聚，希望可以帮助到大家。</p><p>Windows下编译OpenCV分为四步，即：</p><ul><li>一、下载安装必要的工具</li><li>二、下载OpenCV源码</li><li>三、生成编译脚本</li><li>四、使用VS工程编译OpenCV</li></ul><span id="more"></span><h2 id="下载必要的工具"><a href="#下载必要的工具" class="headerlink" title="下载必要的工具"></a>下载必要的工具</h2><ol><li>安装python3和numpy库，<a href="https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe">下载地址：https://www.python.org/ftp/python/3.9.2/python-3.9.2-amd64.exe</a></li><li>安装 VS, 下载社区版即可，<a href="https://visualstudio.microsoft.com/zh-hans/downloads/">下载地址： https://visualstudio.microsoft.com/zh-hans/downloads/</a></li><li>安装 cmake，<a href="https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-windows-x86_64.msi">下载地址：https://github.com/Kitware/CMake/releases/download/v3.20.0-rc1/cmake-3.20.0-rc1-windows-x86_64.msi</a></li><li>下载IPPICV，<a href="https://github.com/opencv/opencv_3rdparty.git">下载地址：https://github.com/opencv/opencv_3rdparty.git</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/opencv/opencv_3rdparty.git</span><br></pre></td></tr></table></figure></li></ol><h2 id="下载opencv源码"><a href="#下载opencv源码" class="headerlink" title="下载opencv源码"></a>下载opencv源码</h2><ol><li><p>下载opencv源码, 方法：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/opencv/opencv.git</span><br></pre></td></tr></table></figure></li><li><p>下载opencv-contrib源码, 方法：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/opencv/opencv_contrib.git</span><br></pre></td></tr></table></figure></li></ol><h2 id="生成编译脚本"><a href="#生成编译脚本" class="headerlink" title="生成编译脚本"></a>生成编译脚本</h2><ol><li>在存放opencv源码目录中创建build目录</li><li>运行cmake</li><li>选择opencv源码目录</li><li>选择编译目录</li><li>选择CPU架构</li><li>增加opencv-contrib选项, OPENCV_EXTRA_MODULES_PATH&#x3D;..&#x2F;opencv_contrib&#x2F;modules</li><li>检查编译选项，并<ol><li>勾选 opencv_world</li><li>勾选 ffmpeg</li><li>勾选 IPPICV，这步容易出错，如果你访问不了外网的话一般会出错。可以偿试手工下载IPPICV，进行设置。</li></ol></li><li>生成编译脚本</li></ol><h2 id="使用VS编译OpenCV"><a href="#使用VS编译OpenCV" class="headerlink" title="使用VS编译OpenCV"></a>使用VS编译OpenCV</h2><ol><li>选择输出版本类型</li><li>进行编译</li></ol><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在上述步骤中，第三步<strong>生成编译脚本</strong>是最容易出错的，其中第7步是导致出错的最大原因，所以在生成编译脚本时一定要仔细检查这几项是否都是OK的。</p><h2 id="我的课程"><a href="#我的课程" class="headerlink" title="我的课程"></a>我的课程</h2><p>-<a href="https://coding.imooc.com/class/496.html">OpenCV入门与实战</a></p><p>-<a href="https://coding.imooc.com/class/415.html">音视频系统入门</a></p><p>-<a href="https://coding.imooc.com/class/279.html">ffmpeg精讲</a></p><p>-<a href="https://coding.imooc.com/class/329.html">WebRTC入门与实战</a></p><p>-<a href="https://coding.imooc.com/class/387.html">WebRTC高并发流媒体服务器</a></p><p>-<a href="https://time.geekbang.org/column/article/111337">从0开始构造直播系统</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近发现有很多同学在学习OpenCV时，不知道该如何在Windows下编译OpenCV源码，这里我整理了一份Windows编译OpenCV的具体步聚，希望可以帮助到大家。&lt;/p&gt;
-&lt;p&gt;Windows下编译OpenCV分为四步，即：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一、下载安装必要的工具&lt;/li&gt;
-&lt;li&gt;二、下载OpenCV源码&lt;/li&gt;
-&lt;li&gt;三、生成编译脚本&lt;/li&gt;
-&lt;li&gt;四、使用VS工程编译OpenCV&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="人工智能" scheme="https://blog.avdancedu.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-      <category term="图像处理" scheme="https://blog.avdancedu.com/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
-    
-    
-      <category term="OpenCV" scheme="https://blog.avdancedu.com/tags/OpenCV/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何正确的部署mediasoup-demo</title>
-    <link href="https://blog.avdancedu.com/3ab8cfd4/"/>
-    <id>https://blog.avdancedu.com/3ab8cfd4/</id>
-    <published>2022-11-19T06:52:00.000Z</published>
-    <updated>2022-11-21T05:48:10.098Z</updated>
-    
-    <content type="html"><![CDATA[<p>现在发现很多同学部署mediasoup-demo时出现各种问题，最主要的原因是无法通过npm安装依赖包。几乎每天都有同学来问这类问题，解决的办法其实很简单，找个<strong>代理</strong>就好了。</p><p>但这又引来了同学们新的问题，哪种代理好？需要多少费用……</p><span id="more"></span><p>好吧，干脆我给大家做个docker吧，这样对于那些找不到代理，不想花钱的同学直接下载docker进行部署就好了。</p><p>使用docker部署mediasoup-demo的具体步骤如下：</p><ul><li>准备一台Ubuntu22.04的PC机</li><li>下载mediasoup-demo镜像</li><li>下载run.sh脚本</li><li>启动docker</li><li>启动mediasoup</li><li>测试</li></ul><h2 id="下载mediasoup-demo镜像"><a href="#下载mediasoup-demo镜像" class="headerlink" title="下载mediasoup-demo镜像"></a>下载mediasoup-demo镜像</h2><p>下载mediasoup-demo镜像的方法很简单，只要在你的Ubuntu系统下执行下面的命令即可。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull lc0060305/mediasoup-demo:v5</span><br></pre></td></tr></table></figure><blockquote><p>需要注意的是，国内的云主机都对hub.docker.com的访问做了限制，可能无法从hub.docker.com下载docker镜像，或下载很慢，最好的方式当然是在国内找个docker镜像创库，把制作好的镜像放上去，但我没有找到特别好的免费的仓库。有同学有这方面资源的可以提供一下。在此表示感谢！</p></blockquote><h2 id="下载run-sh脚本"><a href="#下载run-sh脚本" class="headerlink" title="下载run.sh脚本"></a>下载run.sh脚本</h2><p>你可以从<a href="https://cdn.avdancedu.com/image/article/docker/v1/run.sh">这里下载run.sh</a>，下载成功后可以将它保存在任意目录下。</p><h2 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h2><p>使用下面的命令来启动docker</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x run.sh</span><br><span class="line">sudo MEDIASOUP_ANNOUNCED_IP=你的IP ./run.sh</span><br></pre></td></tr></table></figure><blockquote><p>注意，上面的IP在不同的情况下需要填入不同的值。如果你是在云主机上部署的，则<strong>MEDIASOUP_ANNOUNCED_IP</strong>设置成你云主机的外网IP地址；如果你是在自己的主机上部署的，IP地址则需要填你主机的IP，它一般是以<code>192.</code>开头的。</p></blockquote><h2 id="启动mediasoup"><a href="#启动mediasoup" class="headerlink" title="启动mediasoup"></a>启动mediasoup</h2><p>上面的步骤执行成功后，我们需要启动mediasoup服务，启动的办法也很简单:</p><ul><li><p>首先执行下面的命令进入到docker中</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach containerID</span><br></pre></td></tr></table></figure></li><li><p>之后，在&#x2F;service目录下执行下面的命令即可：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startservice.sh</span><br></pre></td></tr></table></figure></li><li><p>当服务启动好后，输入<code>ctrl+p, ctrl+q</code>退出docker</p></li></ul><p>到此，mediaosoup-demo就算部署好了。现在让我们来测试一下吧！</p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在chrome 浏览器中输入<code>https://IP:3000</code>，如果一切顺利的话，你将能够看到mediasoup-demo中熟悉的背景，并必本地摄像头也被打开了。</p><p>然后复制页面地址，打开一个新标签页，现在两个页面应该就可以通信了。</p><blockquote><p>注意，我在测试时发现chrome 102 这个版本是可以通信的，而用最新的chrome会报错。该问题我已经提交给mediasoup官网，如果有进一步的消息我会及时进行更新。</p></blockquote><h2 id="下载老版本Chrome地址"><a href="#下载老版本Chrome地址" class="headerlink" title="下载老版本Chrome地址"></a>下载老版本Chrome地址</h2><p><a href="https://www.slimjet.com/chrome/google-chrome-old-version.php">下载old Chrome</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;现在发现很多同学部署mediasoup-demo时出现各种问题，最主要的原因是无法通过npm安装依赖包。几乎每天都有同学来问这类问题，解决的办法其实很简单，找个&lt;strong&gt;代理&lt;/strong&gt;就好了。&lt;/p&gt;
-&lt;p&gt;但这又引来了同学们新的问题，哪种代理好？需要多少费用……&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WebRTC" scheme="https://blog.avdancedu.com/categories/WebRTC/"/>
-    
-      <category term="mediasoup" scheme="https://blog.avdancedu.com/categories/WebRTC/mediasoup/"/>
-    
-    
-      <category term="WebRTC" scheme="https://blog.avdancedu.com/tags/WebRTC/"/>
-    
-      <category term="mediasoup" scheme="https://blog.avdancedu.com/tags/mediasoup/"/>
-    
-      <category term="docker" scheme="https://blog.avdancedu.com/tags/docker/"/>
     
   </entry>
   
