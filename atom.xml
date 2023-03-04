@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2023-03-01T05:17:37.720Z</updated>
+  <updated>2023-03-04T04:32:20.944Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>揭密OpenVPN工作原理</title>
+    <link href="https://blog.avdancedu.com/52f625ca/"/>
+    <id>https://blog.avdancedu.com/52f625ca/</id>
+    <published>2023-03-03T01:05:13.000Z</published>
+    <updated>2023-03-04T04:32:20.944Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于国内的一些原因，有时候我们要下载些代码，比如WebRTC、Chrome等，必备要通过一些代理软件才能将它们下载下来。</p><p>常见的代理软件包括Virtual Private Network 和 HTTP Proxy，这两种软件的工作机制是不同的，今天我们先来聊聊 Virtual Private Network 是如何工作的，之后有机会我们再来HTTP Proxy是如何工作的。</p><p>说到 Virtual Private Network，比较有名的软件当然是 OpenVPN，今天我们就来看看它是如何工作的。  </p><h2 id="什么是OpenVPN"><a href="#什么是OpenVPN" class="headerlink" title="什么是OpenVPN"></a>什么是OpenVPN</h2><p>OpenVPN是一种开源的虚拟专用网络软件，它由客户端和服务端组成，可以实现虚拟专用网络(VPN)连接。在VPN连接过程中，OpenVPN可以实现代理的功能，将客户端的请求通过VPN服务器代理到目标服务器。</p><p>其代理的基本过程如下：</p><ul><li>首先，OpenVPN客户端通过虚似专用网络向VPN服务器发起连接请求。</li><li>连接建立成功后，当用户访问目标服务器时，数据请求会由OpenVPN客户端发往OpenVPN服务器。</li><li>VPN服务器收到请求后，解析该请求，并路由到目标服务器。</li><li>之后，目标服务器返回响应数据。</li><li>紧接着，VPN服务器将响应数据返回给OpenVPN客户端，而OpenVPN客户端转手将响应数据返回给用户。</li></ul><p>在此过程中，OpenVPN实现了客户端与目标服务器之间的代理。由于客户端的请求经过了VPN服务器的转发，目标服务器不知道请求来自哪个客户端，保护了客户端的隐私。</p><h2 id="TUN与TAP模式"><a href="#TUN与TAP模式" class="headerlink" title="TUN与TAP模式"></a>TUN与TAP模式</h2><p>在OpenVPN中有两种工作模式，一种称为 <strong>TUN</strong>(tunnel)模式，即通道的意思；另一种是<strong>TAP</strong>(Terminal Access Point)模式，即一种网络设备或软件虚拟设备的意思。</p><p><strong>TUN模式</strong>是一种虚拟点对点的网络设备模式。通常用于实现点对点（即主机到主机）虚拟专用网络（VPN）。在TUN模式下，OpenVPN会创建一个虚拟网络接口（通常称为tun0），通过该接口发送和接收IP包。TUN模式通常用于路由网络流量，因此其只能够处理<strong>IP层</strong>（OSI模型中的第3层）数据包，<strong>不能处理链路层</strong>（OSI模型中的第2层）数据包。</p><p><strong>TAP模式</strong>是一种<strong>以太网桥</strong>设备模式。通常用于实现一点对多点（即主机到局域网）虚拟专用网络（VPN）。在TAP模式下，OpenVPN同样会创建一个虚拟网络接口（通常称为tap0），不过该接口与NAT模式下的接口不同，它可以接收和发送<strong>以太网帧</strong>，就像一个物理的以太网接口一样。TAP模式可以处理链路层数据包，因此它可以传输多种类型的网络包，如IP、ARP、NetBIOS等。</p><p>一般来说，<strong>TUN模式更适合用于远程访问，因为它可以更好地控制网络流量，并且可以提供更好的性能。而TAP模式更适合用于网络扩展，因为它可以模拟真实的局域网，并且可以传输多种类型的网络包</strong>。</p><p>因此，我们访问外网是都是使用的TUN模式。</p><h2 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h2><p><img data-src="https://cdn.avdancedu.com/image/article/OpenVPN/OpenVPN_arch.png"></p><p>当我们打开OpenVPN与服务端建立连接后，OpenVPN首先会创建一个虚似网络接口<strong>tun</strong>，之后使用TLS协议与服务端建立好连接。</p><p>连接建立好后，用户（应用程序）在向目标主机发送数据包时，传输到网层的数据包会被tun虚拟网络接口截获。</p><p>当tun虚拟接口截获数据后，它将为截获的数据进行加密等一系列操作，之后再将数据传给真正的网络设备，在我这里就是 <strong>eth0</strong>。</p><p><strong>eth0</strong>收到数据后，经网络路由，路由到OpenVPN服务端。服务端收到数据后进行解密，再根据目标地址将数据转交给目标主机。</p><p>目标主机收到请求后进行处理，之后将处理结果返回VPN服务器。VPN服务器再将数据返回到发送主机。</p><p>以上就是OpenVPN的基本工作原理。</p><h2 id="如何截获本地数据包"><a href="#如何截获本地数据包" class="headerlink" title="如何截获本地数据包"></a>如何截获本地数据包</h2><p>这里有同学可能会好奇，OpenVPN是如何截获用户的数据包，将其发往VPN服务器，并最终传给目标主机的呢？</p><p>其实非常简单，当使用VPN时，OpenVPN会向本地路由表中添加一个表项，如下所示：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Internet:</span><br><span class="line">Destination        Gateway            Flags           Netif Expire</span><br><span class="line"><span class="number">0</span>/<span class="number">1</span>                <span class="number">10.8</span><span class="number">.0</span><span class="number">.1</span>           UGScg          utun10 </span><br><span class="line"><span class="keyword">default</span>            <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span>        UGScg             en1             </span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>其中 <code>0/1</code>的含义是，将整个网络分成两个大的网段，第一个网段是从 0.0.0.0 到 127.255.255.255，第二个网段是从 128.0.0.0 到 255.255.255.255。</p><p>由于路由规定，具体网段路由的优先权大于默认路由，因此整个网段被分成了两个具体的网络后，其优先权就大于 <code>defulat</code>路由了。所以，所有属于这两个网段的IP包都会被路由到utun10网关，又由于utun10就是VPN网关，因此就保证了所有数据都走了VPN链路。</p><p>总之，当我们在客户端建立好VPN连接后，本地路由表中就增加了<code>0/1</code>这一路由项，从而使得所有的数据都通过VPN出去了。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>通过上面的分析，大家应该清楚OpenVPN到底是如何工作的了。我想对于很多同学来说，理解其工作原理的难点是不知道OpenVPN是如何截获网络数据包的，实际上就是通过增加一个本地路由配置，从而达到的截获数据包的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;由于国内的一些原因，有时候我们要下载些代码，比如WebRTC、Chrome等，必备要通过一些代理软件才能将它们下载下来。&lt;/p&gt;
+&lt;p&gt;常见的代理软件包括Virtual Private Network 和 HTTP Proxy，这两种软件的工作机制是不同的，今天我们先来聊聊
+      
+    
+    </summary>
+    
+    
+      <category term="OpenVPN" scheme="https://blog.avdancedu.com/categories/OpenVPN/"/>
+    
+    
+      <category term="OpenVPN" scheme="https://blog.avdancedu.com/tags/OpenVPN/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows下编译Chrome浏览器</title>
@@ -565,33 +592,6 @@
       <category term="WebRTC" scheme="https://blog.avdancedu.com/tags/WebRTC/"/>
     
       <category term="视频课" scheme="https://blog.avdancedu.com/tags/%E8%A7%86%E9%A2%91%E8%AF%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《WebRTC音视频实时互动技术--原理、实战与源码分析》勘误表</title>
-    <link href="https://blog.avdancedu.com/f2403a12/"/>
-    <id>https://blog.avdancedu.com/f2403a12/</id>
-    <published>2022-11-19T06:52:00.000Z</published>
-    <updated>2022-11-20T05:52:20.056Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="勘误一"><a href="#勘误一" class="headerlink" title="勘误一"></a>勘误一</h2><p>a. P3, 1.2节，第三段中的 AVI 应为 AV1.<br>b. P11,  2.1.3节，第一段中的 AVI 应为 AV1<br>c. P22，3.2.2 节，第三段中的所有 AVI 应为 AV1<br>d. P261， 13.5节，第二段中的 AVI 应为 AV1</p><h2 id="勘误二"><a href="#勘误二" class="headerlink" title="勘误二"></a>勘误二</h2><p>P10, P11, P12 中的三张图，修改如下：</p><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive2.png"></p><span id="more"></span><p><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive3.png"><br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_plugin.png"></p><h2 id="勘误三"><a href="#勘误三" class="headerlink" title="勘误三"></a>勘误三</h2><p>P15，第三段应为：</p><p>“从上面的描述中你可以看到，在 WebRTC 架构的四层中，最复杂、最核心的是第三层，即 引擎层，因此，这里我再对引擎层内部的关系做下简要介绍。引擎层包括三部分内容，分别是: 音频引擎、视频引擎以及网络传输。其中<strong>音频引擎</strong>和视频引擎是相对比较独立的。不过，它们 都需要与网络传输层(transport)打交道。也就是说，它们都需要将自己产生的数据通过网络 传输层发送出去;同时，也需要通过网络传输层接收其它端发过来的数据。此外，音频引擎与 视频引擎由于要进行音视频同步的原因，所以它们之间也存在着关联关系。”</p><h2 id="勘误四"><a href="#勘误四" class="headerlink" title="勘误四"></a>勘误四</h2><p>P34，代码4.4 修改如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.to(room).emit(&#x27;cmd&#x27;);</span><br></pre></td></tr></table></figure><h2 id="勘误五"><a href="#勘误五" class="headerlink" title="勘误五"></a>勘误五</h2><p>P39，代码98行，修改如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.to(room).emit(&#x27;other_join&#x27;, room, socket.id);</span><br></pre></td></tr></table></figure><h2 id="勘误六"><a href="#勘误六" class="headerlink" title="勘误六"></a>勘误六</h2><p>P40, 代码120行，修改如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.emit(&#x27;left&#x27;, room, socket.id);</span><br></pre></td></tr></table></figure><h2 id="勘误七"><a href="#勘误七" class="headerlink" title="勘误七"></a>勘误七</h2><p>P43，第四段第一个单词<strong>groudId</strong>应为<strong>groupId</strong>。</p><h2 id="勘误八"><a href="#勘误八" class="headerlink" title="勘误八"></a>勘误八</h2><p>P50, 代码20行，修改如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(&#x27;other_join&#x27;, (roomid) =&gt; &#123;</span><br></pre></td></tr></table></figure><h2 id="勘误九"><a href="#勘误九" class="headerlink" title="勘误九"></a>勘误九</h2><p>P70, 代码170行，修改如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(&#x27;other_join&#x27;, (roomid) =&gt; &#123;</span><br></pre></td></tr></table></figure><h2 id="勘误十"><a href="#勘误十" class="headerlink" title="勘误十"></a>勘误十</h2><p>P71, 代码210行，修改如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(&#x27;left&#x27;, (roomid, id) =&gt; &#123;</span><br></pre></td></tr></table></figure><h2 id="勘误十一"><a href="#勘误十一" class="headerlink" title="勘误十一"></a>勘误十一</h2><p>P98，表6.2各NAT之间可穿越表应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/NAT_table.png"></p><h2 id="勘误十二"><a href="#勘误十二" class="headerlink" title="勘误十二"></a>勘误十二</h2><p>P103，6.4.2小节倒数第二应为：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/turn_protocal.png"></p><p>“因为主机 A 拿到了主机 B 的 Relay 类型的 Candidate，即 RelayB，所以主机 A 可以直接将音视频数据发向 RelayB。TurnServer 从 RelayB 接收到数据后，会将数据 打包成 TURN 消息，经 3478 端口发往主机<strong>B</strong>。主机<strong>B</strong>收数据后，再利用 TurnClient 模块将数据从 TURN 消息中取出，交给其它模块做进一步处理; 同理，主机 B 与主机 A 的操作流程是一样的。TurnServer 从 RelayA 收到数据后，将其打包成 TURN 消息， 也要经过 3478 端口转发给主机<strong>A</strong>。”</p><h2 id="勘误十三"><a href="#勘误十三" class="headerlink" title="勘误十三"></a>勘误十三</h2><p>P114，第一段应为：</p><p>“程， 默认情况下 WebRTC 会将 VP8&#x2F;H264 等编码器编码后的数据再交由 red 模块编码，生成带一些冗余信息的数据包，这样当传输中某个包丢了，就可以通过其他包将其恢复回来，而不用重传丢失的包。了解了上面这些内容后，第 <strong>16～18</strong> 行代码的含义应该就清楚了，即 PT 值为 124 表示需要使用 red 对之前编码好的数据再进行 red 处理，119 是 PT&#x3D;124 重传数据 包的 PayloadType。如果用 Wireshark 等抓包工具抓取 WebRTC 媒体数据包时会发现它们都 是 red 包，而在 red 包里装的是 VP8&#x2F;H264 编码的数据。”</p><h2 id="勘误十四"><a href="#勘误十四" class="headerlink" title="勘误十四"></a>勘误十四</h2><p>P124，代码行号69，内容应为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">69 使用Opus时，每个音频帧的最小间隔为10毫秒，使用带内FEC</span><br><span class="line">70 a=fmtp:111 minptime=10;useinbandfec=1</span><br></pre></td></tr></table></figure><h2 id="勘误十五"><a href="#勘误十五" class="headerlink" title="勘误十五"></a>勘误十五</h2><p>P168，图9.10有误，正确的图如下所示：<br><img data-src="https://cdn.avdancedu.com/image/article/webrtc_book_kw/onebyeheader2.png"></p><h2 id="勘误十六"><a href="#勘误十六" class="headerlink" title="勘误十六"></a>勘误十六</h2><p>P175，10.1 节的第一段应为：</p><p>“在 WebRTC 中包含多种拥塞控制算法，有 GCC、BBR和 PCC。GCC 根据其实现又可细分为基于发送端的拥塞控制算法 Transport-CC4和基于<strong>接收端</strong>的拥塞控制算法 Goog-REMB。”</p><h2 id="勘误十七"><a href="#勘误十七" class="headerlink" title="勘误十七"></a>勘误十七</h2><p>P176，第一段中的<strong>QUICK</strong>应该为<strong>QUIC</strong>。此外，注脚中的<strong>QUICK</strong>，也应为<strong>QUIC</strong>。</p><h2 id="勘误十八"><a href="#勘误十八" class="headerlink" title="勘误十八"></a>勘误十八</h2><p>P183, 公式10.19 下面一段的第一句应为：</p><p>“在上述公式中，d(i) 表示当前包组到达时长与包组发送时长之差，<strong>参见公式10.4。</strong>正常情况下该值有正有负, ……”</p><h2 id="勘误十九"><a href="#勘误十九" class="headerlink" title="勘误十九"></a>勘误十九</h2><p>P271, 第一段应为：</p><p>“在上述代码中，如果对其再进行简化的话，可以发现 StartNextDecode() 方法中只调用了frame_buffer_对象的 NextFrame() 这个方法。由于该方法传入参数过于复杂，所以不太好理解，其实关键点是掌握其核心代码的第9～15行。”</p><h2 id="勘误二十"><a href="#勘误二十" class="headerlink" title="勘误二十"></a>勘误二十</h2><ul><li>P126，代码126行，应修改为：“PT&#x3D;96, 代表视频编码器VP8 &#x2F; 采样率为90000”</li><li>P127，代码179行，应修改为：“PT&#x3D;98，代表视频编码器VP9 &#x2F; 采样率为90000”</li><li>P127，代码199行，应修改为：“PT&#x3D;100，代表视频编码器VP9 &#x2F; 采样率为90000”</li><li>P128，代码200行，应修改为：“PT&#x3D;102，代表视频编码器H264 &#x2F; 采样率为90000”</li><li>P128，代码237行，应修改为：“PT&#x3D;127，代表视频编码器H264 &#x2F; 采样率为90000”</li><li>P129，代码254行，应修改为：“PT&#x3D;125，代表视频编码器H264 &#x2F; 采样率为90000”</li><li>P129，代码271行，应修改为：“PT&#x3D;108，代表视频编码器H264 &#x2F; 采样率为90000”</li></ul><h2 id="勘误二十一"><a href="#勘误二十一" class="headerlink" title="勘误二十一"></a>勘误二十一</h2><p>P198, “博利叶算法”应改为”傅立叶算法”</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;勘误一&quot;&gt;&lt;a href=&quot;#勘误一&quot; class=&quot;headerlink&quot; title=&quot;勘误一&quot;&gt;&lt;/a&gt;勘误一&lt;/h2&gt;&lt;p&gt;a. P3, 1.2节，第三段中的 AVI 应为 AV1.&lt;br&gt;b. P11,  2.1.3节，第一段中的 AVI 应为 AV1&lt;br&gt;c. P22，3.2.2 节，第三段中的所有 AVI 应为 AV1&lt;br&gt;d. P261， 13.5节，第二段中的 AVI 应为 AV1&lt;/p&gt;
-&lt;h2 id=&quot;勘误二&quot;&gt;&lt;a href=&quot;#勘误二&quot; class=&quot;headerlink&quot; title=&quot;勘误二&quot;&gt;&lt;/a&gt;勘误二&lt;/h2&gt;&lt;p&gt;P10, P11, P12 中的三张图，修改如下：&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&quot;https://cdn.avdancedu.com/image/article/webrtc_book_kw/AV_Archive2.png&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="WebRTC" scheme="https://blog.avdancedu.com/categories/WebRTC/"/>
-    
-      <category term="书" scheme="https://blog.avdancedu.com/categories/WebRTC/%E4%B9%A6/"/>
-    
-    
-      <category term="书" scheme="https://blog.avdancedu.com/tags/%E4%B9%A6/"/>
     
   </entry>
   
