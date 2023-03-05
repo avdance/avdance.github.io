@@ -5234,6 +5234,8 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <url>/73ca35b3/</url>
     <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/RTX4090.jpeg"><br>最近随着<strong>Midjourney</strong>和<strong>ChatGPT</strong>爆火之后，人工智能，深度学习又开始了新的一波学习浪潮。很多同学在学习深度学习的过程中，苦于没有好的实验环境，半路退场，实在可惜。</p>
 <p>我这里整理了两种搭建深度学习实验环境的方法，希望对大家能有所帮助！</p>
+<span id="more"></span>
+
 <h2 id="使用免费GPU云主机"><a href="#使用免费GPU云主机" class="headerlink" title="使用免费GPU云主机"></a>使用免费GPU云主机</h2><p>实际上，国际上以<strong>Google</strong>为首的一些大企业，他们知道搭建自己的深度学习环境，不仅成本高而且难度也大，因此为学生和小白们准备了一些免费的GPU云主机，专门供大家学习使用。这些企业真是 <strong>业界良心</strong>，<strong>为这些企业点赞！！！</strong></p>
 <p>下面我们就来看看如何在Google云上申请一台免费的GPU云主机。</p>
 <p>首先，众所周知的原因，你需要有能够访问外网的能力。这一步是逃不过去的。<br>之后，你需要在Google云上注册一个账户，同时绑定信用卡。</p>
