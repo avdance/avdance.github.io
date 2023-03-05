@@ -5229,4 +5229,60 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
         <tag>OpenVPN</tag>
       </tags>
   </entry>
+  <entry>
+    <title>深度学习开发环境搭建</title>
+    <url>/73ca35b3/</url>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/RTX4090.jpeg"><br>最近随着<strong>Midjourney</strong>和<strong>ChatGPT</strong>爆火之后，人工智能，深度学习又开始了新的一波学习浪潮。很多同学在学习深度学习的过程中，苦于没有好的实验环境，半路退场，实在可惜。</p>
+<p>我这里整理了两种搭建深度学习实验环境的方法，希望对大家能有所帮助！</p>
+<h2 id="使用免费GPU云主机"><a href="#使用免费GPU云主机" class="headerlink" title="使用免费GPU云主机"></a>使用免费GPU云主机</h2><p>实际上，国际上以<strong>Google</strong>为首的一些大企业，他们知道搭建自己的深度学习环境，不仅成本高而且难度也大，因此为学生和小白们准备了一些免费的GPU云主机，专门供大家学习使用。这些企业真是 <strong>业界良心</strong>，<strong>为这些企业点赞！！！</strong></p>
+<p>下面我们就来看看如何在Google云上申请一台免费的GPU云主机。</p>
+<p>首先，众所周知的原因，你需要有能够访问外网的能力。这一步是逃不过去的。<br>之后，你需要在Google云上注册一个账户，同时绑定信用卡。</p>
+<p>以上两步可能是大多数同学申请免费GPU云主机的最大障碍，没办法，免费也是有代价的：）</p>
+<p>当上述两步完成后，接下来你就可以申请免费GPU云主机了。打开Google的<a href="https://colab.research.google.com/">Colab</a>，之后你应该可以看到下面的界面<br><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/Colaboratory.png"></p>
+<p>有可能你的界面不是中文的而是英文，这没关系只要能进入到这个界面，你就可以申请CPU云主机了。</p>
+<p>进入到该界面后，首先在右侧的欢迎页面中选中一段代码，之后点击图中红线框出来的项 <strong>“代码执行程序”</strong>。</p>
+<p>在弹出的下拉框中选择 <strong>“更改运行时类型”</strong>，如下图所示：<br><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/runtime.png"></p>
+<p>紧接着，在弹出的窗口中选择 <strong>“GPU”</strong>，这样你就拥有了一台带GPU的云主机。</p>
+<p>现在让我们来看看Google有没有给我们分配好GPU，分配的GPU又是哪种型号吧！</p>
+<p>首先我们在Colab中点击右侧的<strong>“+代码”</strong>，如下图所示：<br><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/run_code.png"></p>
+<p>在代码框中输入如下代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">torch.cuda.is_available()</span><br></pre></td></tr></table></figure>
+
+<p>之后点击运行，如果看到下面的结果，说明GPU已经分配好了。<br><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/run_code_result.png"></p>
+<p>另外，如果你想知道Google结你分配的GPU型号，可以使用下面的命令查看</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">!nvidia-smi</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/GPU_type.png"></p>
+<p>从上图你可以知道，Google给我分配的GPU是<strong>Tesla T4</strong>，这块GPU性能还是蛮不错的。该云主机安装的Nvidia Driver版本是 <strong>525.85.12</strong>，CUDA版本是 <strong>12.0</strong>。</p>
+<p>Goole免费可以申请的GPU主要有三种型号，分别是</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">P100 &gt; T4 &gt; K80</span><br></pre></td></tr></table></figure>
+
+<p>其中 P100的性能与 RTX3090Ti差不多。</p>
+<p>如果你觉得Goole给你分配的GPU性能不够，那你还可以申请Pro，每月只要 <strong>$9.9</strong>，还是蛮便宜的。</p>
+<p>如果你觉得在Google上申请免费的GPU太麻烦，也可以自己搭建深度学习环境，下面我再介绍一下如何在自己的主机上搭建环境。</p>
+<h2 id="搭建自己的深度学习环境"><a href="#搭建自己的深度学习环境" class="headerlink" title="搭建自己的深度学习环境"></a>搭建自己的深度学习环境</h2><p>要搭建自己的深度学习环境，你首先要有一台“超级计算机”，最主要的是配一块高端显卡，比如RTX4090、RTX3090TI或RTX3090。配置这样一台主机价格不菲，少说要3W左右。</p>
+<p>我配置的就是RTX3090，性价比还是蛮高的。当然Nvidia还有很多低端显卡，但我不建议购买这些低端显卡，一方面容易买到<strong>矿卡（二手卡）</strong>；另一方面这些卡性能不够，做深度学习训练时会很慢。</p>
+<p>机子配置好了，接下来我们看看如何搭建深度学习环境！</p>
+<p>首先是操作系统，搭建深度学习环境最好使用Ubuntu系统，很多资料都是以Ubuntu系统为基础讲解的。</p>
+<p>当然用Windows环境搭建也没任何问题，我这里就是在Windows系统上安装的。因此，这里我只介绍在Windows下如何搭建深度学习环境，想在Ubuntu下搭建环境的同学可以自己在网上查找资料。</p>
+<p>Windows下搭建深度学习环境的步骤如下：</p>
+<p>首先，安装Nvidia GPU驱动，你可以从<a href="https://www.nvidia.cn/Download/index.aspx?lang=cn">这里</a>下载你与操作系统、显卡匹配的Driver。下载好后双击安装即可。</p>
+<p>之后，安装Anaconda。该工具主要是为了管理多个Python开发环境，你可以从<a href="https://www.anaconda.com/products/distribution/start-coding-immediately">这里</a>下载Anaconda。同样将该包下载好后，双击安装即可。</p>
+<p>紧接着，我们就可以使用Anaconda来创建自己的Python环境了。创建环境的命令如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda create -n ml_env</span><br></pre></td></tr></table></figure>
+<p>通过上述命令，我们就创建了一个名为<strong>ml_env</strong>的python的开发环境。</p>
+<p>接下来，我们可以使用Anaconda安装pytorch、CUDA等包。你可以到pytorch的官网上查看最近的pytorch版本，地址如下：<a href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a></p>
+<p>并根据自己的实际情况做选择要装哪些包，我的选择如下：<br><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/pytorch_env.png"></p>
+<p>当选择好pytorch版本，操作系统等信息后，它会给你提供一条安装相关包的指令，即</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio pytorch-cuda=<span class="number">11.7</span> -c pytorch -c nvidia</span><br></pre></td></tr></table></figure>
+
+<p>在执行该执令之前，我们需要将前面创建好的环境名加上，这样可以让这些包只做用于我们刚创建的环境中，如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda install -n ml_env pytorch torchvision torchaudio pytorch-cuda=<span class="number">11.7</span> -c pytorch -c nvidia</span><br></pre></td></tr></table></figure>
+
+<p>最后使用<code>conda activate ml_env</code>激活环境即可。</p>
+<p>至此，我们自己的深度学习环境就算搭建好了。</p>
+<p>发果你不想用这个环境了，可以调用<code>conda deactivate</code>来返激活python环境。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这里我提供了两种深度学习的开发环境，其中第一种是免费的，难点是你要有访问外网的能力并绑定一张信用卡。这种方法虽然省去了买主机的钱，但绑定信用卡也是很多同学所不愿意的。</p>
+<p>第二种方式是自己购买主机搭建环境，这种方式的最大问题是购买主机的花费太大，对于学生来说，真的很难承受。</p>
+]]></content>
+  </entry>
 </search>
