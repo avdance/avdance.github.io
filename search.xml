@@ -5232,7 +5232,7 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
   <entry>
     <title>深度学习开发环境搭建</title>
     <url>/73ca35b3/</url>
-    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/RTX4090.jpeg"><br>最近随着<strong>Midjourney</strong>和<strong>ChatGPT</strong>爆火之后，人工智能，深度学习又开始了新的一波学习浪潮。很多同学在学习深度学习的过程中，苦于没有好的实验环境，半路退场，实在可惜。</p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/deeplearning/RTX4090.png"><br>最近随着<strong>Midjourney</strong>和<strong>ChatGPT</strong>爆火之后，人工智能，深度学习又开始了新的一波学习浪潮。很多同学在学习深度学习的过程中，苦于没有好的实验环境，半路退场，实在可惜。</p>
 <p>我这里整理了两种搭建深度学习实验环境的方法，希望对大家能有所帮助！</p>
 <span id="more"></span>
 
