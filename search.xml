@@ -5298,16 +5298,16 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <url>/eaff035c/</url>
     <content><![CDATA[<h2 id="Anaconda还是Miniconada"><a href="#Anaconda还是Miniconada" class="headerlink" title="Anaconda还是Miniconada?"></a>Anaconda还是Miniconada?</h2><p>使用Python的人都会遇到库的安装、环境的管理问题，Conda就是这样一个工具来帮助你解决这些问题。</p>
 <p>Anaconda想必大家比较熟悉，但是很多人并不知道还有个轻量化的Miniconda。对于有一定基础的Python使用者，我本人更推荐Miniconda的。</p>
-<p>Anaconda:</p>
-<ul>
+<span id="more"></span>
+
+<h3 id="Anaconda"><a href="#Anaconda" class="headerlink" title="Anaconda"></a>Anaconda</h3><ul>
 <li>适合初学者（因为有图形界面，还内置了jupyter lab, spider等等）</li>
 <li>预装了超过1500个科学计算库（99%其实用不上）</li>
 <li>安装比较耗时，也比较占用空间</li>
 <li>因为预装了很多库，所以不需要重复下载。</li>
 <li>可能对一些库做了改进（？）</li>
 </ul>
-<p>Miniconda:</p>
-<ul>
+<h3 id="Miniconda"><a href="#Miniconda" class="headerlink" title="Miniconda"></a>Miniconda</h3><ul>
 <li>不介意手动安装所需的库（其实这个并不麻烦）</li>
 <li>节省空间和时间</li>
 </ul>
