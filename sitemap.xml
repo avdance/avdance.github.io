@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.avdancedu.com/92d94a35/</loc>
+    
+    <lastmod>2023-03-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.avdancedu.com/b8127007/</loc>
+    
+    <lastmod>2023-03-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.avdancedu.com/eaff035c/</loc>
     
     <lastmod>2023-03-10</lastmod>
@@ -156,15 +174,6 @@
   
   <url>
     <loc>https://blog.avdancedu.com/f2403a12/</loc>
-    
-    <lastmod>2022-11-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.avdancedu.com/92d94a35/</loc>
     
     <lastmod>2022-11-20</lastmod>
     
@@ -945,6 +954,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://blog.avdancedu.com/tags/Python/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -1103,6 +1119,13 @@
   
   <url>
     <loc>https://blog.avdancedu.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2023-03-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.avdancedu.com/categories/Python/</loc>
     <lastmod>2023-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

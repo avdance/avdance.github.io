@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2023-03-10T02:11:08.163Z</updated>
+  <updated>2023-03-10T09:38:15.627Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python知识点滴</title>
+    <link href="https://blog.avdancedu.com/b8127007/"/>
+    <id>https://blog.avdancedu.com/b8127007/</id>
+    <published>2023-03-10T08:51:09.000Z</published>
+    <updated>2023-03-10T09:38:15.627Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里记录一些使用Python时的小知识点！</p><span id="more"></span><h2 id="Python中的-with-open-…-as-…语法"><a href="#Python中的-with-open-…-as-…语法" class="headerlink" title="Python中的 with open … as …语法"></a>Python中的 with open … as …语法</h2><p>在Python中，使用<strong>with</strong>语法可以打开一个文件，并执行某些操作，然后自动关闭该文件。</p><p><strong>with</strong>可以保证文件使用完毕后正确关闭文件句柄，即使发生异常，也能保证文件被关闭。</p><p>使用<strong>with</strong>语法后，用户不需要在操作完文件后再显示的调用**close()**方法。</p><h2 id="pandas库"><a href="#pandas库" class="headerlink" title="pandas库"></a>pandas库</h2><p>Python pandas 是一个用于数据处理和分析的开源库。它提供了一组强大的工具，包括数据结构、数据清洗、数据转换、数据分析和数据可<br>视化，以便更轻松地处理和分析大量数据。</p><p>以下是 pandas 的一些常见用途：</p><ul><li>数据清洗：使用 pandas 可以轻松地清洗和处理数据，包括数据缺失、异常值和重复数据的处理。</li><li>数据转换：pandas 提供了强大的数据转换和操作工具，如合并、排序、分组和透视等，使得数据转换变得更加容易。</li><li>数据分析：pandas 提供了丰富的数据分析工具，如统计分析、数据可视化和时间序列分析，使得数据分析变得更加简单和高效。</li><li>数据可视化：pandas 可以轻松地将数据可视化，以便更好地理解数据和发现隐藏的模式。</li></ul><p>总的来说，pandas 是一种非常有用的工具，可以大大提高数据处理和分析的效率，因此在数据科学、机器学习和人工智能等领域广泛使用&gt;。</p><h2 id="错误与解决办法"><a href="#错误与解决办法" class="headerlink" title="错误与解决办法"></a>错误与解决办法</h2><h3 id="报错”ValueError-numpy-ndarray-size-changed-may-indicate-binary-incompatibility-”"><a href="#报错”ValueError-numpy-ndarray-size-changed-may-indicate-binary-incompatibility-”" class="headerlink" title="报错”ValueError: numpy.ndarray size changed, may indicate binary incompatibility.”"></a>报错”ValueError: numpy.ndarray size changed, may indicate binary incompatibility.”</h3><p>这是由于你使用的库版本不兼容所致，找到出问题的库，执行如下操作可以解决该问题</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install --upgrade xxx(库的名子）</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里记录一些使用Python时的小知识点！&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="https://blog.avdancedu.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://blog.avdancedu.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Mac系统下的GPU搭建机器学习环境</title>
@@ -552,36 +575,6 @@
     
     
       <category term="WebRTC" scheme="https://blog.avdancedu.com/tags/WebRTC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VS调试技巧</title>
-    <link href="https://blog.avdancedu.com/736c6e64/"/>
-    <id>https://blog.avdancedu.com/736c6e64/</id>
-    <published>2022-11-19T06:52:00.000Z</published>
-    <updated>2022-11-20T04:34:12.327Z</updated>
-    
-    <content type="html"><![CDATA[<p>文中记录了一些我经常使用的VS快捷键以及调试工具，希望也能帮助到其它同学。</p><h2 id="常用调试快捷键"><a href="#常用调试快捷键" class="headerlink" title="常用调试快捷键"></a>常用调试快捷键</h2><ul><li>F5 : 运行程序</li><li>F10：单步调试</li><li>F11：进入函数</li><li>Shift+F11: 跳出函数</li><li>F9：设置或取消断点</li></ul><span id="more"></span><h2 id="阅读代码快捷键"><a href="#阅读代码快捷键" class="headerlink" title="阅读代码快捷键"></a>阅读代码快捷键</h2><ul><li>F12 :  函数间跳转</li><li>crtl + -: 跳回去，与F12方向向反。</li></ul><h2 id="查看变量内存值"><a href="#查看变量内存值" class="headerlink" title="查看变量内存值"></a>查看变量内存值</h2><ul><li>打开内存显示窗口</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEBUG-&gt;windows-&gt;memory</span><br></pre></td></tr></table></figure><ul><li><p>在内存显示窗口里贴入要查看的变量地址</p></li><li><p>查看当前所有线程</p></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">点击 Debug -&gt; Windows -&gt; Threads</span><br></pre></td></tr></table></figure><ul><li>查看线程视图</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Debug -&gt; Windows -&gt; Parallel Stack</span><br></pre></td></tr></table></figure><blockquote><p>注意，在程序中打断点，然后启动调试（线程窗口需要启动调试才可以看得到）</p></blockquote><h2 id="VS常用设置"><a href="#VS常用设置" class="headerlink" title="VS常用设置"></a>VS常用设置</h2><ul><li><p>如何设置 $(Outdir)  路径</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉输出目录</span><br></pre></td></tr></table></figure></li><li><p>如何设置输出文件类型</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉项目默认值-&gt;配置类型</span><br></pre></td></tr></table></figure></li><li><p>如何设置目标文件名</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉目标文件名</span><br></pre></td></tr></table></figure></li><li><p>如何设置目标扩展名</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉常规-〉目标扩展名</span><br></pre></td></tr></table></figure></li><li><p>如何修改C&#x2F;C++中将警告视为错误</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉属性-〉配置属性-〉C/C++-&gt;将警告视为错误</span><br></pre></td></tr></table></figure></li><li><p>当一个工程里有多个项目时，要设置一个启动项目做为开始</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键工程-〉设置为启动项目</span><br></pre></td></tr></table></figure></li></ul><h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>持继更新中……</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;文中记录了一些我经常使用的VS快捷键以及调试工具，希望也能帮助到其它同学。&lt;/p&gt;
-&lt;h2 id=&quot;常用调试快捷键&quot;&gt;&lt;a href=&quot;#常用调试快捷键&quot; class=&quot;headerlink&quot; title=&quot;常用调试快捷键&quot;&gt;&lt;/a&gt;常用调试快捷键&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;F5 : 运行程序&lt;/li&gt;
-&lt;li&gt;F10：单步调试&lt;/li&gt;
-&lt;li&gt;F11：进入函数&lt;/li&gt;
-&lt;li&gt;Shift+F11: 跳出函数&lt;/li&gt;
-&lt;li&gt;F9：设置或取消断点&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="文本编辑器" scheme="https://blog.avdancedu.com/categories/%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/"/>
-    
-    
-      <category term="VisualStudio" scheme="https://blog.avdancedu.com/tags/VisualStudio/"/>
     
   </entry>
   

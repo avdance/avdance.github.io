@@ -1934,8 +1934,8 @@
 <td align="left">设置帧率（Hz值，分数或缩写）。作为输入选项，忽略存储在文件中的任何时间戳，根据速率生成新的时间戳。这与用于-framerate选项不同（它在FFmpeg的旧版本中使用的是相同的）。如果有疑问，请使用-framerate而不是输入选项-r。作为输出选项，复制或丢弃输入帧以实现恒定输出帧频fps。</td>
 </tr>
 <tr>
-<td align="left">-s [：stream_specifier]大小（输入&#x2F;输出，每个流）</td>
-<td align="left">设置窗口大小。作为输入选项，这是video_size专用选项的快捷方式，由某些分帧器识别，其帧尺寸未被存储在文件中。作为输出选项，这会将缩放视频过滤器插入到相应过滤器图形的末尾。请直接使用比例过滤器将其插入到开头或其他地方。格式是’wxh’（默认 - 与源相同）。</td>
+<td align="left">-video_size [：stream_specifier]大小（输入&#x2F;输出，每个流）</td>
+<td align="left">设置窗口大小。作为输入选项，由某些分帧器识别，其帧尺寸未被存储在文件中。作为输出选项，这会将缩放视频过滤器插入到相应过滤器图形的末尾。请直接使用比例过滤器将其插入到开头或其他地方。格式是’wxh’（默认 - 与源相同）。</td>
 </tr>
 <tr>
 <td align="left">-aspect [：stream_specifier] 宽高比（输出，每个流）</td>
@@ -1952,6 +1952,10 @@
 <tr>
 <td align="left">-vf filtergraph（输出）</td>
 <td align="left">创建由filtergraph指定的过滤器图，并使用它来过滤流。</td>
+</tr>
+<tr>
+<td align="left">-pixel_format</td>
+<td align="left">指定原始数据的格式，如yuv420p</td>
 </tr>
 </tbody></table>
 <h3 id="音频参数"><a href="#音频参数" class="headerlink" title="音频参数"></a>音频参数</h3><table>
@@ -2015,7 +2019,7 @@
 <li>-b:a 指定音频码率。 b 是 bitrate的缩写, a是 audio的缩与。</li>
 </ul>
 <p><strong>Linux下录屏</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -f x11grab -s 640*480 -r 20 -i :0.0 test.mp4</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -f x11grab -video_size640*480 -r 20 -i :0.0 test.mp4</span><br></pre></td></tr></table></figure>
 
 <p><strong>录视频</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -framerate 30 -f avfoundation -i 0 out.mp4</span><br></pre></td></tr></table></figure>
@@ -2061,14 +2065,14 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -i out.h264 -i out.aac -vcodec copy -acodec copy out.mp4</span><br></pre></td></tr></table></figure>
 
 <h2 id="处理原始数据"><a href="#处理原始数据" class="headerlink" title="处理原始数据"></a>处理原始数据</h2><p><strong>提取YUV数据</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -an -c:v rawvideo -pix_fmt yuv420p out.yuv</span><br><span class="line">ffplay -s wxh out.yuv</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -an -c:v rawvideo -pixel_format yuv420p out.yuv</span><br><span class="line">ffplay -video_size wxh out.yuv</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>-c:v rawvideo 指定将视频转成原始数据</li>
-<li>-pix_fmt yuv420p 指定转换格式为yuv420p</li>
+<li>-pixel_format yuv420p 指定转换格式为yuv420p</li>
 </ul>
 <p><strong>YUV转H264</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -f rawvideo -pix_fmt yuv420p -s 320x240 -r 30 -i out.yuv -c:v libx264 -f rawvideo out.h264</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -f rawvideo -pix_format yuv420p -video_size 320x240 -r 30 -i out.yuv -c:v libx264 -f rawvideo out.h264</span><br></pre></td></tr></table></figure>
 
 <p><strong>提取PCM数据</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -i out.mp4 -vn -ar 44100 -ac 2 -f s16le out.pcm</span><br><span class="line">ffplay -ar 44100 -ac 2 -f s16le -i out.pcm</span><br></pre></td></tr></table></figure>
@@ -2264,13 +2268,13 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -i rtmp://server/live/originalStream -c:a copy -c:v copy -f flv rtmp://server/live/h264Stream</span><br></pre></td></tr></table></figure>
 
 <p><strong>实时推流</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -framerate 15 -f avfoundation -i &quot;1&quot; -s 1280x720 -c:v libx264  -f  flv rtmp://localhost:1935/live/room</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -framerate 15 -f avfoundation -i &quot;1&quot; -video_size 1280x720 -c:v libx264  -f  flv rtmp://localhost:1935/live/room</span><br></pre></td></tr></table></figure>
 
 <h2 id="ffplay"><a href="#ffplay" class="headerlink" title="ffplay"></a>ffplay</h2><p><strong>播放YUV 数据</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffplay -pix_fmt nv12 -s 192x144 1.yuv</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffplay -pix_fmt nv12 -video_size 192x144 1.yuv</span><br></pre></td></tr></table></figure>
 
 <p><strong>播放YUV中的 Y平面</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffplay -pix_fmt nv21 -s 640x480 -vf extractplanes=&#x27;y&#x27; 1.yuv</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffplay -pix_fmt nv21 -video_size 640x480 -vf extractplanes=&#x27;y&#x27; 1.yuv</span><br></pre></td></tr></table></figure>
 
 <h2 id="查看多媒体文件详细信息"><a href="#查看多媒体文件详细信息" class="headerlink" title="查看多媒体文件详细信息"></a>查看多媒体文件详细信息</h2><p><strong>输出每路流最详细的信息</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffprobe -print_format json -show_streams 多媒体文件</span><br></pre></td></tr></table></figure>
@@ -5346,6 +5350,34 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
       </categories>
       <tags>
         <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python知识点滴</title>
+    <url>/b8127007/</url>
+    <content><![CDATA[<p>这里记录一些使用Python时的小知识点！</p>
+<span id="more"></span>
+
+<h2 id="Python中的-with-open-…-as-…语法"><a href="#Python中的-with-open-…-as-…语法" class="headerlink" title="Python中的 with open … as …语法"></a>Python中的 with open … as …语法</h2><p>在Python中，使用<strong>with</strong>语法可以打开一个文件，并执行某些操作，然后自动关闭该文件。</p>
+<p><strong>with</strong>可以保证文件使用完毕后正确关闭文件句柄，即使发生异常，也能保证文件被关闭。</p>
+<p>使用<strong>with</strong>语法后，用户不需要在操作完文件后再显示的调用**close()**方法。</p>
+<h2 id="pandas库"><a href="#pandas库" class="headerlink" title="pandas库"></a>pandas库</h2><p>Python pandas 是一个用于数据处理和分析的开源库。它提供了一组强大的工具，包括数据结构、数据清洗、数据转换、数据分析和数据可<br>视化，以便更轻松地处理和分析大量数据。</p>
+<p>以下是 pandas 的一些常见用途：</p>
+<ul>
+<li>数据清洗：使用 pandas 可以轻松地清洗和处理数据，包括数据缺失、异常值和重复数据的处理。</li>
+<li>数据转换：pandas 提供了强大的数据转换和操作工具，如合并、排序、分组和透视等，使得数据转换变得更加容易。</li>
+<li>数据分析：pandas 提供了丰富的数据分析工具，如统计分析、数据可视化和时间序列分析，使得数据分析变得更加简单和高效。</li>
+<li>数据可视化：pandas 可以轻松地将数据可视化，以便更好地理解数据和发现隐藏的模式。</li>
+</ul>
+<p>总的来说，pandas 是一种非常有用的工具，可以大大提高数据处理和分析的效率，因此在数据科学、机器学习和人工智能等领域广泛使用&gt;。</p>
+<h2 id="错误与解决办法"><a href="#错误与解决办法" class="headerlink" title="错误与解决办法"></a>错误与解决办法</h2><h3 id="报错”ValueError-numpy-ndarray-size-changed-may-indicate-binary-incompatibility-”"><a href="#报错”ValueError-numpy-ndarray-size-changed-may-indicate-binary-incompatibility-”" class="headerlink" title="报错”ValueError: numpy.ndarray size changed, may indicate binary incompatibility.”"></a>报错”ValueError: numpy.ndarray size changed, may indicate binary incompatibility.”</h3><p>这是由于你使用的库版本不兼容所致，找到出问题的库，执行如下操作可以解决该问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3 install --upgrade xxx(库的名子）</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
       </tags>
   </entry>
 </search>
