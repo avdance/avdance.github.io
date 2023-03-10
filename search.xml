@@ -5296,10 +5296,12 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
   <entry>
     <title>使用Mac系统下的GPU搭建机器学习环境</title>
     <url>/eaff035c/</url>
-    <content><![CDATA[<h2 id="Anaconda还是Miniconada"><a href="#Anaconda还是Miniconada" class="headerlink" title="Anaconda还是Miniconada?"></a>Anaconda还是Miniconada?</h2><p>使用Python的人都会遇到库的安装、环境的管理问题，Conda就是这样一个工具来帮助你解决这些问题。</p>
-<p>Anaconda想必大家比较熟悉，但是很多人并不知道还有个轻量化的Miniconda。对于有一定基础的Python使用者，我本人更推荐Miniconda的。</p>
+    <content><![CDATA[<p>在我的印像中，一直认为在Mac下无法使用GPU进行训练，最近查阅了一些资料，才发我的认知太陈旧了。新版的Pytorch已经支持了多种类型的GPU，这其中也支持了Mac M1下的GPU。</p>
+<p>今天我们就来看看该如何在Mac M1下使用GPU进入机器学习训练。</p>
 <span id="more"></span>
 
+<h2 id="Anaconda还是Miniconada"><a href="#Anaconda还是Miniconada" class="headerlink" title="Anaconda还是Miniconada?"></a>Anaconda还是Miniconada?</h2><p>使用Python的人都会遇到库的安装、环境的管理问题，Conda就是这样一个工具来帮助你解决这些问题。</p>
+<p>Anaconda想必大家比较熟悉，但是很多人并不知道还有个轻量化的Miniconda。对于有一定基础的Python使用者，我本人更推荐Miniconda的。</p>
 <h3 id="Anaconda"><a href="#Anaconda" class="headerlink" title="Anaconda"></a>Anaconda</h3><ul>
 <li>适合初学者（因为有图形界面，还内置了jupyter lab, spider等等）</li>
 <li>预装了超过1500个科学计算库（99%其实用不上）</li>
