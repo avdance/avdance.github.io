@@ -5293,4 +5293,57 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
         <tag>深度学习</tag>
       </tags>
   </entry>
+  <entry>
+    <title>使用Mac系统下的GPU搭建机器学习环境</title>
+    <url>/eaff035c/</url>
+    <content><![CDATA[<h2 id="Anaconda还是Miniconada"><a href="#Anaconda还是Miniconada" class="headerlink" title="Anaconda还是Miniconada?"></a>Anaconda还是Miniconada?</h2><p>使用Python的人都会遇到库的安装、环境的管理问题，Conda就是这样一个工具来帮助你解决这些问题。</p>
+<p>Anaconda想必大家比较熟悉，但是很多人并不知道还有个轻量化的Miniconda。对于有一定基础的Python使用者，我本人更推荐Miniconda的。</p>
+<p>Anaconda:</p>
+<ul>
+<li>适合初学者（因为有图形界面，还内置了jupyter lab, spider等等）</li>
+<li>预装了超过1500个科学计算库（99%其实用不上）</li>
+<li>安装比较耗时，也比较占用空间</li>
+<li>因为预装了很多库，所以不需要重复下载。</li>
+<li>可能对一些库做了改进（？）</li>
+</ul>
+<p>Miniconda:</p>
+<ul>
+<li>不介意手动安装所需的库（其实这个并不麻烦）</li>
+<li>节省空间和时间</li>
+</ul>
+<p>我个人感觉Anaconda太过笨重，很多人的电脑可能打开Anaconda都需要一点时间。图形化的界面在我看来反应比较迟钝，如果使用命令行其实还不如直接上Miniconda。</p>
+<h2 id="安装Miniconda"><a href="#安装Miniconda" class="headerlink" title="安装Miniconda"></a>安装Miniconda</h2><p>从这里<a href="https://conda.io/en/latest/miniconda.html">下载Miniconda</a>。假设我们使用的Python版本是3.10，执行下面的命令来安装Miniconda:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sh Minconda3-xxx-xxx...sh -b</span><br></pre></td></tr></table></figure>
+<p>然后执行下面的命令初始化conda:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~/miniconda3/bin/conda init</span><br></pre></td></tr></table></figure>
+
+<p>至此，Miniconda就安装好了。</p>
+<h2 id="配置新的Python环境"><a href="#配置新的Python环境" class="headerlink" title="配置新的Python环境"></a>配置新的Python环境</h2><p>当Miniconda安装好后，我们可以通过下面的命令创建一个新的Python环境:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda create --name ml python=3.10 -y</span><br></pre></td></tr></table></figure>
+
+<p>上面我就使用conda创建了一个新的Python环境，名子叫ml，它使用的Python是3.10。<br>不过，虽然我们创建好了Python环境，但它还不能使用，因为在使用之前需要先将它激活。你可以使用下面的命令来激活它:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda activate ml</span><br></pre></td></tr></table></figure>
+
+<p>另外，当我们不需要这个环境时，可以通过下面的命令退出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda deactivate </span><br></pre></td></tr></table></figure>
+
+<h2 id="安装pytorch"><a href="#安装pytorch" class="headerlink" title="安装pytorch"></a>安装pytorch</h2><p>前面将Python环境设置好后，接下来就可以安装Pytorch了，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio -c pytorch</span><br></pre></td></tr></table></figure>
+
+<p>之后，你可以使用下面命令验证你的Mac M1中是否有可用的GPU:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &quot;import torch;print(torch.backends.mps.is_built())&quot;</span><br></pre></td></tr></table></figure>
+<p>如果命令的返回结果为<code>True</code>，说明有GPU可用。</p>
+<h2 id="使用Mac-M1下的GPU"><a href="#使用Mac-M1下的GPU" class="headerlink" title="使用Mac M1下的GPU"></a>使用Mac M1下的GPU</h2><p>在Mac M1下的GPU称作<strong>mps</strong>，它类似于Nvidia的<strong>cuda</strong>。如果你想在Mac M1下使用GPU进行深度学习的训练，只需要将运算指定到mps上运行即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import torch</span><br><span class="line">model = torch.nn.Linear(5,1).to(&#x27;mps&#x27;)</span><br><span class="line">x = torch.randn(5).to(&#x27;mps&#x27;)</span><br><span class="line">y = model(x)</span><br><span class="line">pront(y.shape)</span><br></pre></td></tr></table></figure>
+<p>如上代码所示，该代先首先定义了一个最简单5x1的线性模形，并告诉Pytorch它在Mac M1的GPU上运行；然后给该模形创建一个输入，该输入也是在GPU<br>上，是一个5x5的tensor，最后输出运算结果的维度。</p>
+<p>如果上面的代码可以正常运行，说明你Mac上的GPU确实可以正常工作。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>如果你是一名机器学习的初学者，并且手上有一台Mac电脑的话，你可以直接使用Mac搭建机器学习环境进行学习。这样就可以节省一大笔钱了！</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
 </search>
