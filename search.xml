@@ -5356,6 +5356,8 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <title>FaceBook最新的图像分割模型SegmentAnything到底有多厉害？</title>
     <url>/cd01af8d/</url>
     <content><![CDATA[<p>这两天 Facebook AI Research (FAIR) 团队开发的一种新的图像分割模型，名为 <strong>Segment Anything</strong>。该模型使用了一种新的方法，可以在不需要大量标注数据的情况下，对图像中的任何物体进行分割。这种方法可以帮助计算机视觉领域的研究人员和开发人员更轻松地训练模型，从而提高计算机视觉应用程序的性能。</p>
+<span id="more"></span>
+
 <p>如果您想了解更多关于“Segment Anything”模型的信息，可以查看<a href="https://ai.facebook.com/blog/segment-anything-foundation-model-image-segmentation/">这篇文章</a>。</p>
 <h2 id="SegmentAnything是什么？"><a href="#SegmentAnything是什么？" class="headerlink" title="SegmentAnything是什么？"></a>SegmentAnything是什么？</h2><p><strong>Segment Anything</strong> 模型是一种新的图像分割模型，它可以在不需要大量标注数据的情况下，对图像中的任何物体进行分割。这种方法可以帮助计算机视觉领域的研究人员和开发人员更轻松地训练模型，从而提高计算机视觉应用程序的性能。</p>
 <p><strong>Segment Anything</strong>模型使用了一种名为“自监督学习”的方法，该方法可以在不需要大量标注数据的情况下训练模型。该模型使用了一个名为“Contrastive Predictive Coding (CPC)”的算法，该算法可以从未标记的图像中学习到有用的特征，并将这些特征用于图像分割任务。</p>
@@ -5401,6 +5403,8 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <title>MiniConda基本操作.md</title>
     <url>/459b0e30/</url>
     <content><![CDATA[<h2 id="为什么要使用Conda安装Python环境"><a href="#为什么要使用Conda安装Python环境" class="headerlink" title="为什么要使用Conda安装Python环境?"></a>为什么要使用Conda安装Python环境?</h2><p>Conda是一个开源的软件包管理系统和环境管理系统，不仅能进行包管理，还能够创建隔离的环境，你可以通过它创建不同的Python环境，各Python环境之间相互隔离，互不影响。而我们常用的pip只是一个Python包管理工具，它只能对Python包进行管理，如下载、安装、卸载，去不能像Conda一样创建多个相互隔离的Python环境，因此使用Conda可以帮助我们创建、管理更复杂的Python环境。</p>
+<span id="more"></span>
+
 <h2 id="Miniconda与Anaconda的区别"><a href="#Miniconda与Anaconda的区别" class="headerlink" title="Miniconda与Anaconda的区别"></a>Miniconda与Anaconda的区别</h2><p>Miniconda是Anaconda的精简版，只包含conda、Python和一些基本的包，而Anaconda是面向数据科学的Python发行版，包含conda、conda-build、Python和100+常用的数据科学常用的库及其依赖。</p>
 <p>总的来说，Miniconda更小、更轻量。对于学习机器学习、深度学习这类工作，使用Miniconda就足够了，这样还能为你节省大量的磁盘空间。</p>
 <h2 id="Miniconda的基本使用"><a href="#Miniconda的基本使用" class="headerlink" title="Miniconda的基本使用"></a>Miniconda的基本使用</h2><ul>
@@ -5463,6 +5467,9 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <url>/379d38e0/</url>
     <content><![CDATA[<h2 id="GPT-Plugin-是什么？"><a href="#GPT-Plugin-是什么？" class="headerlink" title="GPT Plugin 是什么？"></a>GPT Plugin 是什么？</h2><p>ChatGPT Plugin 是一种插件，旨在帮助 ChatGPT 访问最新信息、运行计算或使用第三方服务。它可以帮助 ChatGPT 访问外部数据，使得 ChatGPT 可以主动通过访问第三方 API 来获取相关知识。</p>
 <p>Plugin 的推出意味着 OpenAI 正在追求平台化而非聊天机器人。插件的推出被媒体比喻成 AI 领域的 iPhone 时刻。OpenAI 相当于苹果公司，GPT-4 模型相当于苹果的 iPhone，推出的插件系统则相当于软件商店 App Store。</p>
+<span id="more"></span>
+
+
 <h2 id="GPT-Plugin是如何工作的？"><a href="#GPT-Plugin是如何工作的？" class="headerlink" title="GPT Plugin是如何工作的？"></a>GPT Plugin是如何工作的？</h2><p>GPT Plugin的具体工作流程如下：</p>
 <ul>
 <li>用户在ChatGPT中输入一个问题或请求</li>
