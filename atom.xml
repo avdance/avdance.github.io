@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2023-04-12T02:06:50.957Z</updated>
+  <updated>2023-04-12T02:11:22.687Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>MiniConda基本操作.md</title>
+    <title>MiniConda基本操作</title>
     <link href="https://blog.avdancedu.com/459b0e30/"/>
     <id>https://blog.avdancedu.com/459b0e30/</id>
     <published>2023-04-12T00:36:28.000Z</published>
-    <updated>2023-04-12T02:06:50.957Z</updated>
+    <updated>2023-04-12T02:11:22.687Z</updated>
     
     <content type="html"><![CDATA[<h2 id="为什么要使用Conda安装Python环境"><a href="#为什么要使用Conda安装Python环境" class="headerlink" title="为什么要使用Conda安装Python环境?"></a>为什么要使用Conda安装Python环境?</h2><p>Conda是一个开源的软件包管理系统和环境管理系统，不仅能进行包管理，还能够创建隔离的环境，你可以通过它创建不同的Python环境，各Python环境之间相互隔离，互不影响。而我们常用的pip只是一个Python包管理工具，它只能对Python包进行管理，如下载、安装、卸载，去不能像Conda一样创建多个相互隔离的Python环境，因此使用Conda可以帮助我们创建、管理更复杂的Python环境。</p><span id="more"></span><h2 id="Miniconda与Anaconda的区别"><a href="#Miniconda与Anaconda的区别" class="headerlink" title="Miniconda与Anaconda的区别"></a>Miniconda与Anaconda的区别</h2><p>Miniconda是Anaconda的精简版，只包含conda、Python和一些基本的包，而Anaconda是面向数据科学的Python发行版，包含conda、conda-build、Python和100+常用的数据科学常用的库及其依赖。</p><p>总的来说，Miniconda更小、更轻量。对于学习机器学习、深度学习这类工作，使用Miniconda就足够了，这样还能为你节省大量的磁盘空间。</p><h2 id="Miniconda的基本使用"><a href="#Miniconda的基本使用" class="headerlink" title="Miniconda的基本使用"></a>Miniconda的基本使用</h2><ul><li>安装Miniconda</li></ul><p>可以从这里<a href="https://docs.conda.io/en/latest/miniconda.html">下载Miniconda</a>，从中选择合适的操作系统版本即可。</p><ul><li>默认环境</li></ul><p>当Miniconda环境好后，它会为你创建一个默认环境，即 <strong>Base</strong> 环境。你可以直接在这个环境中安装各种Python包。</p><p>当然，一般情况下，我们都会为自己的项目创建一个新的环境。</p><ul><li>创建新的Python环境</li></ul><p>使用Miniconda创建新环境的命令如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n xxx </span><br></pre></td></tr></table></figure><p>其中 <code>-n xxx</code> 指明你要创建的环境名。<code>xxx</code>用你自己的环境名替代。</p><ul><li>切换到某个环境</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate xxx</span><br></pre></td></tr></table></figure><ul><li>安装包</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install xxx</span><br></pre></td></tr></table></figure><blockquote><p>使用conda安装包时不需要代理</p></blockquote><p>有时候有些包conda中没有，此时你可以使用 pip 安装。注意，使用 pip 安装时需要 <strong>代理</strong> 。</p><ul><li>为Conda添加镜像</li></ul><p>有时默认镜像可能不能满足我们的需求，此时我们可以为conda添加镜像，命令如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure><p>上面命令中，第一行是将 <strong>清华</strong> 的镜像添加到conda中。而第二句的含义是设置conda在输出信息时显示镜像源的URL，这样你就可以看到conda从哪个镜像源下载了软件包。</p><ul><li>为pip添加镜像</li></ul><p>虽然这里讲的是conda，但如果使用conda无法安装包时，我们也会用到pip，所以这里将pip切换镜像的命令也一并列出。</p><p>如果是临时使用，可以使用下面的命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package</span><br></pre></td></tr></table></figure><p>发果是永久使用，则使用下面命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure><ul><li>删除之前创建的环境</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n xxx <span class="built_in">all</span></span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>以上就是我们使用conda创建python环境经常用到的一些命令，包括创建、删除、安装、切换镜像等几个基本操作。希望这篇文章可以给你提供一些帮助。</p>]]></content>
     
@@ -32,6 +32,8 @@
     </summary>
     
     
+    
+      <category term="AI" scheme="https://blog.avdancedu.com/tags/AI/"/>
     
   </entry>
   

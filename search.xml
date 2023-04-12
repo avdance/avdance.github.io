@@ -5400,7 +5400,7 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
       </tags>
   </entry>
   <entry>
-    <title>MiniConda基本操作.md</title>
+    <title>MiniConda基本操作</title>
     <url>/459b0e30/</url>
     <content><![CDATA[<h2 id="为什么要使用Conda安装Python环境"><a href="#为什么要使用Conda安装Python环境" class="headerlink" title="为什么要使用Conda安装Python环境?"></a>为什么要使用Conda安装Python环境?</h2><p>Conda是一个开源的软件包管理系统和环境管理系统，不仅能进行包管理，还能够创建隔离的环境，你可以通过它创建不同的Python环境，各Python环境之间相互隔离，互不影响。而我们常用的pip只是一个Python包管理工具，它只能对Python包进行管理，如下载、安装、卸载，去不能像Conda一样创建多个相互隔离的Python环境，因此使用Conda可以帮助我们创建、管理更复杂的Python环境。</p>
 <span id="more"></span>
@@ -5461,6 +5461,9 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>以上就是我们使用conda创建python环境经常用到的一些命令，包括创建、删除、安装、切换镜像等几个基本操作。希望这篇文章可以给你提供一些帮助。</p>
 ]]></content>
+      <tags>
+        <tag>AI</tag>
+      </tags>
   </entry>
   <entry>
     <title>如何打造自己的专属GPT</title>
