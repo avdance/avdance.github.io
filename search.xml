@@ -5527,6 +5527,8 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <url>/17d46da4/</url>
     <content><![CDATA[<p>在图像生成领域最牛的两个AI工具非Midjourney和StableDiffusion莫属了。<strong>Midjourney</strong>是收费的，主要以艺术、丰富的色彩见长；而StableDiffusion是开源的，它更擅长处理细节，生成的图像更逼真，尤其擅长生成人像、商品图像，能以假乱真。</p>
 <p>这篇文章主要介绍一下如何在Windows&#x2F;Linux环境下搭建StableDiffusion训练环境。</p>
+<span id="more"></span>
+
 <h2 id="硬件要求"><a href="#硬件要求" class="headerlink" title="硬件要求"></a>硬件要求</h2><p>搭建StableDiffusion训练环境，首先你要有一张Nvidia显卡，最好内存超过16G，如果是自己搭建主机的的话，建议选择 RTX3090、RTX3090ti、RTX4080、RTX4090这类卡。</p>
 <p>另外，硬盘最好选大此，建议最少 1T 空间，因为一般训练好的 StableDiffusion 模型都要4G左右，训练数据就更多了。</p>
 <p>操作系统选择Windows、Linux都可以，如果是Linux建议使用Ubuntu22.04。</p>
