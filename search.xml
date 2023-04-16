@@ -5023,6 +5023,23 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 <h2 id="客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？"><a href="#客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？" class="headerlink" title="客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？"></a>客户端无法联网，如何判断是无法与路由器连接还是无法与与互联网连接？</h2><p>可以通过向默认网关发ping消息来判断是否主机能与路由器联接。如果客户端可以收到路由器的返馈包，说明两者联接是好的。否则说明无法与路由器连接。</p>
 <p>之后可以向一台云主机发包，如果云主机可以往回数据说明网络联接是好的，否则说明路由器无法联网。</p>
 <h2 id="如何判断客户端主机IP是否被劫持了？"><a href="#如何判断客户端主机IP是否被劫持了？" class="headerlink" title="如何判断客户端主机IP是否被劫持了？"></a>如何判断客户端主机IP是否被劫持了？</h2><p>可以向多台云主机发送数据包，让云主机获取到的客户端主机IP地址返回，如果一致说明没有被劫持，否则说明某条线路的IP地址被劫持了。</p>
+<h2 id="VPN突然连不上了问题分析"><a href="#VPN突然连不上了问题分析" class="headerlink" title="VPN突然连不上了问题分析"></a>VPN突然连不上了问题分析</h2><p>前两个VPN还好好的，结果这两天就突然不能使了，这是啥原因呢？下面记录一下我分析这个问题的过程。</p>
+<ul>
+<li><p>首先登陆到云主机上，看端口是否已经开启了。需要注意的是确认端口是TCP还是UDP。默认VPN端口都是UDP端口1194。</p>
+</li>
+<li><p>对于TCP端口可以使用telnet验证是否处于服务端态，而对于UDP端口则可以使用 nmap 或 nc 来验证。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nmap -sU -p 1194 xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<p>上述命令中 <strong>-sU</strong> 指明扫描UDP协议，**-p** 指明要扫描的端口。或者使用 <strong>nc</strong> 命令，其具体格式如下:</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -vuz xxx.xxx.xxx.xxx 1194</span><br></pre></td></tr></table></figure>
+<p> 其中 <strong>-v</strong> 表示输出详细信息；**-u** 表示扫描UDP端口；**-z** 表示zero I&#x2F;O。</p>
+</li>
+<li><p>如果服务的端口是OK的，接下来要到云主机上抓包，看一下进&#x2F;出包是否正常。可以使用以下面的命令来抓包：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tcpdump -i eth0 udp port 1194</span><br></pre></td></tr></table></figure></li>
+<li><p>如果进&#x2F;出包也正常，则需要再客户端抓包，可以使用wireshark抓包。</p>
+</li>
+</ul>
+<p>我这次的问题就是通过分析客户端的抓包情况才找到真正原因的。</p>
+<p>云主机进&#x2F;出包正常，而客户端只有出包没有入包，说明包从云主机出来后，被拦截了。</p>
 ]]></content>
       <categories>
         <category>网络传输</category>
