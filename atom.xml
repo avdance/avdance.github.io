@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.avdancedu.com/"/>
-  <updated>2023-04-16T10:55:32.299Z</updated>
+  <updated>2023-04-17T03:36:40.310Z</updated>
   <id>https://blog.avdancedu.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>少儿Python编程</title>
+    <link href="https://blog.avdancedu.com/befa4615/"/>
+    <id>https://blog.avdancedu.com/befa4615/</id>
+    <published>2023-04-17T03:36:00.000Z</published>
+    <updated>2023-04-17T03:36:40.310Z</updated>
+    
+    <content type="html"><![CDATA[<p>为了让孩子更早的建立起逻辑思维能力，我决定从现在开始教孩子学习一下Python语言。而这里，我会记录一些教孩子学习Python时的具体步骤，以及他学习过程中的一些点滴。</p><p>对于孩子来说，直接在电脑上写代码肯定是枯燥无味的。怎样才能让他想学编程，对编程感趣呢？图形化显然是个好方法。</p><p>我始终认为，教孩子学习编程的第一步不应上来就讲变量、数组、循环等这些基本知识，而是先让他们对编程建立起兴趣来，有了兴趣一切就好办了。</p><span id="more"></span> <h2 id="图形化"><a href="#图形化" class="headerlink" title="图形化"></a>图形化</h2><p>人对可见的，图形化的，移动的东西具有天然的敏感度，有句老话“一图胜过千言”说的就是这个道理。</p><p>在Python中有很多可以实现图形、动画的库，比如pygame、pygame zero、Turtle等。我们可以利用这些库来画一些基本图形，如点、线、三角形、圆等，甚至制作动画。让孩子看到利用Python可以做什么之后，他们的兴趣就来了，便会发挥自己的主动能动性，去画各种好玩的东西。在这个过程中顺带着就可以将编程学习好了。</p><p>在pygame、pygame Zero、Turtle这三个库中，我建议小孩首先学习 Turtle 库的使用，因为这个相对比较简单。</p><p>下在我简要的介绍一下这三个库。</p><h2 id="pygame"><a href="#pygame" class="headerlink" title="pygame"></a>pygame</h2><p>Pygame是一个强大的图形库，可以用于开发2D游戏和多媒体应用程序。它提供了音频、图形、文本等功能，使您可以开发复杂的多媒体应用程序。</p><p>Pygame 不但是一个功能齐全的游戏开发库，提供了大量的图形、声音、输入和网络功能，它还提供了许多其他的游戏开发工具。由于 Pygame 的功能全面，因此它更适合开发复杂的游戏，但学习难度也较高。</p><p>安装pygame的步骤如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pygame</span><br></pre></td></tr></table></figure><h2 id="pygame-Zero"><a href="#pygame-Zero" class="headerlink" title="pygame Zero"></a>pygame Zero</h2><p>Pygame Zero 是一个基于 Pygame 的简化版本，它针对初学者和教育目的设计，提供了简单易用的图形和游戏功能。Pygame Zero 的语法简单易懂，使用难度较低，适合初学者学习游戏开发的基础知识。</p><p>pgzrun 命令行工具是 Pygame Zero 的一部分，它可以帮助您在命令行&#x2F;终端中运行 Pygame Zero 程序。</p><p>与Turtle相比，Pygame Zero提供了更多的图形和游戏功能，并具有更多的灵活性和控制能力。它适用于开发更复杂的图形和游戏程序。</p><p>你可以使用下面命令安装pgzrun库：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pgzrun</span><br></pre></td></tr></table></figure><h2 id="Turtle库"><a href="#Turtle库" class="headerlink" title="Turtle库"></a>Turtle库</h2><p>Turtle是Python的内置图形库，用于简单的绘图和图形。它非常适合学习编程和图形学习，尤其是对于孩子和初学者。</p><p>在Mac系统下是不安装Turtle库的，你需要使用下面命令安装它：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python-th@3.10</span><br></pre></td></tr></table></figure><h2 id="Python开发环境搭建"><a href="#Python开发环境搭建" class="headerlink" title="Python开发环境搭建"></a>Python开发环境搭建</h2><p>现在搭建Python开发环境，最简单、易用的应该就是 VsCode了，你可以从<a href="https://code.visualstudio.com/download">这里下载VsCode</a>。</p><p>然后根据你的操作系统选择合适的版本安装即可。</p><h2 id="课程安排"><a href="#课程安排" class="headerlink" title="课程安排"></a>课程安排</h2><ul><li>第一课，学会 <strong>Print(…)</strong> 语句</li><li>第二课，使用Turtle绘制直线<br>…</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了让孩子更早的建立起逻辑思维能力，我决定从现在开始教孩子学习一下Python语言。而这里，我会记录一些教孩子学习Python时的具体步骤，以及他学习过程中的一些点滴。&lt;/p&gt;
+&lt;p&gt;对于孩子来说，直接在电脑上写代码肯定是枯燥无味的。怎样才能让他想学编程，对编程感趣呢？图形化显然是个好方法。&lt;/p&gt;
+&lt;p&gt;我始终认为，教孩子学习编程的第一步不应上来就讲变量、数组、循环等这些基本知识，而是先让他们对编程建立起兴趣来，有了兴趣一切就好办了。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="少儿编程" scheme="https://blog.avdancedu.com/categories/%E5%B0%91%E5%84%BF%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="python" scheme="https://blog.avdancedu.com/categories/%E5%B0%91%E5%84%BF%E7%BC%96%E7%A8%8B/python/"/>
+    
+    
+      <category term="少儿编程" scheme="https://blog.avdancedu.com/tags/%E5%B0%91%E5%84%BF%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="python" scheme="https://blog.avdancedu.com/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>如何搭建StableDiffusion环境</title>
@@ -509,40 +538,6 @@
 &lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/f94132a0&quot;&gt;PCM音频播放器的实现&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;本文将向大家介绍一下，如何通过 SDL 绘制一些基本图形，如 点、线、矩形。了解了这些基本图形后，你就可以按照搭积木的方式，构造出其它更复杂的图形了。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="视频渲染" scheme="https://blog.avdancedu.com/categories/%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93/"/>
-    
-    
-      <category term="SDL" scheme="https://blog.avdancedu.com/tags/SDL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SDL窗口渲染</title>
-    <link href="https://blog.avdancedu.com/287ad9ab/"/>
-    <id>https://blog.avdancedu.com/287ad9ab/</id>
-    <published>2022-11-19T06:52:00.000Z</published>
-    <updated>2022-11-20T04:30:42.785Z</updated>
-    
-    <content type="html"><![CDATA[<p>推荐阅读：</p><ul><li><a href="http://www.avdancedu.com/56ef4bcb">SDL 入门</a></li><li><a href="http://www.avdancedu.com/287ad9ab">SDL窗口渲染</a></li><li><a href="http://www.avdancedu.com/24ee78a8">SDL基本图形绘制</a></li><li><a href="http://www.avdancedu.com/a0ec02a7">SDL事件处事</a></li><li><a href="http://www.avdancedu.com/67189745">彻底理解SDL纹理</a></li><li><a href="http://www.avdancedu.com/a6aca2fe">SDL孙悟空与多线程</a></li><li><a href="http://www.avdancedu.com/f94132a0">PCM音频播放器的实现</a></li></ul><p>上一篇文章中我们对SDL作了简单的介绍，重点介绍了如何编译SDL以及如何使用它。在文章的最后我们留下了一个疑问，即虽然我们创建了窗口，但窗口却并没有真正显示出来。</p><p>今天我们就来看一看，如何才能让创建的窗口真正的显示出来。</p><span id="more"></span><h2 id="渲染的基本流程"><a href="#渲染的基本流程" class="headerlink" title="渲染的基本流程"></a>渲染的基本流程</h2><p>为什么我们上一课中创建了窗口，但它却并没有显示出来呢？其原因是，我们创建的窗口只是逻辑上的窗口，要想让窗口显示出来，我们需要对窗口进行效果渲染，也就是要通过绘制像素的方法，将窗口中的像素全部点亮。</p><p>那么如何对窗口进行渲染呢？SDL为我们提供了方便是的API。不过在使用SDL对窗口进行渲染之前，我们要先了解渲染的基本原理。</p><p>其基本原理是，首先创建一个window窗口，它是我们要渲染的目标。然后，要有一个渲染上下文，该上下文中一方面存放着要渲染的目标，也就是windows窗口；另一方面是存放着一个缓冲区，该缓冲区用于存放渲染的内容。</p><p>渲染的内容可以是点、线、各种图形以及图片，视频的各种组合。这些组合后的内容首先被存放到缓冲区中，最终SDL将缓冲区中的内容渲染到窗口中。</p><p>所以渲染的基本流程如下：</p><ul><li>创建窗口</li><li>创建渲染器</li><li>清空缓冲区</li><li>绘制要显示的内容</li><li>最终将缓冲区内容渲染到window窗口上。</li></ul><h2 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h2><ul><li><p>创建渲染上下文</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SDL_Renderer* SDL_CreateRenderer(SDL_Window* window,</span><br><span class="line">                               int         index,</span><br><span class="line">                               Uint32      flags)</span><br></pre></td></tr></table></figure><p>window: 指明在哪个窗口里进行渲染<br>index: 指定渲染驱动的索引号。一般指定为 -1.<br>flags:</p><table><thead><tr><th>flags</th><th>说明</th></tr></thead><tbody><tr><td>SDL_RENDERER_SOFTWARE</td><td>the renderer is a software fallback</td></tr><tr><td>SDL_RENDERER_ACCELERATED</td><td>the renderer uses hardware acceleration</td></tr><tr><td>SDL_RENDERER_PRESENTVSYNC</td><td>present is synchronized with the refresh rate</td></tr><tr><td>SDL_RENDERER_TARGETTEXTURE</td><td>the renderer supports rendering to texture</td></tr></tbody></table></li><li><p>消毁渲染上下文</p><p>释放渲染上下文相关的资源。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void SDL_DestroyRenderer(SDL_Renderer* renderer)</span><br></pre></td></tr></table></figure></li><li><p>清空渲染目标</p><p>该函数的作用是用指定的颜色清空缓冲区。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int SDL_RenderClear(SDL_Renderer* renderer)</span><br></pre></td></tr></table></figure><p>renderer: 上面创建的渲染器上下文。</p></li><li><p>展示要渲染的内容</p><p>将缓冲区中的内容输出到目标上，也就是 windows 窗口上。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void SDL_RenderPresent(SDL_Renderer* renderer)</span><br></pre></td></tr></table></figure><p>renderer: 上面创建的渲染器上下文</p></li></ul><h2 id="完整例子"><a href="#完整例子" class="headerlink" title="完整例子"></a>完整例子</h2><p>我在第一课的代码上，添加了上面几个函数之后，大家可以看到一个全红色的窗口可以显示在我们的面前了。</p><p>当然我们还可以在上面画一些图形，比如使用 SDL_RenderDrawLines() 函数在窗口中画一条直线。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;SDL.h&quot;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char* argv[]) &#123;</span><br><span class="line"></span><br><span class="line">    int flag = 1;</span><br><span class="line"></span><br><span class="line">    SDL_Window *window;                    // Declare a pointer</span><br><span class="line">    SDL_Renderer *renderer;</span><br><span class="line"></span><br><span class="line">    SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2</span><br><span class="line"></span><br><span class="line">    // Create an application window with the following settings:</span><br><span class="line">    window = SDL_CreateWindow(</span><br><span class="line">        &quot;An SDL2 window&quot;,                  // window title</span><br><span class="line">        SDL_WINDOWPOS_UNDEFINED,           // initial x position</span><br><span class="line">        SDL_WINDOWPOS_UNDEFINED,           // initial y position</span><br><span class="line">        640,                               // width, in pixels</span><br><span class="line">        480,                               // height, in pixels</span><br><span class="line">        SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS// flags - see below</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    // Check that the window was successfully created</span><br><span class="line">    if (window == NULL) &#123;</span><br><span class="line">        // In the case that the window could not be made...</span><br><span class="line">        printf(&quot;Could not create window: %s\n&quot;, SDL_GetError());</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* We must call SDL_CreateRenderer in order for draw calls to affect this window. */</span><br><span class="line">    renderer = SDL_CreateRenderer(window, -1, 0);</span><br><span class="line"></span><br><span class="line">    /* Select the color for drawing. It is set to red here. */</span><br><span class="line">    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);</span><br><span class="line"></span><br><span class="line">    /* Clear the entire screen to our selected color. */</span><br><span class="line">    SDL_RenderClear(renderer);</span><br><span class="line"></span><br><span class="line">    /* Up until now everything was drawn behind the scenes.</span><br><span class="line">       This will show the new, red contents of the window. */</span><br><span class="line">    SDL_RenderPresent(renderer);</span><br><span class="line"></span><br><span class="line">    // The window is open: could enter program loop here (see SDL_PollEvent())</span><br><span class="line"></span><br><span class="line">    SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example</span><br><span class="line"></span><br><span class="line">    //destory renderer</span><br><span class="line">    if (renderer) &#123;</span><br><span class="line">        SDL_DestroyRenderer(renderer);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // Close and destroy the window</span><br><span class="line">    SDL_DestroyWindow(window);</span><br><span class="line"></span><br><span class="line">    // Clean up</span><br><span class="line">    SDL_Quit();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文我向大家介绍了如何将创建的窗口展示出来，并重点介绍了窗口渲染的基本原理以及使用的 SDL API。</p><p>后面的文章我将向大家重点介绍如何在窗口绘制一些常用图形。</p><p>谢谢！</p><h2 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h2><ul><li><a href="http://www.avdancedu.com/56ef4bcb">SDL 入门</a></li><li><a href="http://www.avdancedu.com/287ad9ab">SDL窗口渲染</a></li><li><a href="http://www.avdancedu.com/24ee78a8">SDL基本图形绘制</a></li><li><a href="http://www.avdancedu.com/a0ec02a7">SDL事件处事</a></li><li><a href="http://www.avdancedu.com/67189745">彻底理解SDL纹理</a></li><li><a href="http://www.avdancedu.com/a6aca2fe">SDL孙悟空与多线程</a></li><li><a href="http://www.avdancedu.com/f94132a0">PCM音频播放器的实现</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;推荐阅读：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/56ef4bcb&quot;&gt;SDL 入门&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/287ad9ab&quot;&gt;SDL窗口渲染&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/24ee78a8&quot;&gt;SDL基本图形绘制&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/a0ec02a7&quot;&gt;SDL事件处事&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/67189745&quot;&gt;彻底理解SDL纹理&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/a6aca2fe&quot;&gt;SDL孙悟空与多线程&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.avdancedu.com/f94132a0&quot;&gt;PCM音频播放器的实现&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;上一篇文章中我们对SDL作了简单的介绍，重点介绍了如何编译SDL以及如何使用它。在文章的最后我们留下了一个疑问，即虽然我们创建了窗口，但窗口却并没有真正显示出来。&lt;/p&gt;
-&lt;p&gt;今天我们就来看一看，如何才能让创建的窗口真正的显示出来。&lt;/p&gt;
     
     </summary>
     
