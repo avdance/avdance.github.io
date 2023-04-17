@@ -5542,7 +5542,7 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
   <entry>
     <title>如何搭建StableDiffusion环境</title>
     <url>/17d46da4/</url>
-    <content><![CDATA[<p>在图像生成领域最牛的两个AI工具非Midjourney和StableDiffusion莫属了。<strong>Midjourney</strong>是收费的，主要以艺术、丰富的色彩见长；而StableDiffusion是开源的，它更擅长处理细节，生成的图像更逼真，尤其擅长生成人像、商品图像，能以假乱真。</p>
+    <content><![CDATA[<p><img data-src="https://cdn.avdancedu.com/image/article/stablediffusion/sd.png"><br>在图像生成领域最牛的两个AI工具非Midjourney和StableDiffusion莫属了。<strong>Midjourney</strong>是收费的，主要以艺术、丰富的色彩见长；而StableDiffusion是开源的，它更擅长处理细节，生成的图像更逼真，尤其擅长生成人像、商品图像，能以假乱真。</p>
 <p>这篇文章主要介绍一下如何在Windows&#x2F;Linux环境下搭建StableDiffusion训练环境。</p>
 <span id="more"></span>
 
@@ -5617,6 +5617,9 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 
 <h2 id="Python开发环境搭建"><a href="#Python开发环境搭建" class="headerlink" title="Python开发环境搭建"></a>Python开发环境搭建</h2><p>现在搭建Python开发环境，最简单、易用的应该就是 VsCode了，你可以从<a href="https://code.visualstudio.com/download">这里下载VsCode</a>。</p>
 <p>然后根据你的操作系统选择合适的版本安装即可。</p>
+<h2 id="VSCode切换Python环境"><a href="#VSCode切换Python环境" class="headerlink" title="VSCode切换Python环境"></a>VSCode切换Python环境</h2><p>一般在我们的系统中都不止包括一个Python环境，当有多个Python环境时，VSCode到底用的是哪个Python环境呢？</p>
+<p>这个其实可以在VSCode中指定的，具体的切换过程如下图所示：</p>
+<p><img data-src="https://cdn.avdancedu.com/image/article/childpython/python_switch.png"></p>
 <h2 id="课程安排"><a href="#课程安排" class="headerlink" title="课程安排"></a>课程安排</h2><ul>
 <li>第一课，学会 <strong>Print(…)</strong> 语句</li>
 <li>第二课，使用Turtle绘制直线<br>…</li>
