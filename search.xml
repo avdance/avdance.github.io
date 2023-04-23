@@ -5640,6 +5640,8 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
     <content><![CDATA[<p>这里记录了一些 Android 下使用 OpenGL 渲染视频的一些相关资料。</p>
 <h2 id="最新-Android-Studio-下载地址"><a href="#最新-Android-Studio-下载地址" class="headerlink" title="最新 Android Studio 下载地址"></a>最新 Android Studio 下载地址</h2><p>首先，可以在这里<a href="https://developer.android.cn/studio?gclid=Cj0KCQiAjJOQBhCkARIsAEKMtO3zEhdK4_I0CEZic3UH4dl-9gVXuHFR9dCl3TOHKjmv3xWLU3UxfhYaApfAEALw_wcB&gclsrc=aw.ds">下载最新的 Android Studio</a></p>
 <h2 id="下载老版本-Android-Studio"><a href="#下载老版本-Android-Studio" class="headerlink" title="下载老版本 Android Studio"></a>下载老版本 Android Studio</h2><p>有时间你可能需要使用老版本的 Android Studio，你可以从<a href="https://developer.android.google.cn/studio/archive?hl=zh-cn">这里下载</a></p>
+<span id="more"></span>
+
 <h2 id="手机打开-开发者模式"><a href="#手机打开-开发者模式" class="headerlink" title="手机打开 开发者模式"></a>手机打开 开发者模式</h2><p>红米手机的步骤如下：</p>
 <ul>
 <li><p>第一步，执行下面的操作：</p>
