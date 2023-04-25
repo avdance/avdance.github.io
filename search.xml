@@ -5993,6 +5993,7 @@ c2(no)->op2->e</textarea><textarea id="flowchart-0-options" style="display: none
 <p>之后，使用新版 AS 将老版 AS 项目导入进来。新导入的项目一般情况编译时都会失败，该怎么解决这个问题呢？</p>
 <p>解决的办法就是打开之前创建的新项目，在里边将 module 中的 build.gradle，app 中的build.gradle，setting.gradle 以及 gradle.properties。</p>
 <p>通过这种方式基本上就可以将老项目转化为新的 AS 项目了。</p>
+<h2 id="编译Android版OpenCV"><a href="#编译Android版OpenCV" class="headerlink" title="编译Android版OpenCV"></a>编译Android版OpenCV</h2><p>这里有一篇<a href="https://zhuanlan.zhihu.com/p/83226948">稚晖的文章</a>写的非常好，我这里就不再总结了。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面总结了一些使用 AS 的基本方法，可能知识点有点散，但这些知识点对于你创建 AS 工程，成功导入老的 AS 项目起着关键的作用。希望这些知识点能帮你解决一部分工作中的问题。</p>
 ]]></content>
       <tags>
